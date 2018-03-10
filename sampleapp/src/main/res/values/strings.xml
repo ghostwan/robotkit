@@ -2,4 +2,11 @@
     <string name="app_name">SampleApp</string>
     <string name="hello_world">Hello world!</string>
     <string name="bye_world">Bye world!</string>
+    <string name="hello_human">hello human</string>
+    <string name="hello">hello</string>
+    <string name="hi">hi</string>
+    <string name="bye">bye</string>
+    <string name="see_you">see you</string>
+    <string name="i_dont_understood">I don\'t understood</string>
+    <string name="i_stop">Sure I stop!</string>
 </resources>
