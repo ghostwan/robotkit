@@ -11,6 +11,7 @@ import com.aldebaran.qi.sdk.`object`.conversation.Phrase
 import com.aldebaran.qi.sdk.core.FocusManager
 import com.aldebaran.qi.sdk.core.SessionManager
 import com.ghostwan.robotkit.robot.pepper.ext.await
+import java.util.concurrent.CancellationException
 
 
 /**
@@ -41,21 +42,30 @@ class MyPepper(activity: Activity) {
 
     fun isConnected(): Boolean = session != null && session!!.isConnected
 
-    private suspend fun handleFuture(future: Future<*>, wait: Boolean) {
+    private suspend fun <T : Any?> handleFuture(future: Future<T>, wait: Boolean, throwOnCancel:Boolean) {
         futures.add(future)
         future.thenConsume { futures.remove(future) }
-        if(wait)
-            future.await()
-    }
-    suspend fun say(res: Int, wait: Boolean = true) {
-        val say = conversation?.async()?.makeSay(robotContext, Phrase(context.getString(res))).await()
-        handleFuture(say.async().run(), wait)
+        if(wait) {
+            try {
+                future.await()
+            } catch (e : CancellationException){
+                if(throwOnCancel)
+                    throw e
+            }
+        }
     }
     suspend fun stop() {
+        Log.i(TAG, "cancelling ${futures.size} futures")
         for (future in futures) {
             future.requestCancellation();
             futures.remove(future)
         }
+    }
+
+    suspend fun say(res: Int, wait: Boolean = true, throwOnCancel:Boolean = true) {
+        val say = conversation?.async()?.makeSay(robotContext, Phrase(context.getString(res))).await()
+        val futureSay = say.async().run()
+        handleFuture(futureSay, wait, throwOnCancel)
     }
 
 

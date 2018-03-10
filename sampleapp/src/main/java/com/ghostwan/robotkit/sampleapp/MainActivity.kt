@@ -2,6 +2,7 @@ package com.ghostwan.robotkit.sampleapp
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import android.util.Log
 import android.view.View
 import com.ghostwan.robotkit.robot.pepper.MyPepper
 import kotlinx.android.synthetic.main.activity_main.*
@@ -12,6 +13,10 @@ class MainActivity : AppCompatActivity() {
 
 
     private lateinit var pepper : MyPepper
+
+    companion object {
+        val TAG = "MainActivity"
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,15 +43,25 @@ class MainActivity : AppCompatActivity() {
 
     fun onStartButton(view : View){
         launch(UI) {
-            view.isEnabled = false
-            pepper.say(R.string.hello_world)
-            pepper.say(R.string.bye_world)
-            view.isEnabled = true
+            try {
+                view.isEnabled = false
+                Log.i(TAG, "saying hello world")
+                pepper.say(R.string.hello_world)
+                Log.i(TAG, "saying bye world")
+                pepper.say(R.string.bye_world)
+                Log.i(TAG, "Pepper said everything")
+                view.isEnabled = true
+            } catch (e : Exception){
+                Log.e(TAG, "Something happened!", e)
+            }
+
         }
     }
-    fun onStopButton() {
+    fun onStopButton(view : View) {
         launch (UI){
+            Log.i(TAG, "stopping pepper")
             pepper.stop()
+            start_bt.isEnabled = true
         }
     }
 }
