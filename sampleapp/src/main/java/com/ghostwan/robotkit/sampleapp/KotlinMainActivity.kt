@@ -55,7 +55,7 @@ class KotlinMainActivity : AppCompatActivity() {
                 val byeConcept = Concept(this@KotlinMainActivity, R.string.bye, R.string.see_you)
                 val concept = pepper.listen(helloConcept, byeConcept)
                 when (concept) {
-                    helloConcept -> pepper.say(R.string.hello_world, R.raw.hello_anim)
+                    helloConcept -> pepper.say(R.string.hello_world, R.raw.hello_anim, R.raw.hello_trajectory)
                     byeConcept -> pepper.say(R.string.bye_world, R.raw.bye_anim)
                     else -> pepper.say(R.string.i_dont_understand)
                 }

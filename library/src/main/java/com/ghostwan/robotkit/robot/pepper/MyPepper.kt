@@ -76,18 +76,25 @@ class MyPepper(activity: Activity) {
         }
     }
 
-    suspend fun say(phrase: Int, vararg animations : Int,
+    suspend fun say(phraseRes: Int, vararg animationsRes : Int,
+                    bodyLanguageOption: BodyLanguageOption? =null,
+                    wait: Boolean = true, throwOnCancel:Boolean = true) {
+
+        say(context.getString(phraseRes), *animationsRes, bodyLanguageOption = bodyLanguageOption, wait = wait, throwOnCancel = throwOnCancel)
+    }
+
+    suspend fun say(phrase: String, vararg animationsRes : Int,
                     bodyLanguageOption: BodyLanguageOption? =null,
                     wait: Boolean = true, throwOnCancel:Boolean = true) {
 
         val say = if(bodyLanguageOption != null)
-            conversation?.async()?.makeSay(robotContext, Phrase(context.getString(phrase)), bodyLanguageOption).await()
+            conversation?.async()?.makeSay(robotContext, Phrase(phrase), bodyLanguageOption).await()
         else
-            conversation?.async()?.makeSay(robotContext, Phrase(context.getString(phrase))).await()
+            conversation?.async()?.makeSay(robotContext, Phrase(phrase)).await()
 
-        val future = if(animations.isNotEmpty()) {
+        val future = if(animationsRes.isNotEmpty()) {
             val animSet : MutableList<String> = ArrayList()
-            animations.mapTo(animSet) { IOUtils.fromRaw(context, it)}
+            animationsRes.mapTo(animSet) { IOUtils.fromRaw(context, it)}
 
             val animation = actuation?.async()?.makeAnimation(animSet).await()
             val animate = actuation?.async()?.makeAnimate(robotContext, animation).await()

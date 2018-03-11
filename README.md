@@ -90,7 +90,7 @@ Creation of an interface Robot which will be implemented by all Robot supported
 
 Expert API:
 
-    val speech = Speech(R.string.hello_world)
+    val speech = Speech(R.string.intro, R.string.content)
     pepper.say(speech)
 
 ### Animate with animation
