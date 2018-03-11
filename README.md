@@ -1,5 +1,6 @@
 # RobotKit
 RobotKit it's a Kotlin multi-Robot SDK for Android.
+It could works in java but was not design for. See https://github.com/ghostwan/robotkit-java for the java version 
 
 It works with :
 * Pepper (QiSDK) from SoftBank Robotics (https://android.aldebaran.com/sdk/doc/pepper-sdk/index.html)
@@ -19,15 +20,27 @@ Future Robot support:
     }
     pepper.connect()
 
-### Say a phrase [DONE]
+### Say a phrase
 
 Make the robot say something
 
 Simple API:
 
-    pepper.say(R.string.hello_world)    
+    pepper.say(R.string.hello_world)
+        
+Say a phrase and make a special animation
 
-### Listen concepts [DONE]
+    pepper.say(R.string.hello_world, R.raw.elephant_animation)
+    
+### Animate with animation
+
+Make the robot run an animation.
+
+Simple API:
+
+    pepper.animate(R.raw.elephant_animation)
+
+### Listen concepts
 
 Make the robot listen for a phrase or group of phrase known as concept
 
@@ -39,6 +52,12 @@ Make the robot listen for a phrase or group of phrase known as concept
         byeConcept -> pepper.say(R.string.bye_world)
         else -> pepper.say(R.string.i_dont_understood)
     }
+
+
+***
+***
+*** 
+    
     
 ## API TODO
 
@@ -75,12 +94,6 @@ Expert API:
     pepper.say(speech)
 
 ### Animate with animation
-
-Make the robot run an animation.
-
-Simple API:
-
-    pepper.animate(R.raw.elephant_animation)
 
 Expert API:
 

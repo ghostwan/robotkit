@@ -7,7 +7,7 @@
     <string name="hi">hi</string>
     <string name="bye">bye</string>
     <string name="see_you">see you</string>
-    <string name="i_dont_understood">I don\'t understood</string>
+    <string name="i_dont_understand">I don\'t understand!</string>
     <string name="i_stop">Sure I stop!</string>
     <string name="info">Info</string>
 </resources>
