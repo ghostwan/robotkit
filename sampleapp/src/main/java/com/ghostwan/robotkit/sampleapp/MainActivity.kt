@@ -23,19 +23,20 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         pepper = MyPepper(this@MainActivity)
+        pepper.setRobotLostListener {
+            println("Robot Lost : $it")
+            launch (UI){
+                start_bt.visibility = View.INVISIBLE
+                stop_bt.visibility = View.INVISIBLE
+            }
+        }
     }
 
     override fun onStart() {
         super.onStart()
         launch(UI) {
             if(!pepper.isConnected()) {
-                pepper.connect {
-                    println("Robot Lost : $it")
-                    launch (UI){
-                        start_bt.visibility = View.INVISIBLE
-                        stop_bt.visibility = View.INVISIBLE
-                    }
-                }
+                pepper.connect()
                 isRunning(false)
             }
         }
@@ -60,7 +61,6 @@ class MainActivity : AppCompatActivity() {
                 isRunning(false)
             } catch (e : Exception){
                 Log.e(TAG, "Something happened!", e)
-                pepper.say(R.string.i_stop)
             }
 
         }
