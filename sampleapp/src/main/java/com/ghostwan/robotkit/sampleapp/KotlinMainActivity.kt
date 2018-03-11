@@ -24,7 +24,7 @@ class KotlinMainActivity : AppCompatActivity() {
         setContentView(R.layout.kotlin_activity_main)
 
         pepper = MyPepper(this@KotlinMainActivity)
-        pepper.setRobotLostListener {
+        pepper.setOnRobotLost {
             println("Robot Lost : $it")
             launch (UI){
                 start_bt.visibility = View.INVISIBLE

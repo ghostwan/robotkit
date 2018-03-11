@@ -15,7 +15,7 @@ Future Robot support:
 ### Connect to Pepper attached to the tablet
 
     pepper = MyPepper(this@MainActivity)
-    pepper.setRobotLostListener {
+    pepper.setOnRobotLost {
         println("Robot Lost : $it")
     }
     pepper.connect()
@@ -90,8 +90,10 @@ Creation of an interface Robot which will be implemented by all Robot supported
 
 Expert API:
 
-    val speech = Speech(R.string.intro, R.string.content)
+    val speech = Speech(R.string.intro)
     pepper.say(speech)
+
+Needed ?? : Maybe it could be interesting to concatenate phrase 
 
 ### Animate with animation
 
@@ -133,16 +135,41 @@ An API for a Robot to follow another robot
 
 Simple API:
 
-    val result : String= myPepper.discuss(R.raw.cooking_dicussion);
+    val result : String = myPepper.discuss(R.raw.cooking_dicussion)
 
 Expert API:
 
     val discussion = Discussion(R.raw.cooking_dicussion)
-    myPepper.discuss(discussion);
+    myPepper.discuss(discussion)
+    
+    ...
+    
+    val state = discussion.saveState()
+    
+    ...
+    
+    discussion.restoreState(state)
+    
+    ...
+    
+    discussion.setVariable("name", "ghostwan")
+    discussion.getVariable("name")
+    discussion.setOnVariableChanged("name") {
+        println("variable name change to $it")
+    }
+    
+    
+    ...
+    
+    discussion.gotoBookmark("mcdo")
+    discussion.setOnBookmarkReached {
+        println("bookmark $it reached!")
+    }
     
 ### Remember something
 
     myPepper.remember("discussion:result", result)
+    myPepper.remember("discussion:state", state)
     nao.remember("discussion:result", result)
     
 ### Wait for a human
@@ -152,6 +179,16 @@ Expert API:
 ### Engage a human
 
     myPepper.engage(human)
+    
+### Detect touch
+
+    pepper.setOnBodyTouched {
+        when(it) {
+            Body.HEAD -> pepper.say("My head was touched")
+            Body.RIGHT_HAND -> pepper.say("My right hand was touched")
+            Body.LEFT_HAND -> pepper.say("My left hand was touched")
+        }
+    }
 
 ### Allow multiples task in parallel
 

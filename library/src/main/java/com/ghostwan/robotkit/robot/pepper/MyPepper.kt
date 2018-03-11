@@ -33,20 +33,20 @@ class MyPepper(activity: Activity) {
     var robotContext: RobotContext? = null
     var conversation: Conversation? = null
     var actuation: Actuation? = null
-    private var robotLostListener: ((String) -> Unit)? = null
+    private var onRobotLost: ((String) -> Unit)? = null
 
     companion object {
         val TAG = "MyPepper"
     }
 
-    fun setRobotLostListener(function: (String) -> Unit) {
-        robotLostListener = function
+    fun setOnRobotLost(function: (String) -> Unit) {
+        onRobotLost = function
     }
 
     suspend fun connect() {
-        robotContext = util.deserializeRobotContext(focusManager.await(robotLostListener))
+        robotContext = util.deserializeRobotContext(focusManager.await(onRobotLost))
         Log.i(TAG, "session connected")
-        session = sessionManager.await(context, robotLostListener)
+        session = sessionManager.await(context, onRobotLost)
         Log.i(TAG, "focus retrieved")
         conversation = util.retrieveService(session!!, Conversation::class.java, "Conversation")
         actuation = util.retrieveService(session!!, Actuation::class.java, "Actuation")
