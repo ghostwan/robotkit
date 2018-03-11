@@ -33,5 +33,16 @@
             android:layout_toEndOf="@+id/start_bt"
             android:layout_marginStart="23dp"/>
 
+    <TextView
+            android:text="@string/info"
+            android:textSize="30sp"
+            android:textColor="@android:color/holo_red_light"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/start_bt"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="31dp"
+            android:id="@+id/textView"/>
+
 
 </RelativeLayout>

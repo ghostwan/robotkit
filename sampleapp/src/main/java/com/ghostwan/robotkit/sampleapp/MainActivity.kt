@@ -53,16 +53,27 @@ class MainActivity : AppCompatActivity() {
                 val byeConcept = Concept(this@MainActivity, R.string.bye, R.string.see_you)
                 val concept = pepper.listen(helloConcept, byeConcept)
                 when (concept) {
-                    helloConcept -> pepper.say(R.string.hello_world)
-                    byeConcept -> pepper.say(R.string.bye_world)
+                    helloConcept -> pepper.say(R.string.hello_world, R.raw.waving_both_hands_b003)
+                    byeConcept -> pepper.say(R.string.bye_world, R.raw.salute_right_b001)
                     else -> pepper.say(R.string.i_dont_understood)
                 }
 
                 isRunning(false)
             } catch (e : Exception){
                 Log.e(TAG, "Something happened!", e)
+                isRunning(false)
+                e.message?.let { setText(it, true) }
             }
+        }
+    }
 
+    fun setText(message : String, isError : Boolean = false) {
+        textView.text = message
+        if (isError) {
+            textView.setTextColor(resources.getColor(android.R.color.holo_red_light))
+        }
+        else {
+            textView.setTextColor(resources.getColor(android.R.color.holo_blue_light))
         }
     }
     fun onStopButton(view : View) {
@@ -75,10 +86,12 @@ class MainActivity : AppCompatActivity() {
 
     fun isRunning(value: Boolean) {
         if(value) {
+            setText("Running...")
             start_bt.visibility = View.INVISIBLE
             stop_bt.visibility = View.VISIBLE
         }
         else {
+            setText("Stopped!")
             start_bt.visibility = View.VISIBLE
             stop_bt.visibility = View.INVISIBLE
         }
