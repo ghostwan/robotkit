@@ -53,10 +53,16 @@ class KotlinMainActivity : AppCompatActivity() {
 
                 val helloConcept = Concept(this@KotlinMainActivity, R.string.hello, R.string.hi)
                 val byeConcept = Concept(this@KotlinMainActivity, R.string.bye, R.string.see_you)
-                val concept = pepper.listen(helloConcept, byeConcept)
+                val discussConcept = Concept(this@KotlinMainActivity, R.string.talk, R.string.discuss)
+                val concept = pepper.listen(helloConcept, byeConcept, discussConcept)
                 when (concept) {
                     helloConcept -> pepper.say(R.string.hello_world, R.raw.hello_anim, R.raw.hello_trajectory)
                     byeConcept -> pepper.say(R.string.bye_world, R.raw.bye_anim)
+                    discussConcept -> {
+                        val result = pepper.discuss(R.raw.presentation_discussion)
+                        println(result)
+                        pepper.say("The discussion and by: "+result)
+                    }
                     else -> pepper.say(R.string.i_dont_understand)
                 }
 

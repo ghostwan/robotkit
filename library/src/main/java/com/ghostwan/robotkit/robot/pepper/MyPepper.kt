@@ -7,10 +7,7 @@ import com.aldebaran.qi.Future
 import com.aldebaran.qi.Session
 import com.aldebaran.qi.sdk.`object`.actuation.Actuation
 import com.aldebaran.qi.sdk.`object`.context.RobotContext
-import com.aldebaran.qi.sdk.`object`.conversation.BodyLanguageOption
-import com.aldebaran.qi.sdk.`object`.conversation.Conversation
-import com.aldebaran.qi.sdk.`object`.conversation.Phrase
-import com.aldebaran.qi.sdk.`object`.conversation.PhraseSet
+import com.aldebaran.qi.sdk.`object`.conversation.*
 import com.aldebaran.qi.sdk.core.FocusManager
 import com.aldebaran.qi.sdk.core.SessionManager
 import com.aldebaran.qi.sdk.util.IOUtils
@@ -93,7 +90,7 @@ class MyPepper(activity: Activity) {
             conversation?.async()?.makeSay(robotContext, Phrase(phrase)).await()
 
         val future = if(animationsRes.isNotEmpty()) {
-            val animSet : MutableList<String> = ArrayList()
+            val animSet = ArrayList<String>()
             animationsRes.mapTo(animSet) { IOUtils.fromRaw(context, it)}
 
             val animation = actuation?.async()?.makeAnimation(animSet).await()
@@ -109,7 +106,7 @@ class MyPepper(activity: Activity) {
     }
 
     suspend fun listen(vararg concepts: Concept, bodyLanguageOption: BodyLanguageOption? =null, throwOnCancel:Boolean = true): Concept? {
-        val phraseSet : MutableList<PhraseSet> = ArrayList()
+        val phraseSet = ArrayList<PhraseSet>()
         concepts.mapTo(phraseSet) { conversation?.async()?.makePhraseSet(it.phrases).await() }
 
         val listen = if(bodyLanguageOption != null)
@@ -129,7 +126,7 @@ class MyPepper(activity: Activity) {
     }
 
     suspend fun animate(vararg animations : Int, wait: Boolean = true, throwOnCancel:Boolean = true) {
-        val animSet : MutableList<String> = ArrayList()
+        val animSet = ArrayList<String>()
         animations.mapTo(animSet) { IOUtils.fromRaw(context, it)}
 
         val animation = actuation?.async()?.makeAnimation(animSet).await()
@@ -137,6 +134,16 @@ class MyPepper(activity: Activity) {
 
         val future = animate.async().run()
         handleFuture(future, wait, throwOnCancel)
+    }
+
+    suspend fun discuss(vararg topics : Int, wait: Boolean = true, throwOnCancel:Boolean = true) : String? {
+        val topicSet = ArrayList<Topic>()
+        topics.mapTo(topicSet) { conversation?.async()?.makeTopic(IOUtils.fromRaw(context, it)).await() }
+
+        val discuss = conversation?.async()?.makeDiscuss(robotContext, topicSet).await()
+
+        val future = discuss.async().run()
+        return handleFuture(future, wait, throwOnCancel)
     }
 
 

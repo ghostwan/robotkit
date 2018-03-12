@@ -53,6 +53,12 @@ Make the robot listen for a phrase or group of phrase known as concept
         else -> pepper.say(R.string.i_dont_understood)
     }
 
+### Discuss about something
+
+Simple API:
+
+    val result : String = myPepper.discuss(R.raw.cooking_dicussion)
+    
 
 ***
 ***
@@ -132,10 +138,6 @@ An API for a Robot to follow another robot
 
 
 ### Discuss about something
-
-Simple API:
-
-    val result : String = myPepper.discuss(R.raw.cooking_dicussion)
 
 Expert API:
 
