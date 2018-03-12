@@ -57,7 +57,13 @@ Make the robot listen for a phrase or group of phrase known as concept
 
 Simple API:
 
+Start a discussion
+
     val result : String = myPepper.discuss(R.raw.cooking_dicussion)
+    
+Start a discussion and go to bookmark
+
+    val result : String = myPepper.discuss(R.raw.cooking_dicussion, gotoBookmark = "intro")
     
 
 ***
