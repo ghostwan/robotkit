@@ -65,7 +65,7 @@ class KotlinMainActivity : AppCompatActivity() {
                         pepper.say("sure  let's talk!")
                         val result = pepper.discuss(R.raw.presentation_discussion, gotoBookmark = "intro")
                         println(result)
-                        pepper.say("The discussion and by: "+result)
+                        pepper.say("The discussion end by: "+result)
                     }
                     else -> pepper.say(R.string.i_dont_understand)
                 }
