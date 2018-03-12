@@ -13,6 +13,8 @@ import com.aldebaran.qi.sdk.core.SessionManager
 import com.aldebaran.qi.sdk.util.IOUtils
 import com.ghostwan.robotkit.robot.pepper.`object`.Concept
 import com.ghostwan.robotkit.robot.pepper.ext.await
+import kotlinx.coroutines.experimental.android.UI
+import kotlinx.coroutines.experimental.launch
 import java.util.concurrent.CancellationException
 
 
@@ -105,7 +107,8 @@ class MyPepper(activity: Activity) {
         handleFuture(future, wait, throwOnCancel)
     }
 
-    suspend fun listen(vararg concepts: Concept, bodyLanguageOption: BodyLanguageOption? =null, throwOnCancel:Boolean = true): Concept? {
+    suspend fun listen(vararg concepts: Concept,
+                       bodyLanguageOption: BodyLanguageOption? =null, throwOnCancel:Boolean = true): Concept? {
         val phraseSet = ArrayList<PhraseSet>()
         concepts.mapTo(phraseSet) { conversation?.async()?.makePhraseSet(it.phrases).await() }
 
@@ -125,9 +128,11 @@ class MyPepper(activity: Activity) {
         return null
     }
 
-    suspend fun animate(vararg animations : Int, wait: Boolean = true, throwOnCancel:Boolean = true) {
+    suspend fun animate(mainAnimation :Int, vararg additionalAnimations : Int,
+                        wait: Boolean = true, throwOnCancel:Boolean = true) {
         val animSet = ArrayList<String>()
-        animations.mapTo(animSet) { IOUtils.fromRaw(context, it)}
+        animSet.add(IOUtils.fromRaw(context, mainAnimation))
+        additionalAnimations.mapTo(animSet) { IOUtils.fromRaw(context, it)}
 
         val animation = actuation?.async()?.makeAnimation(animSet).await()
         val animate = actuation?.async()?.makeAnimate(robotContext, animation).await()
@@ -136,13 +141,24 @@ class MyPepper(activity: Activity) {
         handleFuture(future, wait, throwOnCancel)
     }
 
-    suspend fun discuss(vararg topics : Int, wait: Boolean = true, throwOnCancel:Boolean = true) : String? {
+    suspend fun discuss(mainTopic : Int, vararg additionalTopics : Int,
+                        wait: Boolean = true, throwOnCancel:Boolean = true,
+                        gotoBookmark : String? = null) : String? {
         val topicSet = ArrayList<Topic>()
-        topics.mapTo(topicSet) { conversation?.async()?.makeTopic(IOUtils.fromRaw(context, it)).await() }
+        topicSet.add(conversation?.async()?.makeTopic(IOUtils.fromRaw(context, mainTopic)).await())
+        additionalTopics.mapTo(topicSet) { conversation?.async()?.makeTopic(IOUtils.fromRaw(context, it)).await() }
 
         val discuss = conversation?.async()?.makeDiscuss(robotContext, topicSet).await()
 
         val future = discuss.async().run()
+        gotoBookmark.let {
+            discuss.setOnStartedListener {
+                launch(UI) {
+                    val bookmark = topicSet[0].async().bookmarks.await()[gotoBookmark]
+                    discuss.async().goToBookmarkedOutputUtterance(bookmark).await()
+                }
+            }
+        }
         return handleFuture(future, wait, throwOnCancel)
     }
 
