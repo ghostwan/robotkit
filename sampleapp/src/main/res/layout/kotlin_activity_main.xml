@@ -13,7 +13,7 @@
             android:onClick="onStartButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/start_bt"
+            android:id="@+id/startBtn"
             android:visibility="invisible"
             android:layout_centerVertical="true"
             android:layout_alignParentStart="true"
@@ -27,10 +27,10 @@
             android:onClick="onStopButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/stop_bt"
-            android:layout_alignBaseline="@+id/start_bt"
-            android:layout_alignBottom="@+id/start_bt"
-            android:layout_toEndOf="@+id/start_bt"
+            android:id="@+id/stopBtn"
+            android:layout_alignBaseline="@+id/startBtn"
+            android:layout_alignBottom="@+id/startBtn"
+            android:layout_toEndOf="@+id/startBtn"
             android:layout_marginStart="23dp"/>
 
     <TextView
@@ -39,10 +39,20 @@
             android:textColor="@android:color/holo_red_light"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_above="@+id/start_bt"
+            android:layout_above="@+id/startBtn"
             android:layout_centerHorizontal="true"
             android:layout_marginBottom="31dp"
             android:id="@+id/textView"/>
+
+    <Button
+            android:text="DISCUSS"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="onDiscussButton"
+            android:layout_below="@+id/startBtn"
+            android:layout_alignStart="@+id/startBtn"
+            android:layout_marginTop="36dp"
+            android:id="@+id/discussBtn"/>
 
 
 </RelativeLayout>

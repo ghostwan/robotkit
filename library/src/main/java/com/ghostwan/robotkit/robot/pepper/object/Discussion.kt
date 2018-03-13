@@ -1,12 +1,15 @@
 package com.ghostwan.robotkit.robot.pepper.`object`
 
 import android.content.Context
+import com.aldebaran.qi.sdk.`object`.conversation.Discuss
 
 /**
  * Created by erwan on 12/03/2018.
  */
 class Discussion {
-    private var topics : MutableList<String> = ArrayList()
+    var topics : MutableList<String> = ArrayList()
+
+    var discuss: Discuss? = null
 
     /*
      https://regex101.com/
@@ -27,4 +30,18 @@ class Discussion {
             topics.add(context.getString(integer))
         }
     }
+
+    fun getVariable(topicContent : String) {
+        val reg = "(?!\\\$\\d+ )(\\\$\\w+)".toRegex()
+        reg.findAll(topicContent)
+                .map { it.groups[1]?.value?.replace("\$","") }
+                .distinct()
+                .forEach { println(it) }
+    }
+
+    fun save() {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+
 }

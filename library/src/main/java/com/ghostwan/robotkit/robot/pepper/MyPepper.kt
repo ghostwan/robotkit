@@ -12,6 +12,7 @@ import com.aldebaran.qi.sdk.core.FocusManager
 import com.aldebaran.qi.sdk.core.SessionManager
 import com.aldebaran.qi.sdk.util.IOUtils
 import com.ghostwan.robotkit.robot.pepper.`object`.Concept
+import com.ghostwan.robotkit.robot.pepper.`object`.Discussion
 import com.ghostwan.robotkit.robot.pepper.ext.await
 import kotlinx.coroutines.experimental.android.UI
 import kotlinx.coroutines.experimental.launch
@@ -54,10 +55,18 @@ class MyPepper(activity: Activity) {
 
     fun isConnected(): Boolean = session != null && session!!.isConnected
 
-    private suspend fun <T : Any?> handleFuture(future: Future<T>, wait: Boolean, throwOnCancel:Boolean): T? {
+    private suspend fun <T : Any?> handleFuture(future: Future<T>, onResult: ((Result<T>) -> Unit)?, throwOnCancel:Boolean): T? {
         futures.add(future)
-        future.thenConsume { futures.remove(future) }
-        if(wait) {
+        future.thenConsume {
+            futures.remove(future)
+            when {
+                it.isSuccess -> onResult?.invoke(Result(it.value))
+                it.isCancelled -> onResult?.invoke(Result(CancellationException()))
+                else -> onResult?.invoke(Result(it.error))
+            }
+        }
+
+        if(onResult == null) {
             try {
                 return future.await()
             } catch (e : CancellationException){
@@ -77,14 +86,16 @@ class MyPepper(activity: Activity) {
 
     suspend fun say(phraseRes: Int, vararg animationsRes : Int,
                     bodyLanguageOption: BodyLanguageOption? =null,
-                    wait: Boolean = true, throwOnCancel:Boolean = true) {
+                    onResult: ((Result<Void>) -> Unit)? = null,
+                    throwOnCancel:Boolean = true) {
 
-        say(context.getString(phraseRes), *animationsRes, bodyLanguageOption = bodyLanguageOption, wait = wait, throwOnCancel = throwOnCancel)
+        say(context.getString(phraseRes), *animationsRes, bodyLanguageOption = bodyLanguageOption, onResult = onResult, throwOnCancel = throwOnCancel)
     }
 
     suspend fun say(phrase: String, vararg animationsRes : Int,
                     bodyLanguageOption: BodyLanguageOption? =null,
-                    wait: Boolean = true, throwOnCancel:Boolean = true) {
+                    onResult: ((Result<Void>) -> Unit)? = null,
+                    throwOnCancel:Boolean = true) {
 
         val say = if(bodyLanguageOption != null)
             conversation?.async()?.makeSay(robotContext, Phrase(phrase), bodyLanguageOption).await()
@@ -104,11 +115,11 @@ class MyPepper(activity: Activity) {
             say.async().run()
         }
 
-        handleFuture(future, wait, throwOnCancel)
+        handleFuture(future, onResult, throwOnCancel)
     }
 
-    suspend fun listen(vararg concepts: Concept,
-                       bodyLanguageOption: BodyLanguageOption? =null, throwOnCancel:Boolean = true): Concept? {
+    suspend fun listen(vararg concepts: Concept, bodyLanguageOption: BodyLanguageOption? =null,
+                       throwOnCancel:Boolean = true): Concept? {
         val phraseSet = ArrayList<PhraseSet>()
         concepts.mapTo(phraseSet) { conversation?.async()?.makePhraseSet(it.phrases).await() }
 
@@ -118,7 +129,7 @@ class MyPepper(activity: Activity) {
             conversation?.async()?.makeListen(robotContext, phraseSet).await()
 
         val future = listen.async().run()
-        val listenResult = handleFuture(future, true, throwOnCancel)
+        val listenResult = handleFuture(future, null, throwOnCancel)
 
         listenResult?.heardPhrase.let {
             concepts
@@ -128,8 +139,9 @@ class MyPepper(activity: Activity) {
         return null
     }
 
-    suspend fun animate(mainAnimation :Int, vararg additionalAnimations : Int,
-                        wait: Boolean = true, throwOnCancel:Boolean = true) {
+    suspend fun animate(mainAnimation:Int, vararg additionalAnimations: Int,
+                        onResult: ((Result<Void>) -> Unit)? = null,
+                        throwOnCancel:Boolean = true) {
         val animSet = ArrayList<String>()
         animSet.add(IOUtils.fromRaw(context, mainAnimation))
         additionalAnimations.mapTo(animSet) { IOUtils.fromRaw(context, it)}
@@ -138,11 +150,12 @@ class MyPepper(activity: Activity) {
         val animate = actuation?.async()?.makeAnimate(robotContext, animation).await()
 
         val future = animate.async().run()
-        handleFuture(future, wait, throwOnCancel)
+        handleFuture(future, onResult, throwOnCancel)
     }
 
     suspend fun discuss(mainTopic : Int, vararg additionalTopics : Int,
-                        wait: Boolean = true, throwOnCancel:Boolean = true,
+                        onResult: ((Result<String>) -> Unit)? = null,
+                        throwOnCancel:Boolean = true,
                         gotoBookmark : String? = null) : String? {
         val topicSet = ArrayList<Topic>()
         topicSet.add(conversation?.async()?.makeTopic(IOUtils.fromRaw(context, mainTopic)).await())
@@ -159,7 +172,29 @@ class MyPepper(activity: Activity) {
                 }
             }
         }
-        return handleFuture(future, wait, throwOnCancel)
+        return handleFuture(future, onResult, throwOnCancel)
+    }
+
+    suspend fun discuss(discussion: Discussion,
+                        onResult: ((Result<String>) -> Unit)? = null,
+                        throwOnCancel:Boolean = true,
+                        gotoBookmark : String? = null) : String? {
+        val topicSet = ArrayList<Topic>()
+        discussion.topics.mapTo(topicSet) { conversation?.async()?.makeTopic(it).await() }
+
+        val discuss = conversation?.async()?.makeDiscuss(robotContext, topicSet).await()
+        discussion.discuss = discuss
+
+        val future = discuss.async().run()
+        gotoBookmark.let {
+            discuss.setOnStartedListener {
+                launch(UI) {
+                    val bookmark = topicSet[0].async().bookmarks.await()[gotoBookmark]
+                    discuss.async().goToBookmarkedOutputUtterance(bookmark).await()
+                }
+            }
+        }
+        return handleFuture(future, onResult, throwOnCancel)
     }
 
 
