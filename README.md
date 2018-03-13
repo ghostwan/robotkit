@@ -1,6 +1,7 @@
-# RobotKit
+# RobotKit ![Kotlin Logo](kotlin.png)
 RobotKit it's a Kotlin multi-Robot SDK for Android.
-It could works in java but was not design for. See https://github.com/ghostwan/robotkit-java for the java version 
+It could works in java but was not design for it. 
+See https://github.com/ghostwan/robotkit-java for the java version 
 
 It works with :
 * Pepper (QiSDK) from SoftBank Robotics (https://android.aldebaran.com/sdk/doc/pepper-sdk/index.html)
