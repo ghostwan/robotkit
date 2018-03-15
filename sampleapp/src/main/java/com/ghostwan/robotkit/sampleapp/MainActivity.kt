@@ -11,20 +11,20 @@ import kotlinx.android.synthetic.main.kotlin_activity_main.*
 import kotlinx.coroutines.experimental.android.UI
 import kotlinx.coroutines.experimental.launch
 
-class KotlinMainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity() {
 
 
     private lateinit var pepper : MyPepper
 
     companion object {
-        val TAG = "KotlinMainActivity"
+        val TAG = "MainActivity"
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.kotlin_activity_main)
 
-        pepper = MyPepper(this@KotlinMainActivity)
+        pepper = MyPepper(this@MainActivity)
         pepper.setOnRobotLost {
             println("Robot Lost : $it")
             launch (UI){
@@ -50,13 +50,12 @@ class KotlinMainActivity : AppCompatActivity() {
             try {
                 isRunning(true)
 
-                pepper.animate(R.raw.intro_anim)
                 pepper.say(R.string.hello_human)
 
 
-                val helloConcept= Concept(this@KotlinMainActivity, R.string.hello, R.string.hi)
-                val byeConcept = Concept(this@KotlinMainActivity, R.string.bye, R.string.see_you)
-                val discussConcept = Concept(this@KotlinMainActivity, R.string.talk, R.string.discuss)
+                val helloConcept= Concept(this@MainActivity, R.string.hello, R.string.hi)
+                val byeConcept = Concept(this@MainActivity, R.string.bye, R.string.see_you)
+                val discussConcept = Concept(this@MainActivity, R.string.talk, R.string.discuss)
                 val concept = pepper.listen(helloConcept, byeConcept, discussConcept)
 
 
@@ -92,11 +91,11 @@ class KotlinMainActivity : AppCompatActivity() {
     fun onDiscussButton(view: View){
         launch (UI){
             Log.i(TAG, "starting discussion")
-            val discussion = Discussion(this@KotlinMainActivity, R.raw.presentation_discussion)
+            val discussion = Discussion(this@MainActivity, R.raw.presentation_discussion)
             val result = pepper.discuss(discussion, gotoBookmark = "intro")
             println(result)
             pepper.say("Saving the discussion: ")
-            discussion.save()
+            discussion.saveData(this@MainActivity)
         }
     }
 

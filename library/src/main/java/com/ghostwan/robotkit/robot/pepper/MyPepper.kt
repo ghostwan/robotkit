@@ -14,6 +14,7 @@ import com.aldebaran.qi.sdk.util.IOUtils
 import com.ghostwan.robotkit.robot.pepper.`object`.Concept
 import com.ghostwan.robotkit.robot.pepper.`object`.Discussion
 import com.ghostwan.robotkit.robot.pepper.ext.await
+import kotlinx.coroutines.experimental.CoroutineScope
 import kotlinx.coroutines.experimental.android.UI
 import kotlinx.coroutines.experimental.launch
 import java.util.concurrent.CancellationException
@@ -37,6 +38,18 @@ class MyPepper(activity: Activity) {
 
     companion object {
         val TAG = "MyPepper"
+        fun info(message: String) {
+            Log.i(TAG, message)
+        }
+        fun warning(message: String) {
+            Log.w(TAG, message)
+        }
+        fun error(e: Exception, message: String="error") {
+            Log.e(TAG, message, e)
+        }
+        fun ui (block: suspend CoroutineScope.() -> Unit) {
+            launch(UI, block = block)
+        }
     }
 
     fun setOnRobotLost(function: (String) -> Unit) {
@@ -183,17 +196,23 @@ class MyPepper(activity: Activity) {
         discussion.topics.mapTo(topicSet) { conversation?.async()?.makeTopic(it).await() }
 
         val discuss = conversation?.async()?.makeDiscuss(robotContext, topicSet).await()
-        discussion.discuss = discuss
-
-        val future = discuss.async().run()
-        gotoBookmark.let {
-            discuss.setOnStartedListener {
+        var startBookmark:String? = null
+        discussion.prepare(discuss)?.let {
+            startBookmark = it
+        }
+        gotoBookmark?.let {
+            startBookmark = gotoBookmark
+        }
+        println("Start bookmark : $startBookmark")
+        startBookmark?.let {
+            discuss?.async()?.setOnStartedListener {
                 launch(UI) {
-                    val bookmark = topicSet[0].async().bookmarks.await()[gotoBookmark]
+                    val bookmark = topicSet[0].async().bookmarks.await()[startBookmark]
                     discuss.async().goToBookmarkedOutputUtterance(bookmark).await()
                 }
             }
         }
+        val future = discuss.async().run()
         return handleFuture(future, onResult, throwOnCancel)
     }
 

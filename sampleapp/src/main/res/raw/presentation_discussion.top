@@ -4,11 +4,16 @@ concept:(hello) [hello hi hey "good morning" greetings]
 
 # Replying to speech
 proposal: %intro ~hello human what's your name ?
-    u1:(my name is _*) $1 it's a nice name ! $name=$1 and what's your age ?
-        u2:(I'm _* years old) $age=$1 Your so young ! and what's your sex ?
+    u1:(my name is _*) $1 it's a nice name ! $name=$1
+     and what's your age ?
+        u2:(I'm _* years old) $age=$1 Your so young !
+        and what's your sex ?
             u3:(I'm a boy) $gender=boy A Boy! ^endDiscuss(sex)
             u3:(I'm a girl) $gender=girl A Girl ! ^endDiscuss(sex)
         u2:(quit) ^endDiscuss(age)
     u1:(quit) ^endDiscuss(name)
 
-proposal: %detail ~hello human, I know that you are a $gender of $age years old. And your name is $name
+proposal: %next ~hello human, I know that you are a $gender of $age years old. And your name is $name .
+        Am I correct ?
+    u1:(yes) ok ^endDiscuss(true)
+    u1:(no) ok ^endDiscuss(false)
