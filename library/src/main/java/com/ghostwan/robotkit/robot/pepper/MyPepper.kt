@@ -190,15 +190,19 @@ class MyPepper(activity: Activity) {
     }
 
     suspend fun discuss(discussion: Discussion,
+                        onStart : (() -> Unit)? = null,
                         onResult: ((Result<String>) -> Unit)? = null,
                         throwOnCancel:Boolean = true,
                         gotoBookmark : String? = null) : String? {
-        val topicSet = ArrayList<Topic>()
-        discussion.topics.mapTo(topicSet) { conversation?.async()?.makeTopic(it).await() }
 
-        val discuss = conversation?.async()?.makeDiscuss(robotContext, topicSet).await()
+        var topics = discussion.topics.map { (key, value) ->
+            val top = conversation?.async()?.makeTopic(value).await()
+            key to top
+        }.toMap()
+
+        val discuss = conversation?.async()?.makeDiscuss(robotContext, topics.values.toList()).await()
         var startBookmark:String? = null
-        discussion.prepare(discuss)?.let {
+        discussion.prepare(discuss, topics)?.let {
             startBookmark = it
         }
         gotoBookmark?.let {
@@ -208,8 +212,9 @@ class MyPepper(activity: Activity) {
         startBookmark?.let {
             discuss?.async()?.setOnStartedListener {
                 launch(UI) {
-                    val bookmark = topicSet[0].async().bookmarks.await()[startBookmark]
+                    val bookmark = topics[discussion.mainTopic]?.async()?.bookmarks.await()[startBookmark]
                     discuss.async().goToBookmarkedOutputUtterance(bookmark).await()
+                    onStart?.invoke()
                 }
             }
         }

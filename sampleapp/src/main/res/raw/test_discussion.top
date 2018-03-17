@@ -19,3 +19,5 @@ proposal: %next ~hello human, I know that you are a $gender of $age years old. A
         Am I correct ?
     u1:(yes) ok ^endDiscuss(true)
     u1:(no) ok ^endDiscuss(false)
+
+proposal: %testGoto I properly reached this topic! ^endDiscuss(goto)

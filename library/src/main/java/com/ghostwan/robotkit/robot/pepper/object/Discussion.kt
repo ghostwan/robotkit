@@ -3,6 +3,7 @@ package com.ghostwan.robotkit.robot.pepper.`object`
 import android.content.Context
 import com.aldebaran.qi.sdk.`object`.conversation.Discuss
 import com.aldebaran.qi.sdk.`object`.conversation.QiChatVariable
+import com.aldebaran.qi.sdk.`object`.conversation.Topic
 import com.aldebaran.qi.sdk.util.IOUtils
 import com.ghostwan.robotkit.robot.pepper.MyPepper.Companion.info
 import com.ghostwan.robotkit.robot.pepper.MyPepper.Companion.warning
@@ -24,14 +25,17 @@ data class Data(var variables: Map<String, String>, @Optional var bookmark: Stri
 }
 
 //Move in a specific extension
-data class NAOqiData(var discuss: Discuss? = null, var qiChatVariables: HashMap<String, QiChatVariable>) {
-    constructor() : this(null, HashMap())
+data class NAOqiData(var discuss: Discuss? = null,
+                     var qiChatVariables: HashMap<String, QiChatVariable>,
+                     var qiTopics : Map<Int, Topic>) {
+    constructor() : this(null, HashMap(), HashMap())
 }
 
 
 class Discussion {
     var id: String = ""
-    var topics = ArrayList<String>()
+    var mainTopic : Int
+    var topics = HashMap<Int, String>()
     var data : Data = Data()
     var naoqiData : NAOqiData = NAOqiData()
 
@@ -39,13 +43,14 @@ class Discussion {
     private var onVariableChanged :((String, String) -> Unit)? = null
 
     constructor(context: Context, vararg integers: Int) {
+        mainTopic = integers[0]
         for (integer in integers) {
             var content = IOUtils.fromRaw(context, integer)
             id += context.getString(integer).substringAfterLast("/")
             content = addBookmarks(content, "(\\s*proposal:)(.*)", "rk-p")
             content = addBookmarks(content, "(\\s*u\\d+:\\([^)]*\\))(.*)", "rk-u")
             println(content)
-            topics.add(content)
+            topics[integer] = content
         }
         id = id.sha512()
         println("Discussion id is $id")
@@ -74,7 +79,7 @@ class Discussion {
 
     fun getVariables(): List<String> {
         val reg = "(\\\$\\w+)".toRegex()
-        return reg.findAll(topics.joinToString { it })
+        return reg.findAll(topics.values.joinToString { it })
                 .map { it.groups[1]?.value?.replace("\$", "") }
                 .distinct().map { it!! }.toList()
     }
@@ -134,9 +139,10 @@ class Discussion {
         data = Data()
     }
 
-    internal suspend fun prepare(discuss: Discuss) : String?{
+    internal suspend fun prepare(discuss: Discuss, topics : Map<Int, Topic>) : String?{
         naoqiData.discuss = discuss
         naoqiData.qiChatVariables.clear()
+        naoqiData.qiTopics = topics
 
         getVariables().forEach {key ->
             val qichatvar =  discuss.async()?.variable(key).await()
@@ -162,6 +168,11 @@ class Discussion {
 
     suspend fun getVariable(name : String) : String {
         return naoqiData.qiChatVariables[name]?.async()?.value.await()
+    }
+
+    suspend fun gotoBookmark(name: String, topic: Int=mainTopic){
+        val bookmark = naoqiData.qiTopics[topic]?.async()?.bookmarks.await()[name]
+        naoqiData.discuss?.async()?.goToBookmarkedOutputUtterance(bookmark).await()
     }
 
 

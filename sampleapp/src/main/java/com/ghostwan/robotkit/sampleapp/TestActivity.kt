@@ -2,6 +2,7 @@ package com.ghostwan.robotkit.sampleapp
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import android.view.View
 import com.ghostwan.robotkit.robot.pepper.MyPepper
 import com.ghostwan.robotkit.robot.pepper.MyPepper.Companion.exception
 import com.ghostwan.robotkit.robot.pepper.MyPepper.Companion.info
@@ -25,7 +26,14 @@ class TestActivity : AppCompatActivity() {
             ui {
                 discussion.clearData()
                 pepper.stop()
-                pepper.discuss(discussion, gotoBookmark = "intro")
+                pepper.discuss(discussion, gotoBookmark = "intro" , onStart = {
+                    gotoBookmarkBtn.visibility = View.VISIBLE
+                })
+            }
+        }
+        gotoBookmarkBtn.setOnClickListener{
+            ui{
+                discussion.gotoBookmark( "testGoto")
             }
         }
         pepper.setOnRobotLost {
@@ -35,21 +43,27 @@ class TestActivity : AppCompatActivity() {
 
     override fun onStart() {
         super.onStart()
+        gotoBookmarkBtn.visibility = View.INVISIBLE
         ui {
             if(!pepper.isConnected()) {
                 pepper.connect()
             }
             try {
                 val result = if(discussion.restoreData(this@TestActivity)) {
-                    pepper.discuss(discussion)
+                    pepper.discuss(discussion, onStart = {
+                        gotoBookmarkBtn.visibility = View.VISIBLE
+                    })
                 }
                 else {
-                    pepper.discuss(discussion, gotoBookmark = "intro")
+                    pepper.discuss(discussion, gotoBookmark = "intro", onStart = {
+                        gotoBookmarkBtn.visibility = View.VISIBLE
+                    })
                 }
                 println("End by $result")
             } catch (e: Exception) {
                 exception(e)
             }
+            gotoBookmarkBtn.visibility = View.INVISIBLE
         }
     }
 
