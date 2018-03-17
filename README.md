@@ -76,7 +76,6 @@ pepper.connect().thenConsume {
 }
 ```
 
-
 ## Compatibility
 It works with :
 
@@ -88,6 +87,72 @@ Future Robot support:
 * Nao from SoftBank Robotics 
 * Cozmo from Anki (http://cozmosdk.anki.com/docs/)
 
+
+## Let's code
+If you want to test the last version in your app : 1.0.0rc
+
+Add in your root build.gradle file :
+
+``` groovy
+allprojects {
+    repositories {
+        ...
+        maven { url "https://jitpack.io" } // To retrieve RobotKit
+        maven { url 'https://android.aldebaran.com/sdk/maven'} // For Pepper SDK
+        maven { url "https://kotlin.bintray.com/kotlinx" } // For Kotlin Serialization API
+        ...
+    }
+}
+```
+And in your app build.gradle file:
+
+``` groovy
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    ...
+    compile 'com.github.ghostwan:robotkit:1.0.0rc'
+}
+kotlin {
+    experimental {
+        coroutines "enable"
+    }
+}
+```
+
+Create a empty activity and make an hello world
+ 
+``` kotlin
+class MainActivity : AppCompatActivity() {
+
+    private lateinit var pepper: MyPepper
+    private lateinit var textview: TextView
+    
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
+        pepper = MyPepper(this)
+        pepper.setOnRobotLost {
+            println("Robot Lost : $it")
+        }
+        textview = findViewById(R.id.text)
+    }
+    
+    override fun onStart() {
+        super.onStart()
+        ui {
+            if (!pepper.isConnected()) {
+                pepper.connect()
+            }
+            try {
+                textview.setText(R.string.hello_world)
+                pepper.say(R.string.hello_world)
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
+        }
+    }
+}
+```
 
 ## API DONE
 
