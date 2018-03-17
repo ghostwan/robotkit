@@ -296,16 +296,14 @@ cozmo = RemoteCozmo(this, "cozmo.local")
 cozmo.connect()
 ```
 
-### Say a phrase
+### Say a phrase #28
 
 Expert API:
 
 ``` kotlin
-val speech = Speech(R.string.intro)
+val speech = Speech(R.string.intro, R.string.presentation, Locale.FRENCH)
 pepper.say(speech)
-```
-
-Needed ?? : Maybe it could be interesting to concatenate phrase 
+``` 
 
 ### Animate with animation #15
 

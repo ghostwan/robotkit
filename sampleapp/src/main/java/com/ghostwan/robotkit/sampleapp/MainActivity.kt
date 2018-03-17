@@ -10,6 +10,7 @@ import com.ghostwan.robotkit.robot.pepper.`object`.Discussion
 import kotlinx.android.synthetic.main.kotlin_activity_main.*
 import kotlinx.coroutines.experimental.android.UI
 import kotlinx.coroutines.experimental.launch
+import java.util.*
 
 class MainActivity : AppCompatActivity() {
 
@@ -57,7 +58,6 @@ class MainActivity : AppCompatActivity() {
                 val byeConcept = Concept(this@MainActivity, R.string.bye, R.string.see_you)
                 val discussConcept = Concept(this@MainActivity, R.string.talk, R.string.discuss)
                 val concept = pepper.listen(helloConcept, byeConcept, discussConcept)
-
 
                 when (concept) {
                     helloConcept -> pepper.say(R.string.hello_world, R.raw.hello_anim, R.raw.hello_trajectory)
