@@ -44,7 +44,7 @@ class MyPepper(activity: Activity) {
         fun warning(message: String) {
             Log.w(TAG, message)
         }
-        fun error(e: Exception, message: String="error") {
+        fun exception(e: Exception, message: String="error") {
             Log.e(TAG, message, e)
         }
         fun ui (block: suspend CoroutineScope.() -> Unit) {
@@ -204,7 +204,7 @@ class MyPepper(activity: Activity) {
         gotoBookmark?.let {
             startBookmark = gotoBookmark
         }
-        println("Start bookmark : $startBookmark")
+        info("Start bookmark : $startBookmark")
         startBookmark?.let {
             discuss?.async()?.setOnStartedListener {
                 launch(UI) {

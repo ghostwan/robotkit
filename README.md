@@ -242,8 +242,8 @@ discussion.saveData(this)
     
 discussion.setVariable("name", "ghostwan")
 discussion.getVariable("name")
-discussion.setOnVariableChanged("name") {
-	println("variable name change to $it")
+discussion.setOnVariableChanged { name, value -> 
+    info("Variable $name changed to $value") 
 }
     
     

@@ -3,6 +3,8 @@ package com.ghostwan.robotkit.sampleapp
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import com.ghostwan.robotkit.robot.pepper.MyPepper
+import com.ghostwan.robotkit.robot.pepper.MyPepper.Companion.exception
+import com.ghostwan.robotkit.robot.pepper.MyPepper.Companion.info
 import com.ghostwan.robotkit.robot.pepper.MyPepper.Companion.ui
 import com.ghostwan.robotkit.robot.pepper.`object`.Discussion
 import kotlinx.android.synthetic.main.activity_test.*
@@ -16,7 +18,9 @@ class TestActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_test)
         pepper = MyPepper(this)
-        discussion = Discussion(this, R.raw.presentation_discussion)
+        discussion = Discussion(this, R.raw.test_discussion)
+        discussion.setOnBookmarkReached { info("Bookmark $it reached!") }
+        discussion.setOnVariableChanged { name, value -> info("Variable $name changed to $value") }
         clearDataBtn.setOnClickListener {
             ui {
                 discussion.clearData()
@@ -25,7 +29,7 @@ class TestActivity : AppCompatActivity() {
             }
         }
         pepper.setOnRobotLost {
-            println("Robot Lost : $it")
+            info("Robot Lost : $it")
         }
     }
 
@@ -44,7 +48,7 @@ class TestActivity : AppCompatActivity() {
                 }
                 println("End by $result")
             } catch (e: Exception) {
-                e.printStackTrace()
+                exception(e)
             }
         }
     }
@@ -52,7 +56,13 @@ class TestActivity : AppCompatActivity() {
     override fun onStop() {
         super.onStop()
         ui{
-            discussion.saveData(this@TestActivity)
+            try {
+                info("name = ${discussion.getVariable("name")}")
+                discussion.saveData(this@TestActivity)
+            }
+            catch (e : Exception) {
+                exception(e)
+            }
         }
     }
 

@@ -2,6 +2,7 @@ package com.ghostwan.robotkit.robot.pepper.`object`
 
 import android.content.Context
 import com.aldebaran.qi.sdk.`object`.conversation.Discuss
+import com.aldebaran.qi.sdk.`object`.conversation.QiChatVariable
 import com.aldebaran.qi.sdk.util.IOUtils
 import com.ghostwan.robotkit.robot.pepper.MyPepper.Companion.info
 import com.ghostwan.robotkit.robot.pepper.MyPepper.Companion.warning
@@ -22,16 +23,22 @@ data class Data(var variables: Map<String, String>, @Optional var bookmark: Stri
     constructor() : this(HashMap(), null)
 }
 
+//Move in a specific extension
+data class NAOqiData(var discuss: Discuss? = null, var qiChatVariables: HashMap<String, QiChatVariable>) {
+    constructor() : this(null, HashMap())
+}
+
+
 class Discussion {
     var id: String = ""
     var topics = ArrayList<String>()
     var data : Data = Data()
+    var naoqiData : NAOqiData = NAOqiData()
 
-    var onBookmarkReached :((String) -> Unit)? = null
-    private var discuss: Discuss? = null
+    private var onBookmarkReached :((String) -> Unit)? = null
+    private var onVariableChanged :((String, String) -> Unit)? = null
 
-    constructor(context: Context, vararg integers: Int, onBookmarkReached: ((String) -> Unit)? = null) {
-        this.onBookmarkReached = onBookmarkReached
+    constructor(context: Context, vararg integers: Int) {
         for (integer in integers) {
             var content = IOUtils.fromRaw(context, integer)
             id += context.getString(integer).substringAfterLast("/")
@@ -43,6 +50,13 @@ class Discussion {
         id = id.sha512()
         println("Discussion id is $id")
 
+    }
+
+    fun setOnBookmarkReached(onBookmarkReached: ((name : String) -> Unit)? = null){
+        this.onBookmarkReached = onBookmarkReached
+    }
+    fun setOnVariableChanged(onVariableChanged: ((name: String, value: String) -> Unit)? = null){
+        this.onVariableChanged = onVariableChanged
     }
 
     private fun addBookmarks(content : String, regex : String, template : String) : String {
@@ -69,7 +83,7 @@ class Discussion {
 
     suspend fun saveData(context: Context) {
         data.variables = getVariables().map {
-            val variable = discuss?.async()?.variable(it).await()
+            val variable = naoqiData.discuss?.async()?.variable(it).await()
             var value = variable.async().value.await()
             if(value == "")
                 value=" "
@@ -107,7 +121,6 @@ class Discussion {
             }
             true
         } catch (e: FileNotFoundException) {
-            e.printStackTrace()
             false
         }
     }
@@ -122,10 +135,18 @@ class Discussion {
     }
 
     internal suspend fun prepare(discuss: Discuss) : String?{
-        this.discuss = discuss
-        data.variables.forEach { (key, value) ->
-            val qichatvar =  discuss?.async()?.variable(key).await()
-            qichatvar.async().setValue(value).await()
+        naoqiData.discuss = discuss
+        naoqiData.qiChatVariables.clear()
+
+        getVariables().forEach {key ->
+            val qichatvar =  discuss.async()?.variable(key).await()
+            naoqiData.qiChatVariables[key] = qichatvar
+            qichatvar.setOnValueChangedListener {
+                onVariableChanged?.invoke(key, it)
+            }
+            if(key in data.variables) {
+                qichatvar.async().setValue(data.variables[key]).await()
+            }
         }
 
         discuss.async().setOnBookmarkReachedListener {
@@ -133,6 +154,14 @@ class Discussion {
             onBookmarkReached?.invoke(it.name)
         }
         return data.bookmark
+    }
+
+    suspend fun setVariable(name : String , value : String) {
+        naoqiData.qiChatVariables[name]?.async()?.setValue(value).await()
+    }
+
+    suspend fun getVariable(name : String) : String {
+        return naoqiData.qiChatVariables[name]?.async()?.value.await()
     }
 
 
