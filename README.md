@@ -8,7 +8,7 @@ See https://github.com/ghostwan/robotkit-java for the java version
 
 To handle asynchronous calls **RobotKit** use an experimental feature of kotlin calls [coroutine](https://kotlinlang.org/docs/reference/coroutines.html), to use those you need to add in your module build.gradle file :
 
-```groovy
+``` groovy
 kotlin {
     experimental {
         coroutines "enable"
@@ -16,7 +16,7 @@ kotlin {
 }
 ```
 
-In your activity or where you want to call RobotKit APIs you have to use the lambda : [launch(UI){} ](https://github.com/Kotlin/kotlinx.coroutines/blob/master/coroutines-guide.md#coroutine-basics) or RobotKit shortcut ui{}
+In your activity or where you want to call RobotKit APIs you have to use the lambda : [launch(UI){}](https://github.com/Kotlin/kotlinx.coroutines/blob/master/coroutines-guide.md#coroutine-basics) or RobotKit shortcut ui{}
 
 ``` kotlin
 ui { //it means that the coroutine it's in the UI thread
@@ -154,6 +154,8 @@ class MainActivity : AppCompatActivity() {
 }
 ```
 
+To deploy on a virtual Pepper refers to [SoftBank Robotics Documentation](https://android.aldebaran.com/sdk/doc/pepper-sdk/getting_started.html)
+
 ## API DONE
 
 ### Connect to Pepper attached to the tablet
@@ -261,7 +263,7 @@ discussion.gotoBookmark("mcdo")
     
 ## API TODO
 
-### Multiple Robot support
+### Multiple Robot support #27
 
 Creation of an interface Robot which will be implemented by all Robot supported
 
@@ -273,14 +275,14 @@ cozmo : Robot = RemoteCozmo(this, "cozmo.local")
 ```    
 
 
-### Connect to Remote Pepper
+### Connect to Remote Pepper #13
 
 ``` kotlin
 pepper = RemotePepper(this, "pepper.local")
 pepper.connect()    
 ```	
 
-### Connect to Remote Nao
+### Connect to Remote Nao #14
 
 ``` kotlin
 nao = RemoteNao(this, "nao.local")
@@ -305,7 +307,7 @@ pepper.say(speech)
 
 Needed ?? : Maybe it could be interesting to concatenate phrase 
 
-### Animate with animation
+### Animate with animation #15
 
 Expert API:
 
@@ -316,7 +318,7 @@ animation.getLabels()
 myPepper.animate(animation)
 ```
 
-### Move around
+### Move around #16
 
 ``` kotlin
 pepper.moveForward(1)
@@ -324,7 +326,7 @@ pepper.moveLeft(1)
 pepper.moveRight(1)
 ```
     
-### Goto a location
+### Goto a location #17
 
 ``` kotlin
  val theKitchen : Location = pepper.getLocation("kitchen")
@@ -338,10 +340,10 @@ val theKitchen = nao.getLocation("kitchen")
 pepper.rememberLocation("kitchen", theKitchen)
 ```
   
-Allow multiple robots to share a location that they know about
+Allow multiple robots to share a location that they know about #18
     
 
-### Follow a robot
+### Follow a robot #20
 
 ``` kotlin
 nao.follow(myPepper)
@@ -383,7 +385,7 @@ pepper.setOnBodyTouched {
 }
 ```
 
-### Allow multiples task in parallel
+### Allow multiples task in parallel #25
 
 ``` kotlin
 val t1 : Task= () -> myPepper.say("Nous voilà dans la cuisine!");
