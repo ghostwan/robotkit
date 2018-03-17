@@ -59,7 +59,7 @@ class TestActivity : AppCompatActivity() {
                         gotoBookmarkBtn.visibility = View.VISIBLE
                     })
                 }
-                println("End by $result")
+                println("End discuss : step $result")
             } catch (e: Exception) {
                 exception(e)
             }
@@ -71,7 +71,7 @@ class TestActivity : AppCompatActivity() {
         super.onStop()
         ui{
             try {
-                info("name = ${discussion.getVariable("name")}")
+                info("user name is ${discussion.getVariable("name")}")
                 discussion.saveData(this@TestActivity)
             }
             catch (e : Exception) {
