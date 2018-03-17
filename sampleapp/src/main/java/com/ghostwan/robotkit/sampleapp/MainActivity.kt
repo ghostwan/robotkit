@@ -52,7 +52,7 @@ class MainActivity : AppCompatActivity() {
 
                 pepper.say(R.string.hello_human)
 
-
+                pepper.animate(R.raw.hello_anim)
                 val helloConcept= Concept(this@MainActivity, R.string.hello, R.string.hi)
                 val byeConcept = Concept(this@MainActivity, R.string.bye, R.string.see_you)
                 val discussConcept = Concept(this@MainActivity, R.string.talk, R.string.discuss)

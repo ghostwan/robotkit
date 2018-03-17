@@ -73,9 +73,9 @@ class MyPepper(activity: Activity) {
         future.thenConsume {
             futures.remove(future)
             when {
-                it.isSuccess -> onResult?.invoke(Result(it.value))
-                it.isCancelled -> onResult?.invoke(Result(CancellationException()))
-                else -> onResult?.invoke(Result(it.error))
+                it.isSuccess -> onResult?.invoke(Success(it.value))
+                it.isCancelled -> onResult?.invoke(Failure(CancellationException()))
+                else -> onResult?.invoke(Failure(it.error))
             }
         }
 
@@ -89,7 +89,8 @@ class MyPepper(activity: Activity) {
         }
         return null
     }
-    suspend fun stop() {
+
+    fun stop() {
         Log.i(TAG, "cancelling ${futures.size} futures")
         for (future in futures) {
             future.requestCancellation();

@@ -27,7 +27,7 @@ class Discussion {
     var topics = ArrayList<String>()
     var data : Data = Data()
 
-    private var onBookmarkReached :((String) -> Unit)? = null
+    var onBookmarkReached :((String) -> Unit)? = null
     private var discuss: Discuss? = null
 
     constructor(context: Context, vararg integers: Int, onBookmarkReached: ((String) -> Unit)? = null) {
