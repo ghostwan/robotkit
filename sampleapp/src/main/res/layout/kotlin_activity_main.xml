@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context="com.ghostwan.robotkit.sampleapp.MainActivity">
+
+    <Button
+            android:text="START"
+            android:backgroundTint="@color/colorPrimary"
+            android:textColor="@android:color/white"
+            android:onClick="onStartButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/startBtn"
+            android:visibility="invisible"
+            android:layout_centerVertical="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="106dp"/>
+
+    <Button
+            android:text="STOP"
+            android:visibility="invisible"
+            android:backgroundTint="@color/colorAccent"
+            android:textColor="@android:color/white"
+            android:onClick="onStopButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/stopBtn"
+            android:layout_alignBaseline="@+id/startBtn"
+            android:layout_alignBottom="@+id/startBtn"
+            android:layout_toEndOf="@+id/startBtn"
+            android:layout_marginStart="23dp"/>
+
+    <TextView
+            android:text="@string/info"
+            android:textSize="30sp"
+            android:textColor="@android:color/holo_red_light"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/startBtn"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="31dp"
+            android:id="@+id/textView"/>
+
+    <Button
+            android:text="DISCUSS"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="onDiscussButton"
+            android:layout_below="@+id/startBtn"
+            android:layout_alignStart="@+id/startBtn"
+            android:layout_marginTop="36dp"
+            android:id="@+id/discussBtn"/>
+
+
+</RelativeLayout>

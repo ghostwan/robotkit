@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">SampleApp</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="bye_world">Bye world!</string>
+    <string name="hello_human">hello human what do you want to do?</string>
+    <string name="hello">hello</string>
+    <string name="hi">hi</string>
+    <string name="bye">bye</string>
+    <string name="see_you">see you</string>
+    <string name="i_dont_understand">I don\'t understand!</string>
+    <string name="i_stop">Sure I stop!</string>
+    <string name="info">Info</string>
+    <string name="discuss">discuss</string>
+    <string name="talk">talk</string>
+</resources>
