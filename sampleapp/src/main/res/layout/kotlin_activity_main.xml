@@ -7,10 +7,9 @@
         tools:context="com.ghostwan.robotkit.sampleapp.MainActivity">
 
     <Button
-            android:text="START"
+            android:text="@string/start"
             android:backgroundTint="@color/colorPrimary"
             android:textColor="@android:color/white"
-            android:onClick="onStartButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/startBtn"
@@ -20,11 +19,10 @@
             android:layout_marginStart="106dp"/>
 
     <Button
-            android:text="STOP"
+            android:text="@string/stop"
             android:visibility="invisible"
             android:backgroundTint="@color/colorAccent"
             android:textColor="@android:color/white"
-            android:onClick="onStopButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/stopBtn"
@@ -45,14 +43,21 @@
             android:id="@+id/textView"/>
 
     <Button
-            android:text="DISCUSS"
+            android:text="@string/discuss"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:onClick="onDiscussButton"
             android:layout_below="@+id/startBtn"
             android:layout_alignStart="@+id/startBtn"
             android:layout_marginTop="36dp"
             android:id="@+id/discussBtn"/>
+
+    <Button
+            android:text="@string/disconnect"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/discussBtn"
+            android:layout_alignEnd="@+id/stopBtn"
+            android:id="@+id/disconnectBtn"/>
 
 
 </RelativeLayout>

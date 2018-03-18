@@ -12,4 +12,7 @@
     <string name="info">Info</string>
     <string name="discuss">discuss</string>
     <string name="talk">talk</string>
+    <string name="start">start</string>
+    <string name="stop">stop</string>
+    <string name="disconnect">disconnect</string>
 </resources>

@@ -17,6 +17,11 @@ interface Pepper {
     suspend fun connect()
 
     /**
+     * Disconnect the robot
+     */
+    suspend fun disconnect()
+
+    /**
      * @param function Lambda called when the connection with robot is lost. Give the reason why.
      */
     fun setOnRobotLost(function: (String) -> Unit)

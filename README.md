@@ -28,13 +28,10 @@ In your activity or where you want to call RobotKit APIs you have to use the lam
 
 ``` kotlin
 ui { //it means that the coroutine it's in the UI thread
-
-    if(!pepper.isConnected()) {
-        pepper.connect() // it's a suspended call
-        /* the coroutine in the thread will be suspended
-        until the robot is connected but the thread is not blocked.  
-        If it fails it will throw an exception.*/
-    }
+    pepper.connect() // it's a suspended call
+    /* the coroutine in the thread will be suspended
+    until the robot is connected but the thread is not blocked.  
+    If it fails it will throw an exception.*/
     
     // then it will update the text view 
     myTextView.text = "hello world" 
@@ -82,6 +79,25 @@ pepper.connect().thenConsume {
         return pepper.animate(R.raw.elephant_animation)
     }		
 }
+```
+
+**Note:** if you want to handle exceptions all at once you can use the helper uiSafe
+
+``` kotlin
+uiSafe (onRun = { 
+    pepper.connect()
+    myTextView.text = "hello world" 
+    pepper.say("Hello world")
+    pepper.animate(R.raw.elephant_animation)
+}, onError = {
+    when(it){
+        is RobotUnavailableException -> println("Robot unavailble ${it.message}")
+        is QiException -> println("Robot Exception ${it.message}")
+        is Resources.NotFoundException ->  println("Android resource missing ${it.message}")
+        is CancellationException -> println("Execution was stopped")
+        else -> it?.printStackTrace() 
+    }
+})
 ```
 
 ## Compatibility
@@ -277,6 +293,16 @@ discussion.setOnBookmarkReached {
 discussion.gotoBookmark("mcdo")
     
 ```
+
+### Allow multiples task in parallel #25
+
+``` kotlin
+val t1 = async { myPepper.say("Nous voilà dans la cuisine!") }
+val t2 : async { myPepper.animate(R.raw.exclamation_both_hands_a003) }
+val t3 : async { nao.animate(R.raw.exclamation_both_hands_a003) }
+
+ println("Task are done ${t1.await()} ${t2.await()} ${t3.await()}")
+```
     
 ***
 ***
@@ -403,16 +429,6 @@ pepper.setOnBodyTouched {
         Body.LEFT_HAND -> pepper.say("My left hand was touched")
     }
 }
-```
-
-### Allow multiples task in parallel #25
-
-``` kotlin
-val t1 : Task= () -> myPepper.say("Nous voilà dans la cuisine!");
-val t2 : Task = () -> myPepper.animate(R.raw.exclamation_both_hands_a003);
-val t3 : Task = () -> nao.animate(R.raw.exclamation_both_hands_a003);
-
-Tasks.Parallele(t1, t2).execute();
 ```
 
 ### Control robot autonomous abilities 

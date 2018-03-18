@@ -1,7 +1,7 @@
 package com.ghostwan.robotkit.robot.pepper.ext
 
 import com.aldebaran.qi.Future
-import java.util.concurrent.CancellationException
+import kotlinx.coroutines.experimental.CancellationException
 import kotlin.coroutines.experimental.Continuation
 import kotlin.coroutines.experimental.suspendCoroutine
 

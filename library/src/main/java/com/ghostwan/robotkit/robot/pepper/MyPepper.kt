@@ -1,7 +1,6 @@
 package com.ghostwan.robotkit.robot.pepper
 
 import android.app.Activity
-import android.content.Context
 import android.util.Log
 import com.aldebaran.qi.Future
 import com.aldebaran.qi.Session
@@ -14,7 +13,6 @@ import com.aldebaran.qi.sdk.util.IOUtils
 import com.ghostwan.robotkit.robot.pepper.`object`.Concept
 import com.ghostwan.robotkit.robot.pepper.`object`.Discussion
 import com.ghostwan.robotkit.robot.pepper.ext.await
-import kotlinx.coroutines.experimental.CoroutineScope
 import kotlinx.coroutines.experimental.android.UI
 import kotlinx.coroutines.experimental.launch
 import java.util.concurrent.CancellationException
@@ -27,9 +25,8 @@ class MyPepper(activity: Activity) : Pepper {
 
     private var futures: MutableList<Future<*>> = ArrayList()
     private var util: PepperUtil = PepperUtil()
-    private var sessionManager: SessionManager = SessionManager(false)
-    private var focusManager: FocusManager = FocusManager(activity, sessionManager)
-    private var context: Context = activity
+    private var weakActivity : Activity by weakRef(activity)
+    private var focusManager: FocusManager? = null
 
     var session: Session? = null
     var robotContext: RobotContext? = null
@@ -47,13 +44,10 @@ class MyPepper(activity: Activity) : Pepper {
             Log.w(TAG, message)
         }
 
-        fun exception(e: Exception, message: String = "error") {
-            Log.e(TAG, message, e)
+        fun exception(t: Throwable?, message: String? = "error") {
+            Log.e(TAG, message, t)
         }
 
-        fun ui(block: suspend CoroutineScope.() -> Unit) {
-            launch(UI, block = block)
-        }
     }
 
     private suspend fun <T : Any?> handleFuture(future: Future<T>, onResult: ((Result<T>) -> Unit)?, throwOnCancel: Boolean): T? {
@@ -78,14 +72,29 @@ class MyPepper(activity: Activity) : Pepper {
         return null
     }
 
+////////////////////////////////////////////////// OVERRIDE ////////////////////////////////////////////////////////////
+
     override fun setOnRobotLost(function: (String) -> Unit) {
         onRobotLost = function
     }
 
     override suspend fun connect() {
-        robotContext = util.deserializeRobotContext(focusManager.await(onRobotLost))
+
+        if(isConnected())
+            disconnect()
+
+        var sessionManager = SessionManager(false)
+        focusManager = FocusManager(weakActivity, sessionManager)
+
+        val robotContextAO = focusManager!!.await(onRobotLost)
+        robotContext = util.deserializeRobotContext(robotContextAO)
         Log.i(TAG, "session connected")
-        session = sessionManager.await(context, onRobotLost)
+        session = weakActivity?.let {
+            sessionManager!!.await(it, {
+                focusManager?.unregister()
+                onRobotLost?.invoke(it)
+            })
+        }
         Log.i(TAG, "focus retrieved")
         conversation = util.retrieveService(session!!, Conversation::class.java, "Conversation")
         actuation = util.retrieveService(session!!, Actuation::class.java, "Actuation")
@@ -93,6 +102,13 @@ class MyPepper(activity: Activity) : Pepper {
     }
 
     override fun isConnected(): Boolean = session != null && session!!.isConnected
+
+    override suspend fun disconnect() {
+        if(isConnected()) {
+            focusManager?.unregister()
+            session?.close()
+        }
+    }
 
     override fun stop() {
         Log.i(TAG, "cancelling ${futures.size} futures")
@@ -107,7 +123,7 @@ class MyPepper(activity: Activity) : Pepper {
                              onStart: (() -> Unit)?,
                              onResult: ((Result<Void>) -> Unit)?) {
 
-        say(context.getString(phraseRes), *animationsRes, bodyLanguageOption = bodyLanguageOption,
+        say(weakActivity!!.getString(phraseRes), *animationsRes, bodyLanguageOption = bodyLanguageOption,
                 throwOnStop = throwOnStop,
                 onStart = onStart,
                 onResult = onResult)
@@ -127,7 +143,7 @@ class MyPepper(activity: Activity) : Pepper {
 
         val future = if (animationsRes.isNotEmpty()) {
             val animSet = ArrayList<String>()
-            animationsRes.mapTo(animSet) { IOUtils.fromRaw(context, it) }
+            animationsRes.mapTo(animSet) { IOUtils.fromRaw(weakActivity, it) }
 
             val animation = actuation?.async()?.makeAnimation(animSet).await()
             val animate = actuation?.async()?.makeAnimate(robotContext, animation).await()
@@ -183,8 +199,8 @@ class MyPepper(activity: Activity) : Pepper {
                                  onResult: ((Result<Void>) -> Unit)?) {
 
         val animSet = ArrayList<String>()
-        animSet.add(IOUtils.fromRaw(context, mainAnimation))
-        additionalAnimations.mapTo(animSet) { IOUtils.fromRaw(context, it) }
+        animSet.add(IOUtils.fromRaw(weakActivity, mainAnimation))
+        additionalAnimations.mapTo(animSet) { IOUtils.fromRaw(weakActivity, it) }
 
         val animation = actuation?.async()?.makeAnimation(animSet).await()
         val animate = actuation?.async()?.makeAnimate(robotContext, animation).await()
@@ -201,8 +217,8 @@ class MyPepper(activity: Activity) : Pepper {
     ): String? {
 
         val topicSet = ArrayList<Topic>()
-        topicSet.add(conversation?.async()?.makeTopic(IOUtils.fromRaw(context, mainTopic)).await())
-        additionalTopics.mapTo(topicSet) { conversation?.async()?.makeTopic(IOUtils.fromRaw(context, it)).await() }
+        topicSet.add(conversation?.async()?.makeTopic(IOUtils.fromRaw(weakActivity, mainTopic)).await())
+        additionalTopics.mapTo(topicSet) { conversation?.async()?.makeTopic(IOUtils.fromRaw(weakActivity, it)).await() }
 
         val discuss = conversation?.async()?.makeDiscuss(robotContext, topicSet).await()
 
