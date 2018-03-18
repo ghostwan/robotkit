@@ -2,6 +2,15 @@
 
 RobotKit it's a Kotlin multi-Robot SDK for Android.
 
+## Last version
+
+1.0.0 Release Candidate RC2 : 
+
+``` groovy
+    compile 'com.github.ghostwan:robotkit:1.0.0rc2'
+```
+A [KDOC](https://jitpack.io/com/github/ghostwan/robotkit/1.0.0rc2/javadoc/library/index.html) ;)
+
 ## Disclaimer
 It could works in java but was not design for it. 
 See https://github.com/ghostwan/robotkit-java for the java version 
@@ -89,11 +98,13 @@ Future Robot support:
 
 
 ## Let's code
-If you want to test the last version in your app : 1.0.0rc
+
+[KDOC SNAPSHOT](https://jitpack.io/com/github/ghostwan/robotkit/-SNAPSHOT/javadoc/library/index.html)
 
 Here the list of [all robotkit version on jitpack](https://jitpack.io/#ghostwan/robotkit)
 
-Add in your root build.gradle file :
+If you want to test the last SNAPSHOT version in your app,
+add in your root build.gradle file :
 
 ``` groovy
 allprojects {
@@ -112,7 +123,7 @@ And in your app build.gradle file:
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     ...
-    compile 'com.github.ghostwan:robotkit:1.0.0rc'
+    compile 'com.github.ghostwan:robotkit:-SNAPSHOT'
 }
 kotlin {
     experimental {
