@@ -4,17 +4,18 @@ RobotKit it's a Kotlin multi-Robot SDK for Android.
 
 ## Last version
 
-1.0.0 Release Candidate RC2 : 
+1.0.0 Release Candidate RC3 : 
 
 ``` groovy
-    compile 'com.github.ghostwan:robotkit:1.0.0rc2'
+    compile 'com.github.ghostwan:robotkit:1.0.0rc3'
 ```
-A [KDOC](https://jitpack.io/com/github/ghostwan/robotkit/1.0.0rc2/javadoc/library/index.html) À Kadoc ! [;)](https://media.giphy.com/media/wWSicFanND2gw/200.gif)
+A [KDOC](https://jitpack.io/com/github/ghostwan/robotkit/1.0.0rc3/javadoc/library/index.html) À Kadoc ! [;)](https://media.giphy.com/media/wWSicFanND2gw/200.gif)
 
 ## Disclaimer
 It could works in java but was not design for it. 
 
 To handle asynchronous calls **RobotKit** use an experimental feature of kotlin calls [coroutine](https://kotlinlang.org/docs/reference/coroutines.html), to use those you need to add in your module build.gradle file :
+
 
 ``` groovy
 kotlin {
@@ -168,15 +169,9 @@ class MainActivity : AppCompatActivity() {
     override fun onStart() {
         super.onStart()
         ui {
-            if (!pepper.isConnected()) {
-                pepper.connect()
-            }
-            try {
-                textview.setText(R.string.hello_world)
-                pepper.say(R.string.hello_world)
-            } catch (e: Exception) {
-                e.printStackTrace()
-            }
+            pepper.connect()
+            textview.setText(R.string.hello_world)
+            pepper.say(R.string.hello_world)
         }
     }
 }
@@ -195,7 +190,8 @@ pepper = MyPepper(this@MainActivity)
 pepper.setOnRobotLost {
     println("Robot Lost : $it")
 }
-pepper.connect()
+if(pepper.isConnected())
+    pepper.connect()
 ```
 
 ### Say a phrase
@@ -297,14 +293,14 @@ discussion.gotoBookmark("mcdo")
 ### Allow multiples task in parallel #25
 
 ``` kotlin
-val t1 = async { myPepper.say("Nous voilà dans la cuisine!") }
-val t2 : async { myPepper.animate(R.raw.exclamation_both_hands_a003) }
-val t3 : async { nao.animate(R.raw.exclamation_both_hands_a003) }
+val t1 = uiAsync { myPepper.say("Nous voilà dans la cuisine!") }
+val t2 = uiAsync { myPepper.animate(R.raw.exclamation_both_hands_a003) }
+val t3 = uiAsync { nao.animate(R.raw.exclamation_both_hands_a003) }
 
- println("Task are done ${t1.await()} ${t2.await()} ${t3.await()}")
+println("Task are done ${t1.await()} ${t2.await()} ${t3.await()}")
 ```
     
-***
+*** 
 ***
 *** 
     
