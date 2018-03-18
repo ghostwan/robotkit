@@ -3,6 +3,7 @@
 buildscript {
     ext.kotlin_version = '1.2.30'
     ext.serialization_version = '0.4.2'
+    ext.dokka_version = '0.9.16'
     repositories {
         google()
         jcenter()
@@ -13,6 +14,7 @@ buildscript {
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
         classpath "org.jetbrains.kotlinx:kotlinx-gradle-serialization-plugin:$serialization_version"
         classpath 'com.github.dcendents:android-maven-gradle-plugin:2.0' // Add this line
+        classpath "org.jetbrains.dokka:dokka-android-gradle-plugin:${dokka_version}"
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
     }
@@ -29,29 +31,6 @@ allprojects {
         maven { url "https://kotlin.bintray.com/kotlinx" }
     }
 }
-
-subprojects {
-    version = generateVersionName()
-}
-
-def isReleaseBuild() {
-    return System.getenv('DAILY') != "true"
-}
-
-def generateVersionName() {
-    if (!isReleaseBuild()) {
-        return "$VERSION_NAME-SNAPSHOT"
-    } else {
-        return VERSION_NAME
-    }
-}
-
-ext {
-    generateVersionName = this.&generateVersionName
-    isReleaseBuild = this.&isReleaseBuild
-}
-
-
 
 task clean(type: Delete) {
     delete rootProject.buildDir

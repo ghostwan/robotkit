@@ -91,6 +91,8 @@ Future Robot support:
 ## Let's code
 If you want to test the last version in your app : 1.0.0rc
 
+Here the list of [all robotkit version on jitpack](https://jitpack.io/#ghostwan/robotkit)
+
 Add in your root build.gradle file :
 
 ``` groovy
@@ -124,7 +126,7 @@ Create a empty activity and make an hello world
 ``` kotlin
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var pepper: MyPepper
+    private lateinit var pepper: Pepper
     private lateinit var textview: TextView
     
     override fun onCreate(savedInstanceState: Bundle?) {

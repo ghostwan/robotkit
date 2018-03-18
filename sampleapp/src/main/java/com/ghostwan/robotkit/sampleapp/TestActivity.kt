@@ -7,12 +7,13 @@ import com.ghostwan.robotkit.robot.pepper.MyPepper
 import com.ghostwan.robotkit.robot.pepper.MyPepper.Companion.exception
 import com.ghostwan.robotkit.robot.pepper.MyPepper.Companion.info
 import com.ghostwan.robotkit.robot.pepper.MyPepper.Companion.ui
+import com.ghostwan.robotkit.robot.pepper.Pepper
 import com.ghostwan.robotkit.robot.pepper.`object`.Discussion
 import kotlinx.android.synthetic.main.activity_test.*
 
 class TestActivity : AppCompatActivity() {
 
-    private lateinit var pepper: MyPepper
+    private lateinit var pepper: Pepper
     private lateinit var discussion : Discussion
 
     override fun onCreate(savedInstanceState: Bundle?) {

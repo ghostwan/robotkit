@@ -2,6 +2,7 @@ apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlinx-serialization'
 apply plugin: 'com.github.dcendents.android-maven'
+apply plugin: 'org.jetbrains.dokka-android'
 
 group = 'com.github.ghostwan'
 
@@ -24,6 +25,7 @@ android {
 
 }
 
+
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
@@ -40,4 +42,39 @@ kotlin {
     experimental {
         coroutines "enable"
     }
+}
+
+
+
+// build a jar with source files
+task sourcesJar(type: Jar) {
+    from android.sourceSets.main.java.srcDirs
+    classifier = 'sources'
+}
+
+task javadoc(type: Javadoc) {
+    failOnError  false
+    source = android.sourceSets.main.java.sourceFiles
+    classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
+    classpath += configurations.compile
+}
+
+dokka {
+    outputFormat = 'html'
+    outputDirectory = javadoc.destinationDir
+    skipEmptyPackages = true
+    externalDocumentationLink {
+        url = new URL("https://android.aldebaran.com/sdk/doc/qisdk/")
+        url = new URL("https://android.aldebaran.com/sdk/doc/libqi-java/")
+    }
+}
+
+task javadok(type: Jar, dependsOn: dokka) {
+    from javadoc.destinationDir
+    classifier = 'javadoc'
+}
+
+artifacts {
+    archives sourcesJar
+    archives javadok
 }

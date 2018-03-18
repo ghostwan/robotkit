@@ -23,13 +23,14 @@ import java.util.concurrent.CancellationException
 /**
  * Created by erwan on 10/03/2018.
  */
-class MyPepper(activity: Activity) {
+class MyPepper(activity: Activity) : Pepper {
 
-    private var futures : MutableList<Future<*>> = ArrayList()
-    private var util : PepperUtil = PepperUtil()
+    private var futures: MutableList<Future<*>> = ArrayList()
+    private var util: PepperUtil = PepperUtil()
     private var sessionManager: SessionManager = SessionManager(false)
     private var focusManager: FocusManager = FocusManager(activity, sessionManager)
     private var context: Context = activity
+
     var session: Session? = null
     var robotContext: RobotContext? = null
     var conversation: Conversation? = null
@@ -41,34 +42,21 @@ class MyPepper(activity: Activity) {
         fun info(message: String) {
             Log.i(TAG, message)
         }
+
         fun warning(message: String) {
             Log.w(TAG, message)
         }
-        fun exception(e: Exception, message: String="error") {
+
+        fun exception(e: Exception, message: String = "error") {
             Log.e(TAG, message, e)
         }
-        fun ui (block: suspend CoroutineScope.() -> Unit) {
+
+        fun ui(block: suspend CoroutineScope.() -> Unit) {
             launch(UI, block = block)
         }
     }
 
-    fun setOnRobotLost(function: (String) -> Unit) {
-        onRobotLost = function
-    }
-
-    suspend fun connect() {
-        robotContext = util.deserializeRobotContext(focusManager.await(onRobotLost))
-        Log.i(TAG, "session connected")
-        session = sessionManager.await(context, onRobotLost)
-        Log.i(TAG, "focus retrieved")
-        conversation = util.retrieveService(session!!, Conversation::class.java, "Conversation")
-        actuation = util.retrieveService(session!!, Actuation::class.java, "Actuation")
-        Log.i(TAG, "services retrieved")
-    }
-
-    fun isConnected(): Boolean = session != null && session!!.isConnected
-
-    private suspend fun <T : Any?> handleFuture(future: Future<T>, onResult: ((Result<T>) -> Unit)?, throwOnCancel:Boolean): T? {
+    private suspend fun <T : Any?> handleFuture(future: Future<T>, onResult: ((Result<T>) -> Unit)?, throwOnCancel: Boolean): T? {
         futures.add(future)
         future.thenConsume {
             futures.remove(future)
@@ -79,18 +67,34 @@ class MyPepper(activity: Activity) {
             }
         }
 
-        if(onResult == null) {
+        if (onResult == null) {
             try {
                 return future.await()
-            } catch (e : CancellationException){
-                if(throwOnCancel)
+            } catch (e: CancellationException) {
+                if (throwOnCancel)
                     throw e
             }
         }
         return null
     }
 
-    fun stop() {
+    override fun setOnRobotLost(function: (String) -> Unit) {
+        onRobotLost = function
+    }
+
+    override suspend fun connect() {
+        robotContext = util.deserializeRobotContext(focusManager.await(onRobotLost))
+        Log.i(TAG, "session connected")
+        session = sessionManager.await(context, onRobotLost)
+        Log.i(TAG, "focus retrieved")
+        conversation = util.retrieveService(session!!, Conversation::class.java, "Conversation")
+        actuation = util.retrieveService(session!!, Actuation::class.java, "Actuation")
+        Log.i(TAG, "services retrieved")
+    }
+
+    override fun isConnected(): Boolean = session != null && session!!.isConnected
+
+    override fun stop() {
         Log.i(TAG, "cancelling ${futures.size} futures")
         for (future in futures) {
             future.requestCancellation();
@@ -98,79 +102,104 @@ class MyPepper(activity: Activity) {
         }
     }
 
-    suspend fun say(phraseRes: Int, vararg animationsRes : Int,
-                    bodyLanguageOption: BodyLanguageOption? =null,
-                    onResult: ((Result<Void>) -> Unit)? = null,
-                    throwOnCancel:Boolean = true) {
+    override suspend fun say(phraseRes: Int, vararg animationsRes: Int, bodyLanguageOption: BodyLanguageOption?,
+                             throwOnStop: Boolean,
+                             onStart: (() -> Unit)?,
+                             onResult: ((Result<Void>) -> Unit)?) {
 
-        say(context.getString(phraseRes), *animationsRes, bodyLanguageOption = bodyLanguageOption, onResult = onResult, throwOnCancel = throwOnCancel)
+        say(context.getString(phraseRes), *animationsRes, bodyLanguageOption = bodyLanguageOption,
+                throwOnStop = throwOnStop,
+                onStart = onStart,
+                onResult = onResult)
     }
 
-    suspend fun say(phrase: String, vararg animationsRes : Int,
-                    bodyLanguageOption: BodyLanguageOption? =null,
-                    onResult: ((Result<Void>) -> Unit)? = null,
-                    throwOnCancel:Boolean = true) {
+    override suspend fun say(phrase: String, vararg animationsRes: Int, bodyLanguageOption: BodyLanguageOption?,
+                             throwOnStop: Boolean,
+                             onStart: (() -> Unit)?,
+                             onResult: ((Result<Void>) -> Unit)?) {
 
-        val say = if(bodyLanguageOption != null)
+        val say = if (bodyLanguageOption != null)
             conversation?.async()?.makeSay(robotContext, Phrase(phrase), bodyLanguageOption).await()
         else
             conversation?.async()?.makeSay(robotContext, Phrase(phrase)).await()
 
-        val future = if(animationsRes.isNotEmpty()) {
+        say.async().setOnStartedListener (onStart)
+
+        val future = if (animationsRes.isNotEmpty()) {
             val animSet = ArrayList<String>()
-            animationsRes.mapTo(animSet) { IOUtils.fromRaw(context, it)}
+            animationsRes.mapTo(animSet) { IOUtils.fromRaw(context, it) }
 
             val animation = actuation?.async()?.makeAnimation(animSet).await()
             val animate = actuation?.async()?.makeAnimate(robotContext, animation).await()
 
             Future.waitAll(animate.async().run(), say.async().run())
-        }
-        else {
+        } else {
             say.async().run()
         }
 
-        handleFuture(future, onResult, throwOnCancel)
+        handleFuture(future, onResult, throwOnStop)
     }
 
-    suspend fun listen(vararg concepts: Concept, bodyLanguageOption: BodyLanguageOption? =null,
-                       throwOnCancel:Boolean = true): Concept? {
+    override suspend fun listen(vararg concepts: Concept, bodyLanguageOption: BodyLanguageOption?,
+                                throwOnStop: Boolean,
+                                onStart: (() -> Unit)?,
+                                onResult: ((Result<Concept>) -> Unit)?
+    ): Concept? {
+
         val phraseSet = ArrayList<PhraseSet>()
         concepts.mapTo(phraseSet) { conversation?.async()?.makePhraseSet(it.phrases).await() }
 
-        val listen = if(bodyLanguageOption != null)
+        val listen = if (bodyLanguageOption != null)
             conversation?.async()?.makeListen(robotContext, phraseSet, bodyLanguageOption).await()
         else
             conversation?.async()?.makeListen(robotContext, phraseSet).await()
 
+        listen.async().setOnStartedListener(onStart)
+
+        var onResultListen : ((Result<ListenResult>) -> Unit)?= null
+        if(onResult != null) {
+             onResultListen = {
+                 when(it){
+                     is Success -> it.value.heardPhrase.let {
+                         concepts.filter { concept -> concept.isPhraseInConcept(it!!) }.map { onResult.invoke(Success(it)) }
+                     }
+                     is Failure -> onResult.invoke(Failure(CancellationException()))
+                 }
+             }
+        }
+
         val future = listen.async().run()
-        val listenResult = handleFuture(future, null, throwOnCancel)
+        val listenResult = handleFuture(future, onResultListen, throwOnStop)
 
         listenResult?.heardPhrase.let {
-            concepts
-                    .filter { concept -> concept.isPhraseInConcept(it!!) }
-                    .forEach { return it }
+            concepts.filter { concept -> concept.isPhraseInConcept(it!!) }.map { return it }
         }
         return null
     }
 
-    suspend fun animate(mainAnimation:Int, vararg additionalAnimations: Int,
-                        onResult: ((Result<Void>) -> Unit)? = null,
-                        throwOnCancel:Boolean = true) {
+    override suspend fun animate(mainAnimation: Int, vararg additionalAnimations: Int,
+                                 throwOnStop: Boolean,
+                                 onStart: (() -> Unit)?,
+                                 onResult: ((Result<Void>) -> Unit)?) {
+
         val animSet = ArrayList<String>()
         animSet.add(IOUtils.fromRaw(context, mainAnimation))
-        additionalAnimations.mapTo(animSet) { IOUtils.fromRaw(context, it)}
+        additionalAnimations.mapTo(animSet) { IOUtils.fromRaw(context, it) }
 
         val animation = actuation?.async()?.makeAnimation(animSet).await()
         val animate = actuation?.async()?.makeAnimate(robotContext, animation).await()
+        animate.async().setOnStartedListener(onStart)
 
         val future = animate.async().run()
-        handleFuture(future, onResult, throwOnCancel)
+        handleFuture(future, onResult, throwOnStop)
     }
 
-    suspend fun discuss(mainTopic : Int, vararg additionalTopics : Int,
-                        onResult: ((Result<String>) -> Unit)? = null,
-                        throwOnCancel:Boolean = true,
-                        gotoBookmark : String? = null) : String? {
+    override suspend fun discuss(mainTopic: Int, vararg additionalTopics: Int, gotoBookmark: String?,
+                                 throwOnStop: Boolean,
+                                 onStart: (() -> Unit)?,
+                                 onResult: ((Result<String>) -> Unit)?
+    ): String? {
+
         val topicSet = ArrayList<Topic>()
         topicSet.add(conversation?.async()?.makeTopic(IOUtils.fromRaw(context, mainTopic)).await())
         additionalTopics.mapTo(topicSet) { conversation?.async()?.makeTopic(IOUtils.fromRaw(context, it)).await() }
@@ -183,25 +212,26 @@ class MyPepper(activity: Activity) {
                 launch(UI) {
                     val bookmark = topicSet[0].async().bookmarks.await()[gotoBookmark]
                     discuss.async().goToBookmarkedOutputUtterance(bookmark).await()
+                    onStart?.invoke()
                 }
             }
         }
-        return handleFuture(future, onResult, throwOnCancel)
+        return handleFuture(future, onResult, throwOnStop)
     }
 
-    suspend fun discuss(discussion: Discussion,
-                        onStart : (() -> Unit)? = null,
-                        onResult: ((Result<String>) -> Unit)? = null,
-                        throwOnCancel:Boolean = true,
-                        gotoBookmark : String? = null) : String? {
+    override suspend fun discuss(discussion: Discussion, gotoBookmark: String?,
+                                 throwOnStop: Boolean,
+                                 onStart: (() -> Unit)?,
+                                 onResult: ((Result<String>) -> Unit)?
+    ): String? {
 
-        var topics = discussion.topics.map { (key, value) ->
+        val topics = discussion.topics.map { (key, value) ->
             val top = conversation?.async()?.makeTopic(value).await()
             key to top
         }.toMap()
 
         val discuss = conversation?.async()?.makeDiscuss(robotContext, topics.values.toList()).await()
-        var startBookmark:String? = null
+        var startBookmark: String? = null
         discussion.prepare(discuss, topics)?.let {
             startBookmark = it
         }
@@ -219,7 +249,7 @@ class MyPepper(activity: Activity) {
             }
         }
         val future = discuss.async().run()
-        return handleFuture(future, onResult, throwOnCancel)
+        return handleFuture(future, onResult, throwOnStop)
     }
 
 

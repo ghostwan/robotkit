@@ -5,17 +5,17 @@ import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import android.view.View
 import com.ghostwan.robotkit.robot.pepper.MyPepper
+import com.ghostwan.robotkit.robot.pepper.Pepper
 import com.ghostwan.robotkit.robot.pepper.`object`.Concept
 import com.ghostwan.robotkit.robot.pepper.`object`.Discussion
 import kotlinx.android.synthetic.main.kotlin_activity_main.*
 import kotlinx.coroutines.experimental.android.UI
 import kotlinx.coroutines.experimental.launch
-import java.util.*
 
 class MainActivity : AppCompatActivity() {
 
 
-    private lateinit var pepper : MyPepper
+    private lateinit var pepper : Pepper
 
     companion object {
         val TAG = "MainActivity"
@@ -66,7 +66,7 @@ class MainActivity : AppCompatActivity() {
                         pepper.say("sure  let's talk!")
                         val result = pepper.discuss(R.raw.presentation_discussion, gotoBookmark = "intro")
                         println(result)
-                        pepper.say("The discussion end by: "+result)
+                        pepper.say("The discussion end by: $result")
                     }
                     else -> pepper.say(R.string.i_dont_understand)
                 }
