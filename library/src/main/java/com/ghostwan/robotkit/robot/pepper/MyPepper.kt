@@ -10,11 +10,11 @@ import com.aldebaran.qi.sdk.`object`.conversation.*
 import com.aldebaran.qi.sdk.core.FocusManager
 import com.aldebaran.qi.sdk.core.SessionManager
 import com.aldebaran.qi.sdk.util.IOUtils
-import com.ghostwan.robotkit.robot.pepper.`object`.Concept
-import com.ghostwan.robotkit.robot.pepper.`object`.Discussion
+import com.ghostwan.robotkit.robot.pepper.`object`.*
 import com.ghostwan.robotkit.robot.pepper.ext.await
-import kotlinx.coroutines.experimental.android.UI
-import kotlinx.coroutines.experimental.launch
+import com.ghostwan.robotkit.robot.pepper.util.PepperUtil
+import com.ghostwan.robotkit.robot.pepper.util.ui
+import com.ghostwan.robotkit.robot.pepper.util.weakRef
 import java.util.concurrent.CancellationException
 
 
@@ -225,7 +225,7 @@ class MyPepper(activity: Activity) : Pepper {
         val future = discuss.async().run()
         gotoBookmark.let {
             discuss.setOnStartedListener {
-                launch(UI) {
+                ui {
                     val bookmark = topicSet[0].async().bookmarks.await()[gotoBookmark]
                     discuss.async().goToBookmarkedOutputUtterance(bookmark).await()
                     onStart?.invoke()
@@ -257,7 +257,7 @@ class MyPepper(activity: Activity) : Pepper {
         info("Start bookmark : $startBookmark")
         startBookmark?.let {
             discuss?.async()?.setOnStartedListener {
-                launch(UI) {
+                ui {
                     val bookmark = topics[discussion.mainTopic]?.async()?.bookmarks.await()[startBookmark]
                     discuss.async().goToBookmarkedOutputUtterance(bookmark).await()
                     onStart?.invoke()

@@ -12,8 +12,8 @@ import com.ghostwan.robotkit.robot.pepper.Pepper
 import com.ghostwan.robotkit.robot.pepper.`object`.Concept
 import com.ghostwan.robotkit.robot.pepper.`object`.Discussion
 import com.ghostwan.robotkit.robot.pepper.exception.RobotUnavailableException
-import com.ghostwan.robotkit.robot.pepper.ui
-import com.ghostwan.robotkit.robot.pepper.uiSafe
+import com.ghostwan.robotkit.robot.pepper.util.ui
+import com.ghostwan.robotkit.robot.pepper.util.uiSafe
 import kotlinx.android.synthetic.main.kotlin_activity_main.*
 import kotlinx.coroutines.experimental.CancellationException
 

@@ -1,4 +1,4 @@
-package com.ghostwan.robotkit.robot.pepper
+package com.ghostwan.robotkit.robot.pepper.util
 
 import kotlinx.coroutines.experimental.*
 import kotlinx.coroutines.experimental.android.UI
@@ -8,8 +8,13 @@ import kotlin.reflect.KProperty
 /**
  * Created by erwan on 18/03/2018.
  */
+
 fun ui(onRun: suspend CoroutineScope.() -> Unit): Job {
     return launch(UI, block = onRun)
+}
+
+fun uiAsync(onRun: suspend CoroutineScope.() -> Unit): Deferred<Unit> {
+    return async(UI, block = onRun)
 }
 
 fun uiSafe(onRun: suspend CoroutineScope.() -> Unit, onError : (Throwable?) -> Unit ): Deferred<Unit> {
@@ -24,7 +29,11 @@ fun background(onRun: suspend CoroutineScope.() -> Unit): Job {
     return launch(block = onRun)
 }
 
-fun backgroundSafe(onRun: suspend CoroutineScope.() -> Unit, onError : (Throwable?) -> Unit): Job {
+fun backgroundAsync(onRun: suspend CoroutineScope.() -> Unit): Deferred<Unit> {
+    return async(block = onRun)
+}
+
+fun backgroundSafe(onRun: suspend CoroutineScope.() -> Unit, onError : (Throwable?) -> Unit): Deferred<Unit> {
     val job = async (block = onRun)
     job.invokeOnCompletion {
         onError.invoke(it)

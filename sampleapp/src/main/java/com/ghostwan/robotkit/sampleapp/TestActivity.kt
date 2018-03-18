@@ -10,12 +10,11 @@ import com.ghostwan.robotkit.robot.pepper.MyPepper.Companion.info
 import com.ghostwan.robotkit.robot.pepper.Pepper
 import com.ghostwan.robotkit.robot.pepper.`object`.Discussion
 import com.ghostwan.robotkit.robot.pepper.exception.RobotUnavailableException
-import com.ghostwan.robotkit.robot.pepper.ui
-import com.ghostwan.robotkit.robot.pepper.uiSafe
+import com.ghostwan.robotkit.robot.pepper.util.ui
+import com.ghostwan.robotkit.robot.pepper.util.uiAsync
+import com.ghostwan.robotkit.robot.pepper.util.uiSafe
 import kotlinx.android.synthetic.main.activity_test.*
 import kotlinx.coroutines.experimental.CancellationException
-import kotlinx.coroutines.experimental.android.UI
-import kotlinx.coroutines.experimental.async
 
 class TestActivity : AppCompatActivity() {
 
@@ -56,8 +55,8 @@ class TestActivity : AppCompatActivity() {
         uiSafe (onRun = {
             pepper.connect()
 
-            val t1 = async(UI) { pepper.say("hello world") }
-            val t2 = async(UI) { pepper.animate(R.raw.hello_anim) }
+            val t1 = uiAsync { pepper.say("hello world") }
+            val t2 = uiAsync { pepper.animate(R.raw.hello_anim) }
 
             t1.await()
             t2.await()
@@ -87,10 +86,10 @@ class TestActivity : AppCompatActivity() {
 
     override fun onStop() {
         super.onStop()
-        uiSafe({
+        uiAsync {
             info("user name is ${discussion.getVariable("name")}")
             discussion.saveData(this@TestActivity)
-        }, {})
+        }
     }
 
 

@@ -1,4 +1,4 @@
-package com.ghostwan.robotkit.robot.pepper
+package com.ghostwan.robotkit.robot.pepper.`object`
 
 /**
  * Created by epinault on 13/03/2018.

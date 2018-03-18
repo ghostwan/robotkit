@@ -5,6 +5,7 @@ import android.support.annotation.StringRes
 import com.aldebaran.qi.sdk.`object`.conversation.BodyLanguageOption
 import com.ghostwan.robotkit.robot.pepper.`object`.Concept
 import com.ghostwan.robotkit.robot.pepper.`object`.Discussion
+import com.ghostwan.robotkit.robot.pepper.`object`.Result
 
 /**
  * Interface to call robotics API on Pepper's robots
