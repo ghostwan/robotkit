@@ -173,6 +173,8 @@ To deploy on a virtual Pepper refers to [SoftBank Robotics Documentation](https:
 
 ### Connect to Pepper attached to the tablet
 
+[Pepper KDOC](https://jitpack.io/com/github/ghostwan/robotkit/-SNAPSHOT/javadoc/library/com.ghostwan.robotkit.robot.pepper/-pepper/index.html)
+
 ``` kotlin
 pepper = MyPepper(this@MainActivity)
 pepper.setOnRobotLost {
@@ -182,6 +184,8 @@ pepper.connect()
 ```
 
 ### Say a phrase
+
+[Say KDOC](https://jitpack.io/com/github/ghostwan/robotkit/-SNAPSHOT/javadoc/library/com.ghostwan.robotkit.robot.pepper/-pepper/say.html)
 
 Make the robot say something
 
@@ -197,7 +201,9 @@ Say a phrase and make a special animation
 pepper.say(R.string.hello_world, R.raw.elephant_animation)
 ```
     
-### Animate with animation
+### Animate pepper with animation
+
+[Animate KDOC](https://jitpack.io/com/github/ghostwan/robotkit/-SNAPSHOT/javadoc/library/com.ghostwan.robotkit.robot.pepper/-pepper/animate.html)
 
 Make the robot run an animation.
 
@@ -209,6 +215,8 @@ pepper.animate(R.raw.elephant_animation)
 
 
 ### Listen concepts
+
+[Listen KDOC](https://jitpack.io/com/github/ghostwan/robotkit/-SNAPSHOT/javadoc/library/com.ghostwan.robotkit.robot.pepper/-pepper/listen.html)
 
 Make the robot listen for a phrase or group of phrase known as concept
 
@@ -224,6 +232,8 @@ when (concept) {
 ```
 
 ### Discuss about something
+
+[Discuss KDOC](https://jitpack.io/com/github/ghostwan/robotkit/-SNAPSHOT/javadoc/library/com.ghostwan.robotkit.robot.pepper/-pepper/discuss.html)
 
 Simple API:
 
