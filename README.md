@@ -13,7 +13,6 @@ A [KDOC](https://jitpack.io/com/github/ghostwan/robotkit/1.0.0rc2/javadoc/librar
 
 ## Disclaimer
 It could works in java but was not design for it. 
-See https://github.com/ghostwan/robotkit-java for the java version 
 
 To handle asynchronous calls **RobotKit** use an experimental feature of kotlin calls [coroutine](https://kotlinlang.org/docs/reference/coroutines.html), to use those you need to add in your module build.gradle file :
 
