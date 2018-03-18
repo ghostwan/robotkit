@@ -9,7 +9,7 @@ RobotKit it's a Kotlin multi-Robot SDK for Android.
 ``` groovy
     compile 'com.github.ghostwan:robotkit:1.0.0rc2'
 ```
-A [KDOC](https://jitpack.io/com/github/ghostwan/robotkit/1.0.0rc2/javadoc/library/index.html) ;)
+A [KDOC](https://jitpack.io/com/github/ghostwan/robotkit/1.0.0rc2/javadoc/library/index.html) À Kadoc ! [;)](https://media.giphy.com/media/wWSicFanND2gw/200.gif)
 
 ## Disclaimer
 It could works in java but was not design for it. 
