@@ -1,5 +1,6 @@
 package com.ghostwan.robotkit.robot.pepper.util
 
+import android.util.Log
 import kotlinx.coroutines.experimental.*
 import kotlinx.coroutines.experimental.android.UI
 import java.lang.ref.WeakReference
@@ -8,6 +9,9 @@ import kotlin.reflect.KProperty
 /**
  * Created by erwan on 18/03/2018.
  */
+
+const val TAG = "RobotKit"
+
 
 fun ui(onRun: suspend CoroutineScope.() -> Unit): Job {
     return launch(UI, block = onRun)
@@ -71,3 +75,16 @@ class WeakRefHolder<T>(private var _value: WeakReference<T>) {
  */
 @Suppress("NOTHING_TO_INLINE")
 inline fun <T> weakRef(value: T) = WeakRefHolder<T>(WeakReference(value))
+
+
+fun info(message: String, tag: String=TAG) {
+    Log.i(tag, message)
+}
+
+fun warning(message: String, tag: String=TAG) {
+    Log.w(tag, message)
+}
+
+fun exception(t: Throwable?, message: String? = "error", tag: String=TAG) {
+    Log.e(tag, message, t)
+}

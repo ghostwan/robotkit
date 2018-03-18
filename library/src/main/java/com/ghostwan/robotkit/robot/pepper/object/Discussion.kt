@@ -5,10 +5,10 @@ import com.aldebaran.qi.sdk.`object`.conversation.Discuss
 import com.aldebaran.qi.sdk.`object`.conversation.QiChatVariable
 import com.aldebaran.qi.sdk.`object`.conversation.Topic
 import com.aldebaran.qi.sdk.util.IOUtils
-import com.ghostwan.robotkit.robot.pepper.MyPepper.Companion.info
-import com.ghostwan.robotkit.robot.pepper.MyPepper.Companion.warning
 import com.ghostwan.robotkit.robot.pepper.ext.await
 import com.ghostwan.robotkit.robot.pepper.ext.sha512
+import com.ghostwan.robotkit.robot.pepper.util.info
+import com.ghostwan.robotkit.robot.pepper.util.warning
 import kotlinx.serialization.Optional
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.JSON

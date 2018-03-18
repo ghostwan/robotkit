@@ -1,7 +1,6 @@
 package com.ghostwan.robotkit.robot.pepper
 
 import android.app.Activity
-import android.util.Log
 import com.aldebaran.qi.Future
 import com.aldebaran.qi.Session
 import com.aldebaran.qi.sdk.`object`.actuation.Actuation
@@ -12,9 +11,7 @@ import com.aldebaran.qi.sdk.core.SessionManager
 import com.aldebaran.qi.sdk.util.IOUtils
 import com.ghostwan.robotkit.robot.pepper.`object`.*
 import com.ghostwan.robotkit.robot.pepper.ext.await
-import com.ghostwan.robotkit.robot.pepper.util.PepperUtil
-import com.ghostwan.robotkit.robot.pepper.util.ui
-import com.ghostwan.robotkit.robot.pepper.util.weakRef
+import com.ghostwan.robotkit.robot.pepper.util.*
 import java.util.concurrent.CancellationException
 
 
@@ -33,22 +30,6 @@ class MyPepper(activity: Activity) : Pepper {
     var conversation: Conversation? = null
     var actuation: Actuation? = null
     private var onRobotLost: ((String) -> Unit)? = null
-
-    companion object {
-        val TAG = "MyPepper"
-        fun info(message: String) {
-            Log.i(TAG, message)
-        }
-
-        fun warning(message: String) {
-            Log.w(TAG, message)
-        }
-
-        fun exception(t: Throwable?, message: String? = "error") {
-            Log.e(TAG, message, t)
-        }
-
-    }
 
     private suspend fun <T : Any?> handleFuture(future: Future<T>, onResult: ((Result<T>) -> Unit)?, throwOnCancel: Boolean): T? {
         futures.add(future)
@@ -88,17 +69,17 @@ class MyPepper(activity: Activity) : Pepper {
 
         val robotContextAO = focusManager!!.await(onRobotLost)
         robotContext = util.deserializeRobotContext(robotContextAO)
-        Log.i(TAG, "session connected")
+        info("session connected")
         session = weakActivity?.let {
             sessionManager!!.await(it, {
                 focusManager?.unregister()
                 onRobotLost?.invoke(it)
             })
         }
-        Log.i(TAG, "focus retrieved")
+        info("focus retrieved")
         conversation = util.retrieveService(session!!, Conversation::class.java, "Conversation")
         actuation = util.retrieveService(session!!, Actuation::class.java, "Actuation")
-        Log.i(TAG, "services retrieved")
+        info("services retrieved")
     }
 
     override fun isConnected(): Boolean = session != null && session!!.isConnected
@@ -111,7 +92,7 @@ class MyPepper(activity: Activity) : Pepper {
     }
 
     override fun stop() {
-        Log.i(TAG, "cancelling ${futures.size} futures")
+        warning( "cancelling ${futures.size} futures")
         for (future in futures) {
             future.requestCancellation();
             futures.remove(future)

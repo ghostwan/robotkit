@@ -3,15 +3,15 @@ package com.ghostwan.robotkit.sampleapp
 import android.content.res.Resources
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
-import android.util.Log
 import android.view.View
 import com.aldebaran.qi.QiException
 import com.ghostwan.robotkit.robot.pepper.MyPepper
-import com.ghostwan.robotkit.robot.pepper.MyPepper.Companion.exception
 import com.ghostwan.robotkit.robot.pepper.Pepper
 import com.ghostwan.robotkit.robot.pepper.`object`.Concept
 import com.ghostwan.robotkit.robot.pepper.`object`.Discussion
 import com.ghostwan.robotkit.robot.pepper.exception.RobotUnavailableException
+import com.ghostwan.robotkit.robot.pepper.util.exception
+import com.ghostwan.robotkit.robot.pepper.util.info
 import com.ghostwan.robotkit.robot.pepper.util.ui
 import com.ghostwan.robotkit.robot.pepper.util.uiSafe
 import kotlinx.android.synthetic.main.kotlin_activity_main.*
@@ -22,9 +22,6 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var pepper: Pepper
 
-    companion object {
-        val TAG = "MainActivity"
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -113,14 +110,14 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun onStopButton(view: View) {
-        Log.i(TAG, "stopping pepper")
+        info( "stopping pepper")
         pepper.stop()
         isRunning(false)
     }
 
     fun onDiscussButton(view: View) {
         uiSafe({
-            Log.i(TAG, "starting discussion")
+            info( "starting discussion")
             val discussion = Discussion(this@MainActivity, R.raw.presentation_discussion)
             val result = pepper.discuss(discussion, gotoBookmark = "intro")
             println(result)

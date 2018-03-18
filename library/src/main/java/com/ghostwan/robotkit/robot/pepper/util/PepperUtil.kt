@@ -34,7 +34,7 @@ class PepperUtil {
             val service = session.service(name).await()
             val deserialize = serializer.deserialize(service, clazz)
             val data =  clazz.cast(deserialize)
-            Log.i(MyPepper.TAG, "$name retrieved")
+            info( "$name retrieved")
             return data
         } catch (e: ExecutionException) {
             throw RobotUnavailableException("Service $name is not available")

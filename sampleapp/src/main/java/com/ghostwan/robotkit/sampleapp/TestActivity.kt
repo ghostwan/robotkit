@@ -6,10 +6,10 @@ import android.support.v7.app.AppCompatActivity
 import android.view.View
 import com.aldebaran.qi.QiException
 import com.ghostwan.robotkit.robot.pepper.MyPepper
-import com.ghostwan.robotkit.robot.pepper.MyPepper.Companion.info
 import com.ghostwan.robotkit.robot.pepper.Pepper
 import com.ghostwan.robotkit.robot.pepper.`object`.Discussion
 import com.ghostwan.robotkit.robot.pepper.exception.RobotUnavailableException
+import com.ghostwan.robotkit.robot.pepper.util.info
 import com.ghostwan.robotkit.robot.pepper.util.ui
 import com.ghostwan.robotkit.robot.pepper.util.uiAsync
 import com.ghostwan.robotkit.robot.pepper.util.uiSafe
