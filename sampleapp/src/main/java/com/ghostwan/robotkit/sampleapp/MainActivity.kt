@@ -16,6 +16,7 @@ import com.ghostwan.robotkit.robot.pepper.util.ui
 import com.ghostwan.robotkit.robot.pepper.util.uiSafe
 import kotlinx.android.synthetic.main.kotlin_activity_main.*
 import kotlinx.coroutines.experimental.CancellationException
+import java.util.*
 
 class MainActivity : AppCompatActivity() {
 
@@ -58,13 +59,13 @@ class MainActivity : AppCompatActivity() {
         uiSafe({
             isRunning(true)
 
-            pepper.say(R.string.hello_human)
+            pepper.say(R.string.hello_human, locale = Locale.FRENCH)
 
             pepper.animate(R.raw.hello_anim)
-            val helloConcept = Concept(this@MainActivity, R.string.hello, R.string.hi)
-            val byeConcept = Concept(this@MainActivity, R.string.bye, R.string.see_you)
-            val discussConcept = Concept(this@MainActivity, R.string.talk, R.string.discuss)
-            val concept = pepper.listen(helloConcept, byeConcept, discussConcept)
+            val helloConcept = Concept(this@MainActivity, R.string.hello, R.string.hi, locale = Locale.FRENCH)
+            val byeConcept = Concept(this@MainActivity, R.string.bye, R.string.see_you, locale = Locale.FRENCH)
+            val discussConcept = Concept(this@MainActivity, R.string.talk, R.string.discuss, locale = Locale.FRENCH)
+            val concept = pepper.listen(helloConcept, byeConcept, discussConcept, locale = Locale.FRENCH)
 
             when (concept) {
                 helloConcept -> pepper.say(R.string.hello_world, R.raw.hello_anim, R.raw.hello_trajectory)

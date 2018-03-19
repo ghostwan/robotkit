@@ -11,8 +11,12 @@ import com.aldebaran.qi.sdk.core.SessionManager
 import com.aldebaran.qi.sdk.util.IOUtils
 import com.ghostwan.robotkit.robot.pepper.`object`.*
 import com.ghostwan.robotkit.robot.pepper.ext.await
+import com.ghostwan.robotkit.robot.pepper.ext.getLocalizedString
+import com.ghostwan.robotkit.robot.pepper.ext.toNaoqiLocale
 import com.ghostwan.robotkit.robot.pepper.util.*
+import java.util.*
 import java.util.concurrent.CancellationException
+import kotlin.collections.ArrayList
 
 
 /**
@@ -70,12 +74,10 @@ class MyPepper(activity: Activity) : Pepper {
         val robotContextAO = focusManager!!.await(onRobotLost)
         robotContext = util.deserializeRobotContext(robotContextAO)
         info("session connected")
-        session = weakActivity?.let {
-            sessionManager!!.await(it, {
+        session = sessionManager.await(weakActivity, {
                 focusManager?.unregister()
                 onRobotLost?.invoke(it)
-            })
-        }
+        })
         info("focus retrieved")
         conversation = util.retrieveService(session!!, Conversation::class.java, "Conversation")
         actuation = util.retrieveService(session!!, Actuation::class.java, "Actuation")
@@ -99,26 +101,42 @@ class MyPepper(activity: Activity) : Pepper {
         }
     }
 
-    override suspend fun say(phraseRes: Int, vararg animationsRes: Int, bodyLanguageOption: BodyLanguageOption?,
+    override suspend fun say(phraseRes: Int, vararg animationsRes: Int,
+                             bodyLanguageOption: BodyLanguageOption?, locale : Locale?,
                              throwOnStop: Boolean,
                              onStart: (() -> Unit)?,
                              onResult: ((Result<Void>) -> Unit)?) {
 
-        say(weakActivity!!.getString(phraseRes), *animationsRes, bodyLanguageOption = bodyLanguageOption,
+        val string = if(locale != null)
+            weakActivity.getLocalizedString(phraseRes, locale)
+        else
+            weakActivity.getString(phraseRes)
+
+        say(string, *animationsRes, bodyLanguageOption = bodyLanguageOption, locale = locale,
                 throwOnStop = throwOnStop,
                 onStart = onStart,
                 onResult = onResult)
     }
 
-    override suspend fun say(phrase: String, vararg animationsRes: Int, bodyLanguageOption: BodyLanguageOption?,
+    override suspend fun say(phrase: String, vararg animationsRes: Int,
+                             bodyLanguageOption: BodyLanguageOption?, locale : Locale?,
                              throwOnStop: Boolean,
                              onStart: (() -> Unit)?,
                              onResult: ((Result<Void>) -> Unit)?) {
 
-        val say = if (bodyLanguageOption != null)
-            conversation?.async()?.makeSay(robotContext, Phrase(phrase), bodyLanguageOption).await()
-        else
-            conversation?.async()?.makeSay(robotContext, Phrase(phrase)).await()
+        val say = if (bodyLanguageOption == null) {
+            if (locale == null) {
+                conversation?.async()?.makeSay(robotContext, Phrase(phrase)).await()
+            } else {
+                conversation?.async()?.makeSay(robotContext, Phrase(phrase), BodyLanguageOption.NEUTRAL, locale.toNaoqiLocale()).await()
+            }
+        } else {
+            if (locale == null) {
+                conversation?.async()?.makeSay(robotContext, Phrase(phrase), bodyLanguageOption).await()
+            } else {
+                conversation?.async()?.makeSay(robotContext, Phrase(phrase), bodyLanguageOption, locale.toNaoqiLocale()).await()
+            }
+        }
 
         say.async().setOnStartedListener (onStart)
 
@@ -137,19 +155,34 @@ class MyPepper(activity: Activity) : Pepper {
         handleFuture(future, onResult, throwOnStop)
     }
 
-    override suspend fun listen(vararg concepts: Concept, bodyLanguageOption: BodyLanguageOption?,
+    override suspend fun listen(vararg concepts: Concept, bodyLanguageOption: BodyLanguageOption?, locale : Locale?,
                                 throwOnStop: Boolean,
                                 onStart: (() -> Unit)?,
                                 onResult: ((Result<Concept>) -> Unit)?
     ): Concept? {
 
         val phraseSet = ArrayList<PhraseSet>()
-        concepts.mapTo(phraseSet) { conversation?.async()?.makePhraseSet(it.phrases).await() }
+        concepts.mapTo(phraseSet) {
+            val phrases = ArrayList<Phrase>()
+            it.phrases.mapTo(phrases) {
+                Phrase(it)
+            }
+            conversation?.async()?.makePhraseSet(phrases).await()
+        }
 
-        val listen = if (bodyLanguageOption != null)
-            conversation?.async()?.makeListen(robotContext, phraseSet, bodyLanguageOption).await()
-        else
-            conversation?.async()?.makeListen(robotContext, phraseSet).await()
+        val listen = if (bodyLanguageOption == null) {
+            if (locale == null) {
+                conversation?.async()?.makeListen(robotContext, phraseSet).await()
+            } else {
+                conversation?.async()?.makeListen(robotContext, phraseSet, BodyLanguageOption.NEUTRAL, locale.toNaoqiLocale()).await()
+            }
+        } else {
+            if (locale == null) {
+                conversation?.async()?.makeListen(robotContext, phraseSet, bodyLanguageOption).await()
+            } else {
+                conversation?.async()?.makeListen(robotContext, phraseSet, bodyLanguageOption, locale.toNaoqiLocale()).await()
+            }
+        }
 
         listen.async().setOnStartedListener(onStart)
 
@@ -158,7 +191,7 @@ class MyPepper(activity: Activity) : Pepper {
              onResultListen = {
                  when(it){
                      is Success -> it.value.heardPhrase.let {
-                         concepts.filter { concept -> concept.isPhraseInConcept(it!!) }.map { onResult.invoke(Success(it)) }
+                         concepts.filter { concept -> concept.isPhraseInConcept(it!!.text) }.map { onResult.invoke(Success(it)) }
                      }
                      is Failure -> onResult.invoke(Failure(CancellationException()))
                  }
@@ -169,7 +202,7 @@ class MyPepper(activity: Activity) : Pepper {
         val listenResult = handleFuture(future, onResultListen, throwOnStop)
 
         listenResult?.heardPhrase.let {
-            concepts.filter { concept -> concept.isPhraseInConcept(it!!) }.map { return it }
+            concepts.filter { concept -> concept.isPhraseInConcept(it!!.text) }.map { return it }
         }
         return null
     }

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">SampleApp</string>
+    <string name="hello_world">Salut le monde!</string>
+    <string name="bye_world">Au revoir le monde!</string>
+    <string name="hello_human">Bonjour humain que veux tu faire</string>
+    <string name="hello">Bonjour</string>
+    <string name="hi">Salut</string>
+    <string name="bye">Au revoir</string>
+    <string name="see_you">A plus tard</string>
+    <string name="i_dont_understand">Je ne comprends pas!</string>
+    <string name="i_stop">Ok, je m\'arrète</string>
+    <string name="info">Info</string>
+    <string name="discuss">Discutons</string>
+    <string name="talk">Parlons</string>
+    <string name="start">start</string>
+    <string name="stop">stop</string>
+    <string name="disconnect">déconnexion</string>
+</resources>

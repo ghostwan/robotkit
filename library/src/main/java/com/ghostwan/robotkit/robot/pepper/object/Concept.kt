@@ -1,26 +1,30 @@
 package com.ghostwan.robotkit.robot.pepper.`object`
 
 import android.content.Context
-import com.aldebaran.qi.sdk.`object`.conversation.Phrase
+import com.ghostwan.robotkit.robot.pepper.ext.getLocalizedString
+import java.util.*
 
 /**
  * Created by erwan on 10/03/2018.
  */
 class Concept{
-    internal var phrases : MutableList<Phrase> = ArrayList()
+    internal var phrases : MutableList<String> = ArrayList()
 
     constructor(vararg strings: String) {
         for (string in strings) {
-            phrases.add(Phrase(string))
+            phrases.add(string)
         }
     }
 
-    constructor(context: Context, vararg integers:Int) {
+    constructor(context: Context, vararg integers:Int, locale : Locale?=null) {
         for (integer in integers) {
-            phrases.add(Phrase(context.getString(integer)))
+            if(locale != null)
+                phrases.add(context.getLocalizedString(integer, locale))
+            else
+                phrases.add(context.getString(integer))
         }
     }
 
-    fun isPhraseInConcept(phrase: Phrase) = phrases.contains(phrase)
+    fun isPhraseInConcept(phrase: String) = phrases.contains(phrase)
 
 }

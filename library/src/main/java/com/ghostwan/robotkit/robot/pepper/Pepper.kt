@@ -6,6 +6,7 @@ import com.aldebaran.qi.sdk.`object`.conversation.BodyLanguageOption
 import com.ghostwan.robotkit.robot.pepper.`object`.Concept
 import com.ghostwan.robotkit.robot.pepper.`object`.Discussion
 import com.ghostwan.robotkit.robot.pepper.`object`.Result
+import java.util.*
 
 /**
  * Interface to call robotics API on Pepper's robots
@@ -58,7 +59,7 @@ interface Pepper {
      * Give a [Success] or a [Failure] with the exception
      *
      */
-    suspend fun say(@StringRes phraseRes: Int, @RawRes vararg animationsRes: Int, bodyLanguageOption: BodyLanguageOption? = null,
+    suspend fun say(@StringRes phraseRes: Int, @RawRes vararg animationsRes: Int, bodyLanguageOption: BodyLanguageOption? = null, locale : Locale?=null,
                     throwOnStop: Boolean = true,
                     onStart: (() -> Unit)? = null,
                     onResult: ((Result<Void>) -> Unit)? = null)
@@ -84,7 +85,7 @@ interface Pepper {
      * Give a [Success] or a [Failure] with the exception
      *
      */
-    suspend fun say(phrase: String, @RawRes vararg animationsRes: Int, bodyLanguageOption: BodyLanguageOption? = null,
+    suspend fun say(phrase: String, @RawRes vararg animationsRes: Int, bodyLanguageOption: BodyLanguageOption? = null, locale : Locale?=null,
                     throwOnStop: Boolean = true,
                     onStart: (() -> Unit)? = null,
                     onResult: ((Result<Void>) -> Unit)? = null)
@@ -109,7 +110,7 @@ interface Pepper {
      * @return the concept that matched if [onResult] it's not set
      *
      */
-    suspend fun listen(vararg concepts: Concept, bodyLanguageOption: BodyLanguageOption? = null,
+    suspend fun listen(vararg concepts: Concept, bodyLanguageOption: BodyLanguageOption? = null, locale : Locale?=null,
                        throwOnStop: Boolean = true,
                        onStart: (() -> Unit)? = null,
                        onResult: ((Result<Concept>) -> Unit)? = null

@@ -1,9 +1,11 @@
 package com.ghostwan.robotkit.robot.pepper.util
 
 import android.util.Log
+import com.aldebaran.qi.sdk.`object`.locale.Language
 import kotlinx.coroutines.experimental.*
 import kotlinx.coroutines.experimental.android.UI
 import java.lang.ref.WeakReference
+import java.util.*
 import kotlin.reflect.KProperty
 
 /**
