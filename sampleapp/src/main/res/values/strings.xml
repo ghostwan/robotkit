@@ -15,4 +15,6 @@
     <string name="start">start</string>
     <string name="stop">stop</string>
     <string name="disconnect">disconnect</string>
+    <string name="title_activity_listen">ListenActivity</string>
+    <string name="action_settings">Settings</string>
 </resources>

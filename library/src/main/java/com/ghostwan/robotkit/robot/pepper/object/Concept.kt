@@ -1,17 +1,17 @@
 package com.ghostwan.robotkit.robot.pepper.`object`
 
-import android.support.annotation.RawRes
+import android.support.annotation.StringRes
 import java.util.*
 
 /**
  * Created by erwan on 10/03/2018.
  */
-interface Concept
+sealed class Concept
 
 class ResConcept : Concept {
     internal var phrases = ArrayList<Int>()
 
-    constructor(@RawRes vararg phrases:Int) {
+    constructor(@StringRes vararg phrases:Int) {
         this.phrases = phrases.toList() as ArrayList<Int>
     }
 
@@ -19,12 +19,12 @@ class ResConcept : Concept {
 }
 
 
-class StringConcept : Concept {
+class StrConcept : Concept {
     internal var phrases = ArrayList<String>()
 
     constructor(vararg phrases:String) {
         this.phrases = phrases.toList() as ArrayList<String>
     }
 
-    fun isPhraseInConcept(phrase: Int) = phrases.contains(phrase)
+    fun isPhraseInConcept(phrase: String) = phrases.contains(phrase)
 }

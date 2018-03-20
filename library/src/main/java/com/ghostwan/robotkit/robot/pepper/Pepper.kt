@@ -59,7 +59,7 @@ interface Pepper {
      * Give a [Success] or a [Failure] with the exception
      *
      */
-    suspend fun say(@StringRes phraseRes: Int, @RawRes vararg animationsRes: Int, bodyLanguageOption: BodyLanguageOption? = null, locale : Locale?=null,
+    suspend fun say(@StringRes phraseRes: Int, @RawRes vararg animationsRes: Int, bodyLanguageOption: BodyLanguageOption = BodyLanguageOption.NEUTRAL, locale : Locale?=null,
                     throwOnStop: Boolean = true,
                     onStart: (() -> Unit)? = null,
                     onResult: ((Result<Void>) -> Unit)? = null)
@@ -85,7 +85,7 @@ interface Pepper {
      * Give a [Success] or a [Failure] with the exception
      *
      */
-    suspend fun say(phrase: String, @RawRes vararg animationsRes: Int, bodyLanguageOption: BodyLanguageOption? = BodyLanguageOption.NEUTRAL, locale : Locale?=null,
+    suspend fun say(phrase: String, @RawRes vararg animationsRes: Int, bodyLanguageOption: BodyLanguageOption = BodyLanguageOption.NEUTRAL, locale : Locale?=null,
                     throwOnStop: Boolean = true,
                     onStart: (() -> Unit)? = null,
                     onResult: ((Result<Void>) -> Unit)? = null)

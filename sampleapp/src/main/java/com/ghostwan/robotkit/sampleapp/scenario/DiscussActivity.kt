@@ -1,30 +1,27 @@
-package com.ghostwan.robotkit.sampleapp
+package com.ghostwan.robotkit.sampleapp.scenario
 
 import android.content.res.Resources
-import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
 import android.view.View
 import com.aldebaran.qi.QiException
-import com.ghostwan.robotkit.robot.pepper.MyPepper
-import com.ghostwan.robotkit.robot.pepper.Pepper
 import com.ghostwan.robotkit.robot.pepper.`object`.Discussion
 import com.ghostwan.robotkit.robot.pepper.exception.RobotUnavailableException
 import com.ghostwan.robotkit.robot.pepper.util.info
 import com.ghostwan.robotkit.robot.pepper.util.ui
 import com.ghostwan.robotkit.robot.pepper.util.uiAsync
 import com.ghostwan.robotkit.robot.pepper.util.uiSafe
-import kotlinx.android.synthetic.main.activity_test.*
+import com.ghostwan.robotkit.sampleapp.ParentActivity
+import com.ghostwan.robotkit.sampleapp.R
+import kotlinx.android.synthetic.main.activity_discuss.*
 import kotlinx.coroutines.experimental.CancellationException
 
-class TestActivity : AppCompatActivity() {
+class DiscussActivity : ParentActivity() {
 
-    private lateinit var pepper: Pepper
+    override fun scenarioName(): String = "Discuss"
+    override fun layout() : Int = R.layout.activity_discuss
+
     private lateinit var discussion : Discussion
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_test)
-        pepper = MyPepper(this)
+    override fun start() {
         discussion = Discussion(this, R.raw.test_discussion)
         discussion.setOnBookmarkReached { info("Bookmark $it reached!") }
         discussion.setOnVariableChanged { name, value -> info("Variable $name changed to $value") }
@@ -36,7 +33,7 @@ class TestActivity : AppCompatActivity() {
                     gotoBookmarkBtn.visibility = View.VISIBLE
                 })
             }, onError = {
-              it?.printStackTrace()
+                it?.printStackTrace()
             })
         }
         gotoBookmarkBtn.setOnClickListener{
@@ -44,13 +41,7 @@ class TestActivity : AppCompatActivity() {
                 discussion.gotoBookmark( "testGoto")
             }
         }
-        pepper.setOnRobotLost {
-            info("Robot Lost : $it")
-        }
-    }
 
-    override fun onStart() {
-        super.onStart()
         gotoBookmarkBtn.visibility = View.INVISIBLE
         uiSafe (onRun = {
             pepper.connect()
@@ -61,7 +52,7 @@ class TestActivity : AppCompatActivity() {
             t1.await()
             t2.await()
 
-            val result = if(discussion.restoreData(this@TestActivity)) {
+            val result = if(discussion.restoreData(this@DiscussActivity)) {
                 pepper.discuss(discussion, onStart = {
                     gotoBookmarkBtn.visibility = View.VISIBLE
                 })
@@ -84,11 +75,12 @@ class TestActivity : AppCompatActivity() {
         })
     }
 
+
     override fun onStop() {
         super.onStop()
         uiAsync {
             info("user name is ${discussion.getVariable("name")}")
-            discussion.saveData(this@TestActivity)
+            discussion.saveData(this@DiscussActivity)
         }
     }
 
