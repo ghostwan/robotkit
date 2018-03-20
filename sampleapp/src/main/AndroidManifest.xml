@@ -30,6 +30,8 @@
                 android:label="@string/title_activity_listen"
                 android:theme="@style/AppTheme.NoActionBar">
         </activity>
+        <activity android:name=".scenario.HelloWorld">
+        </activity>
     </application>
 
 </manifest>

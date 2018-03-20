@@ -17,7 +17,7 @@ import kotlinx.coroutines.experimental.CancellationException
 /**
  * Created by erwan on 20/03/2018.
  */
-abstract class ParentActivity : AppCompatActivity()  {
+abstract class ParentActivity : AppCompatActivity() {
 
     companion object {
         const val START = "startAction"
@@ -26,7 +26,7 @@ abstract class ParentActivity : AppCompatActivity()  {
 
     internal lateinit var pepper: Pepper
 
-    protected open fun layout () : Int {
+    protected open fun layout(): Int {
         return R.layout.activity_parent
     }
 
@@ -35,18 +35,21 @@ abstract class ParentActivity : AppCompatActivity()  {
         setContentView(layout())
 
         fab.setOnClickListener { view ->
-            when(fab.tag) {
-                START -> {
-                    start()
-                    Snackbar.make(view, "Start ${scenarioName()}() scenario", Snackbar.LENGTH_LONG).show()
-                    setFabTag(STOP)
+            uiSafe({
+                when (fab.tag) {
+                    START -> {
+                        start()
+                        Snackbar.make(view, "Start ${scenarioName()}() scenario", Snackbar.LENGTH_LONG).show()
+                        setFabTag(STOP)
+
+                    }
+                    STOP -> {
+                        stop()
+                        Snackbar.make(view, "Stop ${scenarioName()}() scenario", Snackbar.LENGTH_LONG).show()
+                        setFabTag(START)
+                    }
                 }
-                STOP -> {
-                    stop()
-                    Snackbar.make(view, "Stop ${scenarioName()}() scenario", Snackbar.LENGTH_LONG).show()
-                    setFabTag(START)
-                }
-            }
+            }, this::onError)
         }
 
 
@@ -70,24 +73,24 @@ abstract class ParentActivity : AppCompatActivity()  {
         }, this::onError)
     }
 
-    private fun setFabTag(action : String) {
+    private fun setFabTag(action: String) {
         fab.tag = action
-        when(action) {
+        when (action) {
             "startAction" -> fab.setImageResource(R.drawable.start)
             "stopAction" -> fab.setImageResource(R.drawable.stop)
         }
     }
 
-    protected fun displayInfo(string : String, duration : Int = Snackbar.LENGTH_LONG) {
+    protected fun displayInfo(string: String, duration: Int = Snackbar.LENGTH_LONG) {
         Snackbar.make(fab, string, duration).show()
     }
 
     fun onError(throwable: Throwable?) {
-        val message = when(throwable){
+        val message = when (throwable) {
             is QiException -> "Robot Exception ${throwable.message}"
             is RobotUnavailableException -> "Robot unavailble ${throwable.message}"
             is Resources.NotFoundException -> "Android resource missing ${throwable.message}"
-            is CancellationException ->  "Execution was stopped"
+            is CancellationException -> "Execution was stopped"
             else -> throwable?.message
         }
         throwable?.printStackTrace()
@@ -98,7 +101,7 @@ abstract class ParentActivity : AppCompatActivity()  {
         pepper.stop()
     }
 
-    abstract fun start()
+    abstract suspend fun start()
 
-    abstract fun scenarioName() : String
+    abstract fun scenarioName(): String
 }

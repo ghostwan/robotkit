@@ -17,7 +17,7 @@ class DiscussActivity : ParentActivity() {
 
     private lateinit var discussion : Discussion
 
-    override fun start() {
+    override suspend fun start() {
         discussion = Discussion(this, R.raw.test_discussion)
         discussion.setOnBookmarkReached { info("Bookmark $it reached!") }
         discussion.setOnVariableChanged { name, value -> info("Variable $name changed to $value") }
@@ -39,28 +39,26 @@ class DiscussActivity : ParentActivity() {
         }
 
         gotoBookmarkBtn.visibility = View.INVISIBLE
-        uiSafe (onRun = {
-            pepper.connect()
+        pepper.connect()
 
-            val t1 = uiAsync { pepper.say("hello world") }
-            val t2 = uiAsync { pepper.animate(R.raw.hello_anim) }
+        val t1 = uiAsync { pepper.say("hello world") }
+        val t2 = uiAsync { pepper.animate(R.raw.hello_anim) }
 
-            t1.await()
-            t2.await()
+        t1.await()
+        t2.await()
 
-            val result = if(discussion.restoreData(this@DiscussActivity)) {
-                pepper.discuss(discussion, onStart = {
-                    gotoBookmarkBtn.visibility = View.VISIBLE
-                })
-            }
-            else {
-                pepper.discuss(discussion, gotoBookmark = "intro", onStart = {
-                    gotoBookmarkBtn.visibility = View.VISIBLE
-                })
-            }
-            displayInfo("End discuss : step $result")
-            gotoBookmarkBtn.visibility = View.INVISIBLE
-        }, onError = this::onError)
+        val result = if(discussion.restoreData(this@DiscussActivity)) {
+            pepper.discuss(discussion, onStart = {
+                gotoBookmarkBtn.visibility = View.VISIBLE
+            })
+        }
+        else {
+            pepper.discuss(discussion, gotoBookmark = "intro", onStart = {
+                gotoBookmarkBtn.visibility = View.VISIBLE
+            })
+        }
+        displayInfo("End discuss : step $result")
+        gotoBookmarkBtn.visibility = View.INVISIBLE
     }
 
 
