@@ -1,10 +1,7 @@
 package com.ghostwan.robotkit.sampleapp.scenario
 
-import android.content.res.Resources
 import android.view.View
-import com.aldebaran.qi.QiException
 import com.ghostwan.robotkit.robot.pepper.`object`.Discussion
-import com.ghostwan.robotkit.robot.pepper.exception.RobotUnavailableException
 import com.ghostwan.robotkit.robot.pepper.util.info
 import com.ghostwan.robotkit.robot.pepper.util.ui
 import com.ghostwan.robotkit.robot.pepper.util.uiAsync
@@ -12,7 +9,6 @@ import com.ghostwan.robotkit.robot.pepper.util.uiSafe
 import com.ghostwan.robotkit.sampleapp.ParentActivity
 import com.ghostwan.robotkit.sampleapp.R
 import kotlinx.android.synthetic.main.activity_discuss.*
-import kotlinx.coroutines.experimental.CancellationException
 
 class DiscussActivity : ParentActivity() {
 
@@ -62,24 +58,16 @@ class DiscussActivity : ParentActivity() {
                     gotoBookmarkBtn.visibility = View.VISIBLE
                 })
             }
-            println("End discuss : step $result")
+            displayInfo("End discuss : step $result")
             gotoBookmarkBtn.visibility = View.INVISIBLE
-        }, onError = {
-            when(it){
-                is QiException -> println("Robot Exception ${it.message}")
-                is RobotUnavailableException -> println("Robot unavailble ${it.message}")
-                is Resources.NotFoundException ->  println("Android resource missing ${it.message}")
-                is CancellationException -> println("Execution was stopped")
-                else -> it?.printStackTrace()
-            }
-        })
+        }, onError = this::onError)
     }
 
 
     override fun onStop() {
         super.onStop()
         uiAsync {
-            info("user name is ${discussion.getVariable("name")}")
+            displayInfo("user name is ${discussion.getVariable("name")}")
             discussion.saveData(this@DiscussActivity)
         }
     }
