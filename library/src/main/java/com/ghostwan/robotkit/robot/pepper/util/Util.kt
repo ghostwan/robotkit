@@ -23,6 +23,7 @@ fun uiAsync(onRun: suspend CoroutineScope.() -> Unit): Deferred<Unit> {
     return async(UI, block = onRun)
 }
 
+//TODO expose Activity instead of CoroutineScope
 fun uiSafe(onRun: suspend CoroutineScope.() -> Unit, onError : (Throwable?) -> Unit ): Deferred<Unit> {
     val job = async (UI, block = onRun)
     job.invokeOnCompletion {

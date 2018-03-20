@@ -85,7 +85,7 @@ interface Pepper {
      * Give a [Success] or a [Failure] with the exception
      *
      */
-    suspend fun say(phrase: String, @RawRes vararg animationsRes: Int, bodyLanguageOption: BodyLanguageOption? = null, locale : Locale?=null,
+    suspend fun say(phrase: String, @RawRes vararg animationsRes: Int, bodyLanguageOption: BodyLanguageOption? = BodyLanguageOption.NEUTRAL, locale : Locale?=null,
                     throwOnStop: Boolean = true,
                     onStart: (() -> Unit)? = null,
                     onResult: ((Result<Void>) -> Unit)? = null)
@@ -110,7 +110,7 @@ interface Pepper {
      * @return the concept that matched if [onResult] it's not set
      *
      */
-    suspend fun listen(vararg concepts: Concept, bodyLanguageOption: BodyLanguageOption? = null, locale : Locale?=null,
+    suspend fun listen(vararg concepts: Concept, bodyLanguageOption: BodyLanguageOption? = BodyLanguageOption.NEUTRAL, locale : Locale?=null,
                        throwOnStop: Boolean = true,
                        onStart: (() -> Unit)? = null,
                        onResult: ((Result<Concept>) -> Unit)? = null

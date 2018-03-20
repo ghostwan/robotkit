@@ -9,6 +9,7 @@ import com.ghostwan.robotkit.robot.pepper.MyPepper
 import com.ghostwan.robotkit.robot.pepper.Pepper
 import com.ghostwan.robotkit.robot.pepper.`object`.Concept
 import com.ghostwan.robotkit.robot.pepper.`object`.Discussion
+import com.ghostwan.robotkit.robot.pepper.`object`.ResConcept
 import com.ghostwan.robotkit.robot.pepper.exception.RobotUnavailableException
 import com.ghostwan.robotkit.robot.pepper.util.exception
 import com.ghostwan.robotkit.robot.pepper.util.info
@@ -62,9 +63,10 @@ class MainActivity : AppCompatActivity() {
             pepper.say(R.string.hello_human, locale = Locale.FRENCH)
 
             pepper.animate(R.raw.hello_anim)
-            val helloConcept = Concept(this@MainActivity, R.string.hello, R.string.hi, locale = Locale.FRENCH)
-            val byeConcept = Concept(this@MainActivity, R.string.bye, R.string.see_you, locale = Locale.FRENCH)
-            val discussConcept = Concept(this@MainActivity, R.string.talk, R.string.discuss, locale = Locale.FRENCH)
+            val helloConcept = ResConcept(R.string.hello, R.string.hi)
+            val byeConcept = ResConcept(R.string.bye, R.string.see_you)
+            val discussConcept = ResConcept( R.string.talk, R.string.discuss)
+
             val concept = pepper.listen(helloConcept, byeConcept, discussConcept, locale = Locale.FRENCH)
 
             when (concept) {

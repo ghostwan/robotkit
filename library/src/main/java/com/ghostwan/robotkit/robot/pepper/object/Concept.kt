@@ -1,30 +1,30 @@
 package com.ghostwan.robotkit.robot.pepper.`object`
 
-import android.content.Context
-import com.ghostwan.robotkit.robot.pepper.ext.getLocalizedString
+import android.support.annotation.RawRes
 import java.util.*
 
 /**
  * Created by erwan on 10/03/2018.
  */
-class Concept{
-    internal var phrases : MutableList<String> = ArrayList()
+interface Concept
 
-    constructor(vararg strings: String) {
-        for (string in strings) {
-            phrases.add(string)
-        }
+class ResConcept : Concept {
+    internal var phrases = ArrayList<Int>()
+
+    constructor(@RawRes vararg phrases:Int) {
+        this.phrases = phrases.toList() as ArrayList<Int>
     }
 
-    constructor(context: Context, vararg integers:Int, locale : Locale?=null) {
-        for (integer in integers) {
-            if(locale != null)
-                phrases.add(context.getLocalizedString(integer, locale))
-            else
-                phrases.add(context.getString(integer))
-        }
+    fun isPhraseInConcept(phrase: Int) = phrases.contains(phrase)
+}
+
+
+class StringConcept : Concept {
+    internal var phrases = ArrayList<String>()
+
+    constructor(vararg phrases:String) {
+        this.phrases = phrases.toList() as ArrayList<String>
     }
 
-    fun isPhraseInConcept(phrase: String) = phrases.contains(phrase)
-
+    fun isPhraseInConcept(phrase: Int) = phrases.contains(phrase)
 }

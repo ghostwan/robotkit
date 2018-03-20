@@ -107,10 +107,11 @@ class MyPepper(activity: Activity) : Pepper {
                              onStart: (() -> Unit)?,
                              onResult: ((Result<Void>) -> Unit)?) {
 
-        val string = if(locale != null)
+        val string = if(locale != null) {
             weakActivity.getLocalizedString(phraseRes, locale)
-        else
+        } else {
             weakActivity.getString(phraseRes)
+        }
 
         say(string, *animationsRes, bodyLanguageOption = bodyLanguageOption, locale = locale,
                 throwOnStop = throwOnStop,
@@ -124,18 +125,10 @@ class MyPepper(activity: Activity) : Pepper {
                              onStart: (() -> Unit)?,
                              onResult: ((Result<Void>) -> Unit)?) {
 
-        val say = if (bodyLanguageOption == null) {
-            if (locale == null) {
-                conversation?.async()?.makeSay(robotContext, Phrase(phrase)).await()
-            } else {
-                conversation?.async()?.makeSay(robotContext, Phrase(phrase), BodyLanguageOption.NEUTRAL, locale.toNaoqiLocale()).await()
-            }
+        val say = if (locale == null) {
+            conversation?.async()?.makeSay(robotContext, Phrase(phrase), bodyLanguageOption).await()
         } else {
-            if (locale == null) {
-                conversation?.async()?.makeSay(robotContext, Phrase(phrase), bodyLanguageOption).await()
-            } else {
-                conversation?.async()?.makeSay(robotContext, Phrase(phrase), bodyLanguageOption, locale.toNaoqiLocale()).await()
-            }
+            conversation?.async()?.makeSay(robotContext, Phrase(phrase), bodyLanguageOption, locale.toNaoqiLocale()).await()
         }
 
         say.async().setOnStartedListener (onStart)
@@ -161,27 +154,23 @@ class MyPepper(activity: Activity) : Pepper {
                                 onResult: ((Result<Concept>) -> Unit)?
     ): Concept? {
 
-        val phraseSet = ArrayList<PhraseSet>()
-        concepts.mapTo(phraseSet) {
-            val phrases = ArrayList<Phrase>()
-            it.phrases.mapTo(phrases) {
-                Phrase(it)
+        val phraseSet = concepts.map {
+            val phrases = it.phrases.map {
+                val string = if(locale != null) {
+                    weakActivity.getLocalizedString(it, locale)
+                }
+                else {
+                    weakActivity.getString(it)
+                }
+                Phrase(string)
             }
             conversation?.async()?.makePhraseSet(phrases).await()
         }
 
-        val listen = if (bodyLanguageOption == null) {
-            if (locale == null) {
-                conversation?.async()?.makeListen(robotContext, phraseSet).await()
-            } else {
-                conversation?.async()?.makeListen(robotContext, phraseSet, BodyLanguageOption.NEUTRAL, locale.toNaoqiLocale()).await()
-            }
+        val listen = if (locale == null) {
+            conversation?.async()?.makeListen(robotContext, phraseSet, bodyLanguageOption).await()
         } else {
-            if (locale == null) {
-                conversation?.async()?.makeListen(robotContext, phraseSet, bodyLanguageOption).await()
-            } else {
-                conversation?.async()?.makeListen(robotContext, phraseSet, bodyLanguageOption, locale.toNaoqiLocale()).await()
-            }
+            conversation?.async()?.makeListen(robotContext, phraseSet, bodyLanguageOption, locale.toNaoqiLocale()).await()
         }
 
         listen.async().setOnStartedListener(onStart)
@@ -201,8 +190,8 @@ class MyPepper(activity: Activity) : Pepper {
         val future = listen.async().run()
         val listenResult = handleFuture(future, onResultListen, throwOnStop)
 
-        listenResult?.heardPhrase.let {
-            concepts.filter { concept -> concept.isPhraseInConcept(it!!.text) }.map { return it }
+        listenResult?.heardPhrase?.let {
+            concepts.filter { concept -> concept.isPhraseInConcept(it.text) }.map { return it }
         }
         return null
     }
