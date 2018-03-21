@@ -13,28 +13,28 @@ import kotlinx.android.synthetic.main.activity_discuss.*
 class DiscussActivity : ParentActivity() {
 
     override fun scenarioName(): String = "Discuss"
-    override fun layout() : Int = R.layout.activity_discuss
+    override fun layout(): Int = R.layout.activity_discuss
 
-    private lateinit var discussion : Discussion
+    private lateinit var discussion: Discussion
 
     override suspend fun start() {
         discussion = Discussion(this, R.raw.test_discussion)
         discussion.setOnBookmarkReached { info("Bookmark $it reached!") }
         discussion.setOnVariableChanged { name, value -> info("Variable $name changed to $value") }
         clearDataBtn.setOnClickListener {
-            uiSafe ({
+            uiSafe({
                 discussion.clearData()
                 pepper.stop()
-                pepper.discuss(discussion, gotoBookmark = "intro" , onStart = {
+                pepper.discuss(discussion, gotoBookmark = "intro", onStart = {
                     gotoBookmarkBtn.visibility = View.VISIBLE
                 })
             }, onError = {
                 it?.printStackTrace()
             })
         }
-        gotoBookmarkBtn.setOnClickListener{
-            ui{
-                discussion.gotoBookmark( "testGoto")
+        gotoBookmarkBtn.setOnClickListener {
+            ui {
+                discussion.gotoBookmark("testGoto")
             }
         }
 
@@ -47,12 +47,11 @@ class DiscussActivity : ParentActivity() {
         t1.await()
         t2.await()
 
-        val result = if(discussion.restoreData(this@DiscussActivity)) {
+        val result = if (discussion.restoreData(this)) {
             pepper.discuss(discussion, onStart = {
                 gotoBookmarkBtn.visibility = View.VISIBLE
             })
-        }
-        else {
+        } else {
             pepper.discuss(discussion, gotoBookmark = "intro", onStart = {
                 gotoBookmarkBtn.visibility = View.VISIBLE
             })

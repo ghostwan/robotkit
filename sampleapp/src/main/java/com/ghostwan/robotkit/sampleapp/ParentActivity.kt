@@ -9,6 +9,7 @@ import com.aldebaran.qi.QiException
 import com.ghostwan.robotkit.robot.pepper.MyPepper
 import com.ghostwan.robotkit.robot.pepper.Pepper
 import com.ghostwan.robotkit.robot.pepper.exception.RobotUnavailableException
+import com.ghostwan.robotkit.robot.pepper.util.exception
 import com.ghostwan.robotkit.robot.pepper.util.ui
 import com.ghostwan.robotkit.robot.pepper.util.uiSafe
 import kotlinx.android.synthetic.main.activity_parent.*
@@ -38,10 +39,14 @@ abstract class ParentActivity : AppCompatActivity() {
             uiSafe({
                 when (fab.tag) {
                     START -> {
-                        start()
                         Snackbar.make(view, "Start ${scenarioName()}() scenario", Snackbar.LENGTH_LONG).show()
                         setFabTag(STOP)
-
+                        try {
+                            start()
+                        }finally {
+                            setFabTag(START)
+                            textview.setText(R.string.none)
+                        }
                     }
                     STOP -> {
                         stop()
@@ -88,12 +93,13 @@ abstract class ParentActivity : AppCompatActivity() {
     fun onError(throwable: Throwable?) {
         val message = when (throwable) {
             is QiException -> "Robot Exception ${throwable.message}"
-            is RobotUnavailableException -> "Robot unavailble ${throwable.message}"
+            is RobotUnavailableException -> "Robot unavailable ${throwable.message}"
             is Resources.NotFoundException -> "Android resource missing ${throwable.message}"
             is CancellationException -> "Execution was stopped"
             else -> throwable?.message
         }
-        throwable?.printStackTrace()
+        if(throwable !is CancellationException && throwable != null)
+            exception(throwable ,"onError")
         message?.let { displayInfo(message) }
     }
 

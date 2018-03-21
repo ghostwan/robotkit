@@ -29,6 +29,7 @@ class MyPepper(activity: Activity) : Pepper {
     private var weakActivity: Activity by weakRef(activity)
     private var focusManager: FocusManager? = null
 
+    val lock  = Any()
     var session: Session? = null
     var robotContext: RobotContext? = null
     var conversation: Conversation? = null
@@ -36,9 +37,13 @@ class MyPepper(activity: Activity) : Pepper {
     private var onRobotLost: ((String) -> Unit)? = null
 
     private suspend fun <T : Any?> handleFuture(future: Future<T>, onResult: ((Result<T>) -> Unit)?, throwOnCancel: Boolean): T? {
-        futures.add(future)
+        synchronized(lock) {
+            futures.add(future)
+        }
         future.thenConsume {
-            futures.remove(future)
+            synchronized(lock) {
+                futures.remove(future)
+            }
             when {
                 it.isSuccess -> onResult?.invoke(Success(it.value))
                 it.isCancelled -> onResult?.invoke(Failure(CancellationException()))
@@ -94,11 +99,15 @@ class MyPepper(activity: Activity) : Pepper {
         }
     }
 
+
+
     override fun stop() {
-        warning("cancelling ${futures.size} futures")
-        for (future in futures) {
-            future.requestCancellation();
-            futures.remove(future)
+        synchronized(lock) {
+            warning("cancelling ${futures.size} futures")
+            for (future in futures) {
+                future.requestCancellation();
+                futures.remove(future)
+            }
         }
     }
 

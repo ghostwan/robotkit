@@ -17,4 +17,7 @@
     <string name="disconnect">disconnect</string>
     <string name="title_activity_listen">ListenActivity</string>
     <string name="action_settings">Settings</string>
+    <string name="none">NONE</string>
+    <string name="english">English</string>
+    <string name="french">French</string>
 </resources>

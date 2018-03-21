@@ -7,6 +7,7 @@ import java.util.*
 
 class ListenActivity : ParentActivity() {
 
+
     override fun scenarioName() = "Listen"
 
     override suspend fun start() {
@@ -29,6 +30,5 @@ class ListenActivity : ParentActivity() {
             else -> pepper.say(R.string.i_dont_understand)
         }
     }
-
 
 }
