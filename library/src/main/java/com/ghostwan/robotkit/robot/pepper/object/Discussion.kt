@@ -1,11 +1,12 @@
 package com.ghostwan.robotkit.robot.pepper.`object`
 
 import android.content.Context
+import android.support.annotation.RawRes
 import com.aldebaran.qi.sdk.`object`.conversation.Discuss
 import com.aldebaran.qi.sdk.`object`.conversation.QiChatVariable
 import com.aldebaran.qi.sdk.`object`.conversation.Topic
-import com.aldebaran.qi.sdk.util.IOUtils
 import com.ghostwan.robotkit.robot.pepper.ext.await
+import com.ghostwan.robotkit.robot.pepper.ext.getLocalizedRaw
 import com.ghostwan.robotkit.robot.pepper.ext.sha512
 import com.ghostwan.robotkit.robot.pepper.util.info
 import com.ghostwan.robotkit.robot.pepper.util.warning
@@ -14,6 +15,7 @@ import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.JSON
 import java.io.File
 import java.io.FileNotFoundException
+import java.util.*
 import java.util.regex.Pattern
 
 /**
@@ -38,14 +40,16 @@ class Discussion {
     var topics = HashMap<Int, String>()
     var data : Data = Data()
     var naoqiData : NAOqiData = NAOqiData()
+    val locale : Locale?
 
     private var onBookmarkReached :((String) -> Unit)? = null
     private var onVariableChanged :((String, String) -> Unit)? = null
 
-    constructor(context: Context, vararg integers: Int) {
+    constructor(context: Context, @RawRes vararg integers: Int, locale : Locale?=null) {
+        this.locale = locale
         mainTopic = integers[0]
         for (integer in integers) {
-            var content = IOUtils.fromRaw(context, integer)
+            var content = context.getLocalizedRaw(integer, locale)
             id += context.getString(integer).substringAfterLast("/")
             content = addBookmarks(content, "(\\s*proposal:)(.*)", "rk-p")
             content = addBookmarks(content, "(\\s*u\\d+:\\([^)]*\\))(.*)", "rk-u")

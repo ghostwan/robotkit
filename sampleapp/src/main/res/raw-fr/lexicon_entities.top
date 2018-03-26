@@ -1,0 +1,2206 @@
+topic: ~lexicon_entities()
+
+#CATEGORY SUMMARY#
+#adverbs#
+#age#
+#adjectives#
+#beverage#
+#birthday#
+#body#
+#color#
+#food#
+#game#
+#job#
+#languages#
+#music#
+#nationality#
+#number#
+#NG keyword#
+#objects#
+#phobias#
+#place#
+#proper noun#
+#sport#
+#swears#
+
+
+
+#==================================================================#
+##### NUMBER #####
+#------------------------------------------------------------------#
+concept:(number)[0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39]
+
+
+concept:(number_0_100)["0 $num=0" "zéro $num=0" "1 $num=1" "un $num=1" "2 $num=2" "deux $num=2" "3 $num=3" "trois $num=3" "4 $num=4" "quatre $num=4" "cinq $num=5" "5 $num=5" "6 $num=6" "six $num=6" "7 $num=7" "sept $num=7" "8 $num=8" "huit $num=8" "9 $num=9" "neuf $num=9" "10 $num=10" "dix $num=10" "11 $num=11" "onze $num=11" "12 $num=12" "douze $num=12" "13 $num=13" "treize $num=13" "14 $num=14" "quatorze $num=14" "15 $num=15" "quinze $num=15" "16 $num=16" "seize $num=16" "17 $num=17" "dix-sept $num=17" "18 $num=18" "dix-huit $num=18" "19 $num=19" "dix-neuf $num=19" "20 $num=20" "vingt $num=20" "21 $num=21" "vingt et un $num=21" "22 $num=22" "vingt-deux $num=22" "23 $num=23" "vingt-trois $num=23" "24 $num=24" "vingt-quatre $num=24" "25 $num=25" "vingt-cinq $num=25" "26 $num=26" "vingt-six $num=26" "27 $num=27" "vingt-sept $num=27" "28 $num=28" "vingt-huit $num=28" "29 $num=29" "vingt-neuf $num=29" "30 $num=30" "trente $num=30" "31 $num=31" "trente et un $num=31" "32 $num=32" "trente-deux $num=32" "33 $num=33" "trente-trois $num=33" "34 $num=34" "trente-quatre $num=34" "35 $num=35" "trente-cinq $num=35" "36 $num=36" "trente-six $num=36" "37 $num=37" "trente-sept $num=37" "38 $num=38" "trente-huit $num=38" "39 $num=39" "trente-neuf $num=39" "40 $num=40" "quarante $num=40" "41 $num=41" "quarante et un $num=41" "42 $num=42" "quarante-deux $num=42" "43 $num=43" "quarante-trois $num=43" "44 $num=44" "quarante-quatre $num=44" "45 $num=45" "quarante-cinq $num=45" "46 $num=46" "quarante-six $num=46" "47 $num=47" "quarante-sept $num=47" "48 $num=48" "quarante-huit $num=48" "49 $num=49" "quarante-neuf $num=49" "50 $num=50" "cinquante $num=50" "51 $num=51" "cinquante et un $num=51" "52 $num=52" "cinquante-deux $num=52" "53 $num=53" "cinquante-trois $num=53" "54 $num=54" "cinquante-quatre $num=54" "55 $num=55" "cinquante-cinq $num=55" "56 $num=56" "cinquante-six $num=56" "57 $num=57" "cinquante-sept $num=57" "58 $num=58" "cinquante-huit $num=58" "59 $num=59" "cinquante-neuf $num=59" "60 $num=60" "soixante $num=60" "61 $num=61" "soixante et un $num=61" "62 $num=62" "soixante-deux $num=62" "63 $num=63" "soixante-trois $num=63" "64 $num=64" "soixante-quatre $num=64" "65 $num=65" "soixante-cinq $num=65" "66 $num=66" "soixante-six $num=66" "67 $num=67" "soixante-sept $num=67" "68 $num=68" "soixante-huit $num=68" "69 $num=69" "soixante-neuf $num=69" "70 $num=70" "soixante-dix $num=70" "71 $num=71" "soixante et onze $num=71" "72 $num=72" "soixante-douze $num=72" "73 $num=73" "soixante-treize $num=73" "74 $num=74" "soixante-quatorze $num=74" "75 $num=75" "soixante-quinze $num=75" "76 $num=76" "soixante-seize $num=76" "77 $num=77" "soixante-dix-sept $num=77" "78 $num=78" "soixante-dix-huit $num=78" "79 $num=79" "soixante-dix-neuf $num=79" "80 $num=80" "quatre-vingts $num=80" "81 $num=81" "quatre-vingt-un $num=81" "82 $num=82" "quatre-vingt-deux $num=82" "83 $num=83" "quatre-vingt-trois $num=83" "84 $num=84" "quatre-vingt-quatre $num=84" "85 $num=85" "quatre-vingt-cinq $num=85" "86 $num=86" "quatre-vingt-six $num=86" "87 $num=87" "quatre-vingt-sept $num=87" "88 $num=88" "quatre-vingt-huit $num=88" "89 $num=89" "quatre-vingt-neuf $num=89" "90 $num=90" "quatre-vingt-dix $num=90" "91 $num=91" "quatre-vingt-onze $num=91" "92 $num=92" "quatre-vingt-douze $num=92" "93 $num=93" "quatre-vingt-treize $num=93" "94 $num=94" "quatre-vingt-quatorze $num=94" "95 $num=95" "quatre-vingt-quinze $num=95" "96 $num=96" "quatre-vingt-seize $num=96" "97 $num=97" "quatre-vingt-dix-sept $num=97" "98 $num=98" "quatre-vingt-dix-huit $num=98" "99 $num=99" "quatre-vingt-dix-neuf $num=99" "100 $num=100" "cent $num=100"]
+
+
+concept:(ordinal_number_fem_0_100)
+["première $num=1" "2e $num=2" "3e $num=3" "4e $num=4" "5e $num=5" "6e $num=6" "7e $num=7" "8e $num=8" "9e $num=9" "10e $num=10" "11e $num=11" "12e $num=12" "13e $num=13" "14e $num=14" "15e $num=15" "16e $num=16" "17e $num=17" "18e $num=18" "19e $num=19" "20e $num=20" "21e $num=21" "22e $num=22" "23e $num=23" "24e $num=24" "25e $num=25" "26e $num=26" "27e $num=27" "28e $num=28" "29e $num=29" "30e $num=30" "31e $num=31" "32e $num=32" "33e $num=33" "34e $num=34" "35e $num=35" "36e $num=36" "37e $num=37" "38e $num=38" "39e $num=39" "40e $num=40" "41e $num=41" "42e $num=42" "43e $num=43" "44e $num=44" "45e $num=45" "46e $num=46" "47e $num=47" "48e $num=48" "49e $num=49" "50e $num=50" "51e $num=51" "52e $num=52" "53e $num=53" "54e $num=54" "55e $num=55" "56e $num=56" "57e $num=57" "58e $num=58" "59e $num=59" "60e $num=60" "70e $num=70" "71e $num=71" "72e $num=72" "73e $num=73" "74e $num=74" "75e $num=75" "76e $num=76" "77e $num=77" "78e $num=78" "79e $num=79" "80e $num=80" "81e $num=81" "82e $num=82" "83e $num=83" "84e $num=84" "85e $num=85" "86e $num=86" "87e $num=87" "88e $num=88" "89e $num=89" "90e $num=90" "91e $num=91" "92e $num=92" "93e $num=93" "94e $num=94" "95e $num=95" "96e $num=96" "97e $num=97" "98e $num=98" "99e $num=99" "100e $num=100"]
+
+concept:(ordinal_number_masc_0_100)
+["premier $num=1" "2e $num=2" "3e $num=3" "4e $num=4" "5e $num=5" "6e $num=6" "7e $num=7" "8e $num=8" "9e $num=9" "10e $num=10" "11e $num=11" "12e $num=12" "13e $num=13" "14e $num=14" "15e $num=15" "16e $num=16" "17e $num=17" "18e $num=18" "19e $num=19" "20e $num=20" "21e $num=21" "22e $num=22" "23e $num=23" "24e $num=24" "25e $num=25" "26e $num=26" "27e $num=27" "28e $num=28" "29e $num=29" "30e $num=30" "31e $num=31" "32e $num=32" "33e $num=33" "34e $num=34" "35e $num=35" "36e $num=36" "37e $num=37" "38e $num=38" "39e $num=39" "40e $num=40" "41e $num=41" "42e $num=42" "43e $num=43" "44e $num=44" "45e $num=45" "46e $num=46" "47e $num=47" "48e $num=48" "49e $num=49" "50e $num=50" "51e $num=51" "52e $num=52" "53e $num=53" "54e $num=54" "55e $num=55" "56e $num=56" "57e $num=57" "58e $num=58" "59e $num=59" "60e $num=60" "70e $num=70" "71e $num=71" "72e $num=72" "73e $num=73" "74e $num=74" "75e $num=75" "76e $num=76" "77e $num=77" "78e $num=78" "79e $num=79" "80e $num=80" "81e $num=81" "82e $num=82" "83e $num=83" "84e $num=84" "85e $num=85" "86e $num=86" "87e $num=87" "88e $num=88" "89e $num=89" "90e $num=90" "91e $num=91" "92e $num=92" "93e $num=93" "94e $num=94" "95e $num=95" "96e $num=96" "97e $num=97" "98e $num=98" "99e $num=99" "100e $num=100"]
+
+
+concept:(age_entity)[
+"0 $age=0" "1 $age=1" "un $age=1" "2 $age=2" "deux $age=2" "3 $age=3" "trois $age=3" "4 $age=4" "quatre $age=4" "5 $age=5" "cinq $age=5" "6 $age=6" "six $age=6" "7 $age=7" "sept $age=7" "8 $age=8" "huit $age=8" "9 $age=9" "neuf $age=9" "10 $age=10" "dix $age=10" "11 $age=11" "onze $age=11" "12 $age=12" "douze $age=12" "13 $age=13" "treize $age=13" "14 $age=14" "quatorze $age=14" "15 $age=15" "quinze $age=15" "16 $age=16" "seize $age=16" "17 $age=17" "dix-sept $age=17" "18 $age=18" "dix-huit $age=18" "19 $age=19" "dix-neuf $age=19" "20 $age=20" "vingt $age=20" "21 $age=21" "vingt et un $age=21" "22 $age=22" "vingt-deux $age=22" "23 $age=23" "vingt-trois $age=23" "24 $age=24" "vingt-quatre $age=24" "25 $age=25" "vingt-cinq $age=25" "26 $age=26" "vingt-six $age=26" "27 $age=27" "vingt-sept $age=27" "28 $age=28" "vingt-huit $age=28" "29 $age=29" "vingt-neuf $age=29" "30 $age=30" "trente $age=30" "31 $age=31" "trente et un $age=31" "32 $age=32" "trente-deux $age=32" "33 $age=33" "trente-trois $age=33" "34 $age=34" "trente-quatre $age=34" "35 $age=35" "trente-cinq $age=35" "36 $age=36" "trente-six $age=36" "37 $age=37" "trente-sept $age=37" "38 $age=38" "trente-huit $age=38" "39 $age=39" "trente-neuf $age=39" "40 $age=40" "quarante $age=40" "41 $age=41" "quarante et un $age=41" "42 $age=42" "quarante-deux $age=42" "43 $age=43" "quarante-trois $age=43" "44 $age=44" "quarante-quatre $age=44" "45 $age=45" "quarante-cinq $age=45" "46 $age=46" "quarante-six $age=46" "47 $age=47" "quarante-sept $age=47" "48 $age=48" "quarante-huit $age=48" "49 $age=49" "quarante-neuf $age=49" "50 $age=50" "cinquante $age=50" "51 $age=51" "cinquante et un $age=51" "52 $age=52" "cinquante-deux $age=52" "53 $age=53" "cinquante-trois $age=53" "54 $age=54" "cinquante-quatre $age=54" "55 $age=55" "cinquante-cinq $age=55" "56 $age=56" "cinquante-six $age=56" "57 $age=57" "cinquante-sept $age=57" "58 $age=58" "cinquante-huit $age=58" "59 $age=59" "cinquante-neuf $age=59" "60 $age=60" "soixante $age=60" "61 $age=61" "soixante et un $age=61" "62 $age=62" "soixante-deux $age=62" "63 $age=63" "soixante-trois $age=63" "64 $age=64" "soixante-quatre $age=64" "65 $age=65" "soixante-cinq $age=65" "66 $age=66" "soixante-six $age=66" "67 $age=67" "soixante-sept $age=67" "68 $age=68" "soixante-huit $age=68" "69 $age=69" "soixante-neuf $age=69" "70 $age=70" "soixante-dix $age=70" "71 $age=71" "soixante et onze $age=71" "72 $age=72" "soixante-douze $age=72" "73 $age=73" "soixante-treize $age=73" "74 $age=74" "soixante-quatorze $age=74" "75 $age=75" "soixante-quinze $age=75" "76 $age=76" "soixante-seize $age=76" "77 $age=77" "soixante-dix-sept $age=77" "78 $age=78" "soixante-dix-huit $age=78" "79 $age=79" "soixante-dix-neuf $age=79" "80 $age=80" "quatre-vingt $age=80" "81 $age=81" "quatre-vingt-un $age=81" "82 $age=82" "quatre-vingt-deux $age=82" "83 $age=83" "quatre-vingt-trois $age=83" "84 $age=84" "quatre-vingt-quatre $age=84" "85 $age=85" "quatre-vingt-cinq $age=85" "86 $age=86" "quatre-vingt-six $age=86" "87 $age=87" "quatre-vingt-sept $age=87" "88 $age=88" "quatre-vingt-huit $age=88" "89 $age=89" "quatre-vingt-neuf $age=89" "90 $age=90" "quatre-vingt-dix $age=90" "91 $age=91" "quatre-vingt-onze $age=91" "92 $age=92" "quatre-vingt-douze $age=92" "93 $age=93" "quatre-vingt-treize $age=93" "94 $age=94" "quatre-vingt-quatorze $age=94" "95 $age=95" "quatre-vingt-quinze $age=95" "96 $age=96" "quatre-vingt-seize $age=96" "97 $age=97" "quatre-vingt-dix-sept $age=97" "98 $age=98" "quatre-vingt-dix-huit $age=98" "99 $age=99" "quatre-vingt-dix-neuf $age=99" "100 $age=100" "cent $age=100" "101 $age=101" "cent un $age=101" "102 $age=102" "cent deux $age=102" "103 $age=103" "cent trois $age=103" "104 $age=104" "cent quatre $age=104" "105 $age=105" "cent cinq $age=105" "106 $age=106" "cent six $age=106" "107 $age=107" "cent sept $age=107" "108 $age=108" "cent huit $age=108" "109 $age=109" "cent neuf $age=109" "110 $age=110" "cent dix $age=110"
+]
+
+
+concept:(birth_day) ["premier $day=1" "1er $day=1" "2 $day=2" "deux $day=2" "3 $day=3" "trois $day=3" "4 $day=4" "quatre $day=4" "5 $day=5" "cinq $day=5" "6 $day=6" "six $day=6" "7 $day=7" "sept $day=7" "8 $day=8" "huit $day=8" "9 $day=9" "neuf $day=9" "10 $day=10" "dix $day=10" "11 $day=11" "onze $day=11" "12 $day=12" "douze $day=12" "13 $day=13" "treize $day=13" "14 $day=14" "quatorze $day=14" "15 $day=15" "quinze $day=15" "16 $day=16" "seize $day=16" "17 $day=17" "dix-sept $day=17" "18 $day=18" "dix-huit $day=18" "19 $day=19" "dix-neuf $day=19" "20 $day=20" "vingt $day=20" "21 $day=21" "vingt et un $day=21" "22 $day=22" "vingt-deux $day=22" "23 $day=23" "vingt-trois $day=23" "24 $day=24" "vingt-quatre $day=24" "25 $day=25" "vingt-cinq $day=25" "26 $day=26" "vingt-six $day=26" "27 $day=27" "vingt-sept $day=27" "28 $day=28" "vingt-huit $day=28" "29 $day=29" "vingt-neuf $day=29" "30 $day=30" "trente $day=30" "31 $day=31" "trente et un $day=31"]
+
+concept:(birth_month) ["janvier $month=1" "février $month=2" "mars $month=3" "avril $month=4" "mai $month=5" "juin $month=6" "juillet $month=7" "août $month=8" "septembre $month=9" "octobre $month=10" "novembre $month=11" "décembre $month=12"]
+
+concept:(birth_year) [1900 1901 1902 1903 1904 1905 1906 1907 1908 1909 1910 1911 1912 1913 1914 1915 1916 1917 1918 1919 1920 1921 1922 1923 1924 1925 1926 1927 1928 1929 1930 1931 1932 1933 1934 1935 1936 1937 1938 1939 1940 1941 1942 1943 1944 1945 1946 1947 1948 1949 1950 1951 1952 1953 1954 1955 1956 1957 1958 1959 1960 1961 1962 1963 1964 1965 1966 1967 1968 1969 1970 1971 1972 1973 1974 1975 1976 1977 1978 1979 1980 1981 1982 1983 1984 1985 1986 1987 1988 1989 1990 1991 1992 1993 1994 1995 1996 1997 1998 1999 2000 2001 2002 2003 2004 2005 2006 2007 2008 2009 2010 2011 2012 2013 2014 2015 2016]
+
+concept:(months) [janvier février mars avril mai juin juillet août septembre octobre novembre décembre]
+
+concept:(month)[~months]
+
+concept:(days) [lundi mardi mercredi jeudi vendredi samedi dimanche]
+
+concept:(day)[~days]
+
+concept:(futur_moment)["aujourd'hui" "[ce demain] matin" "[ce demain] soir" "[cet "demain"] après-midi" "[cet demain] aprèm" "demain" "après-demain" "ce weekend" "la semaine prochaine"]
+
+concept:(past_moment)["hier" "avant-hier" "hier soir" "hier matin" "hier après-midi" "hier aprèm" "le weekend dernier" "la semaine dernière"]
+
+concept:(at_special_date)["à noël" "{pour} le jour de l'an" "pour le nouvel an" "cet été" "cet hiver" "cet automne" "ce printemps" "pour la fête nationale" "pour l'armistice" "pour la toussaint" "pour le lundi de pâques" "pour la fête du travail" "pour le lundi de {la} pentecôte" "pour l'assomption" "pour la saint valentin" "pour le mardi gras" "pour la fête des [mères mamans]" "pour la fête des [pères papas]" "pour la fête de la musique" "pour la fête de la musique" "pour l'épiphanie" "[pendant pour] les vacances [d'été d'hiver "de {la} toussaint" "de pâques" "de noël"]" "[pour pendant] les grandes vacances"]
+
+#==================================================================#
+##### Food #####
+#------------------------------------------------------------------#
+concept:(fat_food_entity) [
+    "les frites"
+    "les hamburgers"
+    "les pizzas"
+    "les pâtes"
+]
+
+concept:(healthy_food_entity) [
+    "la salade"
+    "la soupe"
+]
+
+concept:(vegetable_entity)
+[
+"ail" "artichaut" "asperge blanche" "asperge verte" "aubergine" "bette" "betterave rouge" "brocoli" "carotte" "catalonia" "céleri" "céleri branche" "céleri rave" "chou blanc" "chou de bruxelles" "chou frisé" "chou romanesco" "chou rouge" "chou-chinois" "chou-fleur" "chou-rave" "cima di rapa" "citrouille" "concombre" "courge" "courgette" "cresson" "endive" "épinard" "fenouil" "haricot" "laitue romaine" "légume" "mâche" "maïs" "navet" "oignon" "patate" "patate douce" "panais" "pâtisson" "petit oignon blanc" "petit pois" "poireau" "pois mange-tout" "poivron" "pomme de terre" "potimarron" "potiron" "radis" "radis long" "rhubarbe" "salsifis" "topinambour"
+]
+
+concept:(vegetables_entity)
+[
+"ails" "artichauts" "asperges" "asperges blanches" "asperges vertes" "aubergines" "bettes" "betteraves" "betteraves rouges" "brocolis" "carottes" "catalonias" "céleris" "céleris branches" "céleris raves" "choux blancs" "choux de bruxelles" "choux frisés" "choux romanescos" "choux rouges" "choux-chinois" "choux-fleurs" "choux-raves" "cima di rapas" "citrouilles" "concombres" "courges" "courgettes" "cressons" "endives" "épinards" "fenouils" "haricots" "légumes" "laitue romaines" "mâches" "maïs" "navets" "oignons" "patates" "patates douces" "panais" "pâtissons" "petits oignons blancs" "petits pois" "poireaux" "pois mange-tout" "poivrons" "pommes de terre" "potimarrons" "potirons" "radis" "radis longs" "rhubarbes" "salsifis" "topinambours"
+]
+
+concept:(fruit_entity)
+[
+"abricot" "airelle" "amande" "ananas" "avocat" "banane" "cassis" "cerise" "châtaigne" "citron" "clémentine" "coing" "datte" "figue fraîche" "fraise" "fraise des bois" "framboise" "fruit" "fruit de la passion" "grenade" "groseille" "groseille à maquereau" "kaki" "kiwi" "kumquat" "litchi" "mandarine" "mangue" "marron" "melon" "mirabelle" "mûre" "myrtille" "nectarine" "noisette" "noix" "orange" "orange sanguine" "pamplemousse" "papaye" "pastèque" "pêche" "poire" "pomme" "prune" "quetsche" "raisin" "reine-claude" "tomate" "tomate ananas" "tomate cerise" "tomate charnue" "tomate ["green zebra" "zèbre" "verte"]" "tomate noire" "tomate ronde" "tomate peretti"
+]
+
+concept:(fruits_entity)
+[
+"abricots" "airelles" "amandes" "ananas" "avocats" "bananes" "cassis" "cerises" "châtaignes" "citrons" "clémentines" "coings" "dattes" "figues fraîches" "fraises" "fraises des bois" "framboises" "fruits" "fruits de la passion" "grenades" "groseilles" "groseilles à maquereau" "kakis" "kiwis" "kumquats" "litchis" "mandarines" "mangues" "marrons" "melons" "mirabelles" "mûres" "myrtilles" "nectarines" "noisettes" "noix" "oranges" "oranges sanguines" "pamplemousses" "papayes" "pastèques" "pêches" "poires" "pommes" "prunes" "quetsches" "raisins" "reines-claude" "tomates" "tomates ananas" "tomates cerises" "tomates charnues" "tomates ["green zebra" "zèbres" "vertes"]" "tomates noires" "tomates rondes" "tomates perettis"
+]
+
+concept:(food_entity)[
+"andouillette" "antillais" "big fernand" "blanquette de veau" "bo-bun" "bobun" "bouchée à la reine" "bouillabaisse" "boulette d'agneau" "boulette de agneau" "boulette de bœuf à la tomate" "boulette de bœuf" "boulette de bœuf" "brandade de morue" "brochette de dinde" "brochette de poisson au curry" "brochette de poisson frit mariné" "brochette de poisson grillé sauce créole" "brochette de poisson pané" "brochette de poisson" "brochette de poulet" "béchamel de morue" "bœuf bourguignon" "bœuf à la carotte" "burger" "burger king" "cassoulet" "chili con carne" "chinois" "chiponais" "chirashi" "choucroute" "choucroute garnie" "colombo de cabri" "colombo de poisson" "colombo de porc" "colombo de poulet" "confit de canarad" "consommé de carottes" "consommé de lentilles" "coq au vin" "coquillettes" "cordon bleu" "courgettes farcies" "court-bouillon de poisson à l'antillaise" "couscous" "couscous bœuf" "couscous de poisson" "couscous merguez" "couscous merguez" "couscous poulet" "croque monsieur" "cuisine antillaise" "cuisine chinoise" "cuisine japonaise" "cuisine libanaise" "cuisine marocaine" "cuisine thaïlandaise" "cuisine vietnamienne" "cuisse de lapin aux olives" "cuisse de lapin aux pruneaux" "cuisse de lapin sauce moutarde" "cuisse de lapin à la tomate" "curry" "curry de poulet" "curry indien" "curry japonais" "curry rouge" "curry vert" "côte de bœuf" "côte de porc charcutières" "côte de porc grillées sauce créole" "côte de porc sauce charcutière" "côte de porc" "daube de bœuf" "daube de poisson à l'antillaise" "émincé de porc sauce aigre-douce" "émincé de porc" "émincé de poulet chop suey" "endives au jambon" "escalope de dinde aux champignons" "escalope de dinde à la provençale" "escalope de dinde" "escalope de ratatouille" "escalope de volaille au curry" "escalope de volaille grillée" "escalope de volaille à la crème" "escalope de volaille" "escalope et brochette de volaille à la crème" "estouffade bourguignonne" "estouffade de bœuf à la provençale" "fallafel" "filet mignon" "fondue bourguignonne" "fricassée de coq" "fricassée de poulet" "frites" "galette" "galette {au} sarrasin" "galette frangipane" "gigot d'agneau" "gratin dauphinois" "gratin de brocolis" "gratin de choux-fleurs" "grec" "greque" "hachis parmentier" "hamburger" "hauts de cuisse de poulet" "hot dog" "italien" "japonais" "kebab" "kfc" "lapin à la moutarde" "lasagnes au saumon" "lasagnes à la bolognaise" "lasagnes" "libanais" "macdo" "mac donald" "magret de canard" "merguez" "moules" "moules frites" "morue" "nems" "omelette" "omelette au fromage" "omelette aux épinards" "[pâtes spaghettis] à la carbonara" "paupiette de dinde aux fines herbes" "paupiette de dinde et de veau à la tomate" "paupiette de dinde" "paupiette de veau au champignon" "paupiette de veau sauce napolitaine" "paupiette de veau" "paupiette de volaille au champignon" "paupiettes de dinde à la tomate" "paëlla" "paëlla au poulet" "panini" "pavé de saumon" "{soupe} pho" "pizza" "poisson au curry" "poisson frit mariné" "poisson frit" "poisson grillé sauce créole" "poisson pané" "poisson sauce citron" "poisson sauce câpre" "poisson à l'huile d'olive" "pot au feu" "poulet au curry" "poulet basquaise" "poulet chasseur" "poulet frites" "poulet grillé sauce créole" "poulet grillé" "poulet rôti" "poulet sauce chasseur" "raclette" "ragoût d'agneau" "ragoût de bœuf aux légumes" "ragoût de bœuf" "ragoût de cabri" "ragoût de porc" "ratatouille" "ravioli gratiné" "raviolis" "raviolis chinois" "raviolis japonais" "raviolis [viêtnamiens vietnamiens]" "risotto" "riz cantonnais" "rougaille de saucisse" "rôti de dinde aux pruneaux" "rôti de dinde" "rôti de porc aux champignons" "rôti de porc à la provençale" "rôti de porc" "rôti de porc" "rouleau {de} printemps" "salade florida" "salade fraîcheur" "salade" "samoussas" "sandwich" "sardines" "sashimi" "saucisse aux oignons" "saucisse de Strasbourg et volaille à la tomate" "saucisse de Strasbourg" "saucisse de volaille" "sauté d'agneau" "sauté de porc" "sauté de volaille sauce champignon" "sauté de volaille sauce charcutière" "sauté et côtes de porc" "semoule" "spaghettis à la Bolognaise" "steak aux champignons" "steak frites" "steak haché au poivre vert" "steak haché aux champignons" "steak haché grillé sauce créole" "steak haché sauce poivre vert" "steak haché sauce échalote" "steak haché à l'échalote" "steak haché à la provençale" "steak haché" "steak tartare" "sushi" "tacos" "tagliatelles {*}" "tajine" "tajine de poulet" "tartare {"de bœuf"}" "tartiflette" "tortilla" "thaï" "ti-nain" "tomates farcies {"à la provençale"}" "vietnamien" "vindaye de poisson" "vol au vent"
+]
+
+
+#beverage#
+concept:(coffee_entity)
+[
+cappuccino
+espresso
+"double espresso"
+latté
+"café latté"
+"café crème"
+"{café latté} macchiato"
+"américano"
+"café américain"
+"café allongé"
+]
+
+concept:(the_coffee_entity)
+[
+"le cappuccino"
+"l'espresso"
+"le double espresso"
+"le latté"
+"le café latté"
+"le café crème"
+"le {café latté} macchiato"
+"l'américano"
+"le café américain"
+"le café allongé"
+]
+
+concept:(a_coffee_entity)
+[
+"du cappuccino"
+"de l'espresso"
+"du double espresso"
+"du latté"
+"du café latté"
+"du café crème"
+"du {café latté} macchiato"
+"de l'américano"
+"du café américain"
+"du café allongé"
+]
+
+concept:(softdrink_entity)
+[
+"coca"
+"coca-cola"
+"coca cola"
+"sprite"
+"seven up"
+"orangina"
+"diabolo grenadine"
+"diabolo menthe"
+"red bull"
+"kéfir"
+"docteur pepper"
+"pepsi"
+"boissons énergisantes"
+"limonades"
+"jus d'orange"
+"jus de légumes"
+"jus de mangue"
+"jus de fruits"
+"jus de pomme"
+"jus d'ananas"
+"jus de d'abricot"
+"jus de kiwi"
+"jus de banane"
+"jus de carotte"
+"jus de gingimbre"
+"jus de citron"
+"jus de poire"
+"smoothie"
+"jus de papaye"
+"jus de {"noix de"} coco"
+"jus de raisin"
+"jus de litchi"
+"san pellegrino"
+"badoit"
+"perrier"
+"quézac"
+"saint yorre"
+"eau gazeuse"
+"eau minérale"
+"eau"
+]
+
+concept:(the_softdrink_entity)
+[
+"le coca"
+"le coca-cola"
+"le coca cola"
+"le sprite"
+"le seven up"
+"l'orangina"
+"le diabolo grenadine"
+"le diabolo menthe"
+"le red bull"
+"le kéfir"
+"le docteur pepper"
+"le pepsi"
+"les boissons énergisantes"
+"les limonades"
+"le jus d'orange"
+"le jus de légumes"
+"le jus de mangue"
+"le jus de fruits"
+"le jus de pomme"
+"le jus d'ananas"
+"le jus de d'abricot"
+"le jus de kiwi"
+"le jus de banane"
+"le jus de carotte"
+"le jus de gingimbre"
+"le jus de citron"
+"le jus de poire"
+"le smoothie"
+"le jus de papaye"
+"le jus de {"noix de"} coco"
+"le jus de raisin"
+"le jus de litchi"
+"le san pellegrino"
+"le badoit"
+"le perrier"
+"le quézac"
+"le saint yorre"
+"l'eau gazeuse"
+"l'eau minérale"
+"l'eau"
+]
+
+
+concept:(a_softdrink_entity)
+[
+"du coca"
+"du coca-cola"
+"du coca cola"
+"du sprite"
+"du seven up"
+"de l'orangina"
+"du diabolo grenadine"
+"du diabolo menthe"
+"du red bull"
+"du kéfir"
+"du docteur pepper"
+"du pepsi"
+"des boissons énergisantes"
+"des limonades"
+"du jus d'orange"
+"du jus de légumes"
+"du jus de mangue"
+"du jus de fruits"
+"du jus de pomme"
+"du jus d'ananas"
+"du jus de d'abricot"
+"du jus de kiwi"
+"du jus de banane"
+"du jus de carotte"
+"du jus de gingimbre"
+"du jus de citron"
+"du jus de poire"
+"du smoothie"
+"du jus de papaye"
+"du jus de {"noix de"} coco"
+"du jus de raisin"
+"du jus de litchi"
+"du san pellegrino"
+"du badoit"
+"du perrier"
+"du quézac"
+"du saint yorre"
+"de l'eau gazeuse"
+"de l'eau minérale"
+"de l'eau"
+]
+
+
+concept:(alcohol_entity)
+[
+"vin {rouge blanc}"
+"saké"
+"whisky"
+"vodka"
+"jet [sept 7]"
+"bière"
+"champagne"
+"shochu"
+"absinthe"
+"ricard"
+"bourbon"
+"mojito"
+]
+
+concept:(the_alcohol_entity)
+[
+"le vin {rouge blanc}"
+"le saké"
+"le whisky"
+"le vodka"
+"le jet [sept 7]"
+"la bière"
+"le champagne"
+"le shochu"
+"l'absinthe"
+"le ricard"
+"le bourbon"
+"le mojito"
+]
+
+concept:(a_alcohol_entity)
+[
+"du vin {rouge blanc}"
+"du saké"
+"du whisky"
+"du vodka"
+"du jet [sept 7]"
+"de la bière"
+"du champagne"
+"du shochu"
+"de l'absinthe"
+"du ricard"
+"du bourbon"
+"du mojito"
+]
+
+concept:(beverage_entity)
+[~alcohol_entity ~softdrink_entity ~coffee_entity]
+
+concept:(the_beverage_entity)
+[~the_alcohol_entity ~the_softdrink_entity ~the_coffee_entity]
+
+concept:(a_beverage_entity)
+[~a_alcohol_entity ~a_softdrink_entity ~a_coffee_entity]
+
+#==================================================================#
+##### Color #####
+#------------------------------------------------------------------#
+concept:(color_entity) [
+    "rouge $color_enu=red
+    "bleu $color_enu=blue
+    "vert $color_enu=green
+    "jaune $color_enu=yellow
+    "blanc $color_enu=white
+    "rose $color_enu=pink
+    "violet $color_enu=purple
+    "orange $color_enu=orange
+    "marron $color_enu=brown
+    "noir $color_enu=black
+    "gris $color_enu=gray"
+]
+
+
+def:translateColor($color)
+[
+    "$color==black $color_frf=noir"
+    "$color==white $color_frf=blanc"
+    "$color==red $color_frf=rouge"
+    "$color==orange $color_frf=orange"
+    "$color==green $color_frf=vert"
+    "$color==blue $color_frf=bleu"
+    "$color==gray $color_frf=gris"
+    "$color==yellow $color_frf=jaune"
+]
+
+#==================================================================#
+##### Sport #####
+#------------------------------------------------------------------#
+concept:(sport_entity)[
+"accrobranche" "aérobic {sportive}" "aïkido" "alpinisme" "apnée" "aqua gym" "arts martiaux" "athlétisme" "aviation" "aviron" "badminton" "ballet sur glace" "baseball" "basket ball" "beach soccer" "foot sur sable" "foot de plage" "beach volley" "volley sur plage" "volley de plage" "biathlon" "bmx" "bobsleigh" "bodyboard" "boule lyonnaise" "bowling" "boxe" "boxe américaine" "boxe anglaise" "boxe chinoise" "boxe française" "boxe thaïlandaise" "canoë kayak" "canyonisme" "capoeira" "char à voile" "cheerleading" "combat libre" "combat médiéval" "course à pied" "course d'orientation" "cricket" "curling" "cyclisme" "cyclisme sur piste" "cyclisme sur route" "cyclo-cross" "cyclotourisme" "deltaplane" "équitation" "escalade" "escrime" "fitness" "foot" "football" "football américain" "futsal" "golf" "gymnastique" "gymnastique artistique" "gymnastique douce" "gymnastique rythmique" "haltérophilie" "handball" "handisport" "hapkido" "hockey" "hockey subaquatique" "hockey sur gazon" "hockey sur glace" "iaïdo" "jeet kune do" "jetski" "jiu-jitsu brésilien" "[ju-jitsu ju-jutsu jiu-jitsu] {traditionnel}" "judo" "karaté" "karting" "kendo" "kick boxing" "kite surf" "kobudo" "kung fu" "kyudo" "lacrosse" "luge" "lutte" "lutte contact" "lutte gréco-romaine" "lutte libre" "marche athlétique" "moto cross" "moto enduro" "moto sur glace" "moto vitesse" "motoneige" "mountainboard" "musculation"  "nage avec palmes" "nage en eau vive" "natation" "natation synchronisée" "nunchaku" "padel" "parachutisme" "parapente" "patinage artistique" "pêche" "pêche sous-marine" "penchak silat" "pentathlon" "planche à voile" "plongée" "polo" "rafting" "raid nature" "rallye" "randonnée {équestre pédestre}" "roller" "rugby {"à 13" "à 15"}" "saut à ski" "self défense" "sepak takraw" "short track" "skateboard" "ski alpin" "ski de fond" "ski de randonnée" "ski de vitesse" "ski nautique" "ski telemark" "snowboard" "softball" "spéléologie" "squash" "sumo" "surf" "taekwondo" "taï chi chuan" "taï jitsu"  "tennis" "ping pong" "tennis de table" "tir à l'arc" "tir sportif" "tir subaquatique" "traîneaux" "trampoline" "triathlon" "ultimate frisbee" "viet vo dao" "voile" "vol à voile" "volley ball" "vtt" "water polo" "yoga"
+]
+
+
+concept:(the_sport_entity)
+[
+"l'accrobranche" "l'aérobic {sportive}" "l'aïkido" "l'alpinisme" "l'apnée" "l'aqua gym" "les arts martiaux" "l'athlétisme" "l'aviation" "l'aviron" "le badminton" "le ballet sur glace" "le baseball" "le basket ball" "le beach soccer" "le foot sur sable" "le foot de plage" "le beach volley" "le volley sur plage" "le volley de plage" "le biathlon" "le bmx" "le bodyboard" "le bobsleigh" "la boule lyonnaise" "le bowling" "la boxe" "la boxe américaine" "la boxe anglaise" "la boxe chinoise" "la boxe française" "la boxe thaïlandaise" "le canoë kayak" "le canyonisme" "le capoeira" "le char à voile" "le cheerleading" "le combat libre" "le combat médiéval" "la course à pied" "la course d'orientation" "le cricket" "le curling" "le cyclisme" "le cyclisme sur piste" "le cyclisme sur route" "le cyclo-cross" "le cyclotourisme" "le deltaplane" "l'équitation" "l'escalade" "l'escrime" "le fitness" "le foot" "le football" "le football américain" "le futsal" "le golf" "la gymnastique" "la gymnastique artistique" "la gymnastique douce" "la gymnastique rythmique" "l'haltérophilie" "le handball" "le handisport" "l'hapkido" "le hapkido" "le hockey" "le hockey subaquatique" "le hockey sur gazon" "le hockey sur glace" "le iaïdo" "l'iaïdo" "le jeet kune do" "le jetski" "le jiu-jitsu brésilien" "le [ju-jitsu ju-jutsu jiu-jitsu] {traditionnel}" "le judo" "le karaté" "le karting" "le kendo" "le kick boxing" "le kite {surf}" "le kobudo" "le kung fu" "le kyudo" "le lacrosse" "la luge" "la lutte" "la lutte contact" "la lutte gréco-romaine" "la lutte libre" "la marche athlétique" "la moto cross" "la moto enduro" "la moto sur glace" "la moto vitesse" "la motoneige" "le mountainboard" "la musculation" "la nage avec palmes" "la nage en eau vive" "la natation" "la natation synchronisée" "le nunchaku" "le padel" "le parachutisme" "le parapente" "le patinage artistique" "la pêche" "la pêche sous-marine" "le penchak silat" "le pentathlon" "la planche à voile" "la plongée" "le polo" "le rafting" "le raid nature" "le rallye" "la randonnée {équestre pédestre}" "le roller" "le rugby {"à 13" "à 15"}" "le saut à ski" "le self défense" "le sepak takraw" "le short track" "le skateboard" "le ski alpin" "le ski de fond" "le ski de randonnée" "le ski de vitesse" "le ski nautique" "le ski telemark" "le snowboard" "le softball" "la spéléologie" "le squash" "le sumo" "le surf" "le taekwondo" "le taï chi chuan" "le taï jitsu" "le tennis" "le ping pong" "le tennis de table" "le tir à l'arc" "le tir sportif" "le tir subaquatique" "le traîneaux" "le trampoline" "le triathlon" "l'ultimate frisbee" "le viet vo dao" "la voile" "le vol à voile" "le volley ball" "le vtt" "le water polo" "le yoga" ]
+
+concept:(a_sport_entity)
+[
+"de l'accrobranche" "de l'aérobic {sportive}" "de l'aïkido" "de l'alpinisme" "de l'apnée" "de l'aqua gym" "des arts martiaux" "de l'athlétisme" "de l'aviation" "de l'aviron" "du badminton" "du ballet sur glace" "du baseball" "du basket ball" "du beach soccer" "du foot sur sable" "du foot de plage" "du beach volley" "du volley sur plage" "du volley de plage" "du biathlon" "du bmx" "du bodyboard" "du bobsleigh" "de la boudu lyonnaise" "du bowling" "de la boxe" "de la boxe américaine" "de la boxe anglaise" "de la boxe chinoise" "de la boxe française" "de la boxe thaïlandaise" "du canoë kayak" "du canyonisme" "du capoeira" "du char à voile" "du cheerleading" "du combat libre" "du combat médiéval" "de la course à pied" "de la course d'orientation" "du cricket" "du curling" "du cyclisme" "du cyclisme sur piste" "du cyclisme sur route" "du cyclo-cross" "du cyclotourisme" "du deltaplane" "de l'équitation" "de l'escalade" "de l'escrime" "du fitness" "du foot" "du football" "du football américain" "du futsal" "du golf" "de la gymnastique" "de la gymnastique artistique" "de la gymnastique douce" "de la gymnastique rythmique" "de l'haltérophilie" "du handball" "du handisport" "de l'hapkido" "du hapkido" "du hockey" "du hockey subaquatique" "du hockey sur gazon" "du hockey sur glace" "du iaïdo" "de l'iaïdo" "du jeet kune do" "du jetski" "du jiu-jitsu brésilien" "du [ju-jitsu ju-jutsu jiu-jitsu] {traditionnel}" "du judo" "du karaté" "du karting" "du kendo" "du kick boxing" "du kite {surf}" "du kobudo" "du kung fu" "du kyudo" "du lacrosse" "de la luge" "de la lutte" "de la lutte contact" "de la lutte gréco-romaine" "de la lutte libre" "de la marche athlétique" "de la moto cross" "de la moto enduro" "de la moto sur glace" "de la moto vitesse" "de la motoneige" "du mountainboard" "de la musculation" "de la nage avec palmes" "de la nage en eau vive" "de la natation" "de la natation synchronisée" "du nunchaku" "du padel" "du parachutisme" "du parapente" "du patinage artistique" "de la pêche" "de la pêche sous-marine" "du penchak silat" "du pentathlon" "de la planche à voile" "de la plongée" "du polo" "du rafting" "du raid nature" "du rallye" "de la randonnée {équestre pédestre}" "du roller" "du rugby {"à 13" "à 15"}" "du saut à ski" "du self défense" "du sepak takraw" "du short track" "du skateboard" "du ski alpin" "du ski de fond" "du ski de randonnée" "du ski de vitesse" "du ski nautique" "du ski telemark" "du snowboard" "du softball" "de la spéléologie" "du squash" "du sumo" "du surf" "du taekwondo" "du taï chi chuan" "du taï jitsu" "du tennis" "du ping pong" "du tennis de table" "du tir à de l'arc" "du tir sportif" "du tir subaquatique" "du traîneaux" "du trampoline" "du triathlon" "de l'ultimate frisbee" "du frisbee" "du viet vo dao" "de la voile" "du vol à voile" "du volley ball" "du vtt" "du water polo" "du yoga" ]
+
+concept:(au_sport_entity)
+[
+"au foot"
+"au football"
+"au basketball"
+"au handball"
+"au badminton"
+"au ping pong"
+"au tennis"
+"au squash"
+"au water polo"
+"au polo"
+"au baseball"
+"au golf"
+"au rugby"
+"au football américain"
+"au frisbee"
+"à l'ulitmate frisbee"
+]
+
+
+concept:(dance_entity)
+[
+"boogie woogie" "claquettes" "danse africaine" "danse caraïbes" "danse classique" "danse contemporaine" "danse country" "danse de salon" "danse espagnole" "danse indienne" "danse jazz" "danse latine" "danse modern jazz" "danse orientale" "danse standard" "danse sur glace" "danse swing" "danse" "hip hop" "rock acrobatique" "rock" "salsa" "samba" "swing" "tango argentin"
+]
+
+
+concept:(the_dance_entity)
+[
+"le boogie woogie" "les claquettes" "la danse africaine" "la danse caraïbes" "la danse classique" "la danse contemporaine" "la danse country" "la danse de salon" "la danse espagnole" "la danse indienne" "la danse jazz" "la danse latine" "la danse orientale" "le moderne jazz" "le jazz moderne" "la danse standard" "la danse sur glace" "la danse swing" "la danse" "le hip hop" "le rock acrobatique" "le rock" "la danse rock" "la salsa" "la samba" "le swing" "le tango {argentin}"
+]
+
+concept:(de_la_dance_entity)
+[
+"du boogie woogie" "des claquettes" "de la danse africaine" "de la danse caraïbes" "de la danse classique" "de la danse contemporaine" "de la danse country" "de la danse de salon" "de la danse espagnole" "de la danse indienne" "de la danse jazz" "de la danse latine" "de la danse orientale" "du moderne jazz" "du jazz moderne" "de la danse standard" "de la danse sur glace" "de la danse swing" "de la danse" "du hip hop" "du rock acrobatique" "du rock" "de la salsa" "de la samba" "du swing" "du tango {argentin}"
+]
+
+
+
+
+#==================================================================#
+##### Music #####
+#------------------------------------------------------------------#
+
+concept:(instrument_entity)[
+"accordéon" "alto" "arpeggione" "bandurria" "banjo" "baryton" "basse" "basson" "batterie" "clairon" "claquettes" "clarinette" "clavecin" "contrebasse" "contrebasse à vent" "contrebasson" "cor" "cor anglais" "euphonieum" "flûte" "flûte à bec" "flûte traversière" "guitare" "guitare classique" "guitare éléctrique" "guitare baroque" "harmonica" "harpe" "hautbois" "hautbois d'amour" "luth" "lyre" "manfoline" "octobasse" "ophicléide" "orgue" "piano" "piccolo" "pochette" "quinton" "rébec" "sacqueboute" "sax" "saxhorne" "saxophone" "shakuhatchi" "shamiseine" "shamisen" "sousaphone" "synthé" "synthétiseur" "triangle" "trompette" "tuba" "viola pomposa" "viole" "viole d'amour" "viole d'orphée" "viole de gambe" "violon" "violon baroque" "violon d'amour" "violoncelle" "violoncello da spalla" "violoncello piccolo" "violontchello da spalla" "violontchello piccolo"
+]
+
+concept:(main_music_entity)
+[
+"["la musique" l'] Afro beat $context=music"
+"["la musique" "le"] classique $context=music"
+"["la musique" le] country $context=music"
+"["la musique" le] disco $context=music"
+"["la musique" le] dub $context=music"
+"["la musique" le] funk $context=music"
+"["la musique $context=music" "le $context=maybe_music $context2="la danse""] Hip-Hop"
+"["la musique" le] punk $context=music"
+"["la musique" le] [rock "rock'n'roll"] $context=music"
+"["la musique" la] techno $context=music"
+"[le la] bossa nova $context=music"
+"le métal $context=maybe_music $context2="le matériel""
+"l'opéra $context=music"
+"l'électro $context=music"
+"la house musique $context=music"
+"la musique [électronique électro] $context=music"
+"la musique contemporaine $context=music"
+"la musique house $context=music"
+"la variété française $context=music"
+"le gospel $context=music"
+"le jazz $context=music"
+"le rap $context=music"
+"le reggae $context=music"
+"le soul $context=music"
+"la soul musique $context=music"
+]
+
+concept:(music_entity)
+[
+"2-step garage" "2 tone" "4-beat" "12-bar blues" "50s progression" "a cappella" "acid breaks" "acid house" "acid jazz" "acid rock" "acid techno" "acid trance" "acoustique" "adult contemporary" "afrobeat" "afro-cuban jazz" "jazz afro-cubain" "afropop" "aguinaldo" "aleatoric" "alternative country" "alternative dance" "alternative hip hop" "alternative metal" "alternative r&b" "alternative rock" "ambient" "ambient house" "americana" "anarcho-punk" "anasheed" "ancient" "anatolian rock" "anime" "anti-folk" "apala" "arabic pop" "pop arabe" "argentine rock" "rock argentin" "ars antiqua" "ars nova" "ars subtilior" "art pop" "art punk" "art rock" "artcore " "ashik" "assyrian pop" "pop assyrienne" "australian country" "country australienne" "australian pub rock" "australian hip hop" "hip hop autralien" "avant-garde" "avant-garde jazz" "avant-garde metal" "avant-punk" "axé" "bachata" "baggy" "baguala" "baião" "bakersfield sound" "baila" "baisha xiyue" "bajourou" "bal-musette" "balakadri" "balinese gamelan" "balearic beat" "balearic house" "balkan brass band" "ballade" "ballata" "ballet" "baltimore club" "bambuco" "banda" "bangsawan" "bantowbol" "barbershop" "barcarolle" "barn dance" "baroque" "baroque pop" "barynya" "basse" "bassline" "batá-rumba" "batucada" "baul" "beach" "beat" "beatboxing" "beautiful" "bebop" "beguine" "biguine" "beiguan" "bel canto" "bend-skin" "benga" "bent edge" "berejú" "berlin school" "bhajan" "bhangra" "bhangragga" "big band" "big beat" "biguine" "blackened death metal" "black metal" "black midi" "bluegrass" "blue-eyed soul" "blues" "blues ballad" "blues rock" "biomusic" "bitpop" "bihu" "boogaloo" "boenke-boenke" "boi" "bossa nova" "bounce" "bouncy techno" "brass" "breakbeat" "breakbeat hardcore" "breakcore" "breakstep" "brega" "breton" "brill building sound" "brit funk" "britpop" "british blues" "british folk rock" "british invasion" "broken beat" "brostep" "brown-eyed soul" "brukdown" "bubblegum dance" "bubblegum pop" "bullerengue" "bikutsi" "bulerías" "bunraku" "burger-highlife" "burgundian school" "bush ballad" "byzantine" "ca din tulnic" "ca trù" "cabaret" "cadence-lypso" "cadence rampa" "cải lương" "cajun" "cakewalk" "calinda" "čalgija" "calypso" "calypso-style baila" "campursari" "can can" "candombe" "canon" "cantata" "cante chico" "cante jondo" "canterbury scene" "cantiñas" "cantiga" "canto livre" "cantopop" "canzone napoletana" "capoeira" "carimbó" "cariso" "carnatic" "carol" "cartageneras" "carnavalito" "cavacha" "celempungan" "cello rock" "celtique" "celtic fusion" "celtic hip hop" "celtic metal" "celtic punk" "celtic reggae" "celtic rock" "cha-cha-cha" "chacarera" "chakacha" "chalga" "chamamé" "chamarrita" "chamber" "chamber jazz" "chamber pop" "champeta" "changüí" "chanson" "chant" "chap hop" "charanga" "charanga-vallenata" "charikawi" "charleston" "chastushka" "chầu văn" "chèo" "children's music" "chicago blues" "chicago house" "chicago soul" "chicken scratch" "chill-out" "chillwave" "musique chinoise" "chinese rock" "rock chinois" "chiptune" "chouval bwa" "chowtal" "choro" "chansons de noël" "musique de noël" "christian electronic" "christian alternative rock" "christian country" "christian hardcore" "christian hip hop" "christian metal" "musique chrétienne {contemporaine}" "christian punk" "christian rock" "christian ska" "chylandyk" "chula" "chumba" "musique d'église" "chut-kai-pang" "chutney" "chutney soca" "cifra" "cielito" "classic country" "classic female blues" "musique classique" "{musique} période classique" "close harmony" "coladeira" "coldwave" "combined rhythm" "comedy music" "comedy rap" "comedy rock" "{musique} opéra comique" "compas" "concerto" "concerto grosso" "conga" "conjunto" "r&b contemporain" "contradanza" "cool jazz" "coon song" "corrido" "country" "country blues" "country folk" "country pop" "country rap" "country rock" "coupé-décalé" "cowpunk" "cretan" "crossover thrash" "crunk" "crunkcore" "crust punk" "csárdás" "cuándo" "cuarteto" "cueca" "cumbia" "cumbia villera" "currulao" "cybergrind" "dabke" "dadra" "dadra tala" "daina" "daina" "dance" "dance-pop" "dance-punk" "dance-rock" "dancehall" "dangdut" "danger" "dansband" "danza" "danzón" "dappan koothu" "dark ambient" "dark cabaret" "darkcore" "dark pop" "dark rock" "darkstep" "dark wave" "de dragoste" "deathcore" "deathgrind" "death industrial" "death metal" "death doom" "death rock" "décima" "delta blues" "deep funk" "deep house" "dementia" "descarga" "desi" "detroit blues" "detroit techno" "dhamar" "dhrupad" "dhun" "diablada" "digital hardcore" "dirge" "dirty rap" "disco" "disco polo" "diva house" "dixieland" "djent" "doina" "dondang sayang" "donegal" "dongjing" "doo-wop" "doom metal" "downtempo" "dream pop" "drone metal" "drill music" "drone" "drum and bass" "drumstep" "dub" "dubtronica" "dubstep" "dubstyle" "dunun" "dunedin sound" "dutch jazz" "early" "east coast blues" "blues de la côte est" "east coast hip hop" "hip hop de la côte est" "easy listening" "electric blues" "electro" "electro backbeat" "electro blues" "electro house" "electro-industrial" "electro swing" "electroclash" "electronic body music" "electronic dance" "musique [électro électronique]" "electronic rock" "electronica" "electronicore" "electropop" "electropunk" "electrostep" "musique d'ascenseur" "emo" "emo pop" "enka" "epic" "eremwu" "ethereal wave" "eurobeat" "eurodance" "euro disco" "euro house" "europop" "eurotrance" "exotica" "experimental" "experimental hip hop" "experimental pop" "experimental rock" "extreme metal" "fado" "falak" "fandango" "farruca" "festejo" "filk" "film score" "filmi" "filmi-ghazal" "fingerstyle" "flamenco" "florida breaks" "folk jazz" "folk metal" "folk" "folk pop" "folk punk" "folk rock" "folktronica" "forró" "foxtrot" "franco-country" "freakbeat" "freak folk" "free improvisation" "free jazz" "freestyle" "free tekno" "french house" "frevo" "fuji" "full on trance" "funaná" "funeral doom" "funk" "funk metal" "funk rock" "funky house" "furniture music" "fusion jazz" "future garage" "future bass" "futurepop" "g-funk" "gaana" "gabber" "gagaku" "gaita zuliana" "galant" "gamelan" "gamelan bebonangan" "gamelan degung" "gamelan gong kebyar" "gamelan salendro" "gamelan selunding" "gamelan semar pegulingan" "gammaldans" "gandrung" "gangster rap" "gar" "garba" "garage house" "garage rock" "gato" "gavotte" "gender wayang" "german folk" "ghazal" "ghetto house" "ghettotech" "girl group" "glam metal" "glam punk" "glam rock" "glitch" "gnawa" "go-go" "goa trance" "gong chime" "goombay" "goregrind" "goshu ondo" "gospel" "gothic metal" "gothic rock" "grebo" "chant grégorien" "grime" "grindcore" "groove metal" "group sounds" "grunge" "grupera" "guarania" "guajira" "gumbe" "gunchei" "gunka" "guoyue" "gwo ka" "gwo ka moderne" "gypsy jazz" "gypsy punk" "habanera" "halling" "hambo" "hamburger schule" "happy hardcore" "haqibah" "hardcore hip hop" "hardcore punk" "hardcore techno" "hard bop" "hard house" "hard rock" "hardstep" "hardstyle" "hard trance" "harmonica blues" "hasapiko" "hát tuồng" "heartland rock" "heavy metal" "hi-nrg" "highlife" "hiplife" "hip hop" "hip house" "hindustani classique" "hiragasy" "honky-tonk" "honkyoku" "hora" "hora lungă" "hornpipe" "horrorcore" "horror punk" "house" "huayño" "huella" "hula" "humppa" "hunguhungu" "hyangak" "hymn" "hyphy" "icaro" "igbo" "illbient" "impressionist" "improvisational" "incidental" "indietronica" "indie folk" "indie" "indie pop" "indie rock" "indo jazz" "industrial death metal" "industrial hip hop" "industrial" "industrial musical" "industrial metal" "industrial rock" "instrumental" "instrumental rock" "intelligent dance" "inuit" "irish folk" "irish rebel" "isicathamiya" "musique islamique" "isolationist" "italo dance" "italo disco" "italo house" "izvorna bosanska" "j-pop" "j-rock" "jaipongan" "jam" "jamrieng samai" "jangle pop" "japanoise" "jarana yucateca" "jarocho" "jawaiian" "jazz" "jazz blues" "jazz-funk" "jazz fusion" "jazz rap" "jazz-rock" "jegog" "jenkka" "jesus" "jig" "jing ping" "jingle" "jit" "jitterbug" "jive" "joged" "joged bumbung" "joik" "joropo" "jota" "jug" "juke joint blues" "jùjú" "jump blues" "jumpstyle" "jungle" "junkanoo" "k-pop" "kaba" "kabuki" "kagok" "kaiso" "kalamatianó" "kan ha diskan" "kansas city blues" "kantrum" "kargyraa" "kaseko" "kachāshī" "kawachi ondo" "kawaii metal" "karaoke" "kayōkyoku" "kecak" "kacapi suling" "kertok" "khaleeji" "khene" "khyal" "khoomei" "kirtan" "kiwi rock" "kizomba" "klapa" "klasik" "klezmer" "kliningan" "kolomyjka" "komagaku" "kpanlogo" "kpop" "krakowiak" "krautrock" "kriti" "kroncong" "kuduro" "kulintang" "kundiman" "kvæði" "kwaito" "kwassa kwassa" "kwela" "laiko" "lambada" "landó" "latin metal" "latin music" "latin pop" "latin swing" "lavani" "legényes" "letkajenkka" "lhamo" "lied" "light" "liquid funk" "liquindi" "lo-fi" "logobi" "loncomeo" "long song" "louisiana blues" "lounge" "lovers rock" "lowercase" "lubbock sound" "luk krung" "luk thung" "lullaby" "lundu" "lust" "madchester" "madrigal" "mafioso rap" "mahori" "makossa" "malhun" "maloya" "malambo" "mambo" "manaschi" "mandopop" "manele" "mangue bit" "manila sound" "mapouka" "marabi" "maracatu" "mariachi" "marrabenta" "martial industrial" "maskanda" "marinera" "martinetes" "mass" "matamuerte" "mathcore" "math rock" "maxixe" "mazurka" "mbalax" "mbaqanga" "mbube" "meditation" "medieval folk rock" "medieval metal" "medieval" "mejoranera" "malhun" "melam" "melodic hardcore" "melodic metalcore" "melodic" "memphis blues" "memphis soul" "mento" "merengue" "merengue típico" "méringue" "metalcore" "mexican rock" "rock mexicain" "meykhana" "mezwed" "miami bass" "microhouse" "mini-jazz" "menuet" "milonga" "milongón" "min'yō" "minimal" "minimal goa" "minimal trance" "minimal techno" "minstrel" "minneapolis sound" "modinha" "modern classical" "moderne classique" "modern laïka" "modern rock" "morenada" "mor lam" "mor lam sing" "moombahton" "moombahcore" "motown" "montuno" "morna" "mozambique of cuba" "mozambique of america" "mugham" "murga" "musette" "mushroom jazz" "music drama" "music hall" "música criolla" "musica llanero" "música popular brasileira" "musiqi-e assil" "musique concrète" "muwashshah" "nagauta" "nakasi" "nangma" "nanguan music" "narcocorrido" "nardcore" "narodna muzika" "nashville sound" "national socialist black metal" "nederpop" "neoclassical" "neoclassical dark wave" "neo-classical metal" "neoclassical new age" "neo kyma" "neofolk" "neo-medieval" "neo-progressive rock" "neo-psychedelia" "neo soul" "neotraditional country" "nerdcore" "neue deutsche welle" "neue deutsche todeskunst" "neurofunk" "new-age" "new beat" "neue deutsche härte" "new jack swing" "new orleans blues" "new prog" "new rave" "new school hip hop" "new taiwanese song" "new wave" "new wave of new wave" "new weird america" "new york blues" "nintendocore" "nisiotika" "no wave" "noh" "noise" "noise pop" "noise rock" "nordic folk" "nordic folk dance" "nortec" "norteño" "northern soul" "nu-disco" "nu-funk" "nu gaze" "nu jazz" "nu metal" "nu skool breaks" "obscuro" "old school hip hop" "old-time" "oldies" "olonkho" "old time radio" "ondo" "opera" "operatic pop" "oratorio" "orchestra" "organ trio" "organic ambient" "organum" "oriental metal" "ottava rima" "ottoman military band" "outlaw country" "outsider music" "operetta" "p-funk" "pbr&b" "pagan metal" "pagan rock" "pagode" "paisley underground" "palm wine" "panambih" "panchai baja" "panchavadyam" "pansori" "paraguayan polka" "paranda" "parranda" "parody" "patriotique" "pambiche" "paranda" "parang" "partido alto" "pasacalle" "pasillo" "pasodoble" "payada" "psychobilly" "peace punk" "musique pelimanni" "musique traditionnelle persanne" "peruvian cumbia" "petenera" "peyote song" "philadelphia soul" "piano blues" "pimba" "piedmont blues" "pinoy rock" "pinpeat orchestra" "piphat" "pirate metal" "piyyutim" "plainchant" "plena" "pleng phua cheewit" "pleng thai sakorn" "polka" "polo" "polonaise" "pols" "polska" "pong lang" "pop folk" "pop music" "pop punk" "pop rap" "pop rock" "pop sunda" "pornocore" "pornogrind" "porro" "post-britpop" "post-dubstep" "post-disco" "post-grunge" "post-hardcore" "post-industrial" "post-metal" "post-minimalism" "post-punk" "post-rock" "post-romanticism" "powada-marathi folk" "power duo" "power electronics" "power metal" "power noise" "power pop" "power trio" "powerviolence" "pow-wow" "ppongtchak" "praise song" "program symphony" "progressive electronic" "progressive folk" "progressive house" "progressive metal" "progressive bluegrass" "progressive rock" "progressive trance" "protopunk" "psychedelic" "psychedelic folk" "psychedelic rock" "psychedelic trance" "psychobilly" "pub rock" "pungmul" "punk blues" "punk cabaret" "punk jazz" "punk rock" "punta" "punta rock" "puya" "quan ho" "qasidah" "qasidah modern" "qawwali" "quadrille" "queercore" "quiet storm" "raga rock" "raga" "raggamuffin" "ragga jungle" "ragtime" "rai" "raicore" "raï'n'b" "rake-and-scrape" "ramkbach" "ramvong" "ranchera" "rapso" "rap rock" "rara" "rare groove" "rasguido doble" "rasiya" "ravanahatha" "rebetiko" "red dirt" "reel" "refalosa" "reggae" "reggae dancehall" "reggae fusion" "reggae highlife" "reggaeton" "rekilaulu" "religious" "rembetiko" "renaissance music" "retro" "requiem" "rhapsody" "rhumba" "rhyming spiritual" "rhythm and blues" "ricercar" "rímur" "riot grrrl" "rock" "rock opera" "rock and roll" "rock en español" "rockabilly" "rocksteady" "rococo" "période romantique" "ronggeng" "roots reggae" "roots rock" "roots rock reggae" "rumba" "sabar" "salsa" "salsa erotica" "salsa romantica" "saltarello" "samba" "samba-canção" "samba-reggae" "samba-rock" "sambai" "sambass" "sangueo" "sanjo" "sanjuanito" "sârbă" "sardana" "sato kagura" "sawt" "saya" "schlager" "schottisch" "musique baroque écossaise" "scrumpy and western" "scuff" "sea shanty" "sean nós" "seapunk" "second viennese school" "musique sega" "seggae" "seis" "semba" "musique séphardique" "serialism" "sertanejo" "set dance" "sevdalinka" "sevillana" "shabad" "shalako" "shan'ge" "shango" "shape note" "shibuya-kei" "shidaiqu" "shima-uta" "shock rock" "shoegaze" "shoka" "shomyo" "shota" "show tune" "sica" "siguiriyas" "silat" "sinawi" "singer-songwriter" "situational" "ska" "ska punk" "skald" "skate punk" "skiffle" "skyladiko" "skullstep" "slack-key guitar" "slängpolska" "slide" "slowcore" "sludge metal" "smooth jazz" "ska" "skweee" "soca" "soft rock" "son-batá" "son cubano" "son montuno" "son nica" "sonata" "songo" "songo-salsa" "sophisti-pop" "soukous" "soul blues" "soul jazz" "soul music" "soundtrack" "southern gospel" "southern harmony" "southern hip hop" "southern metal" "southern rock" "southern soul" "space age pop" "space disco" "space music" "space rock" "spectralism" "speedcore" "speed garage" "speed metal" "spirituals" "spouge" "sprechgesang" "square dance" "saint louis blues" "steelband" "stoner metal" "stoner rock" "straight edge" "strathspeys" "street bass" "stride" "string" "string quartet" "sufi music" "suite" "sunshine pop" "suomirock" "super eurobeat" "surf ballads" "surf instrumental" "surf music" "surf pop" "surf rock" "swamp blues" "swamp pop" "swamp rock" "swing music" "sygyt" "symphonic black metal" "symphonic metal" "symphonic poem" "symphonic rock" "symphonie" "synthpop" "synthwave" "taarab" "tai tu" "taiwanese pop" "pop taiwanaise" "tala" "talempong" "talking blues" "tambito" "tamborito" "tambu" "tamburitza" "tamil christian keerthanai" "táncház" "tango" "tanguk" "tappa" "taquirari" "taqwacore" "tarana" "tarantella" "taranto" "tech house" "tech trance" "technical death metal" "technical metal" "techno" "technoid" "techstep" "techtonik" "tecno brega" "teen pop" "tejano music" "tex-mex" "third stream" "tekno" "tembang sunda" "texas blues" "theme music" "thillana" "third wave ska" "thirty-two-bar form" "thrashcore" "thrash metal" "thumri" "tibetan pop" "pop tibétaine" "tientos" "timbila" "tin pan alley" "tinga" "tinku" "toeshey" "togaku" "tondero" "t'ong guitar" "pop {musique} traditionnelle" "musique pop traditionnelle" "trallalero" "trance" "trap music" "trival" "tribal house" "trikitixa" "trip hop" "tropicalia" "tropical music" "musique tropicale" "tropical house" "tropipop" "truck-driving country" "tsapika" "tsapiky" "tsjingel tsjangel" "tumba" "turbo-folk" "musique turque" "turntablism" "tuvan throat-singing" "twee pop" "twist" "two tone" "uk garage" "uk hardcore" "uk hard house" "uk pub rock" "unblack metal" "underground music" "uplifting trance" "urban cowboy" "urban folk" "vallenato" "vaporwave" "vaudeville" "verbunkos" "verismo" "vidala" "vidalita" "musique de jeu vidéo" "viking metal" "villanella" "virelais" "visual kei" "visual music" "vocal house"]
+
+
+
+#======================================================#
+#####JOB####
+#------------------------------------------------------#
+concept:(job_entity) [
+"abbesse {*}"
+"abbé {*}"
+"accordéoniste {*}"
+"acheteur {*}"
+"acheteuse {*}"
+"acousticien {*}"
+"acousticienne {*}"
+"acrobate {*}"
+"acteur {*}"
+"actrice {*}"
+"actuaire {*}"
+"adjoint maire {*}"
+"administrateur {*}"
+"administratrice {*}"
+"africaniste {*}"
+"agent {*}"
+"agent secret {*}"
+"agriculteur {*}"
+"agronome {*}"
+"aide médico-psychologique {*}"
+"aide-soignant {*}"
+"aide-soignante {*}"
+"aiguilleur du ciel {*}"
+"aiguilleuse du ciel {*}"
+"algovendeur {*}"
+"algovendeuse {*}"
+"alpiniste {*}"
+"altiste {*}"
+"ambassadeur {*}"
+"ambassadrice {*}"
+"ambulancier {*}"
+"ambulancière {*}"
+"aménageur {*}"
+"aménageuse {*}"
+"amiral {*}"
+"analyseur {*}"
+"analyste {*}"
+"anatomiste {*}"
+"anesthésiste {*}"
+"animalier{*}"
+"animateur {*}"
+"animateur radio {*}"
+"animateur télé {*}"
+"animateur touristique {*}"
+"animatrice {*}"
+"annonceur {*}"
+"annonceuse {*}"
+"anthropologue {*}"
+"antiquaire {*}"
+"aquaculteur {*}"
+"arbitre {*}"
+"archéologue {*}"
+"architecte {*}"
+"architecte d’intérieur {*}"
+"archiviste {*}"
+"argentier {*}"
+"argentière {*}"
+"armateur {*}"
+"armurier {*}"
+"armurière {*}"
+"arnaqueur {*}"
+"arnaqueuse {*}"
+"aromaticien {*}"
+"aromaticienne {*}"
+"arrangeur {*}"
+"arrangeuse {*}"
+"artificier {*}"
+"artiste {*}"
+"assistant {*}"
+"assistante {*}"
+"assureur {*}"
+"astrologue {*}"
+"astronaute {*}"
+"astronome {*}"
+"astrophysicien {*}"
+"astrophysicienne {*}"
+"athlète {*}"
+"attaché commercial {*}"
+"attaché de presse {*}"
+"audioprothésiste {*}"
+"auditeur financier {*}"
+"auxiliaire de puériculture {*}"
+"aviateur {*}"
+"aviatrice {*}"
+"avionneur {*}"
+"avitailleur {*}"
+"avocat {*}"
+"avocate {*}"
+"balafoniste {*}"
+"banquier {*}"
+"banquière {*}"
+"baron {*}"
+"baronne {*}"
+"basketteur {*}"
+"basketteuse {*}"
+"bassiste {*}"
+"bassoniste {*}"
+"batelier {*}"
+"batelière {*}"
+"bâtonnier {*}"
+"bâtonnière {*}"
+"batteur {*}"
+"batteur {*}"
+"berger {*}"
+"bergère {*}"
+"bibliothécaire {*}"
+"bijoutier {*}"
+"bijoutière {*}"
+"biochimiste {*}"
+"biologiste {*}"
+"biologiste médical {*}"
+"biostatisticien {*}"
+"biostatisticienne {*}"
+"biscuitier {*}"
+"biscuitière {*}"
+"blanchisseur {*}"
+"blanchisseuse {*}"
+"botaniste {*}"
+"boucher {*}"
+"boulanger {*}"
+"boulangère {*}"
+"bouquiniste {*}"
+"bourgmestre {*}"
+"boursier {*}"
+"boursière {*}"
+"boutefeu {*}"
+"boxeur {*}"
+"boxeuse {*}"
+"brancardier {*}"
+"brancardière {*}"
+"brasseur {*}"
+"brasseuse {*}"
+"bricoleur {*}"
+"bricoleuse {*}"
+"brigardier {*}"
+"brigardière {*}"
+"broyeur {*}"
+"broyeuse {*}"
+"bûcheron {*}"
+"bûcheronne {*}"
+"buraliste {*}"
+"cadre {*}"
+"cadreur {*}"
+"cafetier {*}"
+"cafetière {*}"
+"caissier {*}"
+"caissière {*}"
+"calculateur {*}"
+"calculatrice {*}"
+"cambiste {*}"
+"cameraman {*}"
+"camionneur {*}"
+"camionneuse {*}"
+"campus manager {*}"
+"cantatrice {*}"
+"cantinier {*}"
+"cantinière {*}"
+"capitaine {*}"
+"caporal {*}"
+"cardiologue {*}"
+"caricaturiste {*}"
+"carillonneur {*}"
+"carreuleur {*}"
+"carreuleuse {*}"
+"carrossier {*}"
+"carrossière {*}"
+"cartographe {*}"
+"cartomancien {*}"
+"cartomancienne {*}"
+"castreur {*}"
+"catéchiste {*}"
+"cavalier {*}"
+"cavalière {*}"
+"caviste {*}"
+"censeur {*}"
+"céramiste {*}"
+"chancelier {*}"
+"chancelière {*}"
+"chanteur {*}"
+"chanteuse {*}"
+"charbonnier {*}"
+"charcutier {*}"
+"chargé d’affaires {*}"
+"chargé d’études commerciales {*}"
+"chargé de clientèle dans la banque {*}"
+"chargé de clientèle en assurance {*}"
+"chargé de clientèle en banque {*}"
+"chargé de communication en environnement {*}"
+"chargé de communication événementielle {*}"
+"chargé de mission {en} énergies renouvelables {*}"
+"chargé de mission agenda 21 {*}"
+"chargé de mission ENR {*}"
+"chargé de pharmaco vigilance {*}"
+"chargé des relations publiques {*}"
+"chargé du recrutement {*}"
+"chargé du suivi des programmes humanitaires {*}"
+"chargeur {*}"
+"chargeuse {*}"
+"charpentier {*}"
+"charpentière {*}"
+"charretier {*}"
+"charretière {*}"
+"charron {*}"
+"chasseur {*}"
+"chasseuse {*}"
+"chaudronier {*}"
+"chauffeur {*}"
+"cheerleadeur {*}"
+"cheerleadeuse {*}"
+"chef d'escale {*}"
+"chef d'orchestre {*}"
+"chef d’exploitation d’unité de récupération {*}"
+"chef de cabine {*}"
+"chef de caisse {*}"
+"chef de chantier {*}"
+"chef de cuisine {*}"
+"chef de mission dans l’humanitaire {*}"
+"chef de produit {*}"
+"chef de projet {*}"
+"chef de pub en agence {*}"
+"chef de rang {*}"
+"chef de rayon {*}"
+"chef opérateur {*}"
+"chef réceptionniste {*}"
+"cheminot {*}"
+"chercheur {*}"
+"chercheuse {*}"
+"chevrier {*}"
+"chevrière {*}"
+"chimiste {*}"
+"chiropracteur {*}"
+"chiropractrice {*}"
+"chirurgien {*}"
+"chirurgien-dentiste {*}"
+"chirurgienne {*}"
+"chocolatier {*}"
+"chocolatière {*}"
+"chorégraphe {*}"
+"choriste {*}"
+"chroniqueur {*}"
+"chroniqueuse {*}"
+"cimentier {*}"
+"cimentière {*}"
+"cinéaste {*}"
+"cithariste {*}"
+"clarinettiste {*}"
+"classeur {*}"
+"classeuse {*}"
+"claveciniste {*}"
+"claviériste {*}"
+"clerc {*}"
+"climatologue {*}"
+"clinicien {*}"
+"clinicienne {*}"
+"clown {*}"
+"coiffeur {*}"
+"coiffeuse {*}"
+"colonel {*}"
+"colporteur {*}"
+"colporteuse {*}"
+"com and ben {*}"
+"comédien {*}"
+"comédienne {*}"
+"commandant {*}"
+"commandant de bord {*}"
+"commentateur {*}"
+"commentatrice {*}"
+"commerçant {*}"
+"commercial {*}"
+"commercial en énergies renouvelables {*}"
+"commercial en ENR {*}"
+"commis {*}"
+"commissaire {*}"
+"commissaire aux comptes {*}"
+"commissaire de police {*}"
+"commissaire-priseur {*}"
+"communicateur {*}"
+"communicatrice {*}"
+"community manager {*}"
+"compositeur {*}"
+"compositrice {*}"
+"comptable {*}"
+"comte {*}"
+"comtesse {*}"
+"concepteur {*}"
+"concepteur multimédia {*}"
+"concepteur réalisateur multimédia {*}"
+"concepteur rédacteur {*}"
+"conceptrice {*}"
+"concertiste {*}"
+"concierge {*}"
+"conducteur {*}"
+"conductrice {*}"
+"confectionneur {*}"
+"confectionneuse {*}"
+"conférencier {*}"
+"conférencière {*}"
+"confiseur {*}"
+"confiseuse {*}"
+"conseil en lobbying {*}"
+"conseiller {*}"
+"conseillère {*}"
+"conservateur {*}"
+"conservatrice {*}"
+"constructeur {*}"
+"constructrice {*}"
+"consul {*}"
+"consultant {*}"
+"consultante {*}"
+"conteur {*}"
+"contrebassiste {*}"
+"contremaître {*}"
+"contrice {*}"
+"contrôleur {*}"
+"contrôleur financiers {*}"
+"contrôleuse {*}"
+"coordinateur {*}"
+"coordinatrice {*}"
+"cordier {*}"
+"cordonnier {*}"
+"cordonnière {*}"
+"corniste {*}"
+"correcteur {*}"
+"correctrice {*}"
+"cosmonaute {*}"
+"costumier {*}"
+"costumière {*}"
+"coureur {*}"
+"coureuse {*}"
+"courrier {*}"
+"courrière {*}"
+"courtier {*}"
+"courtière {*}"
+"couturier {*}"
+"couturière {*}"
+"créateur {*}"
+"créatrice {*}"
+"crémier {*}"
+"crémière {*}"
+"criminologue {*}"
+"critique {*}"
+"croupier {*}"
+"croupière {*}"
+"cuisinier {*}"
+"cuisinière {*}"
+"cuisto {*}"
+"cultivateur {*}"
+"cultivatrice {*}"
+"cycliste {*}"
+"cymbaliste {*}"
+"dactylo {*}"
+"danseur {*}"
+"danseuse {*}"
+"débiteur {*}"
+"débiteuse {*}"
+"décorateur {*}"
+"décorateur-scénographe {*}"
+"décoratrice {*}"
+"décoratrice-scénographe {*}"
+"démographe {*}"
+"dentiste {*}"
+"député {*}"
+"designer {*}"
+"dessinateur {*}"
+"dessinatrice {*}"
+"détective {*}"
+"détective privé {*}"
+"développeur {*}"
+"développeuse {*}"
+"diacre {*}"
+"diagnostiqueur {*}"
+"diagnostiqueuse {*}"
+"diamantaire {*}"
+"diététicien {*}"
+"diététiciennne {*}"
+"diffuseur {*}"
+"diffuseuse {*}"
+"diplomate {*}"
+"directeur {*}"
+"directeur artistique {*}"
+"directrice {*}"
+"directrice artistique {*}"
+"docteur {*}"
+"documentaliste {*}"
+"domoticien {*}"
+"domoticienne {*}"
+"dompteur {*}"
+"dompteuse {*}"
+"douanier {*}"
+"doyen {*}"
+"doyenne {*}"
+"dramaturge {*}"
+"drapier {*}"
+"drapière {*}"
+"droguiste {*}"
+"duc {*}"
+"duchesse {*}"
+"dulcimeriste {*}"
+"ébéniste {*}"
+"éboueur {*}"
+"éboueuse {*}"
+"éclairagiste {*}"
+"eco-concepteur {*}"
+"eco-conceptrice {*}"
+"eco-développeur {*}"
+"eco-développeuse {*}"
+"écologiste {*}"
+"économe {*}"
+"économiste {*}"
+"économiste de la construction {*}"
+"ecotoxicologue {*}"
+"écrivain {*}"
+"écuyer {*}"
+"écuyère {*}"
+"éditeur {*}"
+"éditorialiste {*}"
+"éditrice {*}"
+"éducateur {*}"
+"éducatrice {*}"
+"égoutier {*}"
+"égoutière {*}"
+"égyptologue {*}"
+"électricien {*}"
+"électricienne {*}"
+"électromécanicien {*}"
+"électromécanicienne {*}"
+"électronicien {*}"
+"électronicienne {*}"
+"électrotechnicien {*}"
+"électrotechnicienne {*}"
+"éleveur {*}"
+"éleveuse {*}"
+"émailleur {*}"
+"émailleuse {*}"
+"embaumeur {*}"
+"embaumeuse {*}"
+"émetteur {*}"
+"émettrice {*}"
+"empereur {*}"
+"employeur {*}"
+"employeuse {*}"
+"enquêteur {*}"
+"enquêteuse {*}"
+"enseignant {*}"
+"enseignante {*}"
+"entomologiste {*}"
+"entraîneur {*}"
+"entraîneur sportif {*}"
+"entraîneuse {*}"
+"entrepreneur {*}"
+"entrepreneuse {*}"
+"escaladeur {*}"
+"escaladeuse {*}"
+"esthéticien {*}"
+"esthéticienne {*}"
+"ethnologue {*}"
+"éthologiste {*}"
+"évangéliste {*}"
+"expéditionnaire {*}"
+"expert {*}"
+"experte {*}"
+"exploitant {*}"
+"exploitante {*}"
+"exportateur {*}"
+"exportatrice {*}"
+"fabricant {*}"
+"fabricante {*}"
+"facteur {*}"
+"faïencier {*}"
+"faïencière {*}"
+"faiseur {*}"
+"fermier {*}"
+"fermière {*}"
+"ferrailleur {*}"
+"ferrailleuse {*}"
+"financier {*}"
+"financière {*}"
+"flûtiste {*}"
+"fonceur {*}"
+"fonceuse {*}"
+"fonctionnaire {*}"
+"footballeur {*}"
+"footballeuse {*}"
+"forain {*}"
+"forestier {*}"
+"forestière {*}"
+"forgeron {*}"
+"formateur {*}"
+"formatrice {*}"
+"formeur {*}"
+"formeuse {*}"
+"fossoyeur {*}"
+"fossoyeuse {*}"
+"fournisseur {*}"
+"fournisseuse {*}"
+"fourrier {*}"
+"fourrière {*}"
+"fraiseur {*}"
+"fraiseuse {*}"
+"fresquiste {*}"
+"fromager {*}"
+"fromagère {*}"
+"funambule {*}"
+"futurologue {*}"
+"game designer {*}"
+"gangster {*}"
+"garde {*}"
+"garde chasse {*}"
+"garde du littoral {*}"
+"garde moniteur {*}"
+"garde pêche {*}"
+"gardien {*}"
+"gardienne {*}"
+"gendarme {*}"
+"généraliste {*}"
+"généticien {*}"
+"généticienne {*}"
+"géographe {*}"
+"geôlier {*}"
+"geôlière {*}"
+"géologue {*}"
+"géomaticien {*}"
+"géomaticienne {*}"
+"géomètre {*}"
+"géomètre-topographe {*}"
+"germaniste {*}"
+"gestionnaire {*}"
+"gigolo {*}"
+"glacier {*}"
+"glacière {*}"
+"golfeur {*}"
+"golfeuse {*}"
+"gouvernant {*}"
+"gouvernante {*}"
+"gouverneur {*}"
+"gouverneuse {*}"
+"graisseur {*}"
+"graisseuse {*}"
+"grand reporter {*}"
+"graphiste {*}"
+"graveur {*}"
+"graveuse {*}"
+"greffier {*}"
+"greffière {*}"
+"grossiste {*}"
+"grutier {*}"
+"guérisseur {*}"
+"guérisseuse {*}"
+"guide {*}"
+"guide accompagnateur {*}"
+"guitariste {*}"
+"gymnaste {*}"
+"gynécologue {*}"
+"handballeur {*}"
+"handballeuse {*}"
+"harmoniciste {*}"
+"harmoniumiste {*}"
+"harpiste {*}"
+"hautboïste {*}"
+"herboriste {*}"
+"historien {*}"
+"historienne {*}"
+"homme politique {*}"
+"horloger {*}"
+"horlogère {*}"
+"horticulteur {*}"
+"horticultrice {*}"
+"hôtelier {*}"
+"hôtelière {*}"
+"hôtesse de l'air {*}"
+"huissier {*}"
+"humoriste {*}"
+"hydraulicien {*}"
+"hydraulicienne {*}"
+"hydrobiologiste {*}"
+"hydrogéologue {*}"
+"hygiéniste {*}"
+"hypnotiseur {*}"
+"hypnotiseuse {*}"
+"iconographe {*}"
+"illustrateur {*}"
+"illustratrice {*}"
+"impératrice {*}"
+"importateur {*}"
+"importatrice {*}"
+"imprimeur {*}"
+"imprimeuse {*}"
+"infirmier {*}"
+"infirmière {*}"
+"infographiste de presse {*}"
+"informateur {*}"
+"informaticien {*}"
+"informaticienne {*}"
+"informatrice {*}"
+"ingénieur {*}"
+"ingénieur [numéricien numéricienne] {*}"
+"ingénieur agroalimentaire {*}"
+"ingénieur agronome {*}"
+"ingénieur automatisme-instrumentation {*}"
+"ingénieur calcul et appui scientifique {*}"
+"ingénieur chimiste {*}"
+"ingénieur d'études dans l'automobile {*}"
+"ingénieur d’études dans l'industrie {*}"
+"ingénieur d’études en aéronautique {*}"
+"ingénieur de fabrication {*}"
+"ingénieur du son {*}"
+"ingénieur en efficacité énergétique des bâtiments {*}"
+"ingénieur en environnement {*}"
+"ingénieur en gestion des risques industriels {*}"
+"ingénieur en mécanique {*}"
+"ingénieur en méthanisation {*}"
+"ingénieur en recherche clinique {*}"
+"ingénieur méthodes {*}"
+"ingénieur procédés {*}"
+"ingénieur procédés en environnement {*}"
+"ingénieur qualité {*}"
+"ingénieur qualiticien {*}"
+"ingénieur qualiticienne {*}"
+"ingénieur système {*}"
+"ingénieur télécoms {*}"
+"inspecteur {*}"
+"inspectrice {*}"
+"installateur {*}"
+"installatrice {*}"
+"instituteur {*}"
+"institutrice {*}"
+"instructeur {*}"
+"interprète {*}"
+"intervieweur {*}"
+"inventeur {*}"
+"inventeuse {*}"
+"investisseur {*}"
+"investisseuse {*}"
+"jardinier {*}"
+"jardinière {*}"
+"joaillier {*}"
+"jockey {*}"
+"jongleur {*}"
+"jongleuse {*}"
+"joueur {*}"
+"joueuse {*}"
+"journalier {*}"
+"journalière {*}"
+"journaliste {*}"
+"judoka {*}"
+"juge {*}"
+"juriste {*}"
+"karatéka {*}"
+"kendoka {*}"
+"kiné {*}"
+"kinésithérapeute {*}"
+"koraïste {*}"
+"laborantin {*}"
+"laborantine {*}"
+"laitier {*}"
+"laitière {*}"
+"lamaneur {*}"
+"laveur {*}"
+"laveuse {*}"
+"lecteur {*}"
+"lectrice {*}"
+"législateur {*}"
+"légiste {*}"
+"libraire {*}"
+"lieutenant {*}"
+"linguiste {*}"
+"littérateur {*}"
+"littératrice {*}"
+"livreur {*}"
+"livreuse {*}"
+"logicien {*}"
+"logicienne {*}"
+"logisticien {*}"
+"logisticien {*}"
+"logisticienne {*}"
+"loueur {*}"
+"loueuse {*}"
+"ludothécaire {*}"
+"luthier {*}"
+"luthiste {*}"
+"lutteur {*}"
+"lutteuse {*}"
+"machiniste {*}"
+"maçon {*}"
+"magasinier {*}"
+"magicien {*}"
+"magicienne {*}"
+"magistrat {*}"
+"maire {*}"
+"maître {*}"
+"maître d'hôtel {*}"
+"maître nageur sauveteur {*}"
+"maîtresse {*}"
+"manager dans la restauration rapide {*}"
+"mandoliniste {*}"
+"manipulateur {*}"
+"manipulatrice {*}"
+"mannequin {*}"
+"manucure {*}"
+"manutentionnaire {*}"
+"maquettiste {*}"
+"maquilleur {*}"
+"maquilleuse {*}"
+"maraîcher {*}"
+"marchand {*}"
+"marchande {*}"
+"maréchal {*}"
+"marin {*}"
+"marinier {*}"
+"marionnettiste {*}"
+"masseur {*}"
+"masseur kinésithérapeute {*}"
+"masseuse {*}"
+"matelot {*}"
+"matelote {*}"
+"mathématicien {*}"
+"mathématicienne {*}"
+"mécanicien {*}"
+"mécanicienne {*}"
+"médecin {*}"
+"médecin de l'éducation nationale {*}"
+"médecin du travail {*}"
+"médecin généraliste {*}"
+"médecin légiste {*}"
+"média-planeur {*}"
+"médiateur {*}"
+"médiateur culturel {*}"
+"médiateur en environnement {*}"
+"mélodiste {*}"
+"mémorialiste {*}"
+"ménager {*}"
+"ménagère {*}"
+"menuisier {*}"
+"merchandiser {*}"
+"messager {*}"
+"messagère {*}"
+"métallurgiste {*}"
+"météorologiste {*}"
+"metteur en scène {*}"
+"meunier {*}"
+"microtechnicien {*}"
+"milicien {*}"
+"milicienne {*}"
+"militaire {*}"
+"mineur {*}"
+"miniaturiste {*}"
+"ministre {*}"
+"missionnaire {*}"
+"mixeur {*}"
+"modèle {*}"
+"modéliste {*}"
+"moniteur {*}"
+"moniteur {*}"
+"moniteur-éducateur {*}"
+"monitrice {*}"
+"monitrice-éducatrice {*}"
+"monteur {*}"
+"monteuse {*}"
+"motocycliste {*}"
+"muséographe {*}"
+"musicien {*}"
+"musicienne {*}"
+"musicologue {*}"
+"nageur {*}"
+"nageuse {*}"
+"narrateur {*}"
+"narratrice {*}"
+"navigateur {*}"
+"navigatrice {*}"
+"négociant {*}"
+"négociante {*}"
+"néphrologue {*}"
+"neurologue {*}"
+"notaire {*}"
+"nourrice {*}"
+"nouvelliste {*}"
+"observateur {*}"
+"observatrice {*}"
+"océanologue {*}"
+"officier {*}"
+"opérateur {*}"
+"opérateur {*}"
+"opérateur back office {*}"
+"opérateur de marché CO2 {*}"
+"opérateur de marché en CO2 {*}"
+"opérateur middle office {*}"
+"opératrice {*}"
+"ophtalmologue {*}"
+"opticien-lunetier {*}"
+"orfèvre {*}"
+"organisateur {*}"
+"organisatrice {*}"
+"organiste {*}"
+"organiste {*}"
+"orientaliste {*}"
+"ORL {*}"
+"ornithologue {*}"
+"orthopédiste {*}"
+"orthophoniste {*}"
+"orthoprothésiste {*}"
+"orthoptiste {*}"
+"ostéopathe {*}"
+"osthéo {*}"
+"osthéopathe {*}"
+"ostréiculteur {*}"
+"ostréicultrice {*}"
+"oto-rhino-laryngologiste {*}"
+"outilleur {*}"
+"outilleuse {*}"
+"ouvreur {*}"
+"ouvreuse {*}"
+"ouvrier {*}"
+"ouvrière {*}"
+"paléographe {*}"
+"paléontologue {*}"
+"papetier {*}"
+"papetière {*}"
+"parachutiste {*}"
+"parfumeur {*}"
+"parfumeuse {*}"
+"parolier {*}"
+"parolière {*}"
+"passeur {*}"
+"passeuse {*}"
+"pasteur {*}"
+"pathologiste {*}"
+"patineur {*}"
+"patineuse {*}"
+"pâtissier {*}"
+"patron {*}"
+"patronne {*}"
+"patrouilleur {*}"
+"patrouilleuse {*}"
+"payeur {*}"
+"payeuse {*}"
+"paysagiste {*}"
+"paysan {*}"
+"paysanne {*}"
+"pêcheur {*}"
+"pédagogue {*}"
+"pédiatre {*}"
+"pédicure-podologue {*}"
+"pédologue {*}"
+"pédopsychiatre {*}"
+"peintre {*}"
+"percepteur {*}"
+"perceptrice {*}"
+"perchiste {*}"
+"percussionniste {*}"
+"pharmacien {*}"
+"pharmacien d'officine {*}"
+"pharmacienne {*}"
+"philosophe {*}"
+"photographe {*}"
+"physicien {*}"
+"physicienne {*}"
+"pianiste {*}"
+"pigiste {*}"
+"pilote {*}"
+"piqueur {*}"
+"piqueuse {*}"
+"pistard {*}"
+"planteur {*}"
+"planteuse {*}"
+"planton {*}"
+"plasticien {*}"
+"plasticienne {*}"
+"plombier {*}"
+"plongeur {*}"
+"plongeuse {*}"
+"podologue {*}"
+"poète {*}"
+"pointeur {*}"
+"pointeuse {*}"
+"poissonnier {*}"
+"poissonnière {*}"
+"policier {*}"
+"policière {*}"
+"politiste {*}"
+"politologue {*}"
+"polygraphe {*}"
+"pompier {*}"
+"pompiste {*}"
+"porcelainier {*}"
+"porcelainière {*}"
+"porteur {*}"
+"porteuse {*}"
+"portier {*}"
+"portière {*}"
+"postier {*}"
+"postière {*}"
+"potier {*}"
+"pourvoyeur {*}"
+"pourvoyeuse {*}"
+"praticien {*}"
+"praticienne {*}"
+"préfet {*}"
+"préhistorien {*}"
+"premier ministre {*}"
+"présentateur {*}"
+"présentatrice {*}"
+"président {*}"
+"présidente {*}"
+"prestidigitateur {*}"
+"prêtre {*}"
+"prêtresse {*}"
+"prince {*}"
+"princesse {*}"
+"procureur {*}"
+"producteur {*}"
+"productrice {*}"
+"prof de maths {*}"
+"professeur agrégé {*}"
+"professeur d’EPS {*}"
+"professeur de lycée professionnel {*}"
+"professeur des écoles {*}"
+"professeur des écoles spécialisées {*}"
+"professeur documentaliste {*}"
+"professeur en [collège lycée] {*}"
+"programmateur {*}"
+"programmatrice {*}"
+"prostituée {*}"
+"prothésiste {*}"
+"prothésiste dentaire {*}"
+"psychanalyste {*}"
+"psychiatre {*}"
+"psychologue {*}"
+"psychologue scolaire {*}"
+"psychomotricien {*}"
+"publiciste {*}"
+"puéricultrice {*}"
+"raffineur {*}"
+"raffineuse {*}"
+"rameur {*}"
+"rameuse {*}"
+"rappeur {*}"
+"rappeuse {*}"
+"rapporteur {*}"
+"rapporteuse {*}"
+"réalisateur {*}"
+"réalisateur de loisirs durables {*}"
+"réalisateur multimédia {*}"
+"réalisatrice {*}"
+"réalisatrice de loisirs durables {*}"
+"réalisatrice multimédia {*}"
+"réanimateur {*}"
+"réanimatrice {*}"
+"récepteur {*}"
+"réceptionniste {*}"
+"réceptrice {*}"
+"receveur {*}"
+"receveuse {*}"
+"recteur {*}"
+"rédacteur {*}"
+"rédactrice {*}"
+"référendaire {*}"
+"régent {*}"
+"régente {*}"
+"régisseur {*}"
+"régisseur de spectacles {*}"
+"régulateur {*}"
+"régulatrice {*}"
+"reine {*}"
+"relieur {*}"
+"relieuse {*}"
+"religieuse {*}"
+"religieux {*}"
+"remorqueur {*}"
+"remplaçant {*}"
+"remplaçante {*}"
+"réparateur {*}"
+"réparatrice {*}"
+"répartiteur {*}"
+"répartitrice {*}"
+"repasseur {*}"
+"repasseuse {*}"
+"reporter {*}"
+"reporter radio {*}"
+"requérant {*}"
+"requérante {*}"
+"responsable {*}"
+"restaurateur {*}"
+"restaurateur d’œuvres d’art {*}"
+"restaurateur de livres anciens {*}"
+"restauratrice {*}"
+"retoucheur {*}"
+"retoucheuse {*}"
+"rhumatologue {*}"
+"roboticien {*}"
+"roboticienne {*}"
+"roi {*}"
+"romancier {*}"
+"romancière {*}"
+"rotativiste {*}"
+"rudologue {*}"
+"sage-femme {*}"
+"salarié {*}"
+"sapeur-pompier {*}"
+"saucier {*}"
+"sauveteur {*}"
+"sauveteuse {*}"
+"saxophoniste {*}"
+"scénariste {*}"
+"scénographe {*}"
+"scientifique {*}"
+"scripte {*}"
+"sculpteur {*}"
+"sculptrice {*}"
+"secouriste {*}"
+"secrétaire {*}"
+"secrétaire administratif {*}"
+"secrétaire aux affaires étrangères {*}"
+"sénateur {*}"
+"sénatrice {*}"
+"sergent {*}"
+"serrurier {*}"
+"serrurière {*}"
+"serveur {*}"
+"serveuse {*}"
+"sismologue {*}"
+"skieur {*}"
+"skieuse {*}"
+"sociologue {*}"
+"sofballeuse {*}"
+"softballeur {*}"
+"soigneur {*}"
+"soigneuse {*}"
+"soldat {*}"
+"sommelier {*}"
+"sommelière {*}"
+"sonneur {*}"
+"sonneuse {*}"
+"sophrologue {*}"
+"soudeur {*}"
+"soudeuse {*}"
+"souffleur {*}"
+"souffleuse {*}"
+"spécialiste en biotechnologies {*}"
+"sportif professionnel {*}"
+"sprinteur {*}"
+"sprinteuse {*}"
+"standardiste {*}"
+"statisticien {*}"
+"statisticienne {*}"
+"sténographe {*}"
+"steward {*}"
+"strip-teaseur {*}"
+"strip-teaseuse {*}"
+"styliste {*}"
+"substitut du procureur {*}"
+"superviseur {*}"
+"superviseuse {*}"
+"surveillant {*}"
+"surveillante {*}"
+"syndic {*}"
+"tailleur {*}"
+"tailleuse {*}"
+"tanneur {*}"
+"tanneuse {*}"
+"tapissier {*}"
+"tapissière {*}"
+"technicien {*}"
+"technicienne {*}"
+"technico-commercial {*}"
+"technico-commercial en agrofournitures {*}"
+"teinturier {*}"
+"teinturière {*}"
+"télégraphiste {*}"
+"téléphoniste {*}"
+"teneur {*}"
+"teneuse {*}"
+"testeur {*}"
+"théologien {*}"
+"théologienne {*}"
+"thérapeute {*}"
+"tireur {*}"
+"tireuse {*}"
+"tisserand {*}"
+"tisserande {*}"
+"topographe {*}"
+"torréfacteur {*}"
+"tourneur {*}"
+"tourneuse {*}"
+"traceur {*}"
+"traceuse {*}"
+"trader {*}"
+"traducteur {*}"
+"traductrice {*}"
+"traffic manager {*}"
+"tragédien {*}"
+"tragédienne {*}"
+"traiteur {*}"
+"transporteur {*}"
+"transporteuse {*}"
+"trappeur {*}"
+"trappeuse {*}"
+"trésorier {*}"
+"trésorière {*}"
+"trieur {*}"
+"trieuse {*}"
+"tromboniste {*}"
+"trompettiste {*}"
+"tronçonneur {*}"
+"tronçonneuse {*}"
+"tubiste {*}"
+"tueur {*}"
+"tueuse {*}"
+"tuteur {*}"
+"typographe {*}"
+"urbaniste {*}"
+"vacher {*}"
+"vachère {*}"
+"vannier {*}"
+"veilleur {*}"
+"veilleuse {*}"
+"vendeur {*}"
+"vendeur {*}"
+"vendeuse {*}"
+"ventriloque {*}"
+"vérificateur {*}"
+"verrier {*}"
+"verrière {*}"
+"vétérinaire {*}"
+"vétérinaire équin {*}"
+"vibraphoniste {*}"
+"vicomte {*}"
+"vidéaste {*}"
+"vielleur {*}"
+"vigile {*}"
+"vigneron {*}"
+"violiste {*}"
+"violoncelliste {*}"
+"violoniste {*}"
+"visiteur médical {*}"
+"viticulteur {*}"
+"viticultrice {*}"
+"voilier {*}"
+"volcanologue {*}"
+"voleur {*}"
+"voleuse {*}"
+"voyagiste {*}"
+"voyant {*}"
+"voyante {*}"
+"webmaster {*}"
+"youtubeur {*}"
+"youtubeuse {*}"
+"zoologiste {*}"
+]
+
+
+
+
+
+#==================================================================#
+##### LANGUAGES #####
+#------------------------------------------------------------------#
+
+
+
+concept:(main_languages_entity)
+[
+"arabe $available_language=$Dialog/Language/LangArabic" "{arabe} algérien $available_language=0" "{arabe} bedawi $available_language=0" "{arabe} marocain $available_language=0" "{arabe} mésopotamien $available_language=0" "{arabe} saidi $available_language=0" "{arabe} soudanais $available_language=0" "{arabe} égyptien $available_language=0" "chinois $available_language=$Dialog/Language/LangChinese" "{chinois} cantonais $available_language=$Dialog/Language/LangCantoneseHK" "chinois gan $available_language=0" "chinois hakka $available_language=0" "chinois jinyu $available_language=0" "{chinois} mandarin $available_language=$Dialog/Language/LangMandarinTaiwan" "chinois min bei $available_language=0" "chinois min $available_language=0" "chinois wu $available_language=0" "chinois xiang $available_language=0" "allemand $available_language=$Dialog/Language/LangGerman" "amharique $available_language=0" "anglais $available_language=$Dialog/Language/LangEnglish" "assamais $available_language=0" "awadhi $available_language=0" "azerbaïdjanais $available_language=0" "bengali $available_language=0" "bhojpouri $available_language=0" "birman $available_language=0" "biélorusse $available_language=0" "brésilien $available_language=$Dialog/Language/LangBrazilian" "chhattisgarhi $available_language=0" "chittagonian $available_language=0" "croate $available_language=0" "coréen $available_language=$Dialog/Language/LangKorean" "danois $available_language=$Dialog/Language/LangDanish" "deccan $available_language=0" "espagnol $available_language=$Dialog/Language/LangSpanish" "farsi $available_language=0" "filipino $available_language=0" "finnois $available_language=$Dialog/Language/LangFinnish" "flammand $available_language=$Dialog/Language/LangDutch" "français $available_language=$Dialog/Language/LangFrench" "goudjarati $available_language=0" "grec $available_language=$Dialog/Language/LangGreek" "haoussa $available_language=0" "haryanvi $available_language=0" "hindi $available_language=0" "hollandais $available_language=$Dialog/Language/LangDutch" "hongrois $available_language=0" "ibo $available_language=0" "indonésien $available_language=0" "italien $available_language=$Dialog/Language/LangItalian" "japonais $available_language=$Dialog/Language/LangJapanese" "javanais $available_language=0" "kannada $available_language=0" "madourais $available_language=0" "magahi $available_language=0" "maithili $available_language=0" "malais $available_language=0" "malayalam $available_language=0" "marathi $available_language=0" "marwari $available_language=0" "mexicain $available_language=$Dialog/Language/LangMexico" "néerlandais $available_language=$Dialog/Language/LangDutch" "népali $available_language=0" "norvégien $available_language=$Dialog/Language/LangNorwegian" "oriya $available_language=0" "ourdou $available_language=0" "ouzbek $available_language=0" "pendjabi $available_language=0" "pendjabi de l’Est $available_language=0" "pendjabi de l’Ouest $available_language=0" "polonais $available_language=$Dialog/Language/LangPolish" "portugais $available_language=$Dialog/Language/LangPortuguese" "roumain $available_language=0" "russe $available_language=$Dialog/Language/LangRussian" "saraiki $available_language=0" "serbe $available_language=0" "sindhi $available_language=0" "singhalais $available_language=0" "suèdois $available_language=$Dialog/Language/LangSwedish" "sunda $available_language=0" "tamoul $available_language=0" "tchèque $available_language=$Dialog/Language/LangCzech" "telugu $available_language=0" "thaï $available_language=0" "thaïlandais $available_language=0" "thaï du nord-est $available_language=0" "turc $available_language=$Dialog/Language/LangTurkish" "ukrainien $available_language=0" "vietnamien $available_language=0" "visayan $available_language=0" "yorouba $available_language=0" "langue des signes $available_language=0" "rainien $available_language=0" "vietnamien $available_language=0" "visayan $available_language=0" "yorouba $available_language=0" "langue des signes $available_language=0"
+]
+
+
+concept:(languages_entity) [
+"arabe" "{arabe} algérien" "{arabe} bedawi" "{arabe} marocain" "{arabe} mésopotamien" "{arabe} saidi" "{arabe} soudanais" "{arabe} égyptien" "chinois" "{chinois} cantonais" "chinois gan" "chinois hakka" "chinois jinyu" "{chinois} mandarin" "chinois min bei" "chinois min" "chinois wu" "chinois xiang" "allemand" "amharique" "anglais" "assamais" "awadhi" "azerbaïdjanais" "bengali" "bhojpouri" "birman" "biélorusse" "brésilien" "chhattisgarhi" "chittagonian" "croate" "coréen" "danois" "deccan" "espagnol" "farsi" "filipino" "finnois" "flammand" "français" "goudjarati" "grec" "haoussa" "haryanvi" "hindi" "hollandais" "hongrois" "ibo" "indonésien" "italien" "japonais" "javanais" "kannada" "madourais" "magahi" "maithili" "malais" "malayalam" "marathi" "marwari" "mexicain" "néerlandais" "népali" "norvégien" "oriya" "ourdou" "ouzbek" "pendjabi" "pendjabi de l’Est" "pendjabi de l’Ouest" "polonais" "portugais" "roumain" "russe" "saraiki" "serbe" "sindhi" "singhalais" "suèdois" "sunda" "tamoul" "tchèque" "telugu" "thaï" "thaïlandais" "thaï du nord-est" "turc" "ukrainien" "vietnamien" "visayan" "yorouba" "langue des signes"
+]
+
+concept:(dialog_languages_entity)
+[
+"arabe $lang=Arabic"
+"tchèque $lang=Czech"
+"danois $lang=Danish"
+"grec $lang=Greek"
+"coréen $lang=Korean"
+"allemand $lang=German"
+"anglais $lang=English"
+"espagnol $lang=Spanish"
+"[finnois finlandais] $lang=Finnish"
+"français $lang=French"
+"italien $lang=Italian"
+"néerlandais $lang=Dutch"
+"chinois $lang=Chinese"
+"japonais $lang=Japanese"
+"norvégien $lang=Norwegian"
+"polonais $lang=Polish"
+"brézilien $lang=Brazilian"
+"portuguais $lang=Portuguese"
+"russe $lang=Russian"
+"suédois $lang=Swedish"
+"turc $lang=Turkish"
+"mandarin $lang="Taiwanese Mandarin""
+]
+
+def:translate_lang($language)
+^first
+[
+"$language==Arabic arabe"
+"$language==Czech tchèque"
+"$language==Danish danois"
+"$language==Greek grec"
+"$language==Korean coréen"
+"$language==German allemand"
+"$language==Spanish espagnol"
+"$language==Finnish finnois"
+"$language==French français"
+"$language==Italian italien"
+"$language==Dutch néerlandais"
+"$language==Chinese chinois"
+"$language==Japanese japonais"
+"$language==Norwegian norvégien"
+"$language==Polish polonais"
+"$language==Russian russe"
+"$language==Swedish anglais"
+"$language==Turkish turc"
+"$language==English anglais"
+"$language=="Taiwanese Mandarin" mandarin"
+]
+
+
+
+
+
+#==============================================================================#
+#########################NG KEYWORD#################################
+#==============================================================================#
+
+
+concept:(adj_nogood_entity)
+[
+"mort"
+"morte"
+]
+
+concept:(nogood_action_kw_sing)
+[
+"coup de pied"
+"coup de poing"
+"violence"
+"menace"
+]
+
+concept:(nogood_action_kw_plur)
+[
+"coups de pied"
+"coups de poing"
+"violences"
+"menaces"
+]
+
+concept:(nogood_action_kw)[~nogood_action_kw_plur ~nogood_action_kw_sing]
+
+
+
+
+
+#==================================================================#
+##### PROPER NOUN #####
+#------------------------------------------------------------------#
+concept:(us_politicians_entity)
+[
+"{Barack} Obama"
+"{Donald} Trump"
+"Hilary Clinton"
+]
+
+
+#==================================================================#
+##### BODY #####
+#------------------------------------------------------------------#
+concept:(body_ext_parts_entity) [
+"abdomen" "anus" "bouche" "bras" "cheveux" "cheville" "coude" "coup" "cuisse" "dent" "doigt" "épaule" "fesse" "front" "genou" "hanche" "jambe" "langue" "main" "nez" "oeil" "oreille" "orteil" "pied" "poignet" "poitrine" "pénis" "trou de balle" "trou du cul" "tête" "vagin" "ventre" "yeux" "zizi"
+]
+
+concept:(the_body_ext_parts_entity)
+[
+"les cheveux" "le front" "la tête" "l'oeil" "les yeux" "le nez" "l'oreille" "les oreilles" "la bouche" "les dents" "la langue" "le coup" "l'épaule" "les épaules" "le bras" "les bras" "le coude" "les coudes" "le poignet" "les poignets" "la main" "les mains" "le doigt" "les doigts" "la poitrine" "le ventre" "l'abdomen" "la hanche" "la fesse" "les fesses" "la cuisse" "les cuisses" "le genou" "les genoux" "la jambe" "les jambes" "la cheville" "les chevilles" "le pied" "les pieds" "l'orteil" "les orteils" "le pénis" "le zizi" "le vagin" "l'anus" "le trou du cul" "le trou de balle"
+]
+
+
+concept:(painkiller_entity)
+[
+"doliprane"
+"aspirine"
+"anti douleur"
+"paracétamole"
+]
+
+
+#==================================================================#
+##### OBJECTS #####
+#------------------------------------------------------------------#
+
+concept:(vehicle_entity)
+[
+"airbus" "ambulance" "ascenceur" "autobus" "autochenille" "automobile" "avion de chasse" "avion" "bac" "bagnole" "bateau" "bateau-mouche" "bécane" "bicyclette" "bobsleigh" "bombardier" "brouette" "buggy" "bus" "caisse" "camion" "camionnette" "canot de sauvetage" "caravane" "cargo" "chaland" "char" "charrette" "chariot" "chasseur" "cheval" "diable" "drone" "fauteuil roulant" "fauteuil éléctrique" "ferrari" "ferry" "fil-neige" "fourgonnette" "funiculaire" "fusée" "gyropode" "hydravion" "hélico" "hélicoptère" "jeep" "jet ski" "kart" "lamborgini" "locomotive" "luge" "maserati" "mercedes" "monocycle" "monoroue" "moto" "motocyclette" "motoneige" "métro" "navire de charge" "navire" "parapente" "patins à glace" "patins à roulette" "patins à roulettes" "patins" "petit train" "planeur" "poids lourd" "porsche" "porte-conteneurs" "pousse-pousse" "péniche" "pétrolier" "quad" "raquette {"à neige"}" "RER " "schlitte" "scoot" "scooter {éléctrique}" "semi-remorque" "skateboard" "skis" "tapis volant" "taxi" "téléski" "TGV" "tir fesse" "tir-fesse" "tombereau" "tracteur" "train" "tramway" "transport sanitaire" "traîneau" "tricycle" "triporteur" "trottinette" "tuk-tuk" "tyrolienne" "télécabine" "télésiège" "uber" "chauffeur privé" "vaisseau spatial" "voilier" "voiture de pompier" "voiture hippomobile" "voiture volante" "voiture" "vélo" "vélotaxi" "VTT" "wagon" "yacht"
+]
+
+
+concept:(a_vehicle_entity)
+[
+"un airbus" "une ambulance" "un ascenceur" "un autobus" "une autochenille" "un automobile" "un avion de chasse" "un avion" "un bac" "une bagnole" "un bateau" "un bateau-mouche" "une bécane" "une bicyclette" "un bobsleigh" "un bombardier" "une brouette" "un buggy" "un bus" "une caisse" "un camion" "une camionnette" "un canot de sauvetage" "une caravane" "un cargo" "un chaland" "un char" "une charrette" "un chariot" "un chasseur" "un cheval" "un diable" "un drone" "un fauteuil roulant" "un fauteuil éléctrique" "une ferrari" "un ferry" "un fil-neige" "une fourgonnette" "un funiculaire" "une fusée" "un gyropode" "un hydravion" "un hélico" "un hélicoptère" "un jeep" "un jet ski" "un kart" "une lamborgini" "un locomotive" "une luge" "une maserati" "une mercedes" "un monocycle" "un monoroue" "une moto" "une motocyclette" "un motoneige" "un métro" "un navire de charge" "un navire" "un parapente" "des patins à glace" "des patins à roulette" "des patins à roulettes" "des patins" "un petit train" "un planeur" "un poids lourd" "une porsche" "un porte-conteneurs" "un pousse-pousse" "une péniche" "un pétrolier" "un quad" "une raquette {"à neige"}" "un RER" "un schlitte" "un scoot" "un scooter {éléctrique}" "une semi-remorque" "un skateboard" "des skis" "un tapis volant" "un taxi" "un téléski" "un TGV" "un tir fesse" "un tir-fesse" "un tombereau" "un tracteur" "un train" "un tramway" "un transport sanitaire" "un traîneau" "un tricycle" "un triporteur" "une trottinette" "un tuk-tuk" "une tyrolienne" "une télécabine" "un télésiège" "un uber" "un chauffeur privé" "un vaisseau spatial" "un voilier" "une voiture de pompier" "une voiture hippomobile" "une voiture volante" "une voiture" "un vélo" "un vélotaxi" "un VTT" "un wagon" "un yacht"
+]
+
+
+
+
+#==================================================================#
+##### PHOBIAS #####
+#------------------------------------------------------------------#
+
+concept:(psycho_phobia_entity)[
+"ablutophobie $temp/theme_def_article="la baignade"" "achluophobie $temp/theme_def_article="le noir"" "achmophobie $temp/theme_def_article="les objets pointus"" "acrophobie $temp/theme_def_article="la hauteur"" "acérophobie $temp/theme_def_article="l'acidité"" "agoraphobie $temp/theme_def_article="la foule"" "aichmophobie $temp/theme_def_article="les objets pointus"" "algophobie $temp/theme_def_article="la douleur"" "amatophobie $temp/theme_def_article="la poussière"" "amaxophobie $temp/theme_def_article="la conduite"" "anasthesiaphobie $temp/theme_def_article="l'anesthésie"" "anginophobie $temp/theme_def_article="l'étouffement"" "angrophobie $temp/theme_def_article="la colère en public"" "ankylophobie $temp/theme_def_article="l'immobilité"" "anthropophobie $temp/theme_def_article="les gens"" "anuptaphobie $temp/theme_def_article="le célibat"" "apopathodiaphulatophobie $temp/theme_def_article="la constipation"" "apopathophobie $temp/theme_def_article="le fait de faire caca"" "apéirophobie $temp/theme_def_article="l'infini"" "aquaphobie $temp/theme_def_article="l'eau"" "arithmophobie $temp/theme_def_article="les chiffres"" "asthénophobie $temp/theme_def_article="la perte de connaissance"" "astraphobie $temp/theme_def_article="le tonnerre"" "athazagoraphobie $temp/theme_def_article="le fait d'être oublié"" "atychiphobie $temp/theme_def_article="l'échec"" "aurophobie $temp/theme_def_article="l'or"" "automysophobie $temp/theme_def_article="le fait de sentir mauvais"" "autophobie $temp/theme_def_article="la solitude"" "aviophobie $temp/theme_def_article="le fait de prendre l'avion"" "aérodromophobie $temp/theme_def_article="l'avion"" "aérophobie $temp/theme_def_article="le vent"" "bacillophobie $temp/theme_def_article="les bactéries"" "basophobie $temp/theme_def_article="la marche"" "blemmophobie $temp/theme_def_article="le regard des autres"" "borbophobie $temp/theme_def_article="les gargouillements"" "brontophobie $temp/theme_def_article="le tonnerre"" "bélénophobie $temp/theme_def_article="les aiguilles"" "cancérophobie $temp/theme_def_article="le cancer"" "cardiophobie $temp/theme_def_article="les maladies cardiovasculaire"" "catapédaphobie $temp/theme_def_article="le fait de grimper en hauteur"" "cherophobie $temp/theme_def_article="la gaieté"" "chorophobie $temp/theme_def_article="la danse"" "claustrophobie $temp/theme_def_article="les espaces confinés"" "climacophobie $temp/theme_def_article="les escaliers"" "coulrophobie $temp/theme_def_article="les clowns"" "cyclophobie $temp/theme_def_article="le fait de monter sur une bicyclette"" "cénosillicaphobie $temp/theme_def_article="les verres vides"" "dentophobie $temp/theme_def_article="les dentistes"" "ecclesiophobie $temp/theme_def_article="les églises"" "émétophobie $temp/theme_def_article="les vomissements"" "epistaxiophobie $temp/theme_def_article="les saignements du nez"" "éreutophobie $temp/theme_def_article="les rougissements en public"" "fumiphobie $temp/theme_def_article="la fumée"" "glossophobie $temp/theme_def_article="le fait de parler en public"" "graphophobie $temp/theme_def_article="l'écriture"" "gymnophobie $temp/theme_def_article="la nudité"" "géphyrophobie $temp/theme_def_article="les ponts"" "gérascophobie $temp/theme_def_article="la vieillesse"" "halitophobie $temp/theme_def_article="la mauvaise haleine"" "haptophobie $temp/theme_def_article="le fait d'être touché"" "hylophobie $temp/theme_def_article="les forêts"" "hypégiaphobie $temp/theme_def_article="les responsabilités"" "hématophobie $temp/theme_def_article="le sang"" "ithyphallophobie $temp/theme_def_article="le fait de voir des zizis qui grandissent"" "katagélophobie $temp/theme_def_article="le ridicule"" "kopophobie $temp/theme_def_article="le fait d'être fatigué"" "kénophobie $temp/theme_def_article="l'obscurité"" "kéraunophobie $temp/theme_def_article="la crainte morbide de la foudre et des orages"" "laxophobie $temp/theme_def_article="la diarrhées"" "leucosélophobie $temp/theme_def_article="la page blanche"" "maskaphobie $temp/theme_def_article="les masques"" "medorthophobie $temp/theme_def_article="le fait de voir des zizis qui grandissent"" "musicophobie $temp/theme_def_article="la musique"" "mysophobie $temp/theme_def_article="la saleté"" "mégalophobie $temp/theme_def_article="les grands objets"" "neurophobie $temp/theme_def_article="la neurologie"" "nomophobie $temp/theme_def_article="la séparation avec mon téléphone portable"" "nosocomephobie $temp/theme_def_article="les hôpitaux"" "nosophobie $temp/theme_def_article="les maladies"" "nyctophobie $temp/theme_def_article="le noir"" "nécrophobie $temp/theme_def_article="les cadavres"" "ochlophobie $temp/theme_def_article="la foule"" "odontophobie $temp/theme_def_article="les chirurgiens dentistes"" "ombilicophobie $temp/theme_def_article="les nombrils"" "pantophobie $temp/theme_def_article="tout"" "phagophobie $temp/theme_def_article="l'étouffement par les aliments"" "phasmophobie $temp/theme_def_article="les fantômes"" "philophobie $temp/theme_def_article="le fait de tomber amoureux"" "phobophobie $temp/theme_def_article="la peur"" "pistanthrophobie $temp/theme_def_article="le fait de faire confianceaux autres"" "podophobie $temp/theme_def_article="les pieds"" "pogonophobie $temp/theme_def_article="les barbes"" "psychopathophobie $temp/theme_def_article="le fait de devenir fou"" "pyrophobie $temp/theme_def_article="le feu"" "pédiophobie $temp/theme_def_article="les poupées"" "pédophobie $temp/theme_def_article="les enfants"" "scatophobie $temp/theme_def_article="les cacas"" "scopophobie $temp/theme_def_article="le regard des autres"" "sidérodromophobie $temp/theme_def_article="le voyage en train"" "spectrophobie $temp/theme_def_article="les miroirs"" "spitophobie $temp/theme_def_article="la salive"" "stasophobie $temp/theme_def_article="le fait de devoir rester debout"" "sélénophobie $temp/theme_def_article="la lune"" "taphophobie $temp/theme_def_article="être enterré vivant"" "thalassophobie $temp/theme_def_article="la mer"" "thanatophobie $temp/theme_def_article="la mort"" "théophobie $temp/theme_def_article="dieu"" "tokophobie $temp/theme_def_article="le fait d'accoucher"" "trichophobie $temp/theme_def_article="les poils"" "trypophobie $temp/theme_def_article="les trous"" "téléphonophobie $temp/theme_def_article="le fait de répondre au téléphone"" "tératophobie $temp/theme_def_article="les monstres""
+]
+
+
+
+
+concept:(adj_psycho_phobia_entity)[
+"ablutophobe $temp/theme_def_article="la baignade" $temp/theme_contract_article="de la baignade""
+"achluophobe $temp/theme_def_article="le noir"  $temp/theme_contract_article="du noir""
+"achmophobe $temp/theme_def_article="les objets pointus" $temp/theme_contract_article="des objets pointus""
+"acrophobe $temp/theme_def_article="la hauteur"  $temp/theme_contract_article="de la hauteur""
+"acérophobe $temp/theme_def_article="l'acidité"  $temp/theme_contract_article="de l'acidité""
+"agoraphobe $temp/theme_def_article="la foule"  $temp/theme_contract_article="de la foule""
+"aichmophobe $temp/theme_def_article="les objets pointus"  $temp/theme_contract_article="des objets pointus""
+"algophobe $temp/theme_def_article="la douleur"  $temp/theme_contract_article="de la douleur""
+"amatophobe $temp/theme_def_article="la poussière"  $temp/theme_contract_article="de la poussière""
+"amaxophobe $temp/theme_def_article="la conduite"  $temp/theme_contract_article="de la conduite""
+"anasthesiaphobe $temp/theme_def_article="l'anesthésie"  $temp/theme_contract_article="de l'anesthésie""
+"anginophobe $temp/theme_def_article="l'étouffement"  $temp/theme_contract_article="de l'étouffement""
+"angrophobe $temp/theme_def_article="la colère en public"  $temp/theme_contract_article="de la colère en public""
+"ankylophobe $temp/theme_def_article="l'immobilité"  $temp/theme_contract_article="de l'immobilité""
+"anthropophobe $temp/theme_def_article="les gens"  $temp/theme_contract_article="des gens""
+"anuptaphobe $temp/theme_def_article="le célibat"  $temp/theme_contract_article="du célibat""
+"apopathodiaphulatophobe $temp/theme_def_article="la constipation"  $temp/theme_contract_article="de la constipation""
+"apopathophobe $temp/theme_def_article="le fait de faire caca"  $temp/theme_contract_article="du fait de faire caca""
+"apéirophobe $temp/theme_def_article="l'infini"  $temp/theme_contract_article="de l'infini""
+"aquaphobe $temp/theme_def_article="l'eau"  $temp/theme_contract_article="de l'eau""
+"arithmophobe $temp/theme_def_article="les chiffres"  $temp/theme_contract_article="des chiffres""
+"asthénophobe $temp/theme_def_article="la perte de connaissance"  $temp/theme_contract_article="de la perte de connaissance""
+"astraphobe $temp/theme_def_article="le tonnerre"  $temp/theme_contract_article="du tonnerre""
+"athazagoraphobe $temp/theme_def_article="le fait d'être oublié"  $temp/theme_contract_article="du fait d'être oublié""
+"atychiphobe $temp/theme_def_article="l'échec"  $temp/theme_contract_article="de l'échec""
+"aurophobe $temp/theme_def_article="l'or"  $temp/theme_contract_article="de l'or""
+"automysophobe $temp/theme_def_article="le fait de sentir mauvais" $temp/theme_contract_article="du fait de sentir mauvais""
+"autophobe $temp/theme_def_article="la solitude"  $temp/theme_contract_article="de la solitude""
+"aviophobe $temp/theme_def_article="le fait de prendre l'avion"  $temp/theme_contract_article="du fait de prendre l'avion""
+"aérodromophobe $temp/theme_def_article="l'avion"  $temp/theme_contract_article="de l'avion""
+"aérophobe $temp/theme_def_article="le vent"  $temp/theme_contract_article="du vent""
+"bacillophobe $temp/theme_def_article="les bactéries"  $temp/theme_contract_article="des bactéries""
+"basophobe $temp/theme_def_article="la marche"  $temp/theme_contract_article="de la marche""
+"blemmophobe $temp/theme_def_article="le regard des autres"  $temp/theme_contract_article="du regard des autres""
+"borbophobe $temp/theme_def_article="les gargouillements"  $temp/theme_contract_article="des gargouillements""
+"brontophobe $temp/theme_def_article="le tonnerre"  $temp/theme_contract_article="du tonnerre""
+"bélénophobe $temp/theme_def_article="les aiguilles"  $temp/theme_contract_article="des aiguilles""
+"cancérophobe $temp/theme_def_article="le cancer"  $temp/theme_contract_article="du cancer""
+"cardiophobe $temp/theme_def_article="les maladies cardiovasculaire"  $temp/theme_contract_article="des maladies cardiovasculaire""
+"catapédaphobe $temp/theme_def_article="le fait de grimper en hauteur"  $temp/theme_contract_article="du fait de grimper en hauteur""
+"cherophobe $temp/theme_def_article="la gaieté"  $temp/theme_contract_article="de la gaieté""
+"chorophobe $temp/theme_def_article="la danse"  $temp/theme_contract_article="de la danse""
+"claustrophobe $temp/theme_def_article="les espaces confinés"  $temp/theme_contract_article="des espaces confinés""
+"climacophobe $temp/theme_def_article="les escaliers"  $temp/theme_contract_article="des escaliers""
+"coulrophobe $temp/theme_def_article="les clowns"  $temp/theme_contract_article="des clowns""
+"cyclophobe $temp/theme_def_article="le fait de monter sur une bicyclette"  $temp/theme_contract_article="du fait de monter sur une bicyclette""
+"cénosillicaphobe $temp/theme_def_article="les verres vides"  $temp/theme_contract_article="des verres vides""
+"dentophobe $temp/theme_def_article="les dentistes"  $temp/theme_contract_article="des dentistes""
+"ecclesiophobe $temp/theme_def_article="les églises"  $temp/theme_contract_article="des églises""
+"émétophobe $temp/theme_def_article="les vomissements"  $temp/theme_contract_article="des vomissements""
+"epistaxiophobe $temp/theme_def_article="les saignements du nez"  $temp/theme_contract_article="des saignements du nez""
+"éreutophobe $temp/theme_def_article="les rougissements en public"  $temp/theme_contract_article="des rougissements en public""
+"fumiphobe $temp/theme_def_article="la fumée"  $temp/theme_contract_article="de la fumée""
+"glossophobe $temp/theme_def_article="le fait de parler en public"  $temp/theme_contract_article="du fait de parler en public""
+"graphophobe $temp/theme_def_article="l'écriture"  $temp/theme_contract_article="de l'écriture""
+"gymnophobe $temp/theme_def_article="la nudité"  $temp/theme_contract_article="de la nudité""
+"géphyrophobe $temp/theme_def_article="les ponts"  $temp/theme_contract_article="des ponts""
+"gérascophobe $temp/theme_def_article="la vieillesse"  $temp/theme_contract_article="de la vieillesse""
+"halitophobe $temp/theme_def_article="la mauvaise haleine"  $temp/theme_contract_article="de la mauvaise haleine""
+"haptophobe $temp/theme_def_article="le fait d'être touché"  $temp/theme_contract_article="du fait d'être touché""
+"hylophobe $temp/theme_def_article="les forêts"  $temp/theme_contract_article="des forêts""
+"hypégiaphobe $temp/theme_def_article="les responsabilités"  $temp/theme_contract_article="des responsabilités""
+"hématophobe $temp/theme_def_article="le sang"  $temp/theme_contract_article="du sang""
+"ithyphallophobe $temp/theme_def_article="le fait de voir des zizis qui grandissent"  $temp/theme_contract_article="du fait de voir des zizis qui grandissent""
+"katagélophobe $temp/theme_def_article="le ridicule"  $temp/theme_contract_article="du ridicule""
+"kopophobe $temp/theme_def_article="le fait d'être fatigué"  $temp/theme_contract_article="du fait d'être fatigué""
+"kénophobe $temp/theme_def_article="l'obscurité"  $temp/theme_contract_article="de l'obscurité""
+"kéraunophobe $temp/theme_def_article="la foudre"  $temp/theme_contract_article="de la foudre""
+"laxophobe $temp/theme_def_article="la diarrhées"  $temp/theme_contract_article="de la diarrhées""
+"leucosélophobe $temp/theme_def_article="la page blanche"  $temp/theme_contract_article="de la page blanche""
+"maskaphobe $temp/theme_def_article="les masques"  $temp/theme_contract_article="des masques""
+"medorthophobe $temp/theme_def_article="le fait de voir des zizis qui grandissent"  $temp/theme_contract_article="du fait de voir des zizis qui grandissent""
+"musicophobe $temp/theme_def_article="la musique"  $temp/theme_contract_article="de la musique""
+"mysophobe $temp/theme_def_article="la saleté"  $temp/theme_contract_article="de la saleté""
+"mégalophobe $temp/theme_def_article="les grands objets"  $temp/theme_contract_article="des grands objets""
+"neurophobe $temp/theme_def_article="la neurologie"  $temp/theme_contract_article="de la neurologie""
+"nomophobe $temp/theme_def_article="la séparation avec mon téléphone portable"  $temp/theme_contract_article="de la séparation avec mon téléphone portable""
+"nosocomephobe $temp/theme_def_article="les hôpitaux"  $temp/theme_contract_article="des hôpitaux""
+"nosophobe $temp/theme_def_article="les maladies"  $temp/theme_contract_article="des maladies""
+"nyctophobe $temp/theme_def_article="l'obscurité"  $temp/theme_contract_article="de l'obscurité""
+"nécrophobe $temp/theme_def_article="les cadavres"  $temp/theme_contract_article="des cadavres""
+"ochlophobe $temp/theme_def_article="la foule"  $temp/theme_contract_article="de la foule""
+"odontophobe $temp/theme_def_article="les chirurgiens dentistes"  $temp/theme_contract_article="des chirurgiens dentistes""
+"ombilicophobe $temp/theme_def_article="les nombrils"  $temp/theme_contract_article="des nombrils""
+"pantophobe $temp/theme_def_article="tout"  $temp/theme_contract_article="de tout""
+"phagophobe $temp/theme_def_article="l'étouffement par les aliments" $temp/theme_contract_article="de l'étouffement par les aliments""
+"phasmophobe $temp/theme_def_article="les fantômes" $temp/theme_contract_article="des fantômes""
+"philophobe $temp/theme_def_article="le fait de tomber amoureux" $temp/theme_contract_article="du fait de tomber amoureux""
+"phobophobe $temp/theme_def_article="la peur" $temp/theme_contract_article="de la peur""
+"pistanthrophobe $temp/theme_def_article="le fait de faire confianceaux autres" $temp/theme_contract_article="du fait de faire confianceaux autres""
+"podophobe $temp/theme_def_article="les pieds" $temp/theme_contract_article="des pieds""
+"pogonophobe $temp/theme_def_article="les barbes" $temp/theme_contract_article="des barbes""
+"psychopathophobe $temp/theme_def_article="le fait de devenir fou" $temp/theme_contract_article="du fait de devenir fou""
+"pyrophobe $temp/theme_def_article="le feu" $temp/theme_contract_article="du feu""
+"pédiophobe $temp/theme_def_article="les poupées"  $temp/theme_contract_article="des poupées""
+"pédophobe $temp/theme_def_article="les enfants"  $temp/theme_contract_article="des enfants""
+"scatophobe $temp/theme_def_article="les cacas" $temp/theme_contract_article="des cacas""
+"scopophobe $temp/theme_def_article="le regard des autres" $temp/theme_contract_article="du regard des autres""
+"sidérodromophobe $temp/theme_def_article="le voyage en train" $temp/theme_contract_article="du voyage en train""
+"spectrophobe $temp/theme_def_article="les miroirs" $temp/theme_contract_article="des miroirs""
+"spitophobe $temp/theme_def_article="la salive" $temp/theme_contract_article="de la salive""
+"stasophobe $temp/theme_def_article="le fait de devoir rester debout" $temp/theme_contract_article="du fait de devoir rester debout""
+"sélénophobe $temp/theme_def_article="la lune" $temp/theme_contract_article="de la lune""
+"taphophobe $temp/theme_def_article="être enterré vivant" $temp/theme_contract_article="d'être enterré vivant""
+"thalassophobe $temp/theme_def_article="la mer" $temp/theme_contract_article="de la mer""
+"thanatophobe $temp/theme_def_article="la mort" $temp/theme_contract_article="de la mort""
+"théophobe $temp/theme_def_article="dieu" $temp/theme_contract_article="de dieu""
+"tokophobe $temp/theme_def_article="le fait d'accoucher"  $temp/theme_contract_article="du fait d'accoucher""
+"trichophobe $temp/theme_def_article="les poils"  $temp/theme_contract_article="des poils""
+"trypophobe $temp/theme_def_article="les trous"  $temp/theme_contract_article="des trous""
+"téléphonophobe $temp/theme_def_article="le fait de répondre au téléphone"  $temp/theme_contract_article="du fait de répondre au téléphone""
+"tératophobe $temp/theme_def_article="les monstres"  $temp/theme_contract_article="des monstres""
+]
+
+concept:(food_phobia_entity)
+[
+"carpophobie $temp/theme_def_article="les fruits" $temp/theme_contract_article="des fruits""
+"mycophobie $temp/theme_def_article="les champignons" $temp/theme_contract_article="des champignons""
+"tyrophobie $temp/theme_def_article="les fromages" $temp/theme_contract_article="des fromages""
+"butyrophobie $temp/theme_def_article="le beurre" $temp/theme_contract_article="du beurre""
+]
+
+concept:(adj_food_phobia_entity)
+[
+"carpophobe $temp/theme_def_article="les fruits" $temp/theme_contract_article="des fruits""
+"mycophobe $temp/theme_def_article="les champignons" $temp/theme_contract_article="des champignons""
+"tyrophobe $temp/theme_def_article="les fromages" $temp/theme_contract_article="des fromages""
+"butyrophobe $temp/theme_def_article="le beurre" $temp/theme_contract_article="du beurre""
+]
+
+
+concept:(animal_phobia_entity)
+[
+"acarophobie $temp/theme_def_article="les acariens""
+"ailurophobie  $temp/theme_def_article="les chats" "
+"alektorophobie  $temp/theme_def_article="les poulets""
+"anthelmophobie $temp/theme_def_article="les vers""
+"apiphobie $temp/theme_def_article="les abeilles""
+"arachnophobie $temp/theme_def_article="les araignées""
+"chiroptophobie $temp/theme_def_article="les chauves-souris""
+"cuniculophobie $temp/theme_def_article="les lapins""
+"cynophobie $temp/theme_def_article="les chiens""
+"entomophobie $temp/theme_def_article="les insectes""
+"herpétophobie $temp/theme_def_article="les reptiles""
+"hippophobie $temp/theme_def_article="les chevaux""
+"ichthyophobie $temp/theme_def_article="les poissons""
+"lépidophobie $temp/theme_def_article="les papillons""
+"musophobie $temp/theme_def_article="les souris""
+"myrmécophobie $temp/theme_def_article="les fourmis""
+"octophobie $temp/theme_def_article="les poulpes""
+"ophiophobie $temp/theme_def_article="les serpents""
+"ornithophobie $temp/theme_def_article="les oiseaux""
+"squalophobie $temp/theme_def_article="les requins""
+]
+
+concept:(adj_animal_phobia_entity)
+[
+"acarophobe $temp/theme_def_article="les acariens"   $temp/theme_contract_article="des acariens""
+"ailurophobe  $temp/theme_def_article="les chats" $temp/theme_contract_article="des chats" "
+"alektorophobe  $temp/theme_def_article="les poulets" $temp/theme_contract_article="des poulets" "
+"anatidaephobie $temp/theme_def_article="les canards""
+"anthelmophobe $temp/theme_def_article="les vers" $temp/theme_contract_article="des vers" "
+"apiphobe $temp/theme_def_article="les abeilles" $temp/theme_contract_article="des abeilles" "
+"arachnophobe $temp/theme_def_article="les araignées" $temp/theme_contract_article="des araignées" "
+"chiroptophobe $temp/theme_def_article="les chauves-souris" $temp/theme_contract_article="des chauves-souris""
+"cuniculophobe $temp/theme_def_article="les lapins" $temp/theme_contract_article="des lapins""
+"cynophobe $temp/theme_def_article="les chiens" $temp/theme_contract_article="des chiens""
+"entomophobe $temp/theme_def_article="les insectes" $temp/theme_contract_article="des insectes""
+"herpétophobe $temp/theme_def_article="les reptiles" $temp/theme_contract_article="des reptiles""
+"hippophobe $temp/theme_def_article="les chevaux" $temp/theme_contract_article="des chevaux""
+"ichthyophobe $temp/theme_def_article="les poissons" $temp/theme_contract_article="des poissons""
+"lépidophobe $temp/theme_def_article="les papillons" $temp/theme_contract_article="des papillons""
+"musophobe $temp/theme_def_article="les souris" $temp/theme_contract_article="des souris""
+"myrmécophobe $temp/theme_def_article="les fourmis" $temp/theme_contract_article="des fourmis""
+"octophobe $temp/theme_def_article="les poulpes" $temp/theme_contract_article="des poulpes""
+"ophiophobe $temp/theme_def_article="les serpents" $temp/theme_contract_article="des serpents""
+"ornithophobe $temp/theme_def_article="les oiseaux" $temp/theme_contract_article="des oiseaux""
+"squalophobe $temp/theme_def_article="les requins" $temp/theme_contract_article="des requins""
+]
+
+
+concept:(non_psycho_phobia_entity)
+[
+"hydrophobie rabique $temp/theme_def_article="l'eau en tant que syndrôme de la rage""
+"osmophobie $temp/theme_def_article="les odeurs""
+"phonophobie $temp/theme_def_article="le son""
+"photophobie $temp/theme_def_article="la lumière""
+]
+
+concept:(adj_non_psycho_phobia_entity)
+[
+"hydrophobe rabique $temp/theme_def_article="l'eau en tant que syndrôme de la rage" $temp/theme_contract_article="de l'eau en tant que syndrôme de la rage" "
+"osmophobe $temp/theme_def_article="les odeurs" $temp/theme_contract_article="des odeurs""
+"phonophobe $temp/theme_def_article="le son" $temp/theme_contract_article="du son""
+"photophobe $temp/theme_def_article="la lumière" $temp/theme_contract_article="de la lumière""
+]
+
+
+concept:(superstition_phobia_entity)
+[
+"hexakosioihexekontahexaphobie $temp/theme_def_article="le nombre 666""
+"paraskevidékatriaphobie $temp/theme_def_article="le vendredi 13""
+"tétraphobie $temp/theme_def_article="le chiffre 4""
+"triskaïdékaphobie $temp/theme_def_article="le nombre 13""
+]
+
+concept:(adj_superstition_phobia_entity)
+[
+"hexakosioihexekontahexaphobe $temp/theme_def_article="le nombre 666" $temp/theme_contract_article="du nombre 666""
+"paraskevidékatriaphobe $temp/theme_def_article="le vendredi 13" $temp/theme_contract_article="du vendredi 13" "
+"tétraphobe $temp/theme_def_article="le chiffre 4" $temp/theme_contract_article="du chiffre 4" "
+"triskaïdékaphobe $temp/theme_def_article="le nombre 13" $temp/theme_contract_article="du nombre 13" "
+]
+
+concept:(discrimination_phobia_entity)
+[
+"acéphobie $temp/theme_def_article="les personnes asexuelles""
+"alopophobie $temp/theme_def_article="les chauves""
+"androphobie $temp/theme_def_article="les hommes""
+"biphobie $temp/theme_def_article="les personnes bisexuelles""
+"christianophobie $temp/theme_def_article="les chrétiens""
+"dysmorphophie $temp/theme_def_article="les anomalies physiques""
+"dysmorphophobie $temp/theme_def_article="les anomalies physiques""
+"gérontophobie $temp/theme_def_article="les personnes âgées""
+"gynéphobie $temp/theme_def_article="les femmes""
+"gynécophobie $temp/theme_def_article="les femmes""
+"hétérophobie $temp/theme_def_article="les hétérosexuels""
+"homophobie $temp/theme_def_article="les homosexuels""
+"islamophobie $temp/theme_def_article="les musulmans""
+"judéophobie $temp/theme_def_article="les juifs""
+"lesbophobie $temp/theme_def_article="les lesbiennes""
+"pédophobie $temp/theme_def_article="les enfants""
+"pédiophobie $temp/theme_def_article="les enfants""
+"psychophobie $temp/theme_def_article="les maladies mentales""
+"sidaphobie $temp/theme_def_article="le porteurs de vih""
+"transphobie $temp/theme_def_article="les personnes transidentitaires""
+"xénophobie $temp/theme_def_article="les étrangers""
+]
+
+concept:(adj_discrimination_phobia_entity)
+[
+"acéphobe $temp/theme_def_article="les personnes asexuelles""
+"alopophobe $temp/theme_def_article="les chauves""
+"androphobe $temp/theme_def_article="les hommes""
+"biphobe $temp/theme_def_article="les personnes bisexuelles""
+"christianophobe $temp/theme_def_article="les chrétiens""
+"dysmorphophobe $temp/theme_def_article="les anomalies physiques""
+"gérontophobe $temp/theme_def_article="les personnes âgées""
+"gynéphobe $temp/theme_def_article="les femmes""
+"gynécophobe $temp/theme_def_article="les femmes""
+"hétérophobe $temp/theme_def_article="les hétérosexuels""
+"homophobe $temp/theme_def_article="les homosexuels""
+"islamophobe $temp/theme_def_article="les musulmans""
+"judéophobe $temp/theme_def_article="les juifs""
+"lesbophobe $temp/theme_def_article="les lesbiennes""
+"pédophobe $temp/theme_def_article="les enfants""
+"pédiophobe $temp/theme_def_article="les enfants""
+"psychophobe $temp/theme_def_article="les maladies mentales""
+"sidaphobe $temp/theme_def_article="les porteurs de vih""
+"transphobe $temp/theme_def_article="les personnes transidentitaires""
+"xénophobe $temp/theme_def_article="les étrangers""
+]
+
+concept:(bio_chemichal_phobia_entity)
+[
+"acidophobie $temp/theme_def_article="les produits acides""
+"chemophobie $temp/theme_def_article="les produits chimiques""
+"héliophobie $temp/theme_def_article="la lumière du soleil""
+"lipophobie $temp/theme_def_article="les corps gras""
+"photophobie $temp/theme_def_article="la lumière du jour""
+"superhydrophobie $temp/theme_def_article="l'humidité""
+"thermophobie $temp/theme_def_article="la chaleur""
+]
+
+
+concept:(adj_bio_chemichal_phobia_entity)
+[
+"acidophobe $temp/theme_def_article="les produits acides" $temp/theme_contract_article="des produits acides""
+"chemophobe $temp/theme_def_article="les produits chimiques" $temp/theme_contract_article="des produits chimiques""
+"héliophobe $temp/theme_def_article="la lumière du soleil" $temp/theme_contract_article="de la lumière du soleil""
+"hydrophobe $temp/theme_def_article="l'eau" $temp/theme_contract_article="de l'eau""
+"lipophobe $temp/theme_def_article="les corps gras" $temp/theme_contract_article="des corps gras""
+"myrmécophobe $temp/theme_def_article="les fourmis" $temp/theme_contract_article="des fourmis""
+"photophobe $temp/theme_def_article="la lumière du jour" $temp/theme_contract_article="de la lumière du jour""
+"thermophobe $temp/theme_def_article="la chaleur" $temp/theme_contract_article="de la chaleur""
+]
+
+concept:(weird_phobia_entity)
+[
+"eibohphobie $temp/theme_def_article="les palindromes""
+"élasticophobie $temp/theme_def_article="les élastiques pour cheveux""
+"hippopotomonstrosesquippedaliophobie $temp/theme_def_article="les mots trop longs""
+"luposlipaphobie $temp/theme_def_article="le fait d'être suivi par des loups sur le parquet fraîchement ciré d’une cuisine en ne portant que des chaussettes aux pieds""
+"papétolétophobie $temp/theme_def_article="le fait d'être vu avec du papier toilette" "
+"technophobie $temp/theme_def_article="le progrès scientifique""
+]
+
+concept:(adj_weird_phobia_entity)
+[
+"anatidaephobe $temp/theme_def_article="les canards" $temp/theme_contract_article="des canards" "
+"eibohphobe $temp/theme_def_article="les palindromes" $temp/theme_contract_article="des palindromes""
+"hippopotomonstrosesquippedaliophobe $temp/theme_def_article="les mots trop longs" $temp/theme_contract_article="des mots trop longs""
+"luposlipaphobe $temp/theme_def_article="le fait d'être suivi par des loups sur le parquet fraîchement ciré d’une cuisine en ne portant que des chaussettes aux pieds" $temp/theme_contract_article="du fait d'être suivi par des loups sur le parquet fraîchement ciré d’une cuisine en ne portant que des chaussettes aux pieds""
+"papétolétophobe $temp/theme_def_article="le fait d'être vu avec du papier toilette" $temp/theme_contract_article="du fait d'être vu avec du papier toilette""
+"elasticophobe $temp/theme_def_article="les élastiques pour cheveux" $temp/theme_contract_article="des élastiques pour cheveux""
+"technophobe $temp/theme_def_article="le progrès scientifique" $temp/theme_contract_article="du progrès scientifique""
+]
+
+concept:(color_phobia_entity)
+[
+"chlorophobie"
+"cyanophobie"
+"purpuraophobie"
+"érythrophobie"
+"rhodophobie"
+"xanthophobie"
+"leucophobie"
+"kénonauphobie"
+]
+
+concept:(adj_color_phobia_entity)
+[
+"chlorophobe"
+"cyanophobe"
+"purpuraophobe"
+"érythrophobe"
+"rhodophobe"
+"xanthophobe"
+"leucophobe"
+"kénonauphobe"
+]
+
+
+#==================================================================#
+##### Nationality #####
+#------------------------------------------------------------------#
+concept:(nationalities_entity)
+[
+"américains" "américaines" "arabes" "algériens" "algériennes" "marocains" "marocaines" "mésopotamiens" "soudanais" "égyptiens" "égyptiennes" "chinois" "chinoises" "allemands" "anglais" "anglaises" "brésiliens" "brésiliennes" "croates" "coréens" "coréennes" "danois" "danoises" "espagnols" "philipinos" "philippins" "philippinois" "philippinoises" "finnois" "finnoises" "finlandais" "finlandaises" "flammands" "flammandes" "français" "françaises" "grecques" "hollandais" "hollandaises" "hongrois" "hongroises" "indonésiens" "indonésiennes" "italiens" "italiennes" "japonais" "japonaises" "luxembourgeois" "luxembourgeoises" "malais" "mexicains" "mexicaines"  "néerlandais" "néerlandaises" "népalais" "népalaises" "norvégiens" "norvégiennes" "ouzbeks" "polonais" "polonaises" "portugais" "roumains" "roumaines" "russes" "serbes" "singhalais" "suèdois" "suèdoises" "tchèques" "thaïlandais" "thaïlandaises" "turques" "turcs" "ukrainiens" "ukrainiennes" "vietnamiens" "vietnamiennes" "pakitanais" "pakistanaises" "afghans" "afghannes" "indiens" "indiennes" "bulgares" "albanais"
+]
+
+concept:(nationality_entity)
+[
+"américain" "arabe" "algérien" "marocain" "mésopotamien" "soudanai" "égyptien" "chinois" "allemand" "anglais" "brésilien" "croate" "coréen" "danois" "espagnol" "philipinos" "philippin" "philippinois" "finnois" "finlandais" "flammand" "français" "grecque" "hollandais" "hongrois" "indonésien" "italien" "japonais" "luxembourgeois" "malais" "mexicain" "néerlandais" "népalais" "norvégien" "ouzbek" "polonais" "portugais" "roumain" "russe" "serbe" "singhalai" "suèdois" "tchèque" "thaï" "thaïlandais" "turque" "turc" "ukrainien" "vietnamien"
+]
+
+#==================================================================#
+##### PLACE #####
+#------------------------------------------------------------------#
+
+concept:(place_to_live_entity)
+[
+"abri $temp/entity=place" "appart $temp/entity=place" "appartement $temp/entity=place" "baraque $temp/entity=place" "bâtisse $temp/entity=place" "bercail $temp/entity=place" "building $temp/entity=place" "bungalow $temp/entity=place" "bâtiment $temp/entity=place" "cabane $temp/entity=place" "cahute $temp/entity=place" "chalet $temp/entity=place" "château $temp/entity=place" "domicile $temp/entity=place" "édifice $temp/entity=place" "foyer $temp/entity=place" "gîte $temp/entity=place" "habitacle $temp/entity=place" "habitat $temp/entity=place" "hutte $temp/entity=place" "hôtel $temp/entity=place" "maison $temp/entity=place" "maisonnette $temp/entity=place" "palais $temp/entity=place" "pavillon $temp/entity=place" "résidence $temp/entity=place" "temple $temp/entity=place" "tente $temp/entity=place"
+]
+
+concept:(shopping_place_entity)
+[
+"Aldi $temp/entity=place" "Arrière-boutique $temp/entity=place" "Arrière-magasin $temp/entity=place" "Atoo $temp/entity=place" "Au bon marché $temp/entity=place" "Auchan city $temp/entity=place" "Auchan $temp/entity=place" "Bazar de l'hôtel de ville $temp/entity=place" "Beaugrenelle $temp/entity=place" "BHV {marais} $temp/entity=place" "Biocoop $temp/entity=place" "Bi1 $temp/entity=place" "Boulanger $temp/entity=place" "Boutique $temp/entity=place" "Bricolex $temp/entity=place" "Bricorama $temp/entity=place" "Carrefour city $temp/entity=place" "Carrefour express $temp/entity=place" "Carrefour market $temp/entity=place" "Carrefour montagne $temp/entity=place" "Carrefour $temp/entity=place" "Casino $temp/entity=place" "Castorama $temp/entity=place" "Centre commercial $temp/entity=place" "Cocci market $temp/entity=place" "Coccinelle $temp/entity=place" "Colruyt $temp/entity=place" "Commerce $temp/entity=place" "Cora $temp/entity=place" "Cultura $temp/entity=place" "Decathlon $temp/entity=place" "Diagonal $temp/entity=place" "Diagonal $temp/entity=place" "éco service $temp/entity=place" "Entrepôt $temp/entity=place" "épicerie $temp/entity=place" "Fnac $temp/entity=place" "Franprix $temp/entity=place" "Gallerie lafayette $temp/entity=place" "Géant casino $temp/entity=place" "Grands magasins du Louvre $temp/entity=place" "Groupe Yves rocher $temp/entity=place" "G20 $temp/entity=place" "Hyper U $temp/entity=place" "Hypermarché $temp/entity=place" "IKEA $temp/entity=place" "Intermarché express $temp/entity=place" "Intermarché $temp/entity=place" "l'atelier fermier $temp/entity=place" "le bon marché $temp/entity=place" "Leader price $temp/entity=place" "Leclerc express $temp/entity=place" "Leclerc $temp/entity=place" "Leroy merlin $temp/entity=place" "Lidl $temp/entity=place" "Magasin $temp/entity=place" "Maisons du monde $temp/entity=place" "Marché plus $temp/entity=place" "Match $temp/entity=place" "Maximarché $temp/entity=place" "Migros ["MMM" "triple M"] $temp/entity=place" "Monop $temp/entity=place" "Monoprix $temp/entity=place" "Monsieur briolage $temp/entity=place" "Naturalia $temp/entity=place" "Naturéo $temp/entity=place" "Netto $temp/entity=place" "Norma $temp/entity=place" "Noz $temp/entity=place" "Paris store $temp/entity=place" "Petit casino $temp/entity=place" "Picard $temp/entity=place" "Printemps $temp/entity=place" "Proxi $temp/entity=place" "Proximarché $temp/entity=place" "Rougier et plé $temp/entity=place" "Saint-Maclou $temp/entity=place" "Schlecker $temp/entity=place" "Sephora $temp/entity=place" "Sherpa $temp/entity=place" "Shopi $temp/entity=place" "shopping mall $temp/entity=place" "shopping-mall $temp/entity=place" "Simply market $temp/entity=place" "Spar $temp/entity=place" "Super U $temp/entity=place" "Supermarché match $temp/entity=place" "supermarché $temp/entity=place" "Tang frères $temp/entity=place" "Truffaut $temp/entity=place" "Uniqlo $temp/entity=place" "Utile $temp/entity=place" "U express $temp/entity=place" "Vival $temp/entity=place" "Viveco $temp/entity=place" "Votre marché $temp/entity=place" "Yves Rocher $temp/entity=place" "Zara $temp/entity=place" "{supermarché} Sitis $temp/entity=place" "[8 huit] à huit $temp/entity=place"
+]
+
+
+#==================================================================#
+##### GAME #####
+#------------------------------------------------------------------#
+
+concept:(game_entity)
+[
+"billard" "baby foot" "bridge" "échecs" "fléchettes" "paintball" "pétanque" "othello" "reversi" "go" "jeux vidéos" "shogui"
+]
+
+concept:(the_game_entity)
+[
+"le billard" "le baby foot" "le bridge" "les échecs" "les fléchettes" "le paintball" "la pétanque" "l'othello" "le reversi" "le go" "les jeux vidéos" "le shogui"
+]
+
+concept:(du_game_entity)
+[
+"du billard" "du baby foot" "du bridge" "des échecs" "des fléchettes" "du paintball" "de la pétanque" "de l'othello" "du reversi" "du go" "des jeux vidéos" "du shogui"
+]
+
+
+concept:(au_game_entity)
+[
+"au billard" "au baby foot" "au bridge" "aux échecs" "aux fléchettes" "à l'othello" "au paintball" "à la pétanque" "au go" "aux jeux vidéos" "au shogui"
+]
+
+
+#==================================================================#
+##### COMMON NAME #####
+#------------------------------------------------------------------#
+concept:(_entreprise_name)["Softbank Robotics"]
+
+#TO_ADD knowledge
+
+#^first
+#[
+#"^containsKnowledge($Dialog/ID, knows, pepper_true_history) Aldébaran"
+#"Softbank robotics"
+#]
+
+
+#==================================================================#
+##### AJDECTIVES #####
+#------------------------------------------------------------------#
+concept:(size) [grand gros énorme petit minuscule]
+
+
+#==================================================================#
+##### ADVERBS #####
+#------------------------------------------------------------------#
+concept:(adverbs) [absolument admirablement atrocement beaucoup carrément horriblement quasiment complètement énormément étonnement follement méga parfaitement "pas {"du tout" "tellement" "totalement" "trop" "vraiment"}" plutot plutôt royalement rudement sacrément sérieusement soudainement strictement tellement terriblement totalement "tout à fait" "très {très}" "trop {trop}" ultra "un {petit} peu {beaucoup vraiment trop}" "vachement {trop très}" "vraiment {"très très"}"]

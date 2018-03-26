@@ -9,12 +9,6 @@
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
             android:theme="@style/AppTheme">
-        <activity
-                android:name=".scenario.DiscussActivity"
-                android:exported="true"/>
-        <activity
-                android:name=".TestJavaActivity"
-                android:exported="true"/>
         <activity android:name=".DispatchActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
@@ -22,13 +16,11 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity
-                android:name=".scenario.ListenActivity"
-                android:label="@string/title_activity_listen"
-                android:theme="@style/AppTheme.NoActionBar">
-        </activity>
-        <activity android:name=".scenario.HelloWorld">
-        </activity>
+
+        <activity android:name=".scenario.DiscussActivity" android:exported="true"/>
+        <activity android:name=".scenario.ListenActivity" android:exported="true"/>
+        <activity android:name=".scenario.HelloWorldActivity" android:exported="true"/>
+        <activity android:name=".scenario.HelloWorldMultiLocaleActivity" android:exported="true"/>
     </application>
 
 </manifest>

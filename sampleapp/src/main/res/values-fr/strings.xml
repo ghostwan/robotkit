@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">SampleApp</string>
+    <string name="app_name">RobotKit SampleApp</string>
     <string name="hello_world">Salut le monde!</string>
     <string name="bye_world">Au revoir le monde!</string>
     <string name="hello_human">Bonjour humain que veux tu faire</string>
@@ -16,4 +16,10 @@
     <string name="start">start</string>
     <string name="stop">stop</string>
     <string name="disconnect">déconnexion</string>
+    <string name="none">RIEN</string>
+    <string name="english">Anglais</string>
+    <string name="french">Français</string>
+    <string name="lets_talk">"pas de soucis, parlons! "</string>
+    <string name="action_settings">Paramètres</string>
+    <string name="restore_discussion">On en était où ? Ah, heu .... Oui je disais!</string>
 </resources>

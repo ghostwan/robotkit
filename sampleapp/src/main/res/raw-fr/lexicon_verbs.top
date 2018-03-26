@@ -1,0 +1,689 @@
+topic: ~lexicon_verbs()
+
+
+
+
+#==================================================================#
+
+concept:(vb_pos_i_aimer) [j'aime]
+concept:(vb_neg_i_aimer) ["[j'aime "je n'aime"] pas"]
+concept:(vb_i_aimer) [~vb_pos_i_aimer ~vb_neg_i_aimer]
+concept:(vb_pos_you_aimer) ["tu aimes" t'aimes]
+concept:(vb_neg_you_aimer) ["[t'aimes "tu n'aimes"] pas"]
+concept:(vb_int_you_aimer) [aimes-tu]
+#"n'aimes-tu pas"
+concept:(vb_you_aimer) [~vb_pos_you_aimer ~vb_neg_you_aimer]
+concept:(vb_ask_aimer) ["est-ce que ~vb_pos_you_aimer" ~vb_pos_you_aimer ~vb_int_you_aimer]
+#------------------------------------------------------------------#
+concept:(vb_pos_i_kiffer) ["je kiffe"]
+concept:(vb_neg_i_kiffer) ["je {ne} kiffe pas"]
+concept:(vb_i_kiffer) [~vb_pos_i_kiffer ~vb_neg_i_kiffer]
+#------------------------------------------------------------------#
+concept:(vb_pos_i_adorer) [j'adore]
+concept:(vb_i_adorer) [~vb_pos_i_adorer]
+#------------------------------------------------------------------#
+concept:(vb_pos_i_détester) ["je déteste"]
+concept:(vb_neg_i_détester) ["je {ne} déteste pas"]
+concept:(vb_i_détester) [~vb_pos_i_détester ~vb_neg_i_détester]
+#------------------------------------------------------------------#
+concept:(vb_pos_i_haïr) ["je hais"]
+concept:(vb_neg_i_haïr) ["je {ne} hais pas"]
+concept:(vb_i_haïr) [~vb_pos_i_haïr ~vb_neg_i_haïr]
+#------------------------------------------------------------------#
+concept:(vb_pos_i_prendre) ["je prends"]
+concept:(vb_neg_i_prendre) ["je {ne} prends pas"]
+concept:(vb_i_prendre) [~vb_pos_i_prendre ~vb_neg_i_prendre]
+concept:(vb_pos_you_prendre) ["tu prends"]
+concept:(vb_neg_you_prendre) ["tu {ne} prends pas"]
+concept:(vb_int_you_prendre) [prends-tu "ne prends-tu pas"]
+concept:(vb_ask_prendre) ["{"est-ce que"} ~vb_pos_you_prendre" ~vb_int_you_prendre ~vb_neg_you_prendre]
+#------------------------------------------------------------------#
+concept:(vb_pos_i_savoir) ["je sais"]
+concept:(vb_neg_i_savoir) ["je {ne} sais pas"]
+concept:(vb_i_savoir) [~vb_pos_i_savoir ~vb_neg_i_savoir]
+concept:(vb_pos_you_savoir) ["tu [sais saurais]"]
+concept:(vb_neg_you_savoir) ["tu {ne} [sais saurais] pas"]
+concept:(vb_int_you_savoir) [sais-tu saurais-tu]
+#"ne [sais-tu saurais-tu] pas"
+concept:(vb_ask_savoir) ["est-ce que ~vb_pos_you_savoir" ~vb_pos_you_savoir ~vb_int_you_savoir ~vb_neg_you_savoir]
+#------------------------------------------------------------------#
+concept:(vb_pos_i_connaître) ["je connais"]
+concept:(vb_neg_i_connaître) ["je {ne} connais pas"]
+concept:(vb_i_connaître) [~vb_pos_i_connaître ~vb_neg_i_connaître]
+concept:(vb_pos_you_connaître) ["tu connais"]
+concept:(vb_neg_you_connaître) ["tu {ne} connais pas"]
+concept:(vb_int_you_connaître) [connais-tu]
+#"ne connais-tu pas"
+concept:(vb_you_connaître) [~vb_pos_you_connaître ~vb_neg_you_connaître]
+concept:(vb_ask_connaître) ["est-ce que ~vb_pos_you_connaître" ~vb_pos_you_connaître ~vb_int_you_connaître ~vb_neg_you_connaître]
+#------------------------------------------------------------------#
+concept:(vb_pos_i_croire) ["je crois"]
+concept:(vb_neg_i_croire) ["je {ne} crois pas"]
+concept:(vb_i_croire) [~vb_pos_i_croire ~vb_neg_i_croire]
+concept:(vb_pos_you_croire) ["tu crois"]
+concept:(vb_neg_you_croire) ["tu {ne} crois pas"]
+concept:(vb_int_you_croire) [crois-tu "ne crois-tu pas"]
+concept:(vb_you_croire) [~vb_pos_you_croire ~vb_neg_you_croire]
+concept:(vb_ask_croire) ["{"est-ce que"} ~vb_pos_you_croire" ~vb_int_you_croire ~vb_neg_you_croire]
+#------------------------------------------------------------------#
+concept:(vb_pos_i_vouloir) ["je [veux voudrais]"]
+concept:(vb_neg_i_vouloir) ["je {ne} [veux voudrais] [pas plus]"]
+concept:(vb_i_vouloir) [~vb_pos_i_vouloir ~vb_neg_i_vouloir]
+concept:(vb_pos_you_vouloir) ["tu veux"]
+concept:(vb_neg_you_vouloir) ["tu {ne} veux pas"]
+concept:(vb_int_you_vouloir) [veux-tu]
+#"ne veux-tu pas"
+concept:(vb_you_vouloir) [~vb_pos_you_vouloir ~vb_neg_you_vouloir]
+concept:(vb_ask_vouloir) ["est-ce que ~vb_pos_you_vouloir" ~vb_pos_you_vouloir ~vb_int_you_vouloir ~vb_neg_you_vouloir]
+#------------------------------------------------------------------#
+concept:(vb_pos_i_pouvoir) ["je peux"]
+concept:(vb_neg_i_pouvoir) ["je {ne} peux [pas plus]"]
+concept:(vb_int_i_pouvoir) [puis-je "je peux"]
+concept:(vb_i_pouvoir) [~vb_pos_i_pouvoir ~vb_neg_i_pouvoir]
+concept:(vb_pos_you_pouvoir) ["tu [peux pourrais]"]
+concept:(vb_neg_you_pouvoir) ["tu {ne} [peux pourrais] pas"]
+concept:(vb_int_you_pouvoir) [peux-tu pourrais-tu]
+#"ne [peux-tu pourrais-tu] pas"
+concept:(vb_you_pouvoir) [~vb_pos_you_pouvoir ~vb_neg_you_pouvoir]
+concept:(vb_ask_pouvoir) ["est-ce que ~vb_pos_you_pouvoir" ~vb_pos_you_pouvoir ~vb_int_you_pouvoir ~vb_neg_you_pouvoir]
+#------------------------------------------------------------------#
+concept:(vb_pos_you_supporter) ["tu supportes"]
+concept:(vb_neg_you_supporter) ["tu {ne} supportes pas"]
+concept:(vb_int_you_supporter) [supportes-tu "ne supportes-tu pas"]
+concept:(vb_you_supporter) [~vb_pos_you_supporter ~vb_neg_you_supporter]
+concept:(vb_ask_supporter) ["{"est-ce que"} ~vb_pos_you_supporter" ~vb_int_you_supporter ~vb_neg_you_supporter]
+#------------------------------------------------------------------#
+concept:(vb_pos_i_soutenir) ["je soutiens"]
+concept:(vb_neg_i_soutenir) ["je {ne} soutiens [pas plus]"]
+concept:(vb_i_soutenir) [~vb_pos_i_soutenir ~vb_neg_i_soutenir]
+concept:(vb_pos_you_soutenir) ["tu soutiens"]
+concept:(vb_neg_you_soutenir) ["tu {ne} soutiens pas"]
+concept:(vb_int_you_soutenir) [soutiens-tu "ne soutiens-tu pas"]
+concept:(vb_you_soutenir) [~vb_pos_you_soutenir ~vb_int_you_soutenir]
+concept:(vb_ask_soutenir) ["{"est-ce que"} ~vb_pos_you_soutenir" ~vb_int_you_soutenir ~vb_neg_you_soutenir]
+#------------------------------------------------------------------#
+concept:(vb_pos_i_agree_with) ["je suis {plutot assez} d'accord avec"]
+concept:(vb_neg_i_agree_with) ["je suis {pas} d'accord avec"]
+concept:(vb_i_agree_with) [~vb_pos_i_agree_with ~vb_neg_i_agree_with]
+concept:(vb_pos_you_agree_with) ["tu es d'accord avec"]
+concept:(vb_neg_you_agree_with) ["[t'es "tu es" "tu n'es"] [pas plus] d'accord avec"]
+concept:(vb_int_you_agree_with) ["es-tu d'accord avec" "n'es-tu pas d'accord avec"]
+concept:(vb_you_agree_with) [~vb_pos_you_agree_with ~vb_int_you_agree_with]
+concept:(vb_ask_agree_with) ["{"est-ce que"} ~vb_pos_you_agree_with" ~vb_int_you_agree_with ~vb_neg_you_agree_with]
+#------------------------------------------------------------------#
+concept:(vb_pos_i_préférer) ["je préfère"]
+concept:(vb_neg_i_préférer) ["je {ne} préfère [pas plus]"]
+concept:(vb_i_préférer) [~vb_pos_i_préférer ~vb_neg_i_préférer]
+concept:(vb_pos_you_préférer) ["tu préfères"]
+concept:(vb_neg_you_préférer) ["tu {ne} préfères pas"]
+concept:(vb_int_you_préférer) [préfères-tu "ne préfères-tu pas"]
+concept:(vb_you_préférer) [~vb_pos_you_préférer ~vb_neg_you_préférer]
+concept:(vb_ask_préférer) ["{"est-ce que"} ~vb_pos_you_préférer" ~vb_int_you_préférer ~vb_neg_you_préférer]
+#------------------------------------------------------------------#
+concept:(vb_pos_i_partir) ["je pars"]
+concept:(vb_neg_i_partir) ["je {ne} pars [pas plus]"]
+concept:(vb_i_partir) [~vb_pos_i_partir ~vb_neg_i_partir]
+concept:(vb_pos_you_partir) ["tu pars"]
+concept:(vb_neg_you_partir) ["tu {ne} pars [pas plus]"]
+concept:(vb_int_you_partir) [pars-tu "ne pars-tu pas"]
+concept:(vb_you_partir) [~vb_pos_you_partir ~vb_neg_you_partir]
+concept:(vb_ask_partir) ["{"est-ce que"} ~vb_pos_you_partir" ~vb_int_you_partir ~vb_neg_you_partir]
+#------------------------------------------------------------------#
+concept:(vb_ask_aller) ["vas-tu" "tu vas" "est-ce que tu vas"]
+#==================================================================#
+
+
+#==================================================================#
+##### Auxiliaries #####
+#------------------------------------------------------------------#
+concept:(vb_pos_i_avoir) [j'ai "j'en ai"]
+concept:(vb_neg_i_avoir) ["[j'ai "j'en n'ai" "je [n'ai "n'en ai"]"] [pas plus]"]
+concept:(vb_i_avoir) [~vb_pos_i_avoir ~vb_neg_i_avoir]
+concept:(vb_pos_you_avoir) [t'as "tu as"]
+concept:(vb_neg_you_avoir) ["[t'as "tu n'as"] pas"]
+concept:(vb_int_you_avoir) [as-tu]
+concept:(vb_pos_cond_you_avoir) ["tu aurais" "t'aurais"]
+concept:(vb_neg_cond_you_avoir) ["["tu aurais" "t'aurais" "tu n'aurais"] pas"]
+concept:(vb_int_cond_you_avoir) [aurais-tu]
+#"n'as-tu pas"
+concept:(vb_you_avoir) [~vb_pos_you_avoir ~vb_neg_you_avoir]
+concept:(vb_ask_avoir) ["est-ce que ~vb_pos_you_avoir" ~vb_pos_you_avoir ~vb_int_you_avoir]
+#------------------------------------------------------------------#
+concept:(vb_pos_i_être) ["je suis"]
+concept:(vb_neg_i_être) ["je {ne} suis pas"]
+concept:(vb_i_être) [~vb_pos_i_être ~vb_neg_i_être]
+concept:(vb_pos_you_être) [t'es "tu es"]
+concept:(vb_neg_you_être) ["[t'es "tu n'es"] pas"]
+concept:(vb_int_you_être) [es-tu]
+#"n'es-tu pas"
+concept:(vb_you_être) [~vb_pos_you_être ~vb_neg_you_être]
+concept:(vb_ask_être) ["est-ce que ~vb_pos_you_être" ~vb_pos_you_être ~vb_int_you_être ~vb_neg_you_être]
+#==================================================================#
+
+#==================================================================#
+##### Other verbs #####
+#------------------------------------------------------------------#
+concept:(vb_imp_parle) ["{ne} {me m'en} parle pas"]
+concept:(vb_imp_cause) ["{ne} {me m'en} cause pas"]
+concept:(vb_imp_dire) ["{ne} {me m'en} dis rien"]
+concept:(vb_imp_discute) ["{ne} discute pas"]
+concept:(vb_imp_bavarde) ["{ne} bavarde pas"]
+concept:(verbs_inf_talk) [parler causer dire discuter bavarder]
+concept:(verbs_imp_talk) [~vb_imp_parle ~vb_imp_cause ~vb_imp_dire ~vb_imp_discute ~vb_imp_bavarde]
+
+
+#==================================================================#
+##### 1rst person verbs #####
+#------------------------------------------------------------------#
+concept:(i_am) [~vb_pos_i_être]
+concept:(i_have) [~vb_i_avoir]
+concept:(i_have_)[j'ai]
+concept:(i_am_not) [~vb_neg_i_être]
+concept:(i_dont_have) [~vb_neg_i_avoir]
+concept:(i_have_to) ["je [dois devrais]"]
+concept:(i_want) ["je [veux voudrais] {vraiment} {bien}" "j'aimerais {vraiment} {bien}" "je [souhaite souhaiterais] {vraiment}" "j'aurais {vraiment} {bien} voulu"]
+#"je cherche à"
+concept:(i_dont_want) [~vb_neg_i_vouloir]
+concept:(i_want_to) [~vb_pos_i_vouloir "~vb_pos_i_avoir envie de" "["je veux" "je voudrais" "j'aurai voulu" j'aimerais "je souhaiterais" "je souhaite"] {faire effectuer}" "[c'est "ça serait" "ça aurait été"] pour {faire effectuer}" "j'ai envie {"de faire" "d'effectuer"}"]
+concept:(i_want_you_to)["je veux {vraiment absolument !pas} que tu" "je voudrais {vraiment absolument !pas} que tu" "j'ai {vraiment absolument !pas} envie que tu" "je souhaite {vraiment absolument !pas} que tu" "je souhaiterais {vraiment absolument !pas} que tu"]
+concept:(i_dont_want_to) [~vb_neg_i_vouloir "~vb_neg_i_avoir envie de"]
+concept:(i_think_you_are) ["je te trouve" "{"je [pense trouve] que"} ~vb_pos_you_être"]
+concept:(we_are) ["nous sommes" "on est"]
+concept:(we_are_not) ["["nous {ne} sommes" "on est"] {pas}"]
+#------------------------------------------------------------------#
+##### 2nd person verbs #####
+#------------------------------------------------------------------#
+concept:(you_are) [~vb_pos_you_être]
+concept:(you_are_not) [~vb_neg_you_être]
+concept:(you_were) ["["tu as" t'as] été"]
+concept:(you_have) ["tu as" t'as]
+
+#------------------------------------------------------------------#
+##### 3rd person verbs #####
+#------------------------------------------------------------------#
+concept:(it_is) [
+    c'est c'était
+    "["je pense" "il semble que"] que [c'est c'était]"
+    "à mon avis [c'est c'était]"
+    "et bien [c'est c'était]"
+]
+
+
+
+
+
+#==================================================================#
+#/!\OLD CONCEPTS/!\ (can be used but not to use)#
+#------------------------------------------------------------------#
+concept:(askconnaitre) [~vb_ask_connaître]
+concept:(asksavoir) [~vb_ask_savoir]
+concept:(askparler) ["parles-tu" "{"est-ce que"} tu parles"]
+concept:(askpreferer) [~vb_ask_préférer]
+concept:(askavoir) [~vb_ask_avoir]
+concept:(askposseder) ["possèdes-tu" "{"est-ce que"} tu possèdes"]
+concept:(askvouloir) [~vb_ask_vouloir]
+concept:(askva) [vas-tu "{"est-ce que"} tu vas"]
+concept:(askaimer) [~vb_ask_aimer]
+concept:(askadorer) ["adores-tu" "{"est-ce que"} tu adores"]
+concept:(asksouvenir) ["te souviens-tu de" "{"est-ce que"} tu te souviens de"]
+concept:(asketre) [~vb_ask_être]
+concept:(askporter) ["portes-tu" "{"est-ce que"} tu portes"]
+concept:(askenvoyer) ["envoies-tu" "{"est-ce que"} tu envoies"]
+concept:(askaller) [~vb_ask_aller]
+concept:(askutiliser) ["utilises-tu" "{"est-ce que"} tu utilises"]
+concept:(askcroire) [~vb_ask_croire]
+concept:(askquesavoir) ["que sais-tu" "qu'est-ce que tu sais"]
+concept:(askquepouvoir) ["que peux-tu" "qu'est-ce que tu peux"]
+concept:(askqueaimer) ["qu'aimes-tu" "qu'aime-tu" "qu'est-ce que tu aimes {bien}" "tu aimes quoi"]
+concept:(askquepenser) ["que penses-tu" "qu'est-ce que tu {en} penses"]
+concept:(askqueconnaitre) ["que connais-tu" "qu'est-ce que tu connais"]
+concept:(askquefaire) ["que fais-tu" "qu'est-ce que tu fais"]
+concept:(verbs_inf_parler) [~verbs_inf_talk]
+concept:(verbs_imp_parler) [~verbs_imp_talk]
+concept:(jeveux) [~i_want]
+concept:(jepeux) [~vb_pos_i_pouvoir]
+concept:(want_to_do) [~i_want]
+#/!\OLD CONCEPTS/!\ (can be used but not to use)#
+
+
+
+#==================================================================#
+##### MOST FREQUENT VERBS #####
+#------------------------------------------------------------------#
+concept:(verbs_fr)
+[
+"abandonner" "abattre" "aborder" "accepter" "accomplir" "accorder" "accrocher" "accueillir" "accuser" "acheter" "achever" "admettre" "adresser" "affirmer" "agir" "agiter" "aider" "aimer" "ajouter" "aller" "allumer" "amener" "amuser" "animer" "annoncer" "apercevoir" "apparaître" "appartenir" "appeler" "apporter" "apprendre" "approcher" "approuver" "appuyer" "armer" "arracher" "arriver" "arrêter" "asseoir" "assister" "assurer" "attacher" "attaquer" "atteindre" "attendre" "attirer" "avancer" "avoir" "avouer" "baisser" "battre" "boire" "briller" "briser" "brûler" "cacher" "calmer" "caresser" "casser" "causer" "cesser" "changer" "chanter" "charger" "chasser" "chercher" "choisir" "commander" "commencer" "composer" "comprendre" "compter" "conclure" "condamner" "conduire" "confier" "confondre" "connaître" "consentir" "considérer" "construire" "consulter" "contenir" "contenter" "continuer" "convenir" "coucher" "couler" "couper" "courir" "couvrir" "coûter" "craindre" "creuser" "crier" "croire" "croiser" "créer" "céder" "danser" "demander" "demeurer" "descendre" "dessiner" "devenir" "deviner" "devoir" "dire" "diriger" "discuter" "disposer" "distinguer" "dominer" "donner" "dormir" "douter" "dresser" "durer" "déchirer" "décider" "déclarer" "découvrir" "décrire" "défendre" "dégager" "dépasser" "déposer" "désigner" "désirer" "détacher" "détourner" "détruire" "écarter" "échapper" "éclairer" "éclater" "écouter" "écraser" "écrire" "effacer" "élever" "éloigner" "embrasser" "emmener" "emparer" "employer" "emporter" "empêcher" "endormir" "enfermer" "enfoncer" "engager" "enlever" "entendre" "entourer" "entraîner" "entrer" "entretenir" "envelopper" "envoyer" "éprouver" "espérer" "essayer" "essuyer" "établir" "étaler" "éteindre" "étendre" "étonner" "étouffer" "être" "étudier" "éviter" "examiner" "exiger" "exister" "expliquer" "exposer" "exprimer" "exécuter" "faire" "falloir" "fatiguer" "fermer" "figurer" "finir" "fixer" "fonder" "forcer" "former" "franchir" "frapper" "fuir" "fumer" "gagner" "garder" "glisser" "grandir" "guider" "habiller" "habiter" "haïr" "heurter" "hésiter" "ignorer" "imaginer" "importer" "imposer" "indiquer" "inquiéter" "inspirer" "installer" "interroger" "intéresser" "inventer" "inviter" "jeter" "joindre" "jouer" "juger" "lever" "lier" "lire" "lisser" "livrer" "lutter" "maintenir" "manger" "manquer" "marcher" "marier" "marquer" "menacer" "mener" "mentir" "mettre" "monter" "montrer" "mourir" "mériter" "mêler" "naître" "nommer" "nourrir" "noyer" "obliger" "observer" "obtenir" "obéir" "occuper" "offrir" "oser" "oublier" "ouvrir" "paraître" "parcourir" "parer" "parler" "partager" "partir" "parvenir" "passer" "payer" "pencher" "pendre" "penser" "perdre" "permettre" "peser" "piquer" "placer" "plaindre" "plaire" "pleurer" "plier" "plonger" "porter" "poser" "posséder" "poursuivre" "pousser" "pouvoir" "prendre" "presser" "prier" "produire" "profiter" "promener" "promettre" "prononcer" "proposer" "protéger" "prouver" "précipiter" "précéder" "préférer" "préparer" "présenter" "prétendre" "prévenir" "prévoir" "prêter" "pénétrer" "quitter" "raconter" "ramasser" "ramener" "rappeler" "rapporter" "rassurer" "recevoir" "recueillir" "reculer" "redevenir" "refuser" "regarder" "regretter" "rejeter" "rejoindre" "relever" "remarquer" "remercier" "remettre" "remonter" "remplacer" "remplir" "rencontrer" "rendre" "renoncer" "rentrer" "renverser" "reposer" "repousser" "reprendre" "respecter" "respirer" "ressembler" "rester" "retenir" "retirer" "retomber" "retourner" "retrouver" "revenir" "revoir" "rire" "risquer" "rompre" "rouler" "réclamer" "réduire" "réfléchir" "répandre" "répondre" "répéter" "réserver" "résister" "résoudre" "réunir" "réussir" "réveiller" "révéler" "rêver" "saisir" "saluer" "satisfaire" "sauter" "sauver" "savoir" "sembler" "semer" "sentir" "serrer" "servir" "signer" "signifier" "songer" "sonner" "sortir" "souffler" "souffrir" "souhaiter" "soulever" "soumettre" "sourire" "soutenir" "souvenir" "subir" "suffire" "suivre" "supporter" "supposer" "surprendre" "surveiller" "séparer" "taire" "tendre" "tenir" "tenter" "terminer" "tirer" "tomber" "toucher" "tourner" "tracer" "traiter" "trancher" "travailler" "traverser" "traîner" "trembler" "tromper" "troubler" "trouver" "tuer" "user" "vaincre" "valoir" "veiller" "vendre" "venir" "verser" "visiter" "vivre" "voir" "voler" "vouloir" "voyager" "vêtir"
+]
+
+
+
+
+
+#===========================================================================#
+#########################NG VERB#################################
+#===========================================================================#
+
+
+#THEME/CATEGORY/TENSE/PERSON AND GRAMMATICAL NUMBER/PERSONAL PRONOUN#
+
+
+concept:(nogood_verb_pp)
+[
+"tapé"
+"tapée"
+"tapées"
+"tapés"
+"frappé"
+"frappée"
+"frappées"
+"frappés"
+"pincé"
+"pincée"
+"pincées"
+"pincés"
+]
+
+
+concept:(nogood_verb_pt_1s)
+[
+"j'ai tapé"
+"j'ai frappé"
+"j'ai pincé"
+]
+
+
+
+concept:(nogood_verb_inf)
+[
+"taper"
+"frapper"
+"pincer"
+]
+
+concept:(nogood_verb_inf_ppc3s)
+[
+"[le la] taper"
+"[le la] frapper"
+"[le la] pincer"
+]
+
+concept:(nogood_verb_inf_ppc2s)
+[
+"te taper"
+"te frapper"
+"te pincer"
+]
+
+concept:(nogood_verb_inf_ppc1s)
+[
+"me taper"
+"me frapper"
+"me pincer"
+]
+
+
+concept:(nogood_verb_imper_2s)
+[
+"tape"
+"frappe"
+"pince"
+]
+
+concept:(nogood_verb_imper_2p)
+[
+"tapez"
+"frappez"
+"pincez"
+]
+
+concept:(nogood_verb_present_1s)
+[
+"je tape"
+"je frappe"
+"je pince"
+]
+
+concept:(nogood_verb_subjPresent_1s_ppc2)
+[
+"que je te tape"
+"que je te frappe"
+"que je te pince"
+]
+
+concept:(nogood_verb_imper_2s_ppd1s)
+[
+"tape-moi"
+"frappe-moi"
+"pince-moi"
+]
+
+
+concept:(nogood_verb_futur_1s)
+[
+"je taperai"
+"je vais taper"
+"je frapperai"
+"je vais frapper"
+"je pincerai"
+"je vais pincer"
+]
+
+concept:(nogood_verb_futur_1s_passif)
+[
+"je serai tapé"
+"je vais me faire taper"
+"je serai frappé"
+"je vais me faire frapper"
+"je serai pincé"
+"je vais me faire pincer"
+]
+
+
+
+concept:(nogood_verb_futur_1s_ppc2)
+[
+"je te taperai"
+"je vais te taper"
+"je te frapperai"
+"je vais te frapper"
+"je te pincerai"
+"je vais te pincer"
+]
+
+
+
+concept:(nogood_verb_futur_1p_ppc2)
+[
+"on te tapera"
+"on va te taper"
+"on te frappera"
+"on va te frapper"
+"on te pincera"
+"on va te pincer"
+]
+
+
+
+concept:(brutal_order)
+[
+"tape"
+"frappe"
+"pince"
+]
+
+
+
+
+
+concept:(sad_verb_pp)
+[
+"déçu" "déçue" "déçus" "déçues" "dégouté" "dégoutés" "dégoutée" "dégoutées" "désenchanté" "désenchantés" "désenchantée" "désenchantées" "dépité" "dépités" "dépitée" "dépitées" "trahi" "trahis" "trahie" "trahies" "blessé" "blessés" "blessée" "blessées" "choqué" "choqués" "choquée" "choquées"
+]
+
+
+concept:(pain_verb_inf)
+[
+"souffrir"
+"avoir mal"
+"peiner"
+"subir"
+]
+
+concept:(pain_verb_pres_1s)
+[
+"je souffre"
+"j'ai mal"
+"je peine"
+"je subis"
+"je pleure"
+]
+
+concept:(pain_verb_pres_1p)
+[
+"on souffre"
+"nous souffrons"
+"on a mal"
+"nous avons mal"
+"on peine"
+"nous peinons"
+"on subit"
+"nous subissons"
+"on pleure"
+"nous pleurons"
+]
+
+concept:(pain_verb_pt_1s)
+[
+"j'ai souffert"
+"j'ai eu mal"
+"j'ai peiné"
+"j'ai subi"
+"j'ai pleuré"
+]
+
+
+#=======================================================================#
+#########################GIVE VERB#################################
+#=======================================================================#
+concept:(gift_verb_inf)
+[
+"offrir"
+"donner"
+]
+
+concept:(gift_verb_pres_1s)
+[
+"j'offre"
+"je donne"
+]
+
+concept:(gift_verb_pres_1s_ppc1)
+[
+"je m'offre"
+"je me donne"
+]
+
+concept:(gift_verb_pres_1s_ppc2)
+[
+"je t'offre"
+"je te donne"
+]
+
+concept:(gift_verb_pres_1s_ppc3)
+[
+"je [lui leur] offre"
+"je [lui leur] donne"
+]
+
+concept:(gift_verb_pres_1p)
+[
+"on offre"
+"nous offrons"
+"on donne"
+"nous donnons"
+]
+
+concept:(gift_verb_pres_1p_ppc1)
+[
+"on m'offre"
+"on me donne"
+]
+
+concept:(gift_verb_pres_1p_ppc2)
+[
+"on t'offre"
+"nous t'offrons"
+"on te donne"
+"nous te donnons"
+]
+
+concept:(gift_verb_pres_1p_ppc3)
+[
+"on [lui leur] offre"
+"nous [lui leur] offrons"
+"on [lui leur] donne"
+"nous [lui leur] donnons"
+]
+
+concept:(gift_verb_pt_1s)
+[
+"j'ai offert"
+"j'ai donné"
+]
+
+concept:(gift_verb_pt_1s_ppc1)
+[
+"je me suis offert"
+"je me suis donné"
+]
+
+concept:(gift_verb_pt_1s_ppc2)
+[
+"je t'ai offert"
+"je t'ai donné"
+]
+
+concept:(gift_verb_pt_1s_ppc3)
+[
+"je leur ai offert"
+"je leur ai donné"
+]
+
+concept:(gift_verb_pt_1p)
+[
+"on a offert"
+"nous avons offert"
+"on a donné"
+"nous avons donné"
+]
+
+concept:(gift_verb_pt_1p_ppc1)
+[
+"on m'a offert"
+"on m'a donné"
+]
+
+concept:(gift_verb_pt_1p_ppc2)
+[
+"on t'a offert"
+"on t'a donné"
+]
+
+concept:(gift_verb_pt_1p_ppc3)
+[
+"on [lui leur] a offert"
+"on [lui leur] a donné"
+"nous [lui leur] avons offert"
+"nous [lui leur] avons donné"
+]
+
+
+concept:(gift_verb_futur_1s)
+[
+"j'offrirai"
+"je vais offrir"
+"je donnerai"
+"je vais donner"
+]
+
+concept:(gift_verb_futur_1s_ppc1)
+[
+"je m'offrirai"
+"je vais m'offrir"
+"je me donnerai"
+"je vais me donner"
+]
+
+concept:(gift_verb_futur_1s_ppc2)
+[
+"je t'offrirai"
+"je vais t'offrir"
+"je te donnerai"
+"je vais te donner"
+]
+
+concept:(gift_verb_futur_1s_ppc3)
+[
+"je [lui leur] offrirai"
+"je vais [lui leur] offrir"
+"je [lui leur] donnerai"
+"je vais [lui leur] donner"
+]
+
+concept:(gift_verb_futur_1p)
+[
+"on offrira"
+"nous offrirons"
+"on va offrir"
+"nous allons offrir"
+"on donnera"
+"nous donnerons"
+"on va donner"
+"nous allons donner"
+]
+
+concept:(gift_verb_futur_1p_ppc1)
+[
+"on m'offrira"
+"on va m'offrir"
+"on me donnera"
+"on va me donner"
+]
+
+concept:(gift_verb_futur_1p_ppc2)
+[
+"on t'offrira"
+"nous t'offrirons"
+"on va t'offrir"
+"nous allons t'offrir"
+"on te donnera"
+"nous te donnerons"
+"on va te donner"
+"nous allons te donner"
+]
+
+concept:(gift_verb_futur_1p_ppc3)
+[
+"on [lui leur] offrira"
+"nous [lui leur] offrirons"
+"on va [lui leur] offrir"
+"nous allons [lui leur] offrir"
+"on [lui leur] donnera"
+"nous [lui leur] donnerons"
+"on va [lui leur]  donner"
+"nous allons [lui leur]  donner"
+]
+
+
+
+#============#
+### OTHERS ###
+#============#
+
+concept:(robot_impossible_actions_inf)
+[
+"boire $1spp=bois $1spn="bois pas""
+"manger $1spp=mange $1spn="mange pas""
+"nager $1spp=nage $1spn="nage pas""
+"voler $1spp=vole $1spn="vole pas""
+"faire caca $1spn="fais pas caca" $1spp="fais caca""
+"faire pipi $1spn="fais pas pipi" $1spp="fais pipi" "
+"chier $1spp=chie $1spn="chie pas""
+"pisser $1spp=pisse $1spn="pisse pas""
+"respirer $1spp=respire $1spn="respire pas""
+"pleurer $1spp=pleure $1spn="pleure pas""
+]
+
+concept:(robot_impossible_actions_2spp)
+[
+"bois $1spp=bois $1spn="bois pas""
+"manges $1spp=mange $1spn="mange pas""
+"nages $1spp=nage $1spn="nage pas""
+"voles $1spp=vole $1spn="vole pas""
+"fais caca $1spn="fais pas caca" $1spp="fais caca""
+"fais pipi $1spn="fais pas pipi" $1spp="fais pipi" "
+"chies $1spp=chie $1spn="chie pas""
+"pisses $1spp=pisse $1spn="pisse pas""
+"respires $1spp=respire $1spn="respire pas""
+"pleures $1spp=pleure $1spn="pleure pas""
+]

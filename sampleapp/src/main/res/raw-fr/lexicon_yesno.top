@@ -1,0 +1,213 @@
+topic: ~lexicon_yesno()
+
+
+#------------------------------------------------------------------#
+#CONSENT#
+#------------------------------------------------------------------#
+
+concept:(yes) [
+    oui
+    ouais
+    yes
+    yep
+    "bien sûr"
+    "bien évidemment"
+    "évidemment"
+    "absolument"
+    ]
+
+
+concept:(yes_int_neg)[
+    si
+    sisi
+    "si si"
+    sisisi
+    "si si si"
+    ]
+
+
+concept:(confirmation) [ok okay exact allez
+        "{oui ouais} [
+            "s'il te plait"
+            "s'il vous plait"
+            "voilà"
+            "c'est bien ça"
+            "c'est {bien} cela"
+            "avec plaisir"
+            "pourquoi pas"
+            "je te l'accorde"
+            "plutot {oui ouais}"
+            "~vb_pos_i_vouloir bien"
+            "{"["on va dire" "bien sur" évidemment] que"} c'est vrai"
+            "on va dire ça"
+            "c'est [exact certain sur ça]"
+            "tout a fait"
+            "bien dit"
+            carrément absolument assurément certainement évidemment parfaitement précisément sûrement
+            exactement  grave certes d'accord  entendu volontiers complètement
+            "en effet"
+            "on peut dire ça"
+            "{~vb_pos_you_avoir} tout compris"
+            "c'est {"un peu" plutot} vrai"
+            "["bonne" excellente] idée"
+            "ça [roule marche]"
+            "je sais"
+            "très bien"
+            "[quelques des] fois"
+            parfois rarement beaucoup
+            ]"
+        ]
+
+
+#answer to a propal#
+concept:(approval)
+[
+oui
+d'accord
+"pourquoi pas"
+"["bonne" excellente] idée"
+carrément
+entendu
+"avec plaisir"
+"on va faire ça"
+"faisons comme [ça cela ceci]"
+ouais
+ok
+okay
+allez
+vas-y
+"c'est parti"
+"on [essaye tente essaie] {ça}"
+"on peut [essayer tenter] {ça}"
+volontier
+"ça roule"
+"ça marche"
+"si tu veux"
+"comme tu veux"
+"si ça te fait plaisir"
+"si ça peut te faire plaisir"
+"c'est {bien} parce que c'est toi"
+]
+
+
+
+#------------------------------------------------------------------#
+#DISAGREEMENT#
+#------------------------------------------------------------------#
+concept:(no) [
+    non
+    nope
+    nan
+    "non non"
+    "non non {et} non"
+    "pas du tout"
+    "absolument pas"
+    ]
+
+concept:(refusal)[
+        bof
+        "non merci"
+        "{non} [
+            "[~vb_neg_i_être pas] [d'accord intéressé]"
+            "[~vb_neg_i_avoir pas] envie"
+            ~vb_neg_i_croire
+            "{non} ça [ira "va aller"]"
+            "pas [vraiment "du tout" "le moins du monde" spécialement question]"
+            aucunement nullement jamais
+            "[surtout absolument] pas"
+            "tu peux {toujours} [rêver courir rouler]"
+            "t'as rêvé"
+            "cause toujours"
+            "pas [maintenant vraiment tellement forcément trop "tout a fait" "pour [l'instant "le moment"]"]"
+            "c'est [faux "pas [ça vrai nécessaire "la peine"]"]"
+            "trop pas"
+            "ça {ne} te regarde pas"
+            "de quoi tu te mêles"
+            "qu'est ce que t'en as a [foutre faire]"
+            "occupe toi de tes [affaires oignons fesses]"
+            "jamais de la vie"
+            "ça {ne} me ["dit rien" "[tente parle] pas"]"
+            "sans façon"
+            "{"y a"} pas moyen"
+            "j'en ai assez entendu"
+            "tu ["te trompes" "as tort"]"
+            "pas grand-chose"
+            ]"
+        ]
+
+concept:(i_dont_think_so)
+[
+"{non} je {ne} pense pas"
+"{non} je {ne} crois pas"
+"je crois que non"
+"je pense que non"
+"ça m'étonnerait"
+]
+
+
+
+#------------------------------------------------------------------#
+#NOT SURE#
+#------------------------------------------------------------------#
+
+concept:(dont_know)
+["je {ne} sais pas" "j'en sais rien" "j'en sais que dalle" "aucune idée"]
+
+concept:(maybe)
+[peut-être "c'est possible" "c'est pas impossible" "c'est probable" "y a des chances" "c'est pas pas possible"]
+
+concept:(it_depends)
+["ça dépend" "c'est relatif" "c'est [au du] cas par cas"]
+
+concept:(im_not_sure) [
+    "je {ne} ["sais pas" "suis pas sur"]"
+    "pas sûr"
+    "chai pas"
+    "chui pas sûr"
+    "[j'en "je n'en"] ["sais rien" "ai pas la moindre idée"]"
+    "je réfléchis"
+    j'hésite
+    "aucune idée"
+]
+
+concept:(i_dont_know_simple)
+[
+"je {ne} sais pas"
+"j'en sais {absolument fichtrement vraiment absolument} rien"
+"je n'en sais rien"
+"{"j'en ai" "je n'en ai"} aucune idée"
+"qu'est-ce que j'en sais"
+]
+
+concept:(i_dont_know) [
+    "~vb_neg_i_savoir ["{qu'est} ce que c'est" "c'est quoi"]"
+    "~vb_neg_i_connaître"
+    "{non} ["je {ne} sais pas" "[j'en "je n'en"] ["sais rien" "ai pas la moindre idée"]" "chai pas"]"
+    "{c'est} quoi"
+    "qu'est ce que c'est"
+    "~vb_neg_i_avoir {jamais} entendu parler {de ça}"
+    "c'est-a-dire"
+    "comment {ça}"
+    "je vais y réfléchir"
+]
+
+
+concept:(hesitation)
+[
+"c'est {bien} [possible probable]"
+"probablement"
+]
+
+
+#------------------------------------------------------------------#
+#NOT YOUR BUSINESS#
+#------------------------------------------------------------------#
+
+concept:(not_your_business)
+[
+"ça {ne} te [regarde concerne] pas"
+"de quoi je me mêle"
+"["mêle-toi de" "mêle toi de" "c'est pas" "ce ne sont pas" "ce n'est pas" "occupe-toi de"] tes [oignons affaires]"
+"{ne} te mêle pas de [ça "mes affaires"]"
+"mêle-toi de tes affaires"
+]

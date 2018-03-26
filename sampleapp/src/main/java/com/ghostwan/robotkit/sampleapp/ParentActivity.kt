@@ -27,14 +27,15 @@ abstract class ParentActivity : AppCompatActivity() {
 
     internal lateinit var pepper: Pepper
 
-    protected open fun layout(): Int {
+    protected open fun defaultLayout(): Int {
         return R.layout.activity_parent
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(layout())
+        setContentView(defaultLayout())
 
+        title = scenarioName()
         fab.setOnClickListener { view ->
             uiSafe({
                 when (fab.tag) {
@@ -42,14 +43,14 @@ abstract class ParentActivity : AppCompatActivity() {
                         Snackbar.make(view, "Start ${scenarioName()}() scenario", Snackbar.LENGTH_LONG).show()
                         setFabTag(STOP)
                         try {
-                            start()
+                            onStartAction()
                         }finally {
                             setFabTag(START)
                             textview.setText(R.string.none)
                         }
                     }
                     STOP -> {
-                        stop()
+                        onStopAction()
                         Snackbar.make(view, "Stop ${scenarioName()}() scenario", Snackbar.LENGTH_LONG).show()
                         setFabTag(START)
                     }
@@ -59,12 +60,7 @@ abstract class ParentActivity : AppCompatActivity() {
 
 
         pepper = MyPepper(this)
-        pepper.setOnRobotLost {
-            displayInfo("Robot Lost : $it")
-            ui {
-                fab.visibility = View.INVISIBLE
-            }
-        }
+        pepper.setOnRobotLost (this::onRobotDisconnected)
     }
 
     override fun onStart() {
@@ -72,10 +68,13 @@ abstract class ParentActivity : AppCompatActivity() {
         uiSafe({
             fab.visibility = View.INVISIBLE
             pepper.connect()
-            setFabTag(START)
-            displayInfo("Pepper is connected!")
-            fab.visibility = View.VISIBLE
+            onRobotConnected()
         }, this::onError)
+    }
+
+    override fun onStop() {
+        super.onStop()
+        uiSafe({ onStopAction() }, this::onError)
     }
 
     private fun setFabTag(action: String) {
@@ -90,7 +89,7 @@ abstract class ParentActivity : AppCompatActivity() {
         Snackbar.make(fab, string, duration).show()
     }
 
-    fun onError(throwable: Throwable?) {
+    open fun onError(throwable: Throwable?) {
         val message = when (throwable) {
             is QiException -> "Robot Exception ${throwable.message}"
             is RobotUnavailableException -> "Robot unavailable ${throwable.message}"
@@ -103,11 +102,24 @@ abstract class ParentActivity : AppCompatActivity() {
         message?.let { displayInfo(message) }
     }
 
-    fun stop() {
-        pepper.stop()
+    abstract fun scenarioName(): String
+
+
+    open fun onRobotConnected() {
+        setFabTag(START)
+        displayInfo("Pepper is connected!")
+        fab.visibility = View.VISIBLE
     }
 
-    abstract suspend fun start()
+    open fun onRobotDisconnected(reason: String) {
+        setFabTag(STOP)
+        displayInfo("Robot Lost : $reason")
+        fab.visibility = View.INVISIBLE
+    }
 
-    abstract fun scenarioName(): String
+    abstract suspend fun onStartAction()
+
+    open suspend fun onStopAction() {
+        pepper.stop()
+    }
 }

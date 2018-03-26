@@ -1,6 +1,7 @@
 topic: ~presentation_discussion()
 # Defining extra concepts out of words or group of words
 concept:(hello) [hello hi hey "good morning" greetings]
+concept:(age_entity) [0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 68 69 70 71 72 73 74 75 76 77 78 79 80 81 82 83 84 85 86 87 88 89 90 91 92 93 94 95 96 97 98 99 100 101 102 103 104 105 106 107 108 109 110]
 
 # Replying to speech
 proposal: %intro ~hello human what's your name ?
@@ -8,12 +9,12 @@ proposal: %intro ~hello human what's your name ?
      and what's your age ?
         u2:(I'm _* years old) $age=$1 Your so young !
         and what's your sex ?
-            u3:(I'm a boy) $gender=boy A Boy! ^endDiscuss(sex)
-            u3:(I'm a girl) $gender=girl A Girl ! ^endDiscuss(sex)
+            u3:(I'm a boy) $gender=boy A Boy! ^endDiscuss(intro)
+            u3:(I'm a girl) $gender=girl A Girl ! ^endDiscuss(intro)
         u2:(quit) ^endDiscuss(age)
     u1:(quit) ^endDiscuss(name)
 
 proposal: %next ~hello human, I know that you are a $gender of $age years old. And your name is $name .
         Am I correct ?
-    u1:(yes) ok ^endDiscuss(true)
-    u1:(no) ok ^endDiscuss(false)
+    u1:(yes) ok ^endDiscuss(confirmation)
+    u1:(no) ok, let's start!  ^goto(intro)

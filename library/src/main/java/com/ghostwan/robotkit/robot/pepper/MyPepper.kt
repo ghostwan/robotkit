@@ -8,11 +8,8 @@ import com.aldebaran.qi.sdk.`object`.context.RobotContext
 import com.aldebaran.qi.sdk.`object`.conversation.*
 import com.aldebaran.qi.sdk.core.FocusManager
 import com.aldebaran.qi.sdk.core.SessionManager
-import com.aldebaran.qi.sdk.util.IOUtils
 import com.ghostwan.robotkit.robot.pepper.`object`.*
-import com.ghostwan.robotkit.robot.pepper.ext.await
-import com.ghostwan.robotkit.robot.pepper.ext.getLocalizedString
-import com.ghostwan.robotkit.robot.pepper.ext.toNaoqiLocale
+import com.ghostwan.robotkit.robot.pepper.ext.*
 import com.ghostwan.robotkit.robot.pepper.util.*
 import java.util.*
 import java.util.concurrent.CancellationException
@@ -117,11 +114,7 @@ class MyPepper(activity: Activity) : Pepper {
                              onStart: (() -> Unit)?,
                              onResult: ((Result<Void>) -> Unit)?) {
 
-        val string = if (locale != null) {
-            weakActivity.getLocalizedString(phraseRes, locale)
-        } else {
-            weakActivity.getString(phraseRes)
-        }
+        val string = weakActivity.getLocalizedString(phraseRes, locale)
 
         say(string, *animationsRes, bodyLanguageOption = bodyLanguageOption, locale = locale,
                 throwOnStop = throwOnStop,
@@ -145,7 +138,7 @@ class MyPepper(activity: Activity) : Pepper {
 
         val future = if (animationsRes.isNotEmpty()) {
             val animSet = ArrayList<String>()
-            animationsRes.mapTo(animSet) { IOUtils.fromRaw(weakActivity, it) }
+            animationsRes.mapTo(animSet) { weakActivity.getLocalizedRaw(it, locale) }
 
             val animation = actuation?.async()?.makeAnimation(animSet).await()
             val animate = actuation?.async()?.makeAnimate(robotContext, animation).await()
@@ -170,11 +163,7 @@ class MyPepper(activity: Activity) : Pepper {
             val phrases: List<Phrase> = when (it) {
                 is StrConcept -> it.phrases.map { Phrase(it) }
                 is ResConcept -> it.phrases.map {
-                    val string = if (locale != null) {
-                        weakActivity.getLocalizedString(it, locale)
-                    } else {
-                        weakActivity.getString(it)
-                    }
+                    val string = weakActivity.getLocalizedString(it, locale)
                     stringToRes[string] = it
                     Phrase(string)
                 }
@@ -227,8 +216,8 @@ class MyPepper(activity: Activity) : Pepper {
                                  onResult: ((Result<Void>) -> Unit)?) {
 
         val animSet = ArrayList<String>()
-        animSet.add(IOUtils.fromRaw(weakActivity, mainAnimation))
-        additionalAnimations.mapTo(animSet) { IOUtils.fromRaw(weakActivity, it) }
+        animSet.add(weakActivity.getRaw(mainAnimation))
+        additionalAnimations.mapTo(animSet) { weakActivity.getRaw(it) }
 
         val animation = actuation?.async()?.makeAnimation(animSet).await()
         val animate = actuation?.async()?.makeAnimate(robotContext, animation).await()
@@ -238,17 +227,21 @@ class MyPepper(activity: Activity) : Pepper {
         handleFuture(future, onResult, throwOnStop)
     }
 
-    override suspend fun discuss(mainTopic: Int, vararg additionalTopics: Int, gotoBookmark: String?,
+    override suspend fun discuss(mainTopic: Int, vararg additionalTopics: Int, gotoBookmark: String?, locale : Locale?,
                                  throwOnStop: Boolean,
                                  onStart: (() -> Unit)?,
                                  onResult: ((Result<String>) -> Unit)?
     ): String? {
 
         val topicSet = ArrayList<Topic>()
-        topicSet.add(conversation?.async()?.makeTopic(IOUtils.fromRaw(weakActivity, mainTopic)).await())
-        additionalTopics.mapTo(topicSet) { conversation?.async()?.makeTopic(IOUtils.fromRaw(weakActivity, it)).await() }
+        topicSet.add(conversation?.async()?.makeTopic(weakActivity.getLocalizedRaw(mainTopic, locale)).await())
+        additionalTopics.mapTo(topicSet) { conversation?.async()?.makeTopic(weakActivity.getLocalizedRaw(it, locale)).await() }
 
-        val discuss = conversation?.async()?.makeDiscuss(robotContext, topicSet).await()
+        val discuss = if (locale == null) {
+            conversation?.async()?.makeDiscuss(robotContext, topicSet).await()
+        } else {
+            conversation?.async()?.makeDiscuss(robotContext, topicSet, locale.toNaoqiLocale()).await()
+        }
 
         val future = discuss.async().run()
         gotoBookmark.let {
@@ -274,7 +267,12 @@ class MyPepper(activity: Activity) : Pepper {
             key to top
         }.toMap()
 
-        val discuss = conversation?.async()?.makeDiscuss(robotContext, topics.values.toList()).await()
+        val discuss = if (discussion.locale == null) {
+            conversation?.async()?.makeDiscuss(robotContext, topics.values.toList()).await()
+        } else {
+            conversation?.async()?.makeDiscuss(robotContext, topics.values.toList(), discussion.locale.toNaoqiLocale()).await()
+        }
+
         var startBookmark: String? = null
         discussion.prepare(discuss, topics)?.let {
             startBookmark = it

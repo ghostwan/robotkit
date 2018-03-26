@@ -168,7 +168,7 @@ interface Pepper {
      * @return the result of the discussion if [onResult] it's not set
      *
      */
-    suspend fun discuss(@RawRes mainTopic: Int, @RawRes vararg additionalTopics: Int, gotoBookmark: String? = null,
+    suspend fun discuss(@RawRes mainTopic: Int, @RawRes vararg additionalTopics: Int, gotoBookmark: String? = null, locale : Locale?=null,
                         throwOnStop: Boolean = true,
                         onStart: (() -> Unit)? = null,
                         onResult: ((Result<String>) -> Unit)? = null

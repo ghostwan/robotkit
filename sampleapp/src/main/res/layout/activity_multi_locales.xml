@@ -2,10 +2,8 @@
 <RelativeLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:context="com.ghostwan.robotkit.sampleapp.scenario.HelloWorld">
+        android:layout_height="match_parent">
 
 
     <android.support.design.widget.FloatingActionButton
@@ -30,21 +28,28 @@
     <RadioGroup
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
-
-        <RadioButton
-                android:id="@+id/radio_english"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/english"
-                android:onClick="onRadioButtonClicked"/>
+                android:weightSum="2"
+                android:orientation="horizontal">
 
         <RadioButton
                 android:id="@+id/radio_french"
+                android:layout_weight="1"
+                android:background="@drawable/french_flag"
+                android:gravity="center"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/french"
-                android:onClick="onRadioButtonClicked"/>
+                android:layout_height="100dp"
+                android:text="@string/french"/>
+
+        <RadioButton
+                android:id="@+id/radio_english"
+                android:layout_weight="1"
+                android:textColor="@android:color/white"
+                android:background="@drawable/english_flag"
+                android:gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="100dp"
+                android:text="@string/english"/>
+
     </RadioGroup>
 
 </RelativeLayout>
