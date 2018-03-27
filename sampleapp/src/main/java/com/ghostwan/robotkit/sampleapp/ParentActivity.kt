@@ -10,7 +10,6 @@ import com.ghostwan.robotkit.robot.pepper.MyPepper
 import com.ghostwan.robotkit.robot.pepper.Pepper
 import com.ghostwan.robotkit.robot.pepper.exception.RobotUnavailableException
 import com.ghostwan.robotkit.robot.pepper.util.exception
-import com.ghostwan.robotkit.robot.pepper.util.ui
 import com.ghostwan.robotkit.robot.pepper.util.uiSafe
 import kotlinx.android.synthetic.main.activity_parent.*
 import kotlinx.coroutines.experimental.CancellationException

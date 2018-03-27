@@ -7,36 +7,37 @@ apply plugin: 'org.jetbrains.dokka-android'
 group = 'com.github.ghostwan'
 
 android {
-    compileSdkVersion 26
-
+    compileSdkVersion 27
     defaultConfig {
         minSdkVersion 22
-        targetSdkVersion 26
+        targetSdkVersion 27
         versionCode 1
         versionName version
     }
-
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
-
+    buildToolsVersion '27.0.3'
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
 }
 
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
-
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.1'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
-    compile "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-    compile "org.jetbrains.kotlinx:kotlinx-serialization-runtime:$serialization_version"
-    compile "org.jetbrains.kotlinx:kotlinx-coroutines-core:0.22.5"
-    compile "org.jetbrains.kotlinx:kotlinx-coroutines-android:0.22.5"
-    compile 'com.aldebaran:qisdk:1.1.11'
+    api "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    api "org.jetbrains.kotlinx:kotlinx-serialization-runtime:$serialization_version"
+    api 'org.jetbrains.kotlinx:kotlinx-coroutines-core:0.22.5'
+    api 'org.jetbrains.kotlinx:kotlinx-coroutines-android:0.22.5'
+    api 'com.aldebaran:qisdk:1.1.11'
 }
 kotlin {
     experimental {
