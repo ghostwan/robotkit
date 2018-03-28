@@ -317,8 +317,7 @@ discussion.gotoBookmark("mcdo")
     
 ```
 
-### Allow multiples task in parallel #25
-
+### Allow multiples task in parallel
 ``` kotlin
 val t1 = uiAsync { myPepper.say("Nous voilà dans la cuisine!") }
 val t2 = uiAsync { myPepper.animate(R.raw.exclamation_both_hands_a003) }
@@ -451,4 +450,18 @@ pepper.setOnBodyTouched {
 myPepper.deactivate(Robot.AUTONOMOUS_BLINKING);
 ```
 
+### Stop specific action
+
+``` kotlin
+pepper.stop(Action.SPEAKING);
+pepper.stop(Action.LISTENING);
+pepper.stop(Action.MOVING);
+```
+
+### Play sound
+
+``` kotlin
+pepper.playSound(R.raw.suprise1, R.raw.suprise2, isLooping = true, isRandom = true)
+pepper.stopSound()
+```
 

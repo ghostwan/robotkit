@@ -1,5 +1,7 @@
 package com.ghostwan.robotkit.sampleapp.scenario
 
+import android.media.MediaPlayer
+import android.support.annotation.RawRes
 import android.view.View
 import com.ghostwan.robotkit.robot.pepper.`object`.Discussion
 import com.ghostwan.robotkit.robot.pepper.util.info
@@ -48,8 +50,10 @@ class DiscussActivity : MultiLocaleActivity() {
 
         val result = if (discussion.restoreData(this)) {
             pepper.say(R.string.restore_discussion, locale = locale)
+            playSound(R.raw.intero1)
             pepper.discuss(discussion, onStart = {
                 gotoBookmarkBtn.visibility = View.VISIBLE
+                stopSound()
             })
         } else {
             pepper.discuss(discussion, gotoBookmark = "intro", onStart = {
@@ -64,6 +68,20 @@ class DiscussActivity : MultiLocaleActivity() {
         super.onStopAction()
         displayInfo("user name is ${discussion.getVariable("name")}")
         discussion.saveData(this@DiscussActivity)
+    }
+
+    private var mPlayer: MediaPlayer? = null
+
+    fun playSound(@RawRes res : Int) {
+        mPlayer = MediaPlayer.create(this, res)
+        mPlayer?.isLooping = true
+        mPlayer?.start()
+    }
+
+    fun stopSound() {
+        ui{
+            mPlayer?.stop()
+        }
     }
 
 

@@ -10,6 +10,7 @@ import com.ghostwan.robotkit.robot.pepper.MyPepper
 import com.ghostwan.robotkit.robot.pepper.Pepper
 import com.ghostwan.robotkit.robot.pepper.exception.RobotUnavailableException
 import com.ghostwan.robotkit.robot.pepper.util.exception
+import com.ghostwan.robotkit.robot.pepper.util.ui
 import com.ghostwan.robotkit.robot.pepper.util.uiSafe
 import kotlinx.android.synthetic.main.activity_parent.*
 import kotlinx.coroutines.experimental.CancellationException
@@ -111,9 +112,11 @@ abstract class ParentActivity : AppCompatActivity() {
     }
 
     open fun onRobotDisconnected(reason: String) {
-        setFabTag(STOP)
-        displayInfo("Robot Lost : $reason")
-        fab.visibility = View.INVISIBLE
+        ui {
+            setFabTag(STOP)
+            displayInfo("Robot Lost : $reason")
+            fab.visibility = View.INVISIBLE
+        }
     }
 
     abstract suspend fun onStartAction()

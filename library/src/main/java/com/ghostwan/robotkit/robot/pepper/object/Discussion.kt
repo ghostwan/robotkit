@@ -120,13 +120,24 @@ class Discussion {
             }
             val dataLocal : Data = JSON.parse(json)
             info("get json data : $json")
-            if(restoreState && dataLocal.bookmark != null) {
-                info("state ${dataLocal.bookmark} restored")
-                data.bookmark = dataLocal.bookmark
+            if(restoreState) {
+                if (dataLocal.bookmark != null) {
+                    info("state ${dataLocal.bookmark} restored")
+                    data.bookmark = dataLocal.bookmark
+                }
+                else {
+                    return false
+                }
             }
             if(restoreVariable) {
-                info("variables ${dataLocal.variables} restored")
-                data.variables = dataLocal.variables
+                if (dataLocal.variables.isNotEmpty()) {
+                    info("variables ${dataLocal.variables} restored")
+                    data.variables = dataLocal.variables
+                }
+                else {
+                    return false
+                }
+
             }
             true
         } catch (e: FileNotFoundException) {

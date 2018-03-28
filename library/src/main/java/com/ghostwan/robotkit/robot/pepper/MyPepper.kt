@@ -247,9 +247,9 @@ class MyPepper(activity: Activity) : Pepper {
         gotoBookmark.let {
             discuss.setOnStartedListener {
                 ui {
+                    onStart?.invoke()
                     val bookmark = topicSet[0].async().bookmarks.await()[gotoBookmark]
                     discuss.async().goToBookmarkedOutputUtterance(bookmark).await()
-                    onStart?.invoke()
                 }
             }
         }
@@ -284,9 +284,9 @@ class MyPepper(activity: Activity) : Pepper {
         startBookmark?.let {
             discuss?.async()?.setOnStartedListener {
                 ui {
+                    onStart?.invoke()
                     val bookmark = topics[discussion.mainTopic]?.async()?.bookmarks.await()[startBookmark]
                     discuss.async().goToBookmarkedOutputUtterance(bookmark).await()
-                    onStart?.invoke()
                 }
             }
         }
