@@ -2,14 +2,15 @@
 
 RobotKit it's a Kotlin multi-Robot SDK for Android.
 
+
 ## Last version
 
-1.0.0 Release Candidate RC3 : 
+1.0.0 Release Candidate RC4 : 
 
 ``` groovy
-    compile 'com.github.ghostwan:robotkit:1.0.0rc3'
+    compile 'com.github.ghostwan:robotkit:1.0.0rc4'
 ```
-A [KDOC](https://jitpack.io/com/github/ghostwan/robotkit/1.0.0rc3/javadoc/library/index.html) À Kadoc ! [;)](https://media.giphy.com/media/wWSicFanND2gw/200.gif)
+A [KDOC](https://jitpack.io/com/github/ghostwan/robotkit/1.0.0rc4/javadoc/library/index.html) À Kadoc ! [;)](https://media.giphy.com/media/wWSicFanND2gw/200.gif)
 
 ## Disclaimer
 It could works in java but was not design for it. 
@@ -211,6 +212,18 @@ Say a phrase and make a special animation
 ``` kotlin
 pepper.say(R.string.hello_world, R.raw.elephant_animation)
 ```
+
+Say and display "hello world" in French, while the tablet is in English :
+
+``` kotlin
+pepper.say(R.string.hello_world, locale = Locale.FRENCH)
+
+...
+
+textview.setText(R.string.hello_world, locale = Locale.FRENCH)
+```
+
+
     
 ### Animate pepper with animation
 
@@ -242,6 +255,12 @@ when (concept) {
 }
 ```
 
+Listen in french, it will use the proper localized french ressources for each concepts:
+
+``` kotlin
+val concept = pepper.listen(helloConcept, byeConcept, discussConcept, locale = Locale.FRENCH)
+```
+
 ### Discuss about something
 
 [Discuss KDOC](https://jitpack.io/com/github/ghostwan/robotkit/-SNAPSHOT/javadoc/library/com.ghostwan.robotkit.robot.pepper/-pepper/discuss.html)
@@ -254,16 +273,24 @@ Start a discussion
 val result : String = myPepper.discuss(R.raw.cooking_dicussion)
 ```
     
-Start a discussion and go to bookmark
+Start a discussion and go to bookmark "intro"
 
 ``` kotlin
 val result : String = myPepper.discuss(R.raw.cooking_dicussion, gotoBookmark = "intro")
 ```    
 
+Start a discussion in french and go to bookmark "intro"
+
+``` kotlin
+val result = pepper.discuss(R.raw.presentation_discussion, gotoBookmark = "intro", locale = Locale.FRENCH)
+```   
+
 Expert API:
 
 ``` kotlin
 val discussion = Discussion(R.raw.cooking_dicussion)
+//val discussion = Discussion(this, R.raw.cooking_dicussion, locale = Locale.FRENCH)
+
 discussion.restoreData(this)
 myPepper.discuss(discussion)
     
@@ -339,15 +366,6 @@ nao.connect()
 cozmo = RemoteCozmo(this, "cozmo.local")
 cozmo.connect()
 ```
-
-### Say a phrase #28
-
-Expert API:
-
-``` kotlin
-val speech = Speech(R.string.intro, R.string.presentation, Locale.FRENCH)
-pepper.say(speech)
-``` 
 
 ### Animate with animation #15
 
