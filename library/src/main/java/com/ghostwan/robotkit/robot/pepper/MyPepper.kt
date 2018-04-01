@@ -26,7 +26,7 @@ class MyPepper(activity: Activity) : Pepper {
     private var weakActivity: Activity by weakRef(activity)
     private var focusManager: FocusManager? = null
 
-    val lock  = Any()
+    val lock = Any()
     var session: Session? = null
     var robotContext: RobotContext? = null
     var conversation: Conversation? = null
@@ -95,7 +95,6 @@ class MyPepper(activity: Activity) : Pepper {
             session?.close()
         }
     }
-
 
 
     override fun stop() {
@@ -227,7 +226,7 @@ class MyPepper(activity: Activity) : Pepper {
         handleFuture(future, onResult, throwOnStop)
     }
 
-    override suspend fun discuss(mainTopic: Int, vararg additionalTopics: Int, gotoBookmark: String?, locale : Locale?,
+    override suspend fun discuss(mainTopic: Int, vararg additionalTopics: Int, gotoBookmark: String?, locale: Locale?,
                                  throwOnStop: Boolean,
                                  onStart: (() -> Unit)?,
                                  onResult: ((Result<String>) -> Unit)?
@@ -244,10 +243,11 @@ class MyPepper(activity: Activity) : Pepper {
         }
 
         val future = discuss.async().run()
-        gotoBookmark.let {
-            discuss.setOnStartedListener {
-                ui {
-                    onStart?.invoke()
+        discuss.setOnStartedListener {
+            ui {
+                onStart?.invoke()
+                if(gotoBookmark != null) {
+                    info("Go to bookmark : $gotoBookmark")
                     val bookmark = topicSet[0].async().bookmarks.await()[gotoBookmark]
                     discuss.async().goToBookmarkedOutputUtterance(bookmark).await()
                 }
@@ -280,11 +280,11 @@ class MyPepper(activity: Activity) : Pepper {
         gotoBookmark?.let {
             startBookmark = gotoBookmark
         }
-        info("Start bookmark : $startBookmark")
-        startBookmark?.let {
-            discuss?.async()?.setOnStartedListener {
-                ui {
-                    onStart?.invoke()
+        discuss.setOnStartedListener {
+            ui {
+                onStart?.invoke()
+                if (startBookmark != null) {
+                    info("Go to bookmark : $startBookmark")
                     val bookmark = topics[discussion.mainTopic]?.async()?.bookmarks.await()[startBookmark]
                     discuss.async().goToBookmarkedOutputUtterance(bookmark).await()
                 }

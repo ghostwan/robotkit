@@ -1,9 +1,9 @@
 package com.ghostwan.robotkit.sampleapp.scenario
 
 import android.media.MediaPlayer
-import android.support.annotation.RawRes
 import android.view.View
 import com.ghostwan.robotkit.robot.pepper.`object`.Discussion
+import com.ghostwan.robotkit.robot.pepper.ext.random
 import com.ghostwan.robotkit.robot.pepper.util.info
 import com.ghostwan.robotkit.robot.pepper.util.ui
 import com.ghostwan.robotkit.robot.pepper.util.uiSafe
@@ -20,12 +20,16 @@ class DiscussActivity : MultiLocaleActivity() {
 
     override fun onRobotConnected() {
         super.onRobotConnected()
-        gotoBookmarkBtn.visibility = View.VISIBLE
+        ui {
+            gotoBookmarkBtn.visibility = View.VISIBLE
+        }
     }
 
     override fun onRobotDisconnected(reason: String) {
         super.onRobotDisconnected(reason)
-        gotoBookmarkBtn.visibility = View.INVISIBLE
+        ui {
+            gotoBookmarkBtn.visibility = View.INVISIBLE
+        }
     }
     override suspend fun onStartAction() {
         discussion = Discussion(this, R.raw.presentation_discussion, locale = locale)
@@ -50,7 +54,7 @@ class DiscussActivity : MultiLocaleActivity() {
 
         val result = if (discussion.restoreData(this)) {
             pepper.say(R.string.restore_discussion, locale = locale)
-            playSound(R.raw.intero1)
+            playSound()
             pepper.discuss(discussion, onStart = {
                 gotoBookmarkBtn.visibility = View.VISIBLE
                 stopSound()
@@ -70,20 +74,33 @@ class DiscussActivity : MultiLocaleActivity() {
         discussion.saveData(this@DiscussActivity)
     }
 
-    private var mPlayer: MediaPlayer? = null
+    private var mPlayer: MediaPlayer = MediaPlayer()
 
-    fun playSound(@RawRes res : Int) {
-        mPlayer = MediaPlayer.create(this, res)
-        mPlayer?.isLooping = true
-        mPlayer?.start()
+    private val soundResources = arrayOf(
+            R.raw.sound_wait1,
+            R.raw.sound_wait2,
+            R.raw.sound_wait3,
+            R.raw.sound_wait4,
+            R.raw.sound_wait4,
+            R.raw.sound_wait6,
+            R.raw.sound_wait7)
+
+    fun playSound() {
+        val index = (0..soundResources.size).random()
+        println("Index  : $index / ${soundResources.size}")
+        mPlayer = MediaPlayer.create(this, soundResources[index])
+        mPlayer.setOnCompletionListener {
+            mPlayer.release()
+            playSound()
+        }
+        mPlayer.start()
     }
 
     fun stopSound() {
         ui{
-            mPlayer?.stop()
+            mPlayer.stop()
+            mPlayer.release()
         }
     }
-
-
 
 }
