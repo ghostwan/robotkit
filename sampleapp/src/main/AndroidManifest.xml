@@ -17,20 +17,20 @@
             </intent-filter>
         </activity>
         <activity
-                android:name=".scenario.DiscussActivity"
+                android:name=".samples.DiscussActivity"
                 android:exported="true"/>
         <activity
-                android:name=".scenario.ListenActivity"
+                android:name=".samples.ListenActivity"
                 android:exported="true"/>
         <activity
-                android:name=".scenario.HelloWorldActivity"
+                android:name=".samples.HelloWorldActivity"
                 android:exported="true"/>
         <activity
-                android:name=".scenario.HelloWorldMultiLocaleActivity"
+                android:name=".samples.HelloWorldMultiLocaleActivity"
                 android:exported="true"/>
-        <activity
-                android:name=".TestActivity"
-                android:exported="true"/>
+        <activity android:name=".samples.StopActivity"
+                android:theme="@style/Theme.AppCompat.DayNight.NoActionBar">
+        </activity>
     </application>
 
 </manifest>

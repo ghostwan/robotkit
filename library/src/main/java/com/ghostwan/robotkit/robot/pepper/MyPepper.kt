@@ -14,6 +14,7 @@ import com.ghostwan.robotkit.robot.pepper.util.*
 import java.util.*
 import java.util.concurrent.CancellationException
 import kotlin.collections.ArrayList
+import kotlin.collections.HashMap
 
 
 /**
@@ -21,21 +22,24 @@ import kotlin.collections.ArrayList
  */
 class MyPepper(activity: Activity) : Pepper {
 
-    private var futures: MutableList<Future<*>> = ArrayList()
+    private var futures: MutableMap<Future<*>, Array<out Action>> = HashMap()
     private var util: PepperUtil = PepperUtil()
     private var weakActivity: Activity by weakRef(activity)
     private var focusManager: FocusManager? = null
+    private val lock = Any()
 
-    val lock = Any()
     var session: Session? = null
     var robotContext: RobotContext? = null
     var conversation: Conversation? = null
     var actuation: Actuation? = null
     private var onRobotLost: ((String) -> Unit)? = null
 
-    private suspend fun <T : Any?> handleFuture(future: Future<T>, onResult: ((Result<T>) -> Unit)?, throwOnCancel: Boolean): T? {
+    private suspend fun <T : Any?> handleFuture(future: Future<T>,
+                                                onResult: ((Result<T>) -> Unit)?,
+                                                throwOnCancel: Boolean,
+                                                vararg actions: Action): T? {
         synchronized(lock) {
-            futures.add(future)
+            futures.put(future, actions)
         }
         future.thenConsume {
             synchronized(lock) {
@@ -71,7 +75,7 @@ class MyPepper(activity: Activity) : Pepper {
             disconnect()
         }
 
-        var sessionManager = SessionManager(false)
+        val sessionManager = SessionManager(false)
         focusManager = FocusManager(weakActivity, sessionManager)
 
         val robotContextAO = focusManager!!.await(onRobotLost)
@@ -97,12 +101,26 @@ class MyPepper(activity: Activity) : Pepper {
     }
 
 
-    override fun stop() {
+    override fun stop(vararg actions: Action) {
         synchronized(lock) {
-            warning("cancelling ${futures.size} futures")
-            for (future in futures) {
-                future.requestCancellation();
-                futures.remove(future)
+            if (actions.isEmpty()) {
+//                warning("Stopping all actions : ${futures.size} ")
+                for ((future, _) in futures) {
+                    future.requestCancellation();
+                    futures.remove(future)
+                }
+            }
+            else {
+                loop@ for ((future, futureActions) in futures) {
+                    for(action in actions) {
+                        if (action in futureActions) {
+//                            warning("Stopping action $action")
+                            future.requestCancellation();
+                            futures.remove(future)
+                            break@loop
+                        }
+                    }
+                }
             }
         }
     }
@@ -146,8 +164,10 @@ class MyPepper(activity: Activity) : Pepper {
         } else {
             say.async().run()
         }
-
-        handleFuture(future, onResult, throwOnStop)
+        if (animationsRes.isEmpty())
+            handleFuture(future, onResult, throwOnStop, Action.TALKING)
+        else
+            handleFuture(future, onResult, throwOnStop, Action.TALKING, Action.MOVING)
     }
 
     override suspend fun listen(vararg concepts: Concept, bodyLanguageOption: BodyLanguageOption?, locale: Locale?,
@@ -196,7 +216,7 @@ class MyPepper(activity: Activity) : Pepper {
         }
 
         val future = listen.async().run()
-        val listenResult = handleFuture(future, onResultListen, throwOnStop)
+        val listenResult = handleFuture(future, onResultListen, throwOnStop, Action.LISTENING)
 
         listenResult?.heardPhrase?.let {
             concepts.filter { concept ->
@@ -223,7 +243,7 @@ class MyPepper(activity: Activity) : Pepper {
         animate.async().setOnStartedListener(onStart)
 
         val future = animate.async().run()
-        handleFuture(future, onResult, throwOnStop)
+        handleFuture(future, onResult, throwOnStop, Action.MOVING)
     }
 
     override suspend fun discuss(mainTopic: Int, vararg additionalTopics: Int, gotoBookmark: String?, locale: Locale?,
@@ -246,14 +266,14 @@ class MyPepper(activity: Activity) : Pepper {
         discuss.setOnStartedListener {
             ui {
                 onStart?.invoke()
-                if(gotoBookmark != null) {
+                if (gotoBookmark != null) {
                     info("Go to bookmark : $gotoBookmark")
                     val bookmark = topicSet[0].async().bookmarks.await()[gotoBookmark]
                     discuss.async().goToBookmarkedOutputUtterance(bookmark).await()
                 }
             }
         }
-        return handleFuture(future, onResult, throwOnStop)
+        return handleFuture(future, onResult, throwOnStop, Action.TALKING, Action.LISTENING)
     }
 
     override suspend fun discuss(discussion: Discussion, gotoBookmark: String?,
@@ -291,7 +311,7 @@ class MyPepper(activity: Activity) : Pepper {
             }
         }
         val future = discuss.async().run()
-        return handleFuture(future, onResult, throwOnStop)
+        return handleFuture(future, onResult, throwOnStop, Action.TALKING, Action.LISTENING)
     }
 
 

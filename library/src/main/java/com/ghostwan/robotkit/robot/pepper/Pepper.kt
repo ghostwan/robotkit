@@ -3,6 +3,7 @@ package com.ghostwan.robotkit.robot.pepper
 import android.support.annotation.RawRes
 import android.support.annotation.StringRes
 import com.aldebaran.qi.sdk.`object`.conversation.BodyLanguageOption
+import com.ghostwan.robotkit.robot.pepper.`object`.Action
 import com.ghostwan.robotkit.robot.pepper.`object`.Concept
 import com.ghostwan.robotkit.robot.pepper.`object`.Discussion
 import com.ghostwan.robotkit.robot.pepper.`object`.Result
@@ -34,9 +35,10 @@ interface Pepper {
     fun isConnected() : Boolean
 
     /**
-     * Stop all Pepper's actions
+     * If no action is specify stop all Pepper's actions running
+     * @param actions list of actions to stop
      */
-    fun stop()
+    fun stop(vararg actions : Action)
 
     /**
      * Make pepper say a phrase using a string resource and optionally play an animation at the same time

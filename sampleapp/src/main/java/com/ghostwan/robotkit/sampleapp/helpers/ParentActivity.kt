@@ -1,4 +1,4 @@
-package com.ghostwan.robotkit.sampleapp
+package com.ghostwan.robotkit.sampleapp.helpers
 
 import android.content.res.Resources
 import android.os.Bundle
@@ -9,9 +9,11 @@ import com.aldebaran.qi.QiException
 import com.ghostwan.robotkit.robot.pepper.MyPepper
 import com.ghostwan.robotkit.robot.pepper.Pepper
 import com.ghostwan.robotkit.robot.pepper.exception.RobotUnavailableException
+import com.ghostwan.robotkit.robot.pepper.ext.setOnClickSafeCoroutine
+import com.ghostwan.robotkit.robot.pepper.ext.inUI
+import com.ghostwan.robotkit.robot.pepper.ext.inUISafe
 import com.ghostwan.robotkit.robot.pepper.util.exception
-import com.ghostwan.robotkit.robot.pepper.util.ui
-import com.ghostwan.robotkit.robot.pepper.util.uiSafe
+import com.ghostwan.robotkit.sampleapp.R
 import kotlinx.android.synthetic.main.activity_parent.*
 import kotlinx.coroutines.experimental.CancellationException
 
@@ -36,36 +38,34 @@ abstract class ParentActivity : AppCompatActivity() {
         setContentView(defaultLayout())
 
         title = scenarioName()
-        fab.setOnClickListener { view ->
-            uiSafe({
-                when (fab.tag) {
-                    START -> {
-                        Snackbar.make(view, "Start ${scenarioName()}() scenario", Snackbar.LENGTH_LONG).show()
-                        setFabTag(STOP)
-                        try {
-                            onStartAction()
-                        }finally {
-                            setFabTag(START)
-                            textview.setText(R.string.none)
-                        }
-                    }
-                    STOP -> {
-                        onStopAction()
-                        Snackbar.make(view, "Stop ${scenarioName()}() scenario", Snackbar.LENGTH_LONG).show()
+        fab.setOnClickSafeCoroutine({
+            when (fab.tag) {
+                START -> {
+                    Snackbar.make(this, "Start ${scenarioName()}() scenario", Snackbar.LENGTH_LONG).show()
+                    setFabTag(STOP)
+                    try {
+                        onStartAction()
+                    } finally {
                         setFabTag(START)
+                        textview.setText(R.string.none)
                     }
                 }
-            }, this::onError)
-        }
+                STOP -> {
+                    onStopAction()
+                    Snackbar.make(this, "Stop ${scenarioName()}() scenario", Snackbar.LENGTH_LONG).show()
+                    setFabTag(START)
+                }
+            }
+        }, this::onError)
 
 
         pepper = MyPepper(this)
-        pepper.setOnRobotLost (this::onRobotDisconnected)
+        pepper.setOnRobotLost(this::onRobotDisconnected)
     }
 
     override fun onStart() {
         super.onStart()
-        uiSafe({
+        inUISafe({
             fab.visibility = View.INVISIBLE
             pepper.connect()
             onRobotConnected()
@@ -74,7 +74,7 @@ abstract class ParentActivity : AppCompatActivity() {
 
     override fun onStop() {
         super.onStop()
-        uiSafe({ onStopAction() }, this::onError)
+        inUISafe({ onStopAction() }, this::onError)
     }
 
     private fun setFabTag(action: String) {
@@ -97,8 +97,8 @@ abstract class ParentActivity : AppCompatActivity() {
             is CancellationException -> "Execution was stopped"
             else -> throwable?.message
         }
-        if(throwable !is CancellationException && throwable != null)
-            exception(throwable ,"onError")
+        if (throwable !is CancellationException && throwable != null)
+            exception(throwable, "onError")
         message?.let { displayInfo(message) }
     }
 
@@ -112,7 +112,7 @@ abstract class ParentActivity : AppCompatActivity() {
     }
 
     open fun onRobotDisconnected(reason: String) {
-        ui {
+        inUI {
             setFabTag(STOP)
             displayInfo("Robot Lost : $reason")
             fab.visibility = View.INVISIBLE

@@ -1,8 +1,9 @@
-package com.ghostwan.robotkit.sampleapp
+package com.ghostwan.robotkit.sampleapp.helpers
 
 import android.os.Bundle
 import android.view.View
 import android.widget.RadioButton
+import com.ghostwan.robotkit.sampleapp.R
 import kotlinx.android.synthetic.main.activity_multi_locales.*
 import java.util.*
 

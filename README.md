@@ -26,7 +26,7 @@ kotlin {
 }
 ```
 
-In your activity or where you want to call RobotKit APIs you have to use the lambda : [launch(UI){}](https://github.com/Kotlin/kotlinx.coroutines/blob/master/coroutines-guide.md#coroutine-basics) or RobotKit shortcut ui{}
+In your activity or where you want to call RobotKit APIs you have to use the lambda : [launch(UI){}](https://github.com/Kotlin/kotlinx.coroutines/blob/master/coroutines-guide.md#coroutine-basics) or RobotKit shortcut ui{ } or Activity extention inUI{ }
 
 ``` kotlin
 ui { //it means that the coroutine it's in the UI thread
@@ -245,8 +245,8 @@ pepper.animate(R.raw.elephant_animation)
 Make the robot listen for a phrase or group of phrase known as concept
 
 ``` kotlin
-val helloConcept = Concept(this@MainActivity, R.string.hello, R.string.hi)
-val byeConcept = Concept(this@MainActivity, R.string.bye, R.string.see_you)
+val helloConcept = Concept(this, R.string.hello, R.string.hi)
+val byeConcept = Concept(this, R.string.bye, R.string.see_you)
 val concept = pepper.listen(helloConcept, byeConcept)
 when (concept) {
     helloConcept -> pepper.say(R.string.hello_world)
@@ -324,6 +324,57 @@ val t2 = uiAsync { myPepper.animate(R.raw.exclamation_both_hands_a003) }
 val t3 = uiAsync { nao.animate(R.raw.exclamation_both_hands_a003) }
 
 println("Task are done ${t1.await()} ${t2.await()} ${t3.await()}")
+```
+
+### Stop what pepper is doing
+
+Stop all actions :
+
+``` kotlin
+pepper.stop()
+```
+
+Or a specific action :
+
+``` kotlin
+pepper.stop(Action.SPEAKING);
+...
+pepper.stop(Action.LISTENING);
+...
+pepper.stop(Action.MOVING);
+```
+
+
+### Say something when clicking a button
+
+``` kotlin
+val myButton = findViewById<Button>(R.id.my_button)
+myButton.setOnClickCoroutine { 
+    pepper.say(R.string.hello_world)
+}
+...
+
+val myButton = findViewById<Button>(R.id.my_button)
+myButton.setOnClickSafeCoroutine({
+    pepper.say(R.string.hello_world)
+}, this::onError)
+
+
+fun onError(throwable : Throwable?) {
+    val exceptionMessage = throwable.message
+    val message = when (throwable) {
+        is QiException -> "Robot Exception $exceptionMessage"
+        is RobotUnavailableException -> "Robot unavailable $exceptionMessage"
+        is Resources.NotFoundException -> "Android resource missing $exceptionMessage"
+        is CancellationException -> "Execution was stopped"
+        else -> exceptionMessage
+    }
+    if (it !is CancellationException && it != null)
+        exception(it, "onError")
+    message?.let {
+        Snackbar.make(rootLayout, message, Snackbar.LENGTH_LONG).show()
+    }
+}
 ```
     
 *** 
@@ -447,15 +498,14 @@ pepper.setOnBodyTouched {
 ### Control robot autonomous abilities 
 
 ``` kotlin
-myPepper.deactivate(Robot.AUTONOMOUS_BLINKING);
-```
+pepper.deactivate(Abilitie.BLINKING)
+...
+pepper.deactivate(Abilitie.BACKGROUND_MOVEMENTS, Abilitie.AWARNESS);
+...
+pepper.activate(Abilitie.BLINKING, Abilitie.AWARNESS);
+...
+pepper.activate(Abilitie.BACKGROUND_MOVEMENTS);
 
-### Stop specific action
-
-``` kotlin
-pepper.stop(Action.SPEAKING);
-pepper.stop(Action.LISTENING);
-pepper.stop(Action.MOVING);
 ```
 
 ### Play sound

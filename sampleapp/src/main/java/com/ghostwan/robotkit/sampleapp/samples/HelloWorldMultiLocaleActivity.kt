@@ -1,7 +1,7 @@
-package com.ghostwan.robotkit.sampleapp.scenario
+package com.ghostwan.robotkit.sampleapp.samples
 
 import com.ghostwan.robotkit.robot.pepper.ext.setText
-import com.ghostwan.robotkit.sampleapp.MultiLocaleActivity
+import com.ghostwan.robotkit.sampleapp.helpers.MultiLocaleActivity
 import com.ghostwan.robotkit.sampleapp.R
 import kotlinx.android.synthetic.main.activity_multi_locales.*
 

@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:weightSum="2"
+        android:layout_height="match_parent"
+        tools:context=".samples.StopActivity">
+
+    <LinearLayout
+            android:orientation="horizontal"
+            android:background="@android:color/holo_green_light"
+            android:layout_width="match_parent"
+            android:id="@+id/actionsLayout"
+            android:gravity="center"
+            android:layout_weight="1"
+            android:layout_height="0dp">
+
+        <Button
+                android:text="Say"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/buttonSay"
+                android:layout_weight="1"/>
+
+        <Button
+                android:text="Animate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/buttonAnimate"
+                android:layout_weight="1"/>
+
+        <Button
+                android:text="Say and Animate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/buttonSayAnimate"
+                android:layout_weight="1"/>
+
+        <Button
+                android:text="Discuss"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/buttonDiscuss"
+                android:layout_weight="1"/>
+
+        <Button
+                android:text="Listen"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/buttonListen"
+                android:layout_weight="1"/>
+    </LinearLayout>
+
+    <LinearLayout
+            android:orientation="horizontal"
+            android:background="@android:color/holo_red_light"
+            android:layout_width="match_parent"
+            android:id="@+id/stopActionsLayout"
+            android:gravity="center"
+            android:layout_weight="1"
+            android:layout_height="0dp">
+
+        <Button
+                android:text="Stop talking"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/buttonStopTalking"
+                android:layout_weight="1"/>
+
+        <Button
+                android:text="Stop listening"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/buttonStopListening"
+                android:layout_weight="1"/>
+
+        <Button
+                android:text="Stop moving"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/buttonStopMoving"
+                android:layout_weight="1"/>
+
+    </LinearLayout>
+</LinearLayout>
