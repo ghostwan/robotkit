@@ -62,7 +62,7 @@ task javadoc(type: Javadoc) {
 
 dokka {
     outputFormat = 'html'
-    outputDirectory = javadoc.destinationDir
+    outputDirectory = "../docs/kdoc"
     skipEmptyPackages = true
     externalDocumentationLink {
         url = new URL("https://android.aldebaran.com/sdk/doc/qisdk/")
@@ -71,7 +71,7 @@ dokka {
 }
 
 task javadok(type: Jar, dependsOn: dokka) {
-    from javadoc.destinationDir
+    from "../docs/kdoc"
     classifier = 'javadoc'
 }
 

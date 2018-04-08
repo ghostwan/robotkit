@@ -10,7 +10,7 @@ RobotKit it's a Kotlin multi-Robot SDK for Android.
 ``` groovy
     compile 'com.github.ghostwan:robotkit:1.0.0rc4'
 ```
-A [KDOC](https://jitpack.io/com/github/ghostwan/robotkit/1.0.0rc4/javadoc/library/index.html) À Kadoc ! [;)](https://media.giphy.com/media/wWSicFanND2gw/200.gif)
+A [KDOC](https://ghostwan.github.io/robotkit/docs/javadoc/library/index.html) À Kadoc ! [;)](https://media.giphy.com/media/wWSicFanND2gw/200.gif)
 
 ## Disclaimer
 It could works in java but was not design for it. 
@@ -116,7 +116,7 @@ Future Robot support:
 
 ## Let's code
 
-[KDOC SNAPSHOT](https://jitpack.io/com/github/ghostwan/robotkit/-SNAPSHOT/javadoc/library/index.html)
+[KDOC](https://ghostwan.github.io/robotkit/docs/javadoc/library/index.html)
 
 Here the list of [all robotkit version on jitpack](https://jitpack.io/#ghostwan/robotkit)
 
@@ -184,7 +184,7 @@ To deploy on a virtual Pepper refers to [SoftBank Robotics Documentation](https:
 
 ### Connect to Pepper attached to the tablet
 
-[Pepper KDOC](https://jitpack.io/com/github/ghostwan/robotkit/-SNAPSHOT/javadoc/library/com.ghostwan.robotkit.robot.pepper/-pepper/index.html)
+[Pepper KDOC](https://ghostwan.github.io/robotkit/docs/javadoc/library/com.ghostwan.robotkit.robot.pepper/-pepper/index.html)
 
 ``` kotlin
 pepper = MyPepper(this@MainActivity)
@@ -197,7 +197,7 @@ if(pepper.isConnected())
 
 ### Say a phrase
 
-[Say KDOC](https://jitpack.io/com/github/ghostwan/robotkit/-SNAPSHOT/javadoc/library/com.ghostwan.robotkit.robot.pepper/-pepper/say.html)
+[Say KDOC](https://ghostwan.github.io/robotkit/docs/javadoc/library/com.ghostwan.robotkit.robot.pepper/-pepper/say.html)
 
 Make the robot say something
 
@@ -227,7 +227,7 @@ textview.setText(R.string.hello_world, locale = Locale.FRENCH)
     
 ### Animate pepper with animation
 
-[Animate KDOC](https://jitpack.io/com/github/ghostwan/robotkit/-SNAPSHOT/javadoc/library/com.ghostwan.robotkit.robot.pepper/-pepper/animate.html)
+[Animate KDOC](https://ghostwan.github.io/robotkit/docs/javadoc/library/com.ghostwan.robotkit.robot.pepper/-pepper/animate.html)
 
 Make the robot run an animation.
 
@@ -240,7 +240,7 @@ pepper.animate(R.raw.elephant_animation)
 
 ### Listen concepts
 
-[Listen KDOC](https://jitpack.io/com/github/ghostwan/robotkit/-SNAPSHOT/javadoc/library/com.ghostwan.robotkit.robot.pepper/-pepper/listen.html)
+[Listen KDOC](https://ghostwan.github.io/robotkit/docs/javadoc/library/com.ghostwan.robotkit.robot.pepper/-pepper/listen.html)
 
 Make the robot listen for a phrase or group of phrase known as concept
 
@@ -263,7 +263,7 @@ val concept = pepper.listen(helloConcept, byeConcept, discussConcept, locale = L
 
 ### Discuss about something
 
-[Discuss KDOC](https://jitpack.io/com/github/ghostwan/robotkit/-SNAPSHOT/javadoc/library/com.ghostwan.robotkit.robot.pepper/-pepper/discuss.html)
+[Discuss KDOC](https://ghostwan.github.io/robotkit/docs/javadoc/library/com.ghostwan.robotkit.robot.pepper/-pepper/discuss.html)
 
 Simple API:
 
@@ -327,6 +327,8 @@ println("Task are done ${t1.await()} ${t2.await()} ${t3.await()}")
 ```
 
 ### Stop what pepper is doing
+
+[Stop KDOC](https://ghostwan.github.io/robotkit/docs/javadoc/library/com.ghostwan.robotkit.robot.pepper/-pepper/stop.html)
 
 Stop all actions :
 
