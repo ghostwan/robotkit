@@ -1,0 +1,32 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>MyPepper.animate - library</title>
+<link rel="stylesheet" href="../../../style.css">
+</HEAD>
+<BODY>
+<a href="../../index.html">library</a>&nbsp;/&nbsp;<a href="../index.html">com.ghostwan.robotkit.robot.pepper</a>&nbsp;/&nbsp;<a href="index.html">MyPepper</a>&nbsp;/&nbsp;<a href="./animate.html">animate</a><br/>
+<br/>
+<h1>animate</h1>
+<a name="com.ghostwan.robotkit.robot.pepper.MyPepper$animate(kotlin.Int, kotlin.IntArray, kotlin.Boolean, kotlin.Function0((kotlin.Unit)), kotlin.Function1((com.ghostwan.robotkit.robot.pepper.object.Result((java.lang.Void)), kotlin.Unit)))"></a>
+<code><span class="keyword">suspend</span> <span class="keyword">fun </span><span class="identifier">animate</span><span class="symbol">(</span><span class="identifier" id="com.ghostwan.robotkit.robot.pepper.MyPepper$animate(kotlin.Int, kotlin.IntArray, kotlin.Boolean, kotlin.Function0((kotlin.Unit)), kotlin.Function1((com.ghostwan.robotkit.robot.pepper.object.Result((java.lang.Void)), kotlin.Unit)))/mainAnimation">mainAnimation</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a><span class="symbol">, </span><span class="keyword">vararg</span> <span class="identifier" id="com.ghostwan.robotkit.robot.pepper.MyPepper$animate(kotlin.Int, kotlin.IntArray, kotlin.Boolean, kotlin.Function0((kotlin.Unit)), kotlin.Function1((com.ghostwan.robotkit.robot.pepper.object.Result((java.lang.Void)), kotlin.Unit)))/additionalAnimations">additionalAnimations</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a><span class="symbol">, </span><span class="identifier" id="com.ghostwan.robotkit.robot.pepper.MyPepper$animate(kotlin.Int, kotlin.IntArray, kotlin.Boolean, kotlin.Function0((kotlin.Unit)), kotlin.Function1((com.ghostwan.robotkit.robot.pepper.object.Result((java.lang.Void)), kotlin.Unit)))/throwOnStop">throwOnStop</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html"><span class="identifier">Boolean</span></a><span class="symbol">, </span><span class="identifier" id="com.ghostwan.robotkit.robot.pepper.MyPepper$animate(kotlin.Int, kotlin.IntArray, kotlin.Boolean, kotlin.Function0((kotlin.Unit)), kotlin.Function1((com.ghostwan.robotkit.robot.pepper.object.Result((java.lang.Void)), kotlin.Unit)))/onStart">onStart</span><span class="symbol">:</span>&nbsp;<span class="symbol">(</span><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a><span class="symbol">, </span><span class="identifier" id="com.ghostwan.robotkit.robot.pepper.MyPepper$animate(kotlin.Int, kotlin.IntArray, kotlin.Boolean, kotlin.Function0((kotlin.Unit)), kotlin.Function1((com.ghostwan.robotkit.robot.pepper.object.Result((java.lang.Void)), kotlin.Unit)))/onResult">onResult</span><span class="symbol">:</span>&nbsp;<span class="symbol">(</span><a href="../../com.ghostwan.robotkit.robot.pepper.object/-result.html"><span class="identifier">Result</span></a><span class="symbol">&lt;</span><a href="https://developer.android.com/reference/java/lang/Void.html"><span class="identifier">Void</span></a><span class="symbol">&gt;</span><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<p>Overrides <a href="../-pepper/animate.html">Pepper.animate</a></p>
+<p>Animate pepper with an animation using raw qianim file</p>
+<p>If <a href="animate.html#com.ghostwan.robotkit.robot.pepper.MyPepper$animate(kotlin.Int, kotlin.IntArray, kotlin.Boolean, kotlin.Function0((kotlin.Unit)), kotlin.Function1((com.ghostwan.robotkit.robot.pepper.object.Result((java.lang.Void)), kotlin.Unit)))/onResult">onResult</a> it's not set, the coroutine will be suspended until the animation end, without blocking the thread</p>
+<h3>Parameters</h3>
+<p><a name="mainAnimation"></a>
+<code>mainAnimation</code> - Main animation. It's an android raw resources.</p>
+<p><a name="additionalAnimations"></a>
+<code>additionalAnimations</code> - Additional animation as for example trajectory to make pepper dance.
+They are android raw resources.</p>
+<p><a name="throwOnStop"></a>
+<code>throwOnStop</code> - By default it's true. Does this method throw when the stop api is called and stop it.
+Could be useful to set it to false when we want to continue actions scenario after a stop</p>
+<p><a name="onStart"></a>
+<code>onStart</code> - This lambada is called when the action start on the robot</p>
+<p><a name="onResult"></a>
+<code>onResult</code> - If this lambada is set the coroutine won't wait and the result of
+the api call will be forward to the lambda.
+Give a <a href="../../com.ghostwan.robotkit.robot.pepper.object/-success/index.html">Success</a> or a <a href="../../com.ghostwan.robotkit.robot.pepper.object/-failure/index.html">Failure</a> with the exception</p>
+</BODY>
+</HTML>
