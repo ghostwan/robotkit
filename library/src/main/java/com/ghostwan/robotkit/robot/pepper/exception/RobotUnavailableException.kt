@@ -1,6 +1,8 @@
 package com.ghostwan.robotkit.robot.pepper.exception
 
 /**
- * Created by erwan on 10/03/2018.
+ * Thrown if the robot is unavailable
+ *
+ * @param message The reason why the robot is unavailable
  */
 class RobotUnavailableException(message: String?) : Exception(message)

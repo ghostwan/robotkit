@@ -7,12 +7,15 @@ import java.lang.ref.WeakReference
 import kotlin.reflect.KProperty
 
 /**
- * Created by erwan on 18/03/2018.
+ * Utilities free functions
  */
 
 const val TAG = "RobotKit"
 
 
+/**
+ * Call a coroutine lambda in Android UI thread
+ */
 fun ui(onRun: suspend CoroutineScope.() -> Unit): Job {
     return launch(UI, block = onRun)
 }

@@ -21,12 +21,21 @@ import com.ghostwan.robotkit.robot.pepper.ext.await
 import java.util.concurrent.ExecutionException
 
 /**
- * Created by erwan on 10/03/2018.
+ * Utility class to handle pepper robot
  */
 class PepperUtil {
 
     private val serializer: QiSerializer = createQiSerializer()
 
+    /**
+     * Simplify Naoqi's Service retrieval
+     *
+     * @param session Naoqi's session
+     * @param clazz Class of the service to use for deserialization
+     * @param name Name of the service in Naoqi service directory
+     *
+     * @return a Naoqi service wrapped in a java object
+     */
     suspend fun <T> retrieveService(session: Session, clazz: Class<T>, name: String): T {
         try {
             val service = session.service(name).await()
@@ -39,6 +48,11 @@ class PepperUtil {
         }
     }
 
+    /**
+     * Initialize Naoqi AnyObject converter
+     *
+     * @return a serializer that can be used to deserialize Naoqi's object.
+     */
     fun createQiSerializer(): QiSerializer {
         val serializer = QiSerializer()
 
@@ -57,6 +71,13 @@ class PepperUtil {
         return serializer
     }
 
+    /**
+     * Helper to deserialize Naoqi robot context.
+     *
+     * @param robotContext AnyObject that represent Naoqi robot context.
+     *
+     * @return the robot context wrapped in a java object.
+     */
     fun deserializeRobotContext(robotContext: AnyObject): RobotContext {
         return try {
             val deserialize = serializer.deserialize(robotContext, RobotContext::class.java)

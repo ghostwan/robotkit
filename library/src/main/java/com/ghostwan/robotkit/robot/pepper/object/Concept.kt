@@ -4,7 +4,7 @@ import android.support.annotation.StringRes
 import java.util.*
 
 /**
- * Created by erwan on 10/03/2018.
+ * A Concept is a set of phrase that has similar meaning
  */
 sealed class Concept
 

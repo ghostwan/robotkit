@@ -45,27 +45,28 @@ class Discussion {
     private var onBookmarkReached :((String) -> Unit)? = null
     private var onVariableChanged :((String, String) -> Unit)? = null
 
-    constructor(context: Context, @RawRes vararg integers: Int, locale : Locale?=null) {
+    /**
+     * Construct a Discussion object that will handle the discussion data
+     *
+     * @param context Android context
+     * @param topicsRes Android resource id of the topics to load in the discussion, the first one is the main one.
+     * The topic content depend of the locale
+     * @param locale The locale of the discussion, if it's null, use the one of the device.
+     */
+    constructor(context: Context, @RawRes vararg topicsRes: Int, locale : Locale?=null) {
         this.locale = locale
-        mainTopic = integers[0]
-        for (integer in integers) {
+        mainTopic = topicsRes[0]
+        for (integer in topicsRes) {
             var content = context.getLocalizedRaw(integer, locale)
             id += context.getString(integer).substringAfterLast("/")
             content = addBookmarks(content, "(\\s*proposal:)(.*)", "rk-p")
             content = addBookmarks(content, "(\\s*u\\d+:\\([^)]*\\))(.*)", "rk-u")
             println(content)
-            topics[integer] = content
+            this.topics[integer] = content
         }
         id = id.sha512()
         println("Discussion id is $id")
 
-    }
-
-    fun setOnBookmarkReached(onBookmarkReached: ((name : String) -> Unit)? = null){
-        this.onBookmarkReached = onBookmarkReached
-    }
-    fun setOnVariableChanged(onVariableChanged: ((name: String, value: String) -> Unit)? = null){
-        this.onVariableChanged = onVariableChanged
     }
 
     private fun addBookmarks(content : String, regex : String, template : String) : String {
@@ -81,6 +82,29 @@ class Discussion {
         return matcher.appendTail(buffer).toString()
     }
 
+    /**
+     * Set the listener which be called when a bookmark is reached in the discussion
+     *
+     * @param onBookmarkReached the callback called when a bookmark is reached with the name of the bookmark reached
+     */
+    fun setOnBookmarkReached(onBookmarkReached: ((name : String) -> Unit)? = null){
+        this.onBookmarkReached = onBookmarkReached
+    }
+
+    /**
+     * Set the listener which be called when a variable change
+     *
+     * @param onVariableChanged the callback called when a variable change with the name of the variable and its value
+     */
+    fun setOnVariableChanged(onVariableChanged: ((name: String, value: String) -> Unit)? = null){
+        this.onVariableChanged = onVariableChanged
+    }
+
+    /**
+     * Get the list of variable's name in this discussion
+     *
+     * @return the list of variables
+     */
     fun getVariables(): List<String> {
         val reg = "(\\\$\\w+)".toRegex()
         return reg.findAll(topics.values.joinToString { it })
@@ -90,6 +114,10 @@ class Discussion {
 
     private fun getFilename() = "$id.data"
 
+    /**
+     * Save discussion data; variables and last bookmark reached
+     * @param context Android Context
+     */
     suspend fun saveData(context: Context) {
         data.variables = getVariables().map {
             val variable = naoqiData.discuss?.async()?.variable(it).await()
@@ -108,6 +136,15 @@ class Discussion {
         info("Data saved : $json")
     }
 
+    /**
+     * Restore discussion data
+     *
+     * @param context Android Context
+     * @param restoreVariable Does it restore the discussion variables, yes by default.
+     * @param restoreState Does it restore the discussion state (ie goes back to the last bookmark reached), yes by default.
+     *
+     * @return true if the discussion is restored, false otherwise (bookmark or variables can't be restored)
+     */
     fun restoreData(context: Context,
                     restoreVariable : Boolean = true,
                     restoreState : Boolean = true): Boolean {
@@ -145,6 +182,9 @@ class Discussion {
         }
     }
 
+    /**
+     * Clear discussion data
+     */
     fun clearData() {
         val file = File(getFilename());
         if(file.delete())
@@ -177,14 +217,32 @@ class Discussion {
         return data.bookmark
     }
 
+    /**
+     * Set the value of a discussion variable
+     *
+     * @param name Name of the variable
+     * @param value Value of the variable to set
+     */
     suspend fun setVariable(name : String , value : String) {
         naoqiData.qiChatVariables[name]?.async()?.setValue(value).await()
     }
 
+    /**
+     * Get a discussion variable
+     *
+     * @param name Name of the variable to get
+     * @return the value of the variable
+     */
     suspend fun getVariable(name : String) : String {
         return naoqiData.qiChatVariables[name]?.async()?.value.await()
     }
 
+    /**
+     * Go to a specific bookmark
+     *
+     * @param name Name of the bookmark to go to
+     * @param topic Android resource id of the topic where is the bookmark, by default use the main topic
+     */
     suspend fun gotoBookmark(name: String, topic: Int=mainTopic){
         val bookmark = naoqiData.qiTopics[topic]?.async()?.bookmarks.await()[name]
         naoqiData.discuss?.async()?.goToBookmarkedOutputUtterance(bookmark).await()

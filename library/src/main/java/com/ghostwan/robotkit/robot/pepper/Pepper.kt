@@ -51,6 +51,8 @@ interface Pepper {
      *
      * @param bodyLanguageOption Body language policy
      *
+     * @param locale The locale use to say something, if it's null use the one of the device.
+     *
      * @param throwOnStop By default it's true. Does this method throw when the stop api is called and stop it.
      * Could be useful to set it to false when we want to continue actions scenario after a stop
      *
@@ -77,6 +79,8 @@ interface Pepper {
      *
      * @param bodyLanguageOption Body language policy
      *
+     * @param locale The locale use to say something, if it's null use the one of the device.
+     *
      * @param throwOnStop By default it's true. Does this method throw when the stop api is called and stop it.
      * Could be useful to set it to false when we want to continue actions scenario after a stop
      *
@@ -99,6 +103,8 @@ interface Pepper {
      * @param concepts Set of concept we want to recognize
      *
      * @param bodyLanguageOption Body language policy
+     *
+     * @param locale The locale use to listen sentence, if it's null use the one of the device.
      *
      * @param throwOnStop By default it's true. Does this method throw when the stop api is called and stop it.
      * Could be useful to set it to false when we want to continue actions scenario after a stop
@@ -157,6 +163,8 @@ interface Pepper {
      *
      * @param gotoBookmark Name of the bookmark in the main topic to go to. If it not set the discussion
      * will wait for a rules to match
+     *
+     * @param locale The locale use to discuss about something, if it's null use the one of the device.
      *
      * @param throwOnStop By default it's true. Does this method throw when the stop api is called and stop it.
      * Could be useful to set it to false when we want to continue actions scenario after a stop

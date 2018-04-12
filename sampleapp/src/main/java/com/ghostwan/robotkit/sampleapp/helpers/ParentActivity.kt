@@ -6,7 +6,7 @@ import android.support.design.widget.Snackbar
 import android.support.v7.app.AppCompatActivity
 import android.view.View
 import com.aldebaran.qi.QiException
-import com.ghostwan.robotkit.robot.pepper.MyPepper
+import com.ghostwan.robotkit.robot.pepper.LocalPepper
 import com.ghostwan.robotkit.robot.pepper.Pepper
 import com.ghostwan.robotkit.robot.pepper.exception.RobotUnavailableException
 import com.ghostwan.robotkit.robot.pepper.ext.setOnClickSafeCoroutine
@@ -59,7 +59,7 @@ abstract class ParentActivity : AppCompatActivity() {
         }, this::onError)
 
 
-        pepper = MyPepper(this)
+        pepper = LocalPepper(this)
         pepper.setOnRobotLost(this::onRobotDisconnected)
     }
 

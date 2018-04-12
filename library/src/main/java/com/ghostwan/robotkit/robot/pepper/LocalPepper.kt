@@ -11,8 +11,8 @@ import com.aldebaran.qi.sdk.core.SessionManager
 import com.ghostwan.robotkit.robot.pepper.`object`.*
 import com.ghostwan.robotkit.robot.pepper.ext.*
 import com.ghostwan.robotkit.robot.pepper.util.*
+import kotlinx.coroutines.experimental.CancellationException
 import java.util.*
-import java.util.concurrent.CancellationException
 import kotlin.collections.ArrayList
 import kotlin.collections.HashMap
 
@@ -20,7 +20,7 @@ import kotlin.collections.HashMap
 /**
  * Created by erwan on 10/03/2018.
  */
-class MyPepper(activity: Activity) : Pepper {
+class LocalPepper(activity: Activity) : Pepper {
 
     private var futures: MutableMap<Future<*>, Array<out Action>> = HashMap()
     private var util: PepperUtil = PepperUtil()

@@ -6,7 +6,7 @@ import android.support.design.widget.Snackbar
 import android.support.v7.app.AppCompatActivity
 import android.view.View
 import com.aldebaran.qi.QiException
-import com.ghostwan.robotkit.robot.pepper.MyPepper
+import com.ghostwan.robotkit.robot.pepper.LocalPepper
 import com.ghostwan.robotkit.robot.pepper.`object`.*
 import com.ghostwan.robotkit.robot.pepper.exception.RobotUnavailableException
 import com.ghostwan.robotkit.robot.pepper.ext.inUISafe
@@ -18,12 +18,12 @@ import kotlinx.coroutines.experimental.CancellationException
 
 class StopActivity : AppCompatActivity() {
 
-    private lateinit var pepper: MyPepper
+    private lateinit var pepper: LocalPepper
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_stop_acivity)
-        pepper = MyPepper(this)
+        pepper = LocalPepper(this)
 
         buttonSay.setOnClickCoroutine{
             pepper.say(R.string.lorem_lpsum, onResult = this@StopActivity::onResult)
