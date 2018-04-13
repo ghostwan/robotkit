@@ -9,6 +9,13 @@
 <br/>
 <h1>Discussion</h1>
 <code><span class="keyword">class </span><span class="identifier">Discussion</span></code>
+<p>Object that handle discussion data.</p>
+<p>This is useful for power use of the discuss API:</p>
+<ul><li>The Discussion can be save and restore</li>
+<li>Specific variable can be retrieved</li>
+<li>Bookmarks and variables can be followed</li>
+<li>Possibility to go to a specific bookmark while the discussion is running</li>
+</ul>
 <h3>Constructors</h3>
 <table>
 <tbody>
@@ -17,7 +24,9 @@
 <p><a href="-init-.html">&lt;init&gt;</a></p>
 </td>
 <td>
-<code><span class="identifier">Discussion</span><span class="symbol">(</span><span class="identifier" id="com.ghostwan.robotkit.robot.pepper.object.Discussion$<init>(android.content.Context, kotlin.IntArray, java.util.Locale)/context">context</span><span class="symbol">:</span>&nbsp;<a href="https://developer.android.com/reference/android/content/Context.html"><span class="identifier">Context</span></a><span class="symbol">, </span><span class="keyword">vararg</span> <span class="identifier" id="com.ghostwan.robotkit.robot.pepper.object.Discussion$<init>(android.content.Context, kotlin.IntArray, java.util.Locale)/integers">integers</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a><span class="symbol">, </span><span class="identifier" id="com.ghostwan.robotkit.robot.pepper.object.Discussion$<init>(android.content.Context, kotlin.IntArray, java.util.Locale)/locale">locale</span><span class="symbol">:</span>&nbsp;<a href="https://developer.android.com/reference/java/util/Locale.html"><span class="identifier">Locale</span></a><span class="symbol">?</span>&nbsp;<span class="symbol">=</span>&nbsp;null<span class="symbol">)</span></code></td>
+<code><span class="identifier">Discussion</span><span class="symbol">(</span><span class="identifier" id="com.ghostwan.robotkit.robot.pepper.object.Discussion$<init>(android.content.Context, kotlin.IntArray, java.util.Locale)/context">context</span><span class="symbol">:</span>&nbsp;<a href="https://developer.android.com/reference/android/content/Context.html"><span class="identifier">Context</span></a><span class="symbol">, </span><span class="keyword">vararg</span> <span class="identifier" id="com.ghostwan.robotkit.robot.pepper.object.Discussion$<init>(android.content.Context, kotlin.IntArray, java.util.Locale)/topicsRes">topicsRes</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a><span class="symbol">, </span><span class="identifier" id="com.ghostwan.robotkit.robot.pepper.object.Discussion$<init>(android.content.Context, kotlin.IntArray, java.util.Locale)/locale">locale</span><span class="symbol">:</span>&nbsp;<a href="https://developer.android.com/reference/java/util/Locale.html"><span class="identifier">Locale</span></a><span class="symbol">?</span>&nbsp;<span class="symbol">=</span>&nbsp;null<span class="symbol">)</span></code>
+<p>Construct a Discussion object that will handle the discussion data</p>
+</td>
 </tr>
 </tbody>
 </table>
@@ -76,63 +85,81 @@
 <p><a href="clear-data.html">clearData</a></p>
 </td>
 <td>
-<code><span class="keyword">fun </span><span class="identifier">clearData</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+<code><span class="keyword">fun </span><span class="identifier">clearData</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<p>Clear discussion data</p>
+</td>
 </tr>
 <tr>
 <td>
 <p><a href="get-variable.html">getVariable</a></p>
 </td>
 <td>
-<code><span class="keyword">suspend</span> <span class="keyword">fun </span><span class="identifier">getVariable</span><span class="symbol">(</span><span class="identifier" id="com.ghostwan.robotkit.robot.pepper.object.Discussion$getVariable(kotlin.String)/name">name</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a></code></td>
+<code><span class="keyword">suspend</span> <span class="keyword">fun </span><span class="identifier">getVariable</span><span class="symbol">(</span><span class="identifier" id="com.ghostwan.robotkit.robot.pepper.object.Discussion$getVariable(kotlin.String)/name">name</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a></code>
+<p>Get a discussion variable</p>
+</td>
 </tr>
 <tr>
 <td>
 <p><a href="get-variables.html">getVariables</a></p>
 </td>
 <td>
-<code><span class="keyword">fun </span><span class="identifier">getVariables</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html"><span class="identifier">List</span></a><span class="symbol">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">&gt;</span></code></td>
+<code><span class="keyword">fun </span><span class="identifier">getVariables</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html"><span class="identifier">List</span></a><span class="symbol">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">&gt;</span></code>
+<p>Get the list of variable's name in this discussion</p>
+</td>
 </tr>
 <tr>
 <td>
 <p><a href="goto-bookmark.html">gotoBookmark</a></p>
 </td>
 <td>
-<code><span class="keyword">suspend</span> <span class="keyword">fun </span><span class="identifier">gotoBookmark</span><span class="symbol">(</span><span class="identifier" id="com.ghostwan.robotkit.robot.pepper.object.Discussion$gotoBookmark(kotlin.String, kotlin.Int)/name">name</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">, </span><span class="identifier" id="com.ghostwan.robotkit.robot.pepper.object.Discussion$gotoBookmark(kotlin.String, kotlin.Int)/topic">topic</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a>&nbsp;<span class="symbol">=</span>&nbsp;mainTopic<span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+<code><span class="keyword">suspend</span> <span class="keyword">fun </span><span class="identifier">gotoBookmark</span><span class="symbol">(</span><span class="identifier" id="com.ghostwan.robotkit.robot.pepper.object.Discussion$gotoBookmark(kotlin.String, kotlin.Int)/name">name</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">, </span><span class="identifier" id="com.ghostwan.robotkit.robot.pepper.object.Discussion$gotoBookmark(kotlin.String, kotlin.Int)/topic">topic</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a>&nbsp;<span class="symbol">=</span>&nbsp;mainTopic<span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<p>Go to a specific bookmark</p>
+</td>
 </tr>
 <tr>
 <td>
 <p><a href="restore-data.html">restoreData</a></p>
 </td>
 <td>
-<code><span class="keyword">fun </span><span class="identifier">restoreData</span><span class="symbol">(</span><span class="identifier" id="com.ghostwan.robotkit.robot.pepper.object.Discussion$restoreData(android.content.Context, kotlin.Boolean, kotlin.Boolean)/context">context</span><span class="symbol">:</span>&nbsp;<a href="https://developer.android.com/reference/android/content/Context.html"><span class="identifier">Context</span></a><span class="symbol">, </span><span class="identifier" id="com.ghostwan.robotkit.robot.pepper.object.Discussion$restoreData(android.content.Context, kotlin.Boolean, kotlin.Boolean)/restoreVariable">restoreVariable</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html"><span class="identifier">Boolean</span></a>&nbsp;<span class="symbol">=</span>&nbsp;true<span class="symbol">, </span><span class="identifier" id="com.ghostwan.robotkit.robot.pepper.object.Discussion$restoreData(android.content.Context, kotlin.Boolean, kotlin.Boolean)/restoreState">restoreState</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html"><span class="identifier">Boolean</span></a>&nbsp;<span class="symbol">=</span>&nbsp;true<span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html"><span class="identifier">Boolean</span></a></code></td>
+<code><span class="keyword">fun </span><span class="identifier">restoreData</span><span class="symbol">(</span><span class="identifier" id="com.ghostwan.robotkit.robot.pepper.object.Discussion$restoreData(android.content.Context, kotlin.Boolean, kotlin.Boolean)/context">context</span><span class="symbol">:</span>&nbsp;<a href="https://developer.android.com/reference/android/content/Context.html"><span class="identifier">Context</span></a><span class="symbol">, </span><span class="identifier" id="com.ghostwan.robotkit.robot.pepper.object.Discussion$restoreData(android.content.Context, kotlin.Boolean, kotlin.Boolean)/restoreVariable">restoreVariable</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html"><span class="identifier">Boolean</span></a>&nbsp;<span class="symbol">=</span>&nbsp;true<span class="symbol">, </span><span class="identifier" id="com.ghostwan.robotkit.robot.pepper.object.Discussion$restoreData(android.content.Context, kotlin.Boolean, kotlin.Boolean)/restoreState">restoreState</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html"><span class="identifier">Boolean</span></a>&nbsp;<span class="symbol">=</span>&nbsp;true<span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html"><span class="identifier">Boolean</span></a></code>
+<p>Restore discussion data</p>
+</td>
 </tr>
 <tr>
 <td>
 <p><a href="save-data.html">saveData</a></p>
 </td>
 <td>
-<code><span class="keyword">suspend</span> <span class="keyword">fun </span><span class="identifier">saveData</span><span class="symbol">(</span><span class="identifier" id="com.ghostwan.robotkit.robot.pepper.object.Discussion$saveData(android.content.Context)/context">context</span><span class="symbol">:</span>&nbsp;<a href="https://developer.android.com/reference/android/content/Context.html"><span class="identifier">Context</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+<code><span class="keyword">suspend</span> <span class="keyword">fun </span><span class="identifier">saveData</span><span class="symbol">(</span><span class="identifier" id="com.ghostwan.robotkit.robot.pepper.object.Discussion$saveData(android.content.Context)/context">context</span><span class="symbol">:</span>&nbsp;<a href="https://developer.android.com/reference/android/content/Context.html"><span class="identifier">Context</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<p>Save discussion data; variables and last bookmark reached</p>
+</td>
 </tr>
 <tr>
 <td>
 <p><a href="set-on-bookmark-reached.html">setOnBookmarkReached</a></p>
 </td>
 <td>
-<code><span class="keyword">fun </span><span class="identifier">setOnBookmarkReached</span><span class="symbol">(</span><span class="identifier" id="com.ghostwan.robotkit.robot.pepper.object.Discussion$setOnBookmarkReached(kotlin.Function1((kotlin.String, kotlin.Unit)))/onBookmarkReached">onBookmarkReached</span><span class="symbol">:</span>&nbsp;<span class="symbol">(</span><span class="identifier">name</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a>&nbsp;<span class="symbol">=</span>&nbsp;null<span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+<code><span class="keyword">fun </span><span class="identifier">setOnBookmarkReached</span><span class="symbol">(</span><span class="identifier" id="com.ghostwan.robotkit.robot.pepper.object.Discussion$setOnBookmarkReached(kotlin.Function1((kotlin.String, kotlin.Unit)))/onBookmarkReached">onBookmarkReached</span><span class="symbol">:</span>&nbsp;<span class="symbol">(</span><span class="identifier">name</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a>&nbsp;<span class="symbol">=</span>&nbsp;null<span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<p>Set the listener which be called when a bookmark is reached in the discussion</p>
+</td>
 </tr>
 <tr>
 <td>
 <p><a href="set-on-variable-changed.html">setOnVariableChanged</a></p>
 </td>
 <td>
-<code><span class="keyword">fun </span><span class="identifier">setOnVariableChanged</span><span class="symbol">(</span><span class="identifier" id="com.ghostwan.robotkit.robot.pepper.object.Discussion$setOnVariableChanged(kotlin.Function2((kotlin.String, , kotlin.Unit)))/onVariableChanged">onVariableChanged</span><span class="symbol">:</span>&nbsp;<span class="symbol">(</span><span class="identifier">name</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">,</span>&nbsp;<span class="identifier">value</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a>&nbsp;<span class="symbol">=</span>&nbsp;null<span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+<code><span class="keyword">fun </span><span class="identifier">setOnVariableChanged</span><span class="symbol">(</span><span class="identifier" id="com.ghostwan.robotkit.robot.pepper.object.Discussion$setOnVariableChanged(kotlin.Function2((kotlin.String, , kotlin.Unit)))/onVariableChanged">onVariableChanged</span><span class="symbol">:</span>&nbsp;<span class="symbol">(</span><span class="identifier">name</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">,</span>&nbsp;<span class="identifier">value</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a>&nbsp;<span class="symbol">=</span>&nbsp;null<span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<p>Set the listener which be called when a variable change</p>
+</td>
 </tr>
 <tr>
 <td>
 <p><a href="set-variable.html">setVariable</a></p>
 </td>
 <td>
-<code><span class="keyword">suspend</span> <span class="keyword">fun </span><span class="identifier">setVariable</span><span class="symbol">(</span><span class="identifier" id="com.ghostwan.robotkit.robot.pepper.object.Discussion$setVariable(kotlin.String, kotlin.String)/name">name</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">, </span><span class="identifier" id="com.ghostwan.robotkit.robot.pepper.object.Discussion$setVariable(kotlin.String, kotlin.String)/value">value</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+<code><span class="keyword">suspend</span> <span class="keyword">fun </span><span class="identifier">setVariable</span><span class="symbol">(</span><span class="identifier" id="com.ghostwan.robotkit.robot.pepper.object.Discussion$setVariable(kotlin.String, kotlin.String)/name">name</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">, </span><span class="identifier" id="com.ghostwan.robotkit.robot.pepper.object.Discussion$setVariable(kotlin.String, kotlin.String)/value">value</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<p>Set the value of a discussion variable</p>
+</td>
 </tr>
 </tbody>
 </table>

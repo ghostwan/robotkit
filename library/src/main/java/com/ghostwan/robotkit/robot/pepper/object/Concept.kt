@@ -8,6 +8,9 @@ import java.util.*
  */
 sealed class Concept
 
+/**
+ * A ResConcept is a Concept specialisation which use Android resource ID
+ */
 class ResConcept : Concept {
     internal var phrases = ArrayList<Int>()
 
@@ -18,7 +21,9 @@ class ResConcept : Concept {
     fun isPhraseInConcept(phrase: Int) = phrases.contains(phrase)
 }
 
-
+/**
+ * A StrConcept is a Concept specialisation which use strings
+ */
 class StrConcept : Concept {
     internal var phrases = ArrayList<String>()
 

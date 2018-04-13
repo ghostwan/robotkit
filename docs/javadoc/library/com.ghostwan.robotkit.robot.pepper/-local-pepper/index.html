@@ -1,15 +1,17 @@
 <HTML>
 <HEAD>
 <meta charset="UTF-8">
-<title>MyPepper - library</title>
+<title>LocalPepper - library</title>
 <link rel="stylesheet" href="../../../style.css">
 </HEAD>
 <BODY>
-<a href="../../index.html">library</a>&nbsp;/&nbsp;<a href="../index.html">com.ghostwan.robotkit.robot.pepper</a>&nbsp;/&nbsp;<a href="./index.html">MyPepper</a><br/>
+<a href="../../index.html">library</a>&nbsp;/&nbsp;<a href="../index.html">com.ghostwan.robotkit.robot.pepper</a>&nbsp;/&nbsp;<a href="./index.html">LocalPepper</a><br/>
 <br/>
-<h1>MyPepper</h1>
-<code><span class="keyword">class </span><span class="identifier">MyPepper</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="../-pepper/index.html"><span class="identifier">Pepper</span></a></code>
-<p>Created by erwan on 10/03/2018.</p>
+<h1>LocalPepper</h1>
+<code><span class="keyword">class </span><span class="identifier">LocalPepper</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="../-pepper/index.html"><span class="identifier">Pepper</span></a></code>
+<p>This class is useful if the app is running on Pepper's tablet</p>
+<p>If the app is running on pepper's tablet this class will handle the connection to RobotService
+to retrieve the endpoints and authenticated tokens.</p>
 <h3>Constructors</h3>
 <table>
 <tbody>
@@ -18,8 +20,8 @@
 <p><a href="-init-.html">&lt;init&gt;</a></p>
 </td>
 <td>
-<code><span class="identifier">MyPepper</span><span class="symbol">(</span><span class="identifier" id="com.ghostwan.robotkit.robot.pepper.LocalPepper$<init>(android.app.Activity)/activity">activity</span><span class="symbol">:</span>&nbsp;<a href="https://developer.android.com/reference/android/app/Activity.html"><span class="identifier">Activity</span></a><span class="symbol">)</span></code>
-<p>Created by erwan on 10/03/2018.</p>
+<code><span class="identifier">LocalPepper</span><span class="symbol">(</span><span class="identifier" id="com.ghostwan.robotkit.robot.pepper.LocalPepper$<init>(android.app.Activity)/activity">activity</span><span class="symbol">:</span>&nbsp;<a href="https://developer.android.com/reference/android/app/Activity.html"><span class="identifier">Activity</span></a><span class="symbol">)</span></code>
+<p>This class is useful if the app is running on Pepper's tablet</p>
 </td>
 </tr>
 </tbody>
@@ -103,7 +105,9 @@
 <p><a href="is-connected.html">isConnected</a></p>
 </td>
 <td>
-<code><span class="keyword">fun </span><span class="identifier">isConnected</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html"><span class="identifier">Boolean</span></a></code></td>
+<code><span class="keyword">fun </span><span class="identifier">isConnected</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html"><span class="identifier">Boolean</span></a></code>
+<p>Tell if the connection with robot is still working</p>
+</td>
 </tr>
 <tr>
 <td>
@@ -130,7 +134,9 @@
 <p><a href="set-on-robot-lost.html">setOnRobotLost</a></p>
 </td>
 <td>
-<code><span class="keyword">fun </span><span class="identifier">setOnRobotLost</span><span class="symbol">(</span><span class="identifier" id="com.ghostwan.robotkit.robot.pepper.LocalPepper$setOnRobotLost(kotlin.Function1((kotlin.String, kotlin.Unit)))/function">function</span><span class="symbol">:</span>&nbsp;<span class="symbol">(</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+<code><span class="keyword">fun </span><span class="identifier">setOnRobotLost</span><span class="symbol">(</span><span class="identifier" id="com.ghostwan.robotkit.robot.pepper.LocalPepper$setOnRobotLost(kotlin.Function1((kotlin.String, kotlin.Unit)))/function">function</span><span class="symbol">:</span>&nbsp;<span class="symbol">(</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<p>Set the callback called when the connection with robot is lost</p>
+</td>
 </tr>
 <tr>
 <td>
@@ -138,7 +144,7 @@
 </td>
 <td>
 <code><span class="keyword">fun </span><span class="identifier">stop</span><span class="symbol">(</span><span class="keyword">vararg</span> <span class="identifier" id="com.ghostwan.robotkit.robot.pepper.LocalPepper$stop(kotlin.Array((com.ghostwan.robotkit.robot.pepper.object.Action)))/actions">actions</span><span class="symbol">:</span>&nbsp;<a href="../../com.ghostwan.robotkit.robot.pepper.object/-action/index.html"><span class="identifier">Action</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
-<p>If no action is specify stop all Pepper's actions running</p>
+<p>Stop all or a specific set of actions</p>
 </td>
 </tr>
 </tbody>

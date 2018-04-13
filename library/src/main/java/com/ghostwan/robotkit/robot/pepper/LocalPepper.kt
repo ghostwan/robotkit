@@ -18,7 +18,11 @@ import kotlin.collections.HashMap
 
 
 /**
- * Created by erwan on 10/03/2018.
+ * This class is useful if the app is running on Pepper's tablet
+ *
+ * If the app is running on pepper's tablet this class will handle the connection to RobotService
+ * to retrieve the endpoints and authenticated tokens.
+ *
  */
 class LocalPepper(activity: Activity) : Pepper {
 

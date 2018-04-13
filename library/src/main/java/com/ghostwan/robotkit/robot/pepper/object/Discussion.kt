@@ -33,7 +33,15 @@ data class NAOqiData(var discuss: Discuss? = null,
     constructor() : this(null, HashMap(), HashMap())
 }
 
-
+/**
+ * Object that handle discussion data.
+ *
+ * This is useful for power use of the discuss API:
+ * - The Discussion can be save and restore
+ * - Specific variable can be retrieved
+ * - Bookmarks and variables can be followed
+ * - Possibility to go to a specific bookmark while the discussion is running
+ */
 class Discussion {
     var id: String = ""
     var mainTopic : Int
@@ -80,6 +88,29 @@ class Discussion {
             i++
         }
         return matcher.appendTail(buffer).toString()
+    }
+
+    internal suspend fun prepare(discuss: Discuss, topics : Map<Int, Topic>) : String?{
+        naoqiData.discuss = discuss
+        naoqiData.qiChatVariables.clear()
+        naoqiData.qiTopics = topics
+
+        getVariables().forEach {key ->
+            val qichatvar =  discuss.async()?.variable(key).await()
+            naoqiData.qiChatVariables[key] = qichatvar
+            qichatvar.setOnValueChangedListener {
+                onVariableChanged?.invoke(key, it)
+            }
+            if(key in data.variables) {
+                qichatvar.async().setValue(data.variables[key]).await()
+            }
+        }
+
+        discuss.async().setOnBookmarkReachedListener {
+            data.bookmark = it.name
+            onBookmarkReached?.invoke(it.name)
+        }
+        return data.bookmark
     }
 
     /**
@@ -192,29 +223,6 @@ class Discussion {
         else
             warning("Fail to delete ${getFilename()}!")
         data = Data()
-    }
-
-    internal suspend fun prepare(discuss: Discuss, topics : Map<Int, Topic>) : String?{
-        naoqiData.discuss = discuss
-        naoqiData.qiChatVariables.clear()
-        naoqiData.qiTopics = topics
-
-        getVariables().forEach {key ->
-            val qichatvar =  discuss.async()?.variable(key).await()
-            naoqiData.qiChatVariables[key] = qichatvar
-            qichatvar.setOnValueChangedListener {
-                onVariableChanged?.invoke(key, it)
-            }
-            if(key in data.variables) {
-                qichatvar.async().setValue(data.variables[key]).await()
-            }
-        }
-
-        discuss.async().setOnBookmarkReachedListener {
-            data.bookmark = it.name
-            onBookmarkReached?.invoke(it.name)
-        }
-        return data.bookmark
     }
 
     /**

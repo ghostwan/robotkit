@@ -25,17 +25,24 @@ interface Pepper {
     suspend fun disconnect()
 
     /**
+     * Set the callback called when the connection with robot is lost
+     *
      * @param function Lambda called when the connection with robot is lost. Give the reason why.
      */
     fun setOnRobotLost(function: (String) -> Unit)
 
     /**
+     * Tell if the connection with robot is still working
+     *
      * @return if pepper is connected
      */
     fun isConnected() : Boolean
 
     /**
+     * Stop all or a specific set of actions
+     *
      * If no action is specify stop all Pepper's actions running
+     *
      * @param actions list of actions to stop
      */
     fun stop(vararg actions : Action)
