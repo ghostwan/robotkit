@@ -160,7 +160,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        pepper = MyPepper(this)
+        pepper = LocalPepper(this)
         pepper.setOnRobotLost {
             println("Robot Lost : $it")
         }
@@ -187,7 +187,7 @@ To deploy on a virtual Pepper refers to [SoftBank Robotics Documentation](https:
 [Pepper KDOC](https://ghostwan.github.io/robotkit/docs/javadoc/library/com.ghostwan.robotkit.robot.pepper/-pepper/index.html)
 
 ``` kotlin
-pepper = MyPepper(this@MainActivity)
+pepper = LocalPepper(this@MainActivity)
 pepper.setOnRobotLost {
     println("Robot Lost : $it")
 }
@@ -270,13 +270,13 @@ Simple API:
 Start a discussion
 
 ``` kotlin
-val result : String = myPepper.discuss(R.raw.cooking_dicussion)
+val result : String = pepper.discuss(R.raw.cooking_dicussion)
 ```
     
 Start a discussion and go to bookmark "intro"
 
 ``` kotlin
-val result : String = myPepper.discuss(R.raw.cooking_dicussion, gotoBookmark = "intro")
+val result : String = pepper.discuss(R.raw.cooking_dicussion, gotoBookmark = "intro")
 ```    
 
 Start a discussion in french and go to bookmark "intro"
@@ -292,7 +292,7 @@ val discussion = Discussion(R.raw.cooking_dicussion)
 //val discussion = Discussion(this, R.raw.cooking_dicussion, locale = Locale.FRENCH)
 
 discussion.restoreData(this)
-myPepper.discuss(discussion)
+pepper.discuss(discussion)
     
     
 ...
@@ -319,8 +319,8 @@ discussion.gotoBookmark("mcdo")
 
 ### Allow multiples task in parallel
 ``` kotlin
-val t1 = uiAsync { myPepper.say("Nous voilà dans la cuisine!") }
-val t2 = uiAsync { myPepper.animate(R.raw.exclamation_both_hands_a003) }
+val t1 = uiAsync { pepper.say("Nous voilà dans la cuisine!") }
+val t2 = uiAsync { pepper.animate(R.raw.exclamation_both_hands_a003) }
 val t3 = uiAsync { nao.animate(R.raw.exclamation_both_hands_a003) }
 
 println("Task are done ${t1.await()} ${t2.await()} ${t3.await()}")
@@ -392,7 +392,7 @@ Creation of an interface Robot which will be implemented by all Robot supported
 
 ``` kotlin 
 pepper : Robot = RemotePepper(this,"pepper.local")
-myPepper : Robot = MyPepper(this)
+pepper : Robot = LocalPepper(this)
 nao : Robot = RemoteNao(this,"nao.local")
 cozmo : Robot = RemoteCozmo(this, "cozmo.local")
 ```    
@@ -427,7 +427,7 @@ Expert API:
 val animation = Animation(R.raw.dog_a001)
 animation.getDuration()
 animation.getLabels()
-myPepper.animate(animation)
+pepper.animate(animation)
 ```
 
 ### Move around #16
@@ -458,8 +458,8 @@ Allow multiple robots to share a location that they know about #18
 ### Follow a robot #20
 
 ``` kotlin
-nao.follow(myPepper)
-myPepper.follow(cozmo)
+nao.follow(pepper)
+pepper.follow(cozmo)
 ```
     
 An API for a Robot to follow another robot
@@ -468,21 +468,21 @@ An API for a Robot to follow another robot
 ### Remember something
 
 ``` kotlin
-myPepper.remember("discussion:result", result)
-myPepper.remember("discussion:state", state)
+pepper.remember("discussion:result", result)
+pepper.remember("discussion:state", state)
 nao.remember("discussion:result", result)
 ```    
     
 ### Wait for a human
 
 ``` kotlin
-val human : Human = myPepper.waitForHuman()
+val human : Human = pepper.waitForHuman()
 ```
     
 ### Engage a human
 
 ``` kotlin
-myPepper.engage(human)
+pepper.engage(human)
 ```
     
 ### Detect touch
