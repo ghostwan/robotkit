@@ -5,9 +5,9 @@ import android.support.annotation.RawRes
 import com.aldebaran.qi.sdk.`object`.conversation.Discuss
 import com.aldebaran.qi.sdk.`object`.conversation.QiChatVariable
 import com.aldebaran.qi.sdk.`object`.conversation.Topic
+import com.ghostwan.robotkit.ext.getLocalizedRaw
+import com.ghostwan.robotkit.ext.sha512
 import com.ghostwan.robotkit.naoqi.ext.await
-import com.ghostwan.robotkit.naoqi.ext.getLocalizedRaw
-import com.ghostwan.robotkit.naoqi.ext.sha512
 import com.ghostwan.robotkit.util.info
 import com.ghostwan.robotkit.util.warning
 import kotlinx.serialization.Optional
@@ -42,7 +42,7 @@ data class NAOqiData(var discuss: Discuss? = null,
  * - Bookmarks and variables can be followed
  * - Possibility to go to a specific bookmark while the discussion is running
  */
-class Discussion {
+class Discussion{
     var id: String = ""
     var mainTopic : Int
     var topics = HashMap<Int, String>()

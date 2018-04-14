@@ -3,8 +3,8 @@ package com.ghostwan.robotkit.sampleapp.samples
 import android.media.MediaPlayer
 import android.view.View
 import com.ghostwan.robotkit.naoqi.`object`.Discussion
-import com.ghostwan.robotkit.naoqi.ext.random
-import com.ghostwan.robotkit.naoqi.ext.setOnClickCoroutine
+import com.ghostwan.robotkit.ext.random
+import com.ghostwan.robotkit.ext.setOnClickCoroutine
 import com.ghostwan.robotkit.util.info
 import com.ghostwan.robotkit.util.ui
 import com.ghostwan.robotkit.sampleapp.helpers.MultiLocaleActivity

@@ -6,12 +6,13 @@ import android.support.design.widget.Snackbar
 import android.support.v7.app.AppCompatActivity
 import android.view.View
 import com.aldebaran.qi.QiException
-import com.ghostwan.robotkit.naoqi.pepper.LocalPepper
-import com.ghostwan.robotkit.naoqi.pepper.Pepper
+import com.ghostwan.robotkit.naoqi.robot.LocalPepper
+import com.ghostwan.robotkit.naoqi.robot.Pepper
 import com.ghostwan.robotkit.exception.RobotUnavailableException
-import com.ghostwan.robotkit.naoqi.ext.setOnClickSafeCoroutine
-import com.ghostwan.robotkit.naoqi.ext.inUI
-import com.ghostwan.robotkit.naoqi.ext.inUISafe
+import com.ghostwan.robotkit.ext.setOnClickSafeCoroutine
+import com.ghostwan.robotkit.ext.inUI
+import com.ghostwan.robotkit.ext.inUISafe
+import com.ghostwan.robotkit.naoqi.robot.RemotePepper
 import com.ghostwan.robotkit.util.exception
 import com.ghostwan.robotkit.sampleapp.R
 import kotlinx.android.synthetic.main.activity_parent.*
@@ -59,7 +60,12 @@ abstract class ParentActivity : AppCompatActivity() {
         }, this::onError)
 
 
-        pepper = LocalPepper(this)
+        pepper = if(intent.hasExtra("address")) {
+            RemotePepper(this, intent.getStringExtra("address"))
+        }
+        else {
+            LocalPepper(this)
+        }
         pepper.setOnRobotLost(this::onRobotDisconnected)
     }
 

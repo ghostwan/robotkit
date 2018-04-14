@@ -2,6 +2,11 @@ package com.ghostwan.robotkit.util
 
 import android.util.Log
 
+/**
+ * Utilities free functions
+ */
+
+const val TAG = "RobotKit"
 
 fun info(message: String, tag: String=TAG) {
     Log.i(tag, message)

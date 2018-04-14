@@ -11,7 +11,7 @@ import kotlin.coroutines.experimental.suspendCoroutine
 /**
  * Created by erwan on 10/03/2018.
  */
-suspend fun SessionManager.await(context: Context, robotCallback: ((String) -> Unit)?): Session =
+suspend fun SessionManager.await(context: Context, robotLostCallback: ((String) -> Unit)?): Session =
         suspendCoroutine { cont ->
             val callback = object : SessionManager.Callback {
                 override fun onRobotReady(session: Session?) {
@@ -23,15 +23,14 @@ suspend fun SessionManager.await(context: Context, robotCallback: ((String) -> U
                 }
 
                 override fun onRobotLost() {
-                    if(robotCallback != null)
-                        robotCallback("Robot lost")
+                    robotLostCallback?.invoke("Robot lost")
                 }
             }
             register(context, callback)
         }
 
 
-suspend fun FocusManager.await(robotCallback: ((String) -> Unit)?): AnyObject =
+suspend fun FocusManager.await(focusLostCallback: ((String) -> Unit)?): AnyObject =
         suspendCoroutine { cont ->
             val callback = object : FocusManager.Callback {
                 override fun onFocusGained(robotContext: AnyObject?) {
@@ -43,8 +42,7 @@ suspend fun FocusManager.await(robotCallback: ((String) -> Unit)?): AnyObject =
                 }
 
                 override fun onFocusLost() {
-                    if(robotCallback != null)
-                        robotCallback("Focus lost")
+                    focusLostCallback?.invoke("Focus lost")
                 }
             }
             register(callback)

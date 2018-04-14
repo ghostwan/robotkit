@@ -1,4 +1,4 @@
-package com.ghostwan.robotkit.naoqi.ext
+package com.ghostwan.robotkit.ext
 
 import java.util.*
 

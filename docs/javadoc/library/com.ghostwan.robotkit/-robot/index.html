@@ -17,8 +17,8 @@
 <p><a href="connect.html">connect</a></p>
 </td>
 <td>
-<code><span class="keyword">abstract</span> <span class="keyword">suspend</span> <span class="keyword">fun </span><span class="identifier">connect</span><span class="symbol">(</span><span class="identifier" id="com.ghostwan.robotkit.Robot$connect(kotlin.String)/address">address</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">?</span>&nbsp;<span class="symbol">=</span>&nbsp;null<span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
-<p>Connect to the robot using is optional address</p>
+<code><span class="keyword">abstract</span> <span class="keyword">suspend</span> <span class="keyword">fun </span><span class="identifier">connect</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<p>Connect the robot</p>
 </td>
 </tr>
 <tr>
@@ -48,6 +48,15 @@
 <p>Set the callback called when the connection with robot is lost</p>
 </td>
 </tr>
+<tr>
+<td>
+<p><a href="stop.html">stop</a></p>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">stop</span><span class="symbol">(</span><span class="keyword">vararg</span> <span class="identifier" id="com.ghostwan.robotkit.Robot$stop(kotlin.Array((com.ghostwan.robotkit.object.Action)))/actions">actions</span><span class="symbol">:</span>&nbsp;<a href="../../com.ghostwan.robotkit.object/-action/index.html"><span class="identifier">Action</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<p>Stop all or a specific set of actions</p>
+</td>
+</tr>
 </tbody>
 </table>
 <h3>Inheritors</h3>
@@ -58,7 +67,7 @@
 <p><a href="../../com.ghostwan.robotkit.naoqi/-naoqi-robot/index.html">NaoqiRobot</a></p>
 </td>
 <td>
-<code><span class="keyword">interface </span><span class="identifier">NaoqiRobot</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="./index.html"><span class="identifier">Robot</span></a></code>
+<code><span class="keyword">abstract</span> <span class="keyword">class </span><span class="identifier">NaoqiRobot</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="./index.html"><span class="identifier">Robot</span></a></code>
 <p>Interface to call robotics API on Naoqi's robots</p>
 </td>
 </tr>

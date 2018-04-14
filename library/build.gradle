@@ -65,8 +65,10 @@ dokka {
     outputDirectory = "../docs/javadoc"
     skipEmptyPackages = true
     externalDocumentationLink {
-        url = new URL("https://android.aldebaran.com/sdk/doc/qisdk/")
         url = new URL("https://android.aldebaran.com/sdk/doc/libqi-java/")
+    }
+    externalDocumentationLink {
+        url = new URL("https://android.aldebaran.com/sdk/doc/qisdk/")
     }
 }
 

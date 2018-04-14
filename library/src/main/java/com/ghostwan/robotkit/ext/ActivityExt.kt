@@ -1,12 +1,15 @@
-package com.ghostwan.robotkit.naoqi.ext
+package com.ghostwan.robotkit.ext
 
 import android.app.Activity
 import android.content.Context
 import android.content.res.Configuration
 import android.support.annotation.RawRes
 import android.support.annotation.StringRes
-import kotlinx.coroutines.experimental.*
+import kotlinx.coroutines.experimental.Deferred
+import kotlinx.coroutines.experimental.Job
 import kotlinx.coroutines.experimental.android.UI
+import kotlinx.coroutines.experimental.async
+import kotlinx.coroutines.experimental.launch
 import java.util.*
 
 

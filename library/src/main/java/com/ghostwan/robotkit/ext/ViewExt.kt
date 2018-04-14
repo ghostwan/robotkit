@@ -1,4 +1,4 @@
-package com.ghostwan.robotkit.naoqi.ext
+package com.ghostwan.robotkit.ext
 
 import android.view.View
 import com.ghostwan.robotkit.util.ui

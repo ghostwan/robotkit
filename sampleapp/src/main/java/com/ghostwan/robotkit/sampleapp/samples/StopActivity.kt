@@ -6,15 +6,14 @@ import android.support.design.widget.Snackbar
 import android.support.v7.app.AppCompatActivity
 import android.view.View
 import com.aldebaran.qi.QiException
-import com.ghostwan.robotkit.`object`.Action
-import com.ghostwan.robotkit.`object`.Failure
-import com.ghostwan.robotkit.`object`.Result
-import com.ghostwan.robotkit.`object`.Success
-import com.ghostwan.robotkit.naoqi.pepper.LocalPepper
-import com.ghostwan.robotkit.naoqi.`object`.*
+import com.ghostwan.robotkit.`object`.*
+import com.ghostwan.robotkit.naoqi.robot.LocalPepper
 import com.ghostwan.robotkit.exception.RobotUnavailableException
-import com.ghostwan.robotkit.naoqi.ext.inUISafe
-import com.ghostwan.robotkit.naoqi.ext.setOnClickCoroutine
+import com.ghostwan.robotkit.naoqi.`object`.ResConcept
+import com.ghostwan.robotkit.ext.inUISafe
+import com.ghostwan.robotkit.ext.setOnClickCoroutine
+import com.ghostwan.robotkit.naoqi.robot.Pepper
+import com.ghostwan.robotkit.naoqi.robot.RemotePepper
 import com.ghostwan.robotkit.util.exception
 import com.ghostwan.robotkit.sampleapp.R
 import kotlinx.android.synthetic.main.activity_stop_acivity.*
@@ -22,12 +21,19 @@ import kotlinx.coroutines.experimental.CancellationException
 
 class StopActivity : AppCompatActivity() {
 
-    private lateinit var pepper: LocalPepper
+    private lateinit var pepper: Pepper
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_stop_acivity)
-        pepper = LocalPepper(this)
+
+        pepper = if(intent.hasExtra("address")) {
+            RemotePepper(this, intent.getStringExtra("address"))
+        }
+        else {
+            LocalPepper(this)
+        }
+
 
         buttonSay.setOnClickCoroutine{
             pepper.say(R.string.lorem_lpsum, onResult = this@StopActivity::onResult)

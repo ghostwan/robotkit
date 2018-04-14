@@ -1,16 +1,8 @@
 package com.ghostwan.robotkit.util
 
-import android.util.Log
 import kotlinx.coroutines.experimental.*
 import kotlinx.coroutines.experimental.android.UI
-import java.lang.ref.WeakReference
-import kotlin.reflect.KProperty
 
-/**
- * Utilities free functions
- */
-
-const val TAG = "RobotKit"
 
 /**
  * Call a coroutine lambda in Android UI thread

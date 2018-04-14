@@ -1,10 +1,13 @@
 package com.ghostwan.robotkit
 
+import com.ghostwan.robotkit.`object`.Action
+
 interface Robot {
+
     /**
-     * Connect to the robot using is optional address
+     * Connect the robot
      */
-    suspend fun connect(address: String? = null)
+    suspend fun connect()
 
     /**
      * Disconnect the robot
@@ -24,4 +27,14 @@ interface Robot {
      * @return if the robot is connected
      */
     fun isConnected() : Boolean
+
+    /**
+     * Stop all or a specific set of actions
+     *
+     * If no action is specify stop all NaoqiRobot's actions running
+     *
+     * @param actions list of actions to stop
+     */
+    fun stop(vararg actions : Action)
+
 }
