@@ -1,6 +1,6 @@
 package com.ghostwan.robotkit.sampleapp.samples
 
-import com.ghostwan.robotkit.robot.pepper.ext.inUIAsync
+import com.ghostwan.robotkit.naoqi.ext.inUIAsync
 import com.ghostwan.robotkit.sampleapp.R
 import com.ghostwan.robotkit.sampleapp.helpers.ParentActivity
 import kotlinx.android.synthetic.main.activity_multi_locales.*

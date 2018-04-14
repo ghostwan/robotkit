@@ -1,6 +1,6 @@
 package com.ghostwan.robotkit.sampleapp.samples
 
-import com.ghostwan.robotkit.robot.pepper.`object`.ResConcept
+import com.ghostwan.robotkit.naoqi.`object`.ResConcept
 import com.ghostwan.robotkit.sampleapp.helpers.MultiLocaleActivity
 import com.ghostwan.robotkit.sampleapp.R
 
