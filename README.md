@@ -378,6 +378,22 @@ fun onError(throwable : Throwable?) {
     }
 }
 ```
+
+*** 
+***
+*** 
+    
+    
+## API DOING
+
+### Connect to Remote Pepper #13
+
+``` kotlin
+pepper = RemotePepper(this, "pepper.local")
+
+//pepper = RemotePepper(this, "192.168.1.23")
+pepper.connect()    
+```
     
 *** 
 ***
@@ -398,12 +414,6 @@ cozmo : Robot = RemoteCozmo(this, "cozmo.local")
 ```    
 
 
-### Connect to Remote Pepper #13
-
-``` kotlin
-pepper = RemotePepper(this, "pepper.local")
-pepper.connect()    
-```	
 
 ### Connect to Remote Nao #14
 
