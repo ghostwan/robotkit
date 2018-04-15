@@ -3,27 +3,32 @@
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
+        android:gravity="center"
+        android:orientation="horizontal"
         android:weightSum="3"
         android:layout_height="match_parent"
         tools:context="com.ghostwan.robotkit.sampleapp.DispatchActivity">
 
     <Button
             android:text="Local"
+            android:layout_margin="10dp"
             android:layout_weight="1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_marginStart="245dp"
-            android:id="@+id/localButton"
-            android:layout_centerVertical="true"/>
+            android:id="@+id/localButton"/>
+
+    <Spinner
+            android:layout_margin="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/spinner"
+            android:layout_weight="1"/>
 
     <Button
             android:text="Remote"
+            android:layout_margin="10dp"
             android:layout_weight="1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="271dp"
-            android:id="@+id/remoteButton"
-            android:layout_centerVertical="true"
-            android:layout_alignParentEnd="true"/>
+            android:id="@+id/remoteButton"/>
 </LinearLayout>
