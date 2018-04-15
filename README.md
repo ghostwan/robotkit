@@ -386,22 +386,6 @@ fun onError(throwable : Throwable?) {
     
 ## API DOING
 
-### Connect to Remote Pepper #13
-
-``` kotlin
-pepper = RemotePepper(this, "pepper.local")
-
-//pepper = RemotePepper(this, "192.168.1.23")
-pepper.connect()    
-```
-    
-*** 
-***
-*** 
-    
-    
-## API TODO
-
 ### Multiple Robot support #27
 
 Creation of an interface Robot which will be implemented by all Robot supported
@@ -421,6 +405,36 @@ cozmo : Robot = RemoteCozmo(this, "cozmo.local")
 nao = RemoteNao(this, "nao.local")
 nao.connect()
 ```
+
+### Connect to Remote Pepper #13
+
+``` kotlin
+pepper = RemotePepper(this, "pepper.local")
+
+//pepper = RemotePepper(this, "192.168.1.23")
+pepper.connect()    
+```
+
+### Detect touch #23
+
+``` kotlin
+pepper.setOnBodyTouched {
+    when(it) {
+        Body.HEAD -> pepper.say("My head was touched")
+        Body.RIGHT_HAND -> pepper.say("My right hand was touched")
+        Body.LEFT_HAND -> pepper.say("My left hand was touched")
+    }
+}
+```
+
+*** 
+***
+*** 
+    
+    
+## API TODO
+
+
     
 ### Connect to Remote Cozmo
 
@@ -493,19 +507,7 @@ val human : Human = pepper.waitForHuman()
 
 ``` kotlin
 pepper.engage(human)
-```
-    
-### Detect touch
-
-``` kotlin
-pepper.setOnBodyTouched {
-    when(it) {
-        Body.HEAD -> pepper.say("My head was touched")
-        Body.RIGHT_HAND -> pepper.say("My right hand was touched")
-        Body.LEFT_HAND -> pepper.say("My left hand was touched")
-    }
-}
-```
+```    
 
 ### Control robot autonomous abilities 
 

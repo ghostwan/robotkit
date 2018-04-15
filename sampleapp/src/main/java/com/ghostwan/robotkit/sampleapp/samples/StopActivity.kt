@@ -13,7 +13,6 @@ import com.ghostwan.robotkit.naoqi.`object`.ResConcept
 import com.ghostwan.robotkit.ext.inUISafe
 import com.ghostwan.robotkit.ext.setOnClickCoroutine
 import com.ghostwan.robotkit.naoqi.robot.Pepper
-import com.ghostwan.robotkit.naoqi.robot.RemotePepper
 import com.ghostwan.robotkit.util.exception
 import com.ghostwan.robotkit.sampleapp.R
 import kotlinx.android.synthetic.main.activity_stop_acivity.*
@@ -28,7 +27,7 @@ class StopActivity : AppCompatActivity() {
         setContentView(R.layout.activity_stop_acivity)
 
         pepper = if(intent.hasExtra("address")) {
-            RemotePepper(this, intent.getStringExtra("address"))
+            Pepper(this, intent.getStringExtra("address"))
         }
         else {
             LocalPepper(this)
@@ -77,6 +76,15 @@ class StopActivity : AppCompatActivity() {
             pepper.connect()
             actionsLayout.visibility = View.VISIBLE
             stopActionsLayout.visibility = View.VISIBLE
+        }, this::onError)
+    }
+
+    override fun onStop() {
+        super.onStop()
+        inUISafe({
+            pepper.disconnect()
+            actionsLayout.visibility = View.INVISIBLE
+            stopActionsLayout.visibility = View.INVISIBLE
         }, this::onError)
     }
 

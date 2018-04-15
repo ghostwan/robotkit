@@ -12,7 +12,6 @@ import com.ghostwan.robotkit.exception.RobotUnavailableException
 import com.ghostwan.robotkit.ext.setOnClickSafeCoroutine
 import com.ghostwan.robotkit.ext.inUI
 import com.ghostwan.robotkit.ext.inUISafe
-import com.ghostwan.robotkit.naoqi.robot.RemotePepper
 import com.ghostwan.robotkit.util.exception
 import com.ghostwan.robotkit.sampleapp.R
 import kotlinx.android.synthetic.main.activity_parent.*
@@ -61,7 +60,7 @@ abstract class ParentActivity : AppCompatActivity() {
 
 
         pepper = if(intent.hasExtra("address")) {
-            RemotePepper(this, intent.getStringExtra("address"))
+            Pepper(this, intent.getStringExtra("address"))
         }
         else {
             LocalPepper(this)

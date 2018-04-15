@@ -17,6 +17,7 @@ import com.aldebaran.qi.sdk.`object`.human.HumanConverter
 import com.aldebaran.qi.sdk.`object`.humanawareness.HumanawarenessConverter
 import com.aldebaran.qi.sdk.`object`.knowledge.KnowledgeConverter
 import com.aldebaran.qi.sdk.`object`.sharedtopics.SharedtopicsConverter
+import com.aldebaran.qi.sdk.`object`.touch.Touch
 import com.aldebaran.qi.sdk.`object`.touch.TouchConverter
 import com.aldebaran.qi.sdk.serialization.EnumConverter
 import com.aldebaran.qi.serialization.QiSerializer
@@ -30,15 +31,17 @@ class NaoqiServices {
     private val serializer: QiSerializer = createQiSerializer()
 
     lateinit var conversation: Conversation
+    lateinit var touch: Touch
     lateinit var actuation: Actuation
     lateinit var focus: Focus
     lateinit var contextFactory: RobotContextFactory
 
     suspend fun retrieve(session: Session){
-        conversation = retrieveService(session!!, Conversation::class.java, "Conversation")
-        actuation = retrieveService(session!!, Actuation::class.java, "Actuation")
-        focus = retrieveService(session!!, Focus::class.java, "Focus")
-        contextFactory = retrieveService(session!!, RobotContextFactory::class.java, "ContextFactory")
+        conversation = retrieveService(session, Conversation::class.java, "Conversation")
+        actuation = retrieveService(session, Actuation::class.java, "Actuation")
+        focus = retrieveService(session, Focus::class.java, "Focus")
+        contextFactory = retrieveService(session, RobotContextFactory::class.java, "ContextFactory")
+        touch = retrieveService(session, Touch::class.java, "Touch")
         info("services retrieved")
     }
 

@@ -18,7 +18,7 @@
 <p><a href="-init-.html">&lt;init&gt;</a></p>
 </td>
 <td>
-<code><span class="identifier">NaoqiRobot</span><span class="symbol">(</span><span class="identifier" id="com.ghostwan.robotkit.naoqi.NaoqiRobot$<init>(android.app.Activity)/activity">activity</span><span class="symbol">:</span>&nbsp;<a href="https://developer.android.com/reference/android/app/Activity.html"><span class="identifier">Activity</span></a><span class="symbol">)</span></code>
+<code><span class="identifier">NaoqiRobot</span><span class="symbol">(</span><span class="identifier" id="com.ghostwan.robotkit.naoqi.NaoqiRobot$<init>(android.app.Activity, kotlin.String)/activity">activity</span><span class="symbol">:</span>&nbsp;<a href="https://developer.android.com/reference/android/app/Activity.html"><span class="identifier">Activity</span></a><span class="symbol">, </span><span class="identifier" id="com.ghostwan.robotkit.naoqi.NaoqiRobot$<init>(android.app.Activity, kotlin.String)/address">address</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">?</span><span class="symbol">)</span></code>
 <p>Interface to call robotics API on Naoqi's robots</p>
 </td>
 </tr>
@@ -29,17 +29,10 @@
 <tbody>
 <tr>
 <td>
-<p><a href="futures.html">futures</a></p>
+<p><a href="body-touched-listener.html">bodyTouchedListener</a></p>
 </td>
 <td>
-<code><span class="keyword">var </span><span class="identifier">futures</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-mutable-map/index.html"><span class="identifier">MutableMap</span></a><span class="symbol">&lt;</span><a href="https://android.aldebaran.com/sdk/doc/libqi-java/com/aldebaran/qi/Future.html"><span class="identifier">Future</span></a><span class="symbol">&lt;</span><span class="identifier">*</span><span class="symbol">&gt;</span><span class="symbol">,</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-array/index.html"><span class="identifier">Array</span></a><span class="symbol">&lt;</span><span class="keyword">out</span>&nbsp;<a href="../../com.ghostwan.robotkit.object/-action/index.html"><span class="identifier">Action</span></a><span class="symbol">&gt;</span><span class="symbol">&gt;</span></code></td>
-</tr>
-<tr>
-<td>
-<p><a href="lock.html">lock</a></p>
-</td>
-<td>
-<code><span class="keyword">val </span><span class="identifier">lock</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html"><span class="identifier">Any</span></a></code></td>
+<code><span class="keyword">var </span><span class="identifier">bodyTouchedListener</span><span class="symbol">: </span><span class="symbol">(</span><a href="../../com.ghostwan.robotkit.naoqi.object/-body-part/index.html"><span class="identifier">BodyPart</span></a><span class="symbol">,</span>&nbsp;<a href="../../com.ghostwan.robotkit.naoqi.object/-touch-state/index.html"><span class="identifier">TouchState</span></a><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
 </tr>
 <tr>
 <td>
@@ -71,6 +64,13 @@
 </tr>
 <tr>
 <td>
+<p><a href="touch-sensors.html">touchSensors</a></p>
+</td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">touchSensors</span><span class="symbol">: </span><a href="https://developer.android.com/reference/java/util/ArrayList.html"><span class="identifier">ArrayList</span></a><span class="symbol">&lt;</span><a href="https://android.aldebaran.com/sdk/doc/qisdk/com/aldebaran/qi/sdk/object/touch/TouchSensor.html"><span class="identifier">TouchSensor</span></a><span class="symbol">&gt;</span></code></td>
+</tr>
+<tr>
+<td>
 <p><a href="weak-activity.html">weakActivity</a></p>
 </td>
 <td>
@@ -88,6 +88,15 @@
 <td>
 <code><span class="keyword">suspend</span> <span class="keyword">fun </span><span class="identifier">animate</span><span class="symbol">(</span><span class="identifier" id="com.ghostwan.robotkit.naoqi.NaoqiRobot$animate(kotlin.Int, kotlin.IntArray, kotlin.Boolean, kotlin.Function0((kotlin.Unit)), kotlin.Function1((com.ghostwan.robotkit.object.Result((java.lang.Void)), kotlin.Unit)))/mainAnimation">mainAnimation</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a><span class="symbol">, </span><span class="keyword">vararg</span> <span class="identifier" id="com.ghostwan.robotkit.naoqi.NaoqiRobot$animate(kotlin.Int, kotlin.IntArray, kotlin.Boolean, kotlin.Function0((kotlin.Unit)), kotlin.Function1((com.ghostwan.robotkit.object.Result((java.lang.Void)), kotlin.Unit)))/additionalAnimations">additionalAnimations</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a><span class="symbol">, </span><span class="identifier" id="com.ghostwan.robotkit.naoqi.NaoqiRobot$animate(kotlin.Int, kotlin.IntArray, kotlin.Boolean, kotlin.Function0((kotlin.Unit)), kotlin.Function1((com.ghostwan.robotkit.object.Result((java.lang.Void)), kotlin.Unit)))/throwOnStop">throwOnStop</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html"><span class="identifier">Boolean</span></a>&nbsp;<span class="symbol">=</span>&nbsp;true<span class="symbol">, </span><span class="identifier" id="com.ghostwan.robotkit.naoqi.NaoqiRobot$animate(kotlin.Int, kotlin.IntArray, kotlin.Boolean, kotlin.Function0((kotlin.Unit)), kotlin.Function1((com.ghostwan.robotkit.object.Result((java.lang.Void)), kotlin.Unit)))/onStart">onStart</span><span class="symbol">:</span>&nbsp;<span class="symbol">(</span><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a>&nbsp;<span class="symbol">=</span>&nbsp;null<span class="symbol">, </span><span class="identifier" id="com.ghostwan.robotkit.naoqi.NaoqiRobot$animate(kotlin.Int, kotlin.IntArray, kotlin.Boolean, kotlin.Function0((kotlin.Unit)), kotlin.Function1((com.ghostwan.robotkit.object.Result((java.lang.Void)), kotlin.Unit)))/onResult">onResult</span><span class="symbol">:</span>&nbsp;<span class="symbol">(</span><a href="../../com.ghostwan.robotkit.object/-result.html"><span class="identifier">Result</span></a><span class="symbol">&lt;</span><a href="https://developer.android.com/reference/java/lang/Void.html"><span class="identifier">Void</span></a><span class="symbol">&gt;</span><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a>&nbsp;<span class="symbol">=</span>&nbsp;null<span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
 <p>Animate the robot with an animation using raw qianim file</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="connect.html">connect</a></p>
+</td>
+<td>
+<code><span class="keyword">open</span> <span class="keyword">suspend</span> <span class="keyword">fun </span><span class="identifier">connect</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<p>Connect the robot</p>
 </td>
 </tr>
 <tr>
@@ -116,6 +125,13 @@
 </td>
 <td>
 <code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">getRobotType</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="init-naoqi-data.html">initNaoqiData</a></p>
+</td>
+<td>
+<code><span class="keyword">suspend</span> <span class="keyword">fun </span><span class="identifier">initNaoqiData</span><span class="symbol">(</span><span class="identifier" id="com.ghostwan.robotkit.naoqi.NaoqiRobot$initNaoqiData(com.aldebaran.qi.Session, com.aldebaran.qi.AnyObject)/session">session</span><span class="symbol">:</span>&nbsp;<a href="https://android.aldebaran.com/sdk/doc/libqi-java/com/aldebaran/qi/Session.html"><span class="identifier">Session</span></a><span class="symbol">, </span><span class="identifier" id="com.ghostwan.robotkit.naoqi.NaoqiRobot$initNaoqiData(com.aldebaran.qi.Session, com.aldebaran.qi.AnyObject)/robotContextAO">robotContextAO</span><span class="symbol">:</span>&nbsp;<a href="https://android.aldebaran.com/sdk/doc/libqi-java/com/aldebaran/qi/AnyObject.html"><span class="identifier">AnyObject</span></a><span class="symbol">?</span>&nbsp;<span class="symbol">=</span>&nbsp;null<span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
 </tr>
 <tr>
 <td>
@@ -148,6 +164,15 @@
 </tr>
 <tr>
 <td>
+<p><a href="set-on-body-touched.html">setOnBodyTouched</a></p>
+</td>
+<td>
+<code><span class="keyword">suspend</span> <span class="keyword">fun </span><span class="identifier">setOnBodyTouched</span><span class="symbol">(</span><span class="identifier" id="com.ghostwan.robotkit.naoqi.NaoqiRobot$setOnBodyTouched(kotlin.Function2((com.ghostwan.robotkit.naoqi.object.BodyPart, com.ghostwan.robotkit.naoqi.object.TouchState, kotlin.Unit)))/function">function</span><span class="symbol">:</span>&nbsp;<span class="symbol">(</span><a href="../../com.ghostwan.robotkit.naoqi.object/-body-part/index.html"><span class="identifier">BodyPart</span></a><span class="symbol">,</span>&nbsp;<a href="../../com.ghostwan.robotkit.naoqi.object/-touch-state/index.html"><span class="identifier">TouchState</span></a><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<p>Set the callback called when Pepper's body is touched</p>
+</td>
+</tr>
+<tr>
+<td>
 <p><a href="set-on-robot-lost.html">setOnRobotLost</a></p>
 </td>
 <td>
@@ -166,20 +191,6 @@
 </tr>
 </tbody>
 </table>
-<h3>Inherited Functions</h3>
-<table>
-<tbody>
-<tr>
-<td>
-<p><a href="../../com.ghostwan.robotkit/-robot/connect.html">connect</a></p>
-</td>
-<td>
-<code><span class="keyword">abstract</span> <span class="keyword">suspend</span> <span class="keyword">fun </span><span class="identifier">connect</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
-<p>Connect the robot</p>
-</td>
-</tr>
-</tbody>
-</table>
 <h3>Inheritors</h3>
 <table>
 <tbody>
@@ -188,14 +199,18 @@
 <p><a href="../../com.ghostwan.robotkit.naoqi.robot/-nao/index.html">Nao</a></p>
 </td>
 <td>
-<code><span class="keyword">class </span><span class="identifier">Nao</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="./index.html"><span class="identifier">NaoqiRobot</span></a></code></td>
+<code><span class="keyword">open</span> <span class="keyword">class </span><span class="identifier">Nao</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="./index.html"><span class="identifier">NaoqiRobot</span></a></code>
+<p>Nao robot</p>
+</td>
 </tr>
 <tr>
 <td>
 <p><a href="../../com.ghostwan.robotkit.naoqi.robot/-pepper/index.html">Pepper</a></p>
 </td>
 <td>
-<code><span class="keyword">sealed</span> <span class="keyword">class </span><span class="identifier">Pepper</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="./index.html"><span class="identifier">NaoqiRobot</span></a></code></td>
+<code><span class="keyword">open</span> <span class="keyword">class </span><span class="identifier">Pepper</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="./index.html"><span class="identifier">NaoqiRobot</span></a></code>
+<p>Pepper robot</p>
+</td>
 </tr>
 </tbody>
 </table>

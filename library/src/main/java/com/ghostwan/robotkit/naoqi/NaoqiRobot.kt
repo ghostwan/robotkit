@@ -1,8 +1,10 @@
 package com.ghostwan.robotkit.naoqi
 
 import android.app.Activity
+import android.provider.Settings
 import android.support.annotation.RawRes
 import android.support.annotation.StringRes
+import com.aldebaran.qi.AnyObject
 import com.aldebaran.qi.Future
 import com.aldebaran.qi.Session
 import com.aldebaran.qi.sdk.`object`.context.RobotContext
@@ -10,6 +12,7 @@ import com.aldebaran.qi.sdk.`object`.conversation.BodyLanguageOption
 import com.aldebaran.qi.sdk.`object`.conversation.ListenResult
 import com.aldebaran.qi.sdk.`object`.conversation.Phrase
 import com.aldebaran.qi.sdk.`object`.conversation.Topic
+import com.aldebaran.qi.sdk.`object`.touch.TouchSensor
 import com.ghostwan.robotkit.Robot
 import com.ghostwan.robotkit.`object`.Action
 import com.ghostwan.robotkit.`object`.Failure
@@ -18,10 +21,7 @@ import com.ghostwan.robotkit.`object`.Success
 import com.ghostwan.robotkit.ext.getLocalizedRaw
 import com.ghostwan.robotkit.ext.getLocalizedString
 import com.ghostwan.robotkit.ext.getRaw
-import com.ghostwan.robotkit.naoqi.`object`.Concept
-import com.ghostwan.robotkit.naoqi.`object`.Discussion
-import com.ghostwan.robotkit.naoqi.`object`.ResConcept
-import com.ghostwan.robotkit.naoqi.`object`.StrConcept
+import com.ghostwan.robotkit.naoqi.`object`.*
 import com.ghostwan.robotkit.naoqi.ext.await
 import com.ghostwan.robotkit.naoqi.ext.toNaoqiLocale
 import com.ghostwan.robotkit.util.info
@@ -33,23 +33,25 @@ import java.util.*
 /**
  * Interface to call robotics API on Naoqi's robots
  */
-abstract class NaoqiRobot(activity: Activity) : Robot{
+abstract class NaoqiRobot(activity: Activity, private val address: String?) : Robot{
 
-    protected var futures: MutableMap<Future<*>, Array<out Action>> = HashMap()
+    private var futures: MutableMap<Future<*>, Array<out Action>> = HashMap()
     protected var weakActivity: Activity by weakRef(activity)
-    protected val lock = Any()
+    private val lock = Any()
+
+    var robotContext: RobotContext? = null
+        private set
+
+    var services : NaoqiServices = NaoqiServices()
+        private set
 
     var session: Session? = null
-    var robotContext: RobotContext? = null
-    var services = NaoqiServices()
-
-    // Naoqi services
+        private set
 
     var robotLostListener: ((String) -> Unit)? = null
+    var touchSensors = ArrayList<TouchSensor>();
+    protected var bodyTouchedListener: ((BodyPart, TouchState) -> Unit)? = null
 
-    override fun setOnRobotLost(function: (String) -> Unit) {
-        robotLostListener = function
-    }
 
     private suspend fun <T : Any?> handleFuture(future: Future<T>,
                                                 onResult: ((Result<T>) -> Unit)?,
@@ -80,6 +82,64 @@ abstract class NaoqiRobot(activity: Activity) : Robot{
         return null
     }
 
+    abstract fun getRobotType() : String
+
+    override fun setOnRobotLost(function: (String) -> Unit) {
+        robotLostListener = function
+    }
+
+    override suspend fun connect() {
+
+        if (isConnected()) {
+            disconnect()
+        }
+
+        val session = Session()
+        session.addConnectionListener(object: Session.ConnectionListener {
+            override fun onConnected() {
+            }
+
+            override fun onDisconnected(reason: String?) {
+                if(reason == null) {
+                    robotLostListener?.invoke("")
+                }else {
+                    robotLostListener?.invoke(reason)
+                }
+            }
+
+        })
+        session.connect(address)?.await()
+
+        val deviceId = Settings.Secure.getString(weakActivity.contentResolver, Settings.Secure.ANDROID_ID)
+        val packageId = weakActivity.packageName
+
+        initNaoqiData(session)
+        val focusOwner = services.focus.async().take().await()
+        robotContext = services.contextFactory.async().makeContext().await()
+        robotContext?.async()?.setFocus(focusOwner).await()
+        robotContext?.async()?.setIdentity("$deviceId:$packageId").await()
+    }
+
+    protected suspend fun initNaoqiData(session: Session, robotContextAO: AnyObject?=null){
+        this.session = session
+        services.retrieve(session)
+
+        this.robotContext = robotContextAO?.let { services.deserializeRobotContext(robotContextAO) }
+        if (bodyTouchedListener != null && touchSensors.isEmpty()) {
+            connectSensors()
+        }
+    }
+
+    override suspend fun disconnect() {
+        if (isConnected()) {
+            touchSensors.map {
+                it.setOnStateChangedListener(null)
+            }
+            session?.close()
+        }
+        touchSensors.clear()
+    }
+
     override fun isConnected(): Boolean = session != null && session!!.isConnected
 
     override fun stop(vararg actions: Action) {
@@ -103,6 +163,33 @@ abstract class NaoqiRobot(activity: Activity) : Robot{
             }
         }
     }
+
+    private suspend fun connectSensors(){
+        for (sensorName in services.touch.sensorNames!!) {
+            val touchSensor = services.touch.async()?.getSensor(sensorName).await()
+            touchSensor?.let {
+                it.setOnStateChangedListener {
+                    val state = if (it.touched) {
+                        TouchState.TOUCHED
+                    } else {
+                        TouchState.RELEASED
+                    }
+
+                    when (sensorName) {
+                        "Head/Touch" -> bodyTouchedListener?.invoke(BodyPart.HEAD, state)
+                        "LHand/Touch" -> bodyTouchedListener?.invoke(BodyPart.LEFT_HAND, state)
+                        "RHand/Touch" -> bodyTouchedListener?.invoke(BodyPart.RIGHT_HAND, state)
+                        "Bumper/FrontLeft" -> bodyTouchedListener?.invoke(BodyPart.LEFT_BUMPER, state)
+                        "Bumper/FrontRight" -> bodyTouchedListener?.invoke(BodyPart.RIGHT_BUMPER, state)
+                        "Bumper/Back" -> bodyTouchedListener?.invoke(BodyPart.HEAD, state)
+                    }
+                }
+                touchSensors.add(it)
+            }
+        }
+        info("sensors connected")
+    }
+
 
     /**
      * Make the robot say a phrase using a string resource and optionally play an animation at the same time
@@ -431,12 +518,17 @@ abstract class NaoqiRobot(activity: Activity) : Robot{
         return handleFuture(future, onResult, throwOnStop, Action.TALKING, Action.LISTENING)
     }
 
-    override suspend fun disconnect() {
-        if (isConnected()) {
-            session?.close()
+    /**
+     * Set the callback called when Pepper's body is touched
+     *
+     * @param function lambda called with the [BodyPart] touched and the [TouchState]
+     */
+    suspend fun setOnBodyTouched(function: (BodyPart, TouchState) -> Unit) {
+        bodyTouchedListener = function
+        if (touchSensors.isEmpty() && isConnected()) {
+            connectSensors()
         }
     }
 
-    abstract fun getRobotType() : String
 
 }
