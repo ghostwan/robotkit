@@ -18,6 +18,7 @@
     <ImageView
             android:layout_width="75dp"
             android:layout_height="74dp"
+            android:visibility="invisible"
             app:srcCompat="@drawable/sphere"
             android:layout_alignParentTop="true"
             android:id="@+id/headImage"
@@ -28,6 +29,7 @@
             android:layout_height="wrap_content"
             app:srcCompat="@drawable/sphere"
             android:id="@+id/rightHandImage"
+            android:visibility="invisible"
             android:layout_toEndOf="@+id/rightBumperImage"
             android:layout_alignTop="@+id/leftHandImage"/>
 
@@ -35,6 +37,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:srcCompat="@drawable/sphere"
+            android:visibility="invisible"
             android:layout_alignParentBottom="true"
             android:layout_marginBottom="233dp"
             android:id="@+id/leftHandImage"
@@ -45,6 +48,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:srcCompat="@drawable/sphere"
+            android:visibility="invisible"
             android:layout_alignParentBottom="true"
             android:layout_marginBottom="13dp"
             android:id="@+id/leftBumperImage"
@@ -54,6 +58,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:srcCompat="@drawable/sphere"
+            android:visibility="invisible"
             android:id="@+id/rightBumperImage"
             android:layout_toEndOf="@+id/headImage"
             android:layout_alignTop="@+id/leftBumperImage"/>
@@ -62,6 +67,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:srcCompat="@drawable/sphere"
+            android:visibility="invisible"
             android:id="@+id/backBumperImage"
             android:layout_alignTop="@+id/leftBumperImage"
             android:layout_centerHorizontal="true"/>

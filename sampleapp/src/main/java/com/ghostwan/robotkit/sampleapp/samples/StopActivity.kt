@@ -12,6 +12,7 @@ import com.ghostwan.robotkit.exception.RobotUnavailableException
 import com.ghostwan.robotkit.naoqi.`object`.ResConcept
 import com.ghostwan.robotkit.ext.inUISafe
 import com.ghostwan.robotkit.ext.setOnClickCoroutine
+import com.ghostwan.robotkit.ext.setOnClickSafeCoroutine
 import com.ghostwan.robotkit.naoqi.robot.Pepper
 import com.ghostwan.robotkit.util.exception
 import com.ghostwan.robotkit.sampleapp.R
@@ -35,16 +36,19 @@ class StopActivity : AppCompatActivity() {
 
 
         buttonSay.setOnClickCoroutine{
-            pepper.say(R.string.lorem_lpsum, onResult = this@StopActivity::onResult)
+            pepper.say(R.string.lorem_lpsum, onResult = {onResult(it)})
         }
+
         buttonAnimate.setOnClickCoroutine {
-            pepper.animate(R.raw.taichichuan_anim, onResult = this@StopActivity::onResult)
+            pepper.animate(R.raw.taichichuan_anim) {onResult(it)}
         }
-        buttonDiscuss.setOnClickCoroutine {
-            pepper.discuss(R.raw.presentation_discussion, gotoBookmark = "intro", onResult = this@StopActivity::onResult)
-        }
+
+        buttonDiscuss.setOnClickSafeCoroutine ({
+            pepper.discuss(R.raw.presentation_discussion, gotoBookmark = "intro", onResult = {onResult(it)})
+        }, onError = this::onError )
+
         buttonSayAnimate.setOnClickCoroutine {
-            pepper.say(R.string.lorem_lpsum, R.raw.taichichuan_anim, onResult = this@StopActivity::onResult)
+            pepper.say(R.string.lorem_lpsum, R.raw.taichichuan_anim, onResult = {onResult(it)})
         }
         buttonListen.setOnClickCoroutine {
             val helloConcept = ResConcept(R.string.hello, R.string.hi)

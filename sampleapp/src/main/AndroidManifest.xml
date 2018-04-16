@@ -38,6 +38,11 @@
                 android:name=".samples.TouchActivity"
                 android:theme="@style/Theme.AppCompat.DayNight.NoActionBar">
         </activity>
+        <activity
+                android:name=".samples.BasicHelloWorldActivity"
+                android:label="@string/title_activity_basic_hello_world"
+                android:theme="@style/AppTheme.NoActionBar">
+        </activity>
     </application>
 
 </manifest>

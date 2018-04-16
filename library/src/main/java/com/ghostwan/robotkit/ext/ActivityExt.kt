@@ -42,44 +42,44 @@ fun Context.getLocalizedRaw(@RawRes resId : Int, locale : Locale?=null) : String
 
 fun Activity.inUI(onRun: suspend Activity.() -> Unit): Job {
     return launch(UI, block = {
-        onRun.invoke(this@inUI)
+        onRun(this@inUI)
     })
 }
 
 fun Activity.inUIAsync(onRun: suspend Activity.() -> Unit): Deferred<Unit> {
     return async(UI, block = {
-        onRun.invoke(this@inUIAsync)
+        onRun(this@inUIAsync)
     })
 }
 
 fun Activity.inUISafe(onRun: suspend Activity.() -> Unit, onError : (Throwable?) -> Unit ): Deferred<Unit> {
     val job = async (UI, block = {
-        onRun.invoke(this@inUISafe)
+        onRun(this@inUISafe)
     })
     job.invokeOnCompletion {
-        onError.invoke(it)
+        onError(it)
     }
     return job
 }
 
 fun Activity.inBackground(onRun: suspend Activity.() -> Unit): Job {
     return launch(block = {
-        onRun.invoke(this@inBackground)
+        onRun(this@inBackground)
     })
 }
 
 fun Activity.inBackgroundAsync(onRun: suspend Activity.() -> Unit): Deferred<Unit> {
     return async(block = {
-        onRun.invoke(this@inBackgroundAsync)
+        onRun(this@inBackgroundAsync)
     })
 }
 
 fun Activity.inBackgroundSafe(onRun: suspend Activity.() -> Unit, onError : (Throwable?) -> Unit): Deferred<Unit> {
     val job = async (block = {
-        onRun.invoke(this@inBackgroundSafe)
+        onRun(this@inBackgroundSafe)
     })
     job.invokeOnCompletion {
-        onError.invoke(it)
+        onError(it)
     }
     return job
 }

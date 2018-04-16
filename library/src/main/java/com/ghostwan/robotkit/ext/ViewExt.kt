@@ -7,7 +7,7 @@ import com.ghostwan.robotkit.util.uiSafe
 fun View.setOnClickCoroutine(onRun: suspend View.() -> Unit) {
     setOnClickListener {
         ui({
-            onRun.invoke(this@setOnClickCoroutine)
+            onRun(this@setOnClickCoroutine)
         })
     }
 }
@@ -15,7 +15,7 @@ fun View.setOnClickCoroutine(onRun: suspend View.() -> Unit) {
 fun View.setOnClickSafeCoroutine(onRun: suspend View.() -> Unit, onError: (Throwable?) -> Unit) {
     setOnClickListener {
         uiSafe({
-            onRun.invoke(this@setOnClickSafeCoroutine)
+            onRun(this@setOnClickSafeCoroutine)
         }, onError)
     }
 }

@@ -11,6 +11,7 @@ import android.view.View
 import android.widget.ArrayAdapter
 import android.widget.EditText
 import android.widget.Spinner
+import com.ghostwan.robotkit.ext.inUI
 import kotlinx.android.synthetic.main.activity_dispatch.*
 
 

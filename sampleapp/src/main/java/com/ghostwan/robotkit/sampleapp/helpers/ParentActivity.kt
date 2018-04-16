@@ -15,6 +15,7 @@ import com.ghostwan.robotkit.ext.inUISafe
 import com.ghostwan.robotkit.util.exception
 import com.ghostwan.robotkit.sampleapp.R
 import kotlinx.android.synthetic.main.activity_parent.*
+import kotlinx.android.synthetic.main.activity_stop_acivity.*
 import kotlinx.coroutines.experimental.CancellationException
 
 /**
@@ -79,7 +80,10 @@ abstract class ParentActivity : AppCompatActivity() {
 
     override fun onStop() {
         super.onStop()
-        inUISafe({ onStopAction() }, this::onError)
+        inUISafe({
+            onStopAction()
+            pepper.disconnect()
+        }, this::onError)
     }
 
     private fun setFabTag(action: String) {

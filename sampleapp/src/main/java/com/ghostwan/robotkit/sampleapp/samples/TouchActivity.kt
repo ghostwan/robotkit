@@ -60,6 +60,7 @@ class TouchActivity : AppCompatActivity() {
         super.onStart()
         inUISafe({
             pepper.connect()
+            displayInfo("Robot Connected")
         }, this::onError)
     }
 
