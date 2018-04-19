@@ -8,8 +8,8 @@ import com.aldebaran.qi.sdk.`object`.conversation.Topic
 import com.ghostwan.robotkit.ext.getLocalizedRaw
 import com.ghostwan.robotkit.ext.sha512
 import com.ghostwan.robotkit.naoqi.ext.await
-import com.ghostwan.robotkit.util.info
-import com.ghostwan.robotkit.util.warning
+import com.ghostwan.robotkit.util.infoLog
+import com.ghostwan.robotkit.util.warningLog
 import kotlinx.serialization.Optional
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.JSON
@@ -164,7 +164,7 @@ class Discussion{
         context.openFileOutput(filename, Context.MODE_PRIVATE).use {
             it.write(json.toByteArray())
         }
-        info("Data saved : $json")
+        infoLog("Data saved : $json")
     }
 
     /**
@@ -187,10 +187,10 @@ class Discussion{
                 it.bufferedReader().use { it.readLine() }
             }
             val dataLocal : Data = JSON.parse(json)
-            info("get json data : $json")
+            infoLog("get json data : $json")
             if(restoreState) {
                 if (dataLocal.bookmark != null) {
-                    info("state ${dataLocal.bookmark} restored")
+                    infoLog("state ${dataLocal.bookmark} restored")
                     data.bookmark = dataLocal.bookmark
                 }
                 else {
@@ -199,7 +199,7 @@ class Discussion{
             }
             if(restoreVariable) {
                 if (dataLocal.variables.isNotEmpty()) {
-                    info("variables ${dataLocal.variables} restored")
+                    infoLog("variables ${dataLocal.variables} restored")
                     data.variables = dataLocal.variables
                 }
                 else {
@@ -219,9 +219,9 @@ class Discussion{
     fun clearData() {
         val file = File(getFilename());
         if(file.delete())
-            info("File ${getFilename()} deleted")
+            infoLog("File ${getFilename()} deleted")
         else
-            warning("Fail to delete ${getFilename()}!")
+            warningLog("Fail to delete ${getFilename()}!")
         data = Data()
     }
 

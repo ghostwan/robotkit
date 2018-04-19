@@ -23,7 +23,7 @@ import com.aldebaran.qi.sdk.serialization.EnumConverter
 import com.aldebaran.qi.serialization.QiSerializer
 import com.ghostwan.robotkit.exception.RobotUnavailableException
 import com.ghostwan.robotkit.naoqi.ext.await
-import com.ghostwan.robotkit.util.info
+import com.ghostwan.robotkit.util.infoLog
 import java.util.concurrent.ExecutionException
 
 class NaoqiServices {
@@ -42,7 +42,7 @@ class NaoqiServices {
         focus = retrieveService(session, Focus::class.java, "Focus")
         contextFactory = retrieveService(session, RobotContextFactory::class.java, "ContextFactory")
         touch = retrieveService(session, Touch::class.java, "Touch")
-        info("services retrieved")
+        infoLog("services retrieved")
     }
 
 
@@ -60,7 +60,7 @@ class NaoqiServices {
             val service = session.service(name).await()
             val deserialize = serializer.deserialize(service, clazz)
             val data =  clazz.cast(deserialize)
-            info("$name retrieved")
+            infoLog("$name service retrieved")
             return data
         } catch (e: ExecutionException) {
             throw RobotUnavailableException("Service $name is not available")

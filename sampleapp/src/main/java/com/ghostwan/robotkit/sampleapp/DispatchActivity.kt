@@ -11,7 +11,7 @@ import android.view.View
 import android.widget.ArrayAdapter
 import android.widget.EditText
 import android.widget.Spinner
-import com.ghostwan.robotkit.ext.inUI
+import com.ghostwan.robotkit.naoqi.robot.isOnLocalPepper
 import kotlinx.android.synthetic.main.activity_dispatch.*
 
 
@@ -29,32 +29,34 @@ class DispatchActivity : AppCompatActivity() {
         val spinner = findViewById<View>(R.id.spinner) as Spinner
         spinner.adapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, list)
 
-        localButton.setOnClickListener {
-            val activityInfo = (spinner.selectedItem as DecoratedActivityInfo).activityInfo
-            val intent = Intent()
-            intent.setClassName(activityInfo.applicationInfo.packageName, activityInfo.name)
-            startActivity(intent)
-        }
+        launchButton.setOnClickListener {
 
-        remoteButton.setOnClickListener {
-            val builder = AlertDialog.Builder(this)
-            builder.setTitle(getString(R.string.ip_address))
-
-            val input = EditText(this)
-            input.inputType = InputType.TYPE_CLASS_TEXT
-            builder.setView(input)
-
-            builder.setNegativeButton(R.string.cancel) { dialog, which -> dialog.cancel() }
-            builder.setPositiveButton(R.string.ok)  { dialog, which ->
-                val address = "tcp://${input.text}:9559"
+            if(isOnLocalPepper()) {
                 val activityInfo = (spinner.selectedItem as DecoratedActivityInfo).activityInfo
                 val intent = Intent()
                 intent.setClassName(activityInfo.applicationInfo.packageName, activityInfo.name)
-                intent.putExtra("address", address)
                 startActivity(intent)
             }
+            else {
+                val builder = AlertDialog.Builder(this)
+                builder.setTitle(getString(R.string.ip_address))
 
-            builder.show()
+                val input = EditText(this)
+                input.inputType = InputType.TYPE_CLASS_TEXT
+                builder.setView(input)
+
+                builder.setNegativeButton(R.string.cancel) { dialog, which -> dialog.cancel() }
+                builder.setPositiveButton(R.string.ok)  { dialog, which ->
+                    val address = "tcp://${input.text}:9559"
+                    val activityInfo = (spinner.selectedItem as DecoratedActivityInfo).activityInfo
+                    val intent = Intent()
+                    intent.setClassName(activityInfo.applicationInfo.packageName, activityInfo.name)
+                    intent.putExtra("address", address)
+                    startActivity(intent)
+                }
+
+                builder.show()
+            }
 
         }
     }

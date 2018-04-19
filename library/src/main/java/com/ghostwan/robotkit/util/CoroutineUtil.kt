@@ -19,7 +19,7 @@ fun uiAsync(onRun: suspend CoroutineScope.() -> Unit): Deferred<Unit> {
 fun uiSafe(onRun: suspend CoroutineScope.() -> Unit, onError : (Throwable?) -> Unit ): Deferred<Unit> {
     val job = async (UI, block = onRun)
     job.invokeOnCompletion {
-        onError.invoke(it)
+        onError(it)
     }
     return job
 }
@@ -35,7 +35,7 @@ fun backgroundAsync(onRun: suspend CoroutineScope.() -> Unit): Deferred<Unit> {
 fun backgroundSafe(onRun: suspend CoroutineScope.() -> Unit, onError : (Throwable?) -> Unit): Deferred<Unit> {
     val job = async (block = onRun)
     job.invokeOnCompletion {
-        onError.invoke(it)
+        onError(it)
     }
     return job
 }

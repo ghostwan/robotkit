@@ -14,8 +14,7 @@ import com.ghostwan.robotkit.naoqi.`object`.TouchState
 import com.ghostwan.robotkit.naoqi.robot.LocalPepper
 import com.ghostwan.robotkit.naoqi.robot.Pepper
 import com.ghostwan.robotkit.sampleapp.R
-import com.ghostwan.robotkit.util.exception
-import kotlinx.android.synthetic.main.activity_stop_acivity.*
+import com.ghostwan.robotkit.util.exceptionLog
 import kotlinx.android.synthetic.main.activity_touch.*
 import kotlinx.coroutines.experimental.CancellationException
 
@@ -25,22 +24,20 @@ class TouchActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_touch)
-
-        pepper = if(intent.hasExtra("address")) {
-            Pepper(this, intent.getStringExtra("address"))
-        }
-        else {
-            LocalPepper(this)
-        }
         inUI {
+            setContentView(R.layout.activity_touch)
+            pepper = if (intent.hasExtra("address")) {
+                Pepper(this, intent.getStringExtra("address"))
+            } else {
+                LocalPepper(this)
+            }
             pepper.setOnBodyTouched { bodyPart, touchState ->
                 when (bodyPart) {
                     BodyPart.HEAD -> changePartVisibility(headImage, touchState)
-                    BodyPart.RIGHT_HAND -> changePartVisibility(rightHandImage, touchState)
-                    BodyPart.LEFT_HAND -> changePartVisibility(leftHandImage, touchState)
-                    BodyPart.LEFT_BUMPER -> changePartVisibility(leftBumperImage, touchState)
-                    BodyPart.RIGHT_BUMPER -> changePartVisibility(rightBumperImage, touchState)
+                    BodyPart.RIGHT_HAND -> changePartVisibility(leftHandImage, touchState)
+                    BodyPart.LEFT_HAND -> changePartVisibility(rightHandImage, touchState)
+                    BodyPart.LEFT_BUMPER -> changePartVisibility(rightBumperImage, touchState)
+                    BodyPart.RIGHT_BUMPER -> changePartVisibility(leftBumperImage, touchState)
                     BodyPart.BACK_BUMPER -> changePartVisibility(backBumperImage, touchState)
                 }
             }
@@ -59,7 +56,12 @@ class TouchActivity : AppCompatActivity() {
     override fun onStart() {
         super.onStart()
         inUISafe({
-            pepper.connect()
+            if (!pepper.isConnected()) {
+                pepper.connect()
+            }
+            if (!pepper.hasFocus()) {
+                pepper.takeFocus()
+            }
             displayInfo("Robot Connected")
         }, this::onError)
     }
@@ -67,7 +69,7 @@ class TouchActivity : AppCompatActivity() {
     override fun onStop() {
         super.onStop()
         inUISafe({
-            pepper.disconnect()
+            pepper.releaseFocus()
         }, this::onError)
     }
 
@@ -80,11 +82,11 @@ class TouchActivity : AppCompatActivity() {
             else -> throwable?.message
         }
         if (throwable !is CancellationException && throwable != null)
-            exception(throwable, "onError")
+            exceptionLog(throwable, "onError")
         message?.let { displayInfo(message) }
     }
 
     fun displayInfo(string: String, duration: Int = Snackbar.LENGTH_LONG) {
-        Snackbar.make(stopActionsLayout, string, duration).show()
+        Snackbar.make(layout, string, duration).show()
     }
 }

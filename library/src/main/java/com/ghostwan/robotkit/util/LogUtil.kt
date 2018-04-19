@@ -8,14 +8,17 @@ import android.util.Log
 
 const val TAG = "RobotKit"
 
-fun info(message: String, tag: String=TAG) {
+fun infoLog(message: String, tag: String=TAG) {
     Log.i(tag, message)
 }
 
-fun warning(message: String, tag: String=TAG) {
+fun warningLog(message: String, tag: String=TAG) {
     Log.w(tag, message)
 }
+fun errorLog(message: String, tag: String=TAG){
+    Log.e(tag, message)
+}
 
-fun exception(t: Throwable?, message: String? = "error", tag: String=TAG) {
+fun exceptionLog(t: Throwable?, message: String? = "error", tag: String=TAG) {
     Log.e(tag, message, t)
 }

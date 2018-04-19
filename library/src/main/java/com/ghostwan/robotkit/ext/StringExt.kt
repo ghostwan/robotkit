@@ -12,5 +12,5 @@ fun String.sha512(): String {
 private fun String.hashWithAlgorithm(algorithm: String): String {
     val digest = MessageDigest.getInstance(algorithm)
     val bytes = digest.digest(this.toByteArray(Charsets.UTF_8))
-    return bytes.fold("", { str, it -> str + "%02x".format(it) })
+    return bytes.fold("") { str, it -> str + "%02x".format(it) }
 }

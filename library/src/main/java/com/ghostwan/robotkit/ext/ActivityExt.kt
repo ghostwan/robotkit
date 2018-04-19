@@ -1,16 +1,25 @@
 package com.ghostwan.robotkit.ext
 
 import android.app.Activity
+import android.content.ComponentName
 import android.content.Context
+import android.content.Context.BIND_AUTO_CREATE
+import android.content.Intent
+import android.content.ServiceConnection
 import android.content.res.Configuration
+import android.os.IBinder
 import android.support.annotation.RawRes
 import android.support.annotation.StringRes
+import com.ghostwan.robotkit.exception.RobotUnavailableException
+import com.ghostwan.robotkit.exception.ServiceDisconnectedException
 import kotlinx.coroutines.experimental.Deferred
 import kotlinx.coroutines.experimental.Job
 import kotlinx.coroutines.experimental.android.UI
 import kotlinx.coroutines.experimental.async
 import kotlinx.coroutines.experimental.launch
 import java.util.*
+import kotlin.coroutines.experimental.Continuation
+import kotlin.coroutines.experimental.suspendCoroutine
 
 
 /**
@@ -38,6 +47,28 @@ fun Context.getLocalizedRaw(@RawRes resId : Int, locale : Locale?=null) : String
     if(locale == null)
         return getRaw(resId)
     return createLocalizedContext(locale).getRaw(resId)
+}
+
+data class LocalService(val binder: IBinder?, val connection: ServiceConnection)
+
+suspend fun Context.getLocalService(packageName: String, action: String, flags : Int = BIND_AUTO_CREATE): LocalService {
+    return suspendCoroutine { cont: Continuation<LocalService> ->
+        val connection = object : ServiceConnection {
+            override fun onServiceConnected(name: ComponentName?, service: IBinder?) {
+                cont.resume(LocalService(service, this))
+            }
+
+            override fun onServiceDisconnected(name: ComponentName?) {
+                cont.resumeWithException(ServiceDisconnectedException(name?.className))
+            }
+
+        }
+        val intent = Intent(action)
+        intent.`package` = packageName
+        if(!bindService(intent, connection, flags)) {
+            cont.resumeWithException(RobotUnavailableException("RobotService not available!"))
+        }
+    }
 }
 
 fun Activity.inUI(onRun: suspend Activity.() -> Unit): Job {

@@ -5,7 +5,6 @@ import android.os.Build
 import android.provider.Settings
 import android.support.annotation.RawRes
 import android.support.annotation.StringRes
-import com.aldebaran.qi.AnyObject
 import com.aldebaran.qi.Future
 import com.aldebaran.qi.Session
 import com.aldebaran.qi.sdk.`object`.context.RobotContext
@@ -13,6 +12,7 @@ import com.aldebaran.qi.sdk.`object`.conversation.BodyLanguageOption
 import com.aldebaran.qi.sdk.`object`.conversation.ListenResult
 import com.aldebaran.qi.sdk.`object`.conversation.Phrase
 import com.aldebaran.qi.sdk.`object`.conversation.Topic
+import com.aldebaran.qi.sdk.`object`.focus.FocusOwner
 import com.aldebaran.qi.sdk.`object`.touch.TouchSensor
 import com.ghostwan.robotkit.Robot
 import com.ghostwan.robotkit.`object`.Action
@@ -25,7 +25,7 @@ import com.ghostwan.robotkit.ext.getRaw
 import com.ghostwan.robotkit.naoqi.`object`.*
 import com.ghostwan.robotkit.naoqi.ext.await
 import com.ghostwan.robotkit.naoqi.ext.toNaoqiLocale
-import com.ghostwan.robotkit.util.info
+import com.ghostwan.robotkit.util.infoLog
 import com.ghostwan.robotkit.util.ui
 import com.ghostwan.robotkit.util.weakRef
 import kotlinx.coroutines.experimental.CancellationException
@@ -41,16 +41,18 @@ abstract class NaoqiRobot(activity: Activity, private val address: String?) : Ro
     private val lock = Any()
 
     var robotContext: RobotContext? = null
-        private set
+        protected set
 
     var services : NaoqiServices = NaoqiServices()
-        private set
+        protected set
 
     var session: Session? = null
-        private set
+        protected set
+
+    private var focusOwner: FocusOwner? =null
 
     var robotLostListener: ((String) -> Unit)? = null
-    var touchSensors = ArrayList<TouchSensor>();
+    var touchSensors = ArrayList<TouchSensor>()
     protected var bodyTouchedListener: ((BodyPart, TouchState) -> Unit)? = null
 
 
@@ -111,29 +113,48 @@ abstract class NaoqiRobot(activity: Activity, private val address: String?) : Ro
 
         })
         session.connect(address)?.await()
+        infoLog("session connected")
 
         initNaoqiData(session)
-        takeFocus()
+        if(!hasFocus())
+            takeFocus()
     }
 
-    suspend fun isFocusOwn() : Boolean {
-        return robotContext?.async()?.focus?.await()?.async()?.token().await() != null
+    open suspend fun hasFocus() : Boolean {
+        return if(focusOwner != null) {
+            services.focus.check(focusOwner)
+        } else {
+            false
+        }
     }
 
-    suspend fun takeFocus() {
+    suspend fun releaseFocus() {
+        focusOwner?.async()?.release().await()
+    }
+
+    open suspend fun takeFocus() {
+        takeFocus(null)
+    }
+
+    protected suspend fun takeFocus(token : String?) {
         val deviceId = Settings.Secure.getString(weakActivity.contentResolver, Settings.Secure.ANDROID_ID)
         val packageId = weakActivity.packageName
-        val focusOwner = services.focus.async().take().await()
+        focusOwner = if(token == null) {
+            services.focus.async().take().await()
+        }else {
+            services.focus.async().take(token).await()
+        }
+        infoLog("Focus Granted")
         robotContext = services.contextFactory.async().makeContext().await()
         robotContext?.async()?.setFocus(focusOwner).await()
         robotContext?.async()?.setIdentity("$deviceId:$packageId").await()
+        infoLog("Robot Context initialized")
     }
 
-    protected suspend fun initNaoqiData(session: Session, robotContextAO: AnyObject?=null){
+    protected suspend fun initNaoqiData(session: Session){
         this.session = session
         services.retrieve(session)
 
-        this.robotContext = robotContextAO?.let { services.deserializeRobotContext(robotContextAO) }
         if (bodyTouchedListener != null && touchSensors.isEmpty()) {
             connectSensors()
         }
@@ -150,9 +171,6 @@ abstract class NaoqiRobot(activity: Activity, private val address: String?) : Ro
         touchSensors.clear()
     }
 
-    suspend fun releaseFocus() {
-        robotContext?.async()?.focus.await().async().release().await()
-    }
 
     override fun isConnected(): Boolean = session != null && session!!.isConnected
 
@@ -183,25 +201,27 @@ abstract class NaoqiRobot(activity: Activity, private val address: String?) : Ro
             val touchSensor = services.touch.async()?.getSensor(sensorName).await()
             touchSensor?.let {
                 it.async().setOnStateChangedListener {
-                    val state = if (it.touched) {
-                        TouchState.TOUCHED
-                    } else {
-                        TouchState.RELEASED
-                    }
+                    ui {
+                        val state = if (it.touched) {
+                            TouchState.TOUCHED
+                        } else {
+                            TouchState.RELEASED
+                        }
 
-                    when (sensorName) {
-                        "Head/Touch" -> bodyTouchedListener?.invoke(BodyPart.HEAD, state)
-                        "LHand/Touch" -> bodyTouchedListener?.invoke(BodyPart.LEFT_HAND, state)
-                        "RHand/Touch" -> bodyTouchedListener?.invoke(BodyPart.RIGHT_HAND, state)
-                        "Bumper/FrontLeft" -> bodyTouchedListener?.invoke(BodyPart.LEFT_BUMPER, state)
-                        "Bumper/FrontRight" -> bodyTouchedListener?.invoke(BodyPart.RIGHT_BUMPER, state)
-                        "Bumper/Back" -> bodyTouchedListener?.invoke(BodyPart.HEAD, state)
+                        when (sensorName) {
+                            "Head/Touch" -> bodyTouchedListener?.invoke(BodyPart.HEAD, state)
+                            "LHand/Touch" -> bodyTouchedListener?.invoke(BodyPart.LEFT_HAND, state)
+                            "RHand/Touch" -> bodyTouchedListener?.invoke(BodyPart.RIGHT_HAND, state)
+                            "Bumper/FrontLeft" -> bodyTouchedListener?.invoke(BodyPart.LEFT_BUMPER, state)
+                            "Bumper/FrontRight" -> bodyTouchedListener?.invoke(BodyPart.RIGHT_BUMPER, state)
+                            "Bumper/Back" -> bodyTouchedListener?.invoke(BodyPart.HEAD, state)
+                        }
                     }
                 }//FIXME QiSDK 1.1.15 .await()
                 touchSensors.add(it)
             }
         }
-        info("sensors connected")
+        infoLog("sensors connected")
     }
 
 
@@ -359,9 +379,9 @@ abstract class NaoqiRobot(activity: Activity, private val address: String?) : Ro
                                 is StrConcept -> concept.isPhraseInConcept(it.text)
                                 is ResConcept -> concept.isPhraseInConcept(stringToRes[it.text]!!)
                             }
-                        }.map { onResult.invoke(Success(it)) }
+                        }.map { onResult(Success(it)) }
                     }
-                    is Failure -> onResult.invoke(Failure(CancellationException()))
+                    is Failure -> onResult(Failure(CancellationException()))
                 }
             }
         }
@@ -471,7 +491,7 @@ abstract class NaoqiRobot(activity: Activity, private val address: String?) : Ro
             ui {
                 onStart?.invoke()
                 if (gotoBookmark != null) {
-                    info("Go to bookmark : $gotoBookmark")
+                    infoLog("Go to bookmark : $gotoBookmark")
                     val bookmark = topicSet[0].async().bookmarks.await()[gotoBookmark]
                     discuss.async().goToBookmarkedOutputUtterance(bookmark).await()
                 }
@@ -530,7 +550,7 @@ abstract class NaoqiRobot(activity: Activity, private val address: String?) : Ro
             ui {
                 onStart?.invoke()
                 if (startBookmark != null) {
-                    info("Go to bookmark : $startBookmark")
+                    infoLog("Go to bookmark : $startBookmark")
                     val bookmark = topics[discussion.mainTopic]?.async()?.bookmarks.await()[startBookmark]
                     discuss.async().goToBookmarkedOutputUtterance(bookmark).await()
                 }

@@ -9,26 +9,18 @@
         android:layout_height="match_parent"
         tools:context="com.ghostwan.robotkit.sampleapp.DispatchActivity">
 
-    <Button
-            android:text="Local"
-            android:layout_margin="10dp"
-            android:layout_weight="1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/localButton"/>
-
     <Spinner
             android:layout_margin="10dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/spinner"
-            android:layout_weight="1"/>
+            android:layout_weight="2"/>
 
     <Button
-            android:text="Remote"
+            android:text="Launch"
             android:layout_margin="10dp"
             android:layout_weight="1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/remoteButton"/>
+            android:id="@+id/launchButton"/>
 </LinearLayout>

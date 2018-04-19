@@ -5,7 +5,7 @@ import android.view.View
 import com.ghostwan.robotkit.naoqi.`object`.Discussion
 import com.ghostwan.robotkit.ext.random
 import com.ghostwan.robotkit.ext.setOnClickCoroutine
-import com.ghostwan.robotkit.util.info
+import com.ghostwan.robotkit.util.infoLog
 import com.ghostwan.robotkit.util.ui
 import com.ghostwan.robotkit.sampleapp.helpers.MultiLocaleActivity
 import com.ghostwan.robotkit.sampleapp.R
@@ -34,8 +34,8 @@ class DiscussActivity : MultiLocaleActivity() {
 
     override suspend fun onStartAction() {
         discussion = Discussion(this, R.raw.presentation_discussion, locale = locale)
-        discussion.setOnBookmarkReached { info("Bookmark $it reached!") }
-        discussion.setOnVariableChanged { name, value -> info("Variable $name changed to $value") }
+        discussion.setOnBookmarkReached { infoLog("Bookmark $it reached!") }
+        discussion.setOnVariableChanged { name, value -> infoLog("Variable $name changed to $value") }
         clearDataBtn.setOnClickCoroutine {
             discussion.clearData()
             displayInfo("Data cleared!")

@@ -12,10 +12,9 @@ import com.ghostwan.robotkit.exception.RobotUnavailableException
 import com.ghostwan.robotkit.ext.setOnClickSafeCoroutine
 import com.ghostwan.robotkit.ext.inUI
 import com.ghostwan.robotkit.ext.inUISafe
-import com.ghostwan.robotkit.util.exception
+import com.ghostwan.robotkit.util.exceptionLog
 import com.ghostwan.robotkit.sampleapp.R
 import kotlinx.android.synthetic.main.activity_parent.*
-import kotlinx.android.synthetic.main.activity_stop_acivity.*
 import kotlinx.coroutines.experimental.CancellationException
 
 /**
@@ -107,7 +106,7 @@ abstract class ParentActivity : AppCompatActivity() {
             else -> throwable?.message
         }
         if (throwable !is CancellationException && throwable != null)
-            exception(throwable, "onError")
+            exceptionLog(throwable, "onError")
         message?.let { displayInfo(message) }
     }
 
