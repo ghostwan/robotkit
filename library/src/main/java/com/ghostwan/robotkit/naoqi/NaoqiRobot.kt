@@ -1,6 +1,7 @@
 package com.ghostwan.robotkit.naoqi
 
 import android.app.Activity
+import android.os.Build
 import android.provider.Settings
 import android.support.annotation.RawRes
 import android.support.annotation.StringRes
@@ -111,10 +112,17 @@ abstract class NaoqiRobot(activity: Activity, private val address: String?) : Ro
         })
         session.connect(address)?.await()
 
+        initNaoqiData(session)
+        takeFocus()
+    }
+
+    suspend fun isFocusOwn() : Boolean {
+        return robotContext?.async()?.focus?.await()?.async()?.token().await() != null
+    }
+
+    suspend fun takeFocus() {
         val deviceId = Settings.Secure.getString(weakActivity.contentResolver, Settings.Secure.ANDROID_ID)
         val packageId = weakActivity.packageName
-
-        initNaoqiData(session)
         val focusOwner = services.focus.async().take().await()
         robotContext = services.contextFactory.async().makeContext().await()
         robotContext?.async()?.setFocus(focusOwner).await()
@@ -136,9 +144,14 @@ abstract class NaoqiRobot(activity: Activity, private val address: String?) : Ro
             touchSensors.map {
                 it.async().setOnStateChangedListener(null)//FIXME QiSDK 1.1.15 .await()
             }
+            releaseFocus()
             session?.close()//FIXME QiSDK 1.1.15 .await()
         }
         touchSensors.clear()
+    }
+
+    suspend fun releaseFocus() {
+        robotContext?.async()?.focus.await().async().release().await()
     }
 
     override fun isConnected(): Boolean = session != null && session!!.isConnected
@@ -257,7 +270,7 @@ abstract class NaoqiRobot(activity: Activity, private val address: String?) : Ro
                     onResult: (suspend (Result<Void>) -> Unit)? = null){
 
         val say = if (locale == null) {
-            services.conversation.async()?.makeSay(robotContext, Phrase(phrase), bodyLanguageOption).await()
+            services.conversation.async()?.makeSay(robotContext, Phrase(phrase), bodyLanguageOption, getCurrentLocale().toNaoqiLocale()).await()
         } else {
             services.conversation.async()?.makeSay(robotContext, Phrase(phrase), bodyLanguageOption, locale.toNaoqiLocale()).await()
         }
@@ -327,7 +340,7 @@ abstract class NaoqiRobot(activity: Activity, private val address: String?) : Ro
         }
 
         val listen = if (locale == null) {
-            services.conversation.async()?.makeListen(robotContext, phraseSet, bodyLanguageOption).await()
+            services.conversation.async()?.makeListen(robotContext, phraseSet, bodyLanguageOption, getCurrentLocale().toNaoqiLocale()).await()
         } else {
             services.conversation.async()?.makeListen(robotContext, phraseSet, bodyLanguageOption, locale.toNaoqiLocale()).await()
         }
@@ -448,7 +461,7 @@ abstract class NaoqiRobot(activity: Activity, private val address: String?) : Ro
         additionalTopics.mapTo(topicSet) { services.conversation.async()?.makeTopic(weakActivity.getLocalizedRaw(it, locale)).await() }
 
         val discuss = if (locale == null) {
-            services.conversation.async()?.makeDiscuss(robotContext, topicSet).await()
+            services.conversation.async()?.makeDiscuss(robotContext, topicSet, getCurrentLocale().toNaoqiLocale()).await()
         } else {
             services.conversation.async()?.makeDiscuss(robotContext, topicSet, locale.toNaoqiLocale()).await()
         }
@@ -501,7 +514,7 @@ abstract class NaoqiRobot(activity: Activity, private val address: String?) : Ro
         }.toMap()
 
         val discuss = if (discussion.locale == null) {
-            services.conversation.async()?.makeDiscuss(robotContext, topics.values.toList()).await()
+            services.conversation.async()?.makeDiscuss(robotContext, topics.values.toList(), getCurrentLocale().toNaoqiLocale()).await()
         } else {
             services.conversation.async()?.makeDiscuss(robotContext, topics.values.toList(), discussion.locale.toNaoqiLocale()).await()
         }
@@ -538,6 +551,18 @@ abstract class NaoqiRobot(activity: Activity, private val address: String?) : Ro
             connectSensors()
         }
     }
+
+    /**
+     * Get device locale
+     */
+    open fun getCurrentLocale(): Locale {
+        return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            weakActivity.resources.configuration.locales[0]
+        } else {
+            weakActivity.resources.configuration.locale
+        }
+    }
+
 
 
 }
