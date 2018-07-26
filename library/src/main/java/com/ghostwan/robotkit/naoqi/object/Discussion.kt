@@ -98,18 +98,18 @@ class Discussion{
         getVariables().forEach {key ->
             val qichatvar =  discuss.async()?.variable(key).await()
             naoqiData.qiChatVariables[key] = qichatvar
-            qichatvar.async().setOnValueChangedListener {
+            qichatvar.async().addOnValueChangedListener {
                 onVariableChanged?.invoke(key, it)
-            }//FIXME QiSDK 1.1.15 .await()
+            }.await()
             if(key in data.variables) {
                 qichatvar.async().setValue(data.variables[key]).await()
             }
         }
 
-        discuss.async().setOnBookmarkReachedListener {
+        discuss.async().addOnBookmarkReachedListener {
             data.bookmark = it.name
             onBookmarkReached?.invoke(it.name)
-        }//FIXME QiSDK 1.1.15 .await()
+        }.await()
         return data.bookmark
     }
 

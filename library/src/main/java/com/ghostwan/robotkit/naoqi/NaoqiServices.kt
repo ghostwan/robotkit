@@ -3,9 +3,11 @@ package com.ghostwan.robotkit.naoqi
 import com.aldebaran.qi.AnyObject
 import com.aldebaran.qi.QiConversionException
 import com.aldebaran.qi.Session
+import com.aldebaran.qi.sdk.`object`.AnyObjectWrapperConverter
 import com.aldebaran.qi.sdk.`object`.actuation.Actuation
 import com.aldebaran.qi.sdk.`object`.actuation.ActuationConverter
 import com.aldebaran.qi.sdk.`object`.autonomousabilities.AutonomousabilitiesConverter
+import com.aldebaran.qi.sdk.`object`.camera.CameraConverter
 import com.aldebaran.qi.sdk.`object`.context.ContextConverter
 import com.aldebaran.qi.sdk.`object`.context.RobotContext
 import com.aldebaran.qi.sdk.`object`.context.RobotContextFactory
@@ -15,8 +17,8 @@ import com.aldebaran.qi.sdk.`object`.focus.Focus
 import com.aldebaran.qi.sdk.`object`.focus.FocusConverter
 import com.aldebaran.qi.sdk.`object`.human.HumanConverter
 import com.aldebaran.qi.sdk.`object`.humanawareness.HumanawarenessConverter
+import com.aldebaran.qi.sdk.`object`.image.ImageConverter
 import com.aldebaran.qi.sdk.`object`.knowledge.KnowledgeConverter
-import com.aldebaran.qi.sdk.`object`.sharedtopics.SharedtopicsConverter
 import com.aldebaran.qi.sdk.`object`.touch.Touch
 import com.aldebaran.qi.sdk.`object`.touch.TouchConverter
 import com.aldebaran.qi.sdk.serialization.EnumConverter
@@ -73,21 +75,23 @@ class NaoqiServices {
      * @return a serializer that can be used to deserialize Naoqi's object.
      */
     fun createQiSerializer(): QiSerializer {
-        val serializer = QiSerializer()
+        val qiSerialiser = QiSerializer()
 
-        serializer.addConverter(EnumConverter())
-        serializer.addConverter(ActuationConverter())
-        serializer.addConverter(AutonomousabilitiesConverter())
-        serializer.addConverter(ContextConverter())
-        serializer.addConverter(FocusConverter())
-        serializer.addConverter(ConversationConverter())
-        serializer.addConverter(HumanConverter())
-        serializer.addConverter(TouchConverter())
-        serializer.addConverter(KnowledgeConverter())
-        serializer.addConverter(SharedtopicsConverter())
-        serializer.addConverter(HumanawarenessConverter())
+        qiSerialiser.addConverter(EnumConverter())
+        qiSerialiser.addConverter(ActuationConverter())
+        qiSerialiser.addConverter(AutonomousabilitiesConverter())
+        qiSerialiser.addConverter(ContextConverter())
+        qiSerialiser.addConverter(FocusConverter())
+        qiSerialiser.addConverter(ConversationConverter())
+        qiSerialiser.addConverter(HumanConverter())
+        qiSerialiser.addConverter(TouchConverter())
+        qiSerialiser.addConverter(KnowledgeConverter())
+        qiSerialiser.addConverter(HumanawarenessConverter())
+        qiSerialiser.addConverter(CameraConverter())
+        qiSerialiser.addConverter(ImageConverter())
+        qiSerialiser.addConverter(AnyObjectWrapperConverter())
 
-        return serializer
+        return qiSerialiser
     }
 
     /**

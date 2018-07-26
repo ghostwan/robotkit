@@ -163,10 +163,10 @@ abstract class NaoqiRobot(activity: Activity, private val address: String?) : Ro
     override suspend fun disconnect() {
         if (isConnected()) {
             touchSensors.map {
-                it.async().setOnStateChangedListener(null)//FIXME QiSDK 1.1.15 .await()
+                it.async().removeAllOnStateChangedListeners().await()
             }
             releaseFocus()
-            session?.close()//FIXME QiSDK 1.1.15 .await()
+            session?.close().await()
         }
         touchSensors.clear()
     }
@@ -200,7 +200,7 @@ abstract class NaoqiRobot(activity: Activity, private val address: String?) : Ro
         for (sensorName in services.touch.async().sensorNames.await()) {
             val touchSensor = services.touch.async()?.getSensor(sensorName).await()
             touchSensor?.let {
-                it.async().setOnStateChangedListener {
+                it.async().addOnStateChangedListener {
                     ui {
                         val state = if (it.touched) {
                             TouchState.TOUCHED
@@ -217,7 +217,7 @@ abstract class NaoqiRobot(activity: Activity, private val address: String?) : Ro
                             "Bumper/Back" -> bodyTouchedListener?.invoke(BodyPart.HEAD, state)
                         }
                     }
-                }//FIXME QiSDK 1.1.15 .await()
+                }.await()
                 touchSensors.add(it)
             }
         }
@@ -296,7 +296,7 @@ abstract class NaoqiRobot(activity: Activity, private val address: String?) : Ro
         }
 
         onStart?.let {
-            say.async().setOnStartedListener { ui { it() } }//FIXME QiSDK 1.1.15 .await()
+            say.async().addOnStartedListener { ui { it() } }.await()
         }
 
         val future = if (animationsRes.isNotEmpty()) {
@@ -366,7 +366,7 @@ abstract class NaoqiRobot(activity: Activity, private val address: String?) : Ro
         }
 
         onStart?.let {
-            listen.async().setOnStartedListener { ui { it() } }//FIXME QiSDK 1.1.15 .await()
+            listen.async().addOnStartedListener { ui { it() } }.await()
         }
 
         var onResultListen: ( suspend (Result<ListenResult>) -> Unit)? = null
@@ -433,7 +433,7 @@ abstract class NaoqiRobot(activity: Activity, private val address: String?) : Ro
         val animate = services.actuation.async()?.makeAnimate(robotContext, animation).await()
 
         onStart?.let {
-            animate.async().setOnStartedListener { ui { it() } }//FIXME QiSDK 1.1.15 .await()
+            animate.async().addOnStartedListener { ui { it() } }.await()
         }
 
 
@@ -487,7 +487,7 @@ abstract class NaoqiRobot(activity: Activity, private val address: String?) : Ro
         }
 
         val future = discuss.async().run()
-        discuss.async().setOnStartedListener {
+        discuss.async().addOnStartedListener {
             ui {
                 onStart?.invoke()
                 if (gotoBookmark != null) {
@@ -496,7 +496,7 @@ abstract class NaoqiRobot(activity: Activity, private val address: String?) : Ro
                     discuss.async().goToBookmarkedOutputUtterance(bookmark).await()
                 }
             }
-        }//FIXME QiSDK 1.1.15 .await()
+        }.await()
         return handleFuture(future, onResult, throwOnStop, Action.TALKING, Action.LISTENING)
     }
 
@@ -546,7 +546,7 @@ abstract class NaoqiRobot(activity: Activity, private val address: String?) : Ro
         gotoBookmark?.let {
             startBookmark = gotoBookmark
         }
-        discuss.async().setOnStartedListener {
+        discuss.async().addOnStartedListener {
             ui {
                 onStart?.invoke()
                 if (startBookmark != null) {
@@ -555,7 +555,7 @@ abstract class NaoqiRobot(activity: Activity, private val address: String?) : Ro
                     discuss.async().goToBookmarkedOutputUtterance(bookmark).await()
                 }
             }
-        }//FIXME QiSDK 1.1.15 .await()
+        }.await()
         val future = discuss.async().run()
         return handleFuture(future, onResult, throwOnStop, Action.TALKING, Action.LISTENING)
     }
