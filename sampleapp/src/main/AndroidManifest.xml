@@ -43,6 +43,17 @@
                 android:label="@string/title_activity_basic_hello_world"
                 android:theme="@style/AppTheme.NoActionBar">
         </activity>
+        <activity android:name=".samples.TestConnectionActivity"/>
+        <activity
+                android:name=".TestInstrumentedActivity"
+                android:theme="@style/Theme.AppCompat"/>
+        <activity android:name=".TestActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>

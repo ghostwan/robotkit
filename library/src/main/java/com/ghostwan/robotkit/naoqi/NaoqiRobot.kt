@@ -25,9 +25,7 @@ import com.ghostwan.robotkit.ext.getRaw
 import com.ghostwan.robotkit.naoqi.`object`.*
 import com.ghostwan.robotkit.naoqi.ext.await
 import com.ghostwan.robotkit.naoqi.ext.toNaoqiLocale
-import com.ghostwan.robotkit.util.infoLog
-import com.ghostwan.robotkit.util.ui
-import com.ghostwan.robotkit.util.weakRef
+import com.ghostwan.robotkit.util.*
 import kotlinx.coroutines.experimental.CancellationException
 import java.util.*
 
@@ -42,12 +40,10 @@ abstract class NaoqiRobot(activity: Activity, private val address: String?) : Ro
 
     var robotContext: RobotContext? = null
         protected set
+    var session: Session = Session()
 
-    var services : NaoqiServices = NaoqiServices()
-        protected set
+    var services : NaoqiServices = NaoqiServices(session)
 
-    var session: Session? = null
-        protected set
 
     private var focusOwner: FocusOwner? =null
 
@@ -94,11 +90,13 @@ abstract class NaoqiRobot(activity: Activity, private val address: String?) : Ro
     }
 
     override suspend fun connect() {
+
         if (isConnected()) {
             disconnect()
         }
+        session = Session()
+        services = NaoqiServices(session)
 
-        val session = Session()
         session.addConnectionListener(object: Session.ConnectionListener {
             override fun onConnected() {
             }
@@ -115,14 +113,13 @@ abstract class NaoqiRobot(activity: Activity, private val address: String?) : Ro
         session.connect(address)?.await()
         infoLog("session connected")
 
-        initNaoqiData(session)
         if(!hasFocus())
             takeFocus()
     }
 
     open suspend fun hasFocus() : Boolean {
         return if(focusOwner != null) {
-            services.focus.check(focusOwner)
+            services.focus.await().check(focusOwner)
         } else {
             false
         }
@@ -140,24 +137,15 @@ abstract class NaoqiRobot(activity: Activity, private val address: String?) : Ro
         val deviceId = Settings.Secure.getString(weakActivity.contentResolver, Settings.Secure.ANDROID_ID)
         val packageId = weakActivity.packageName
         focusOwner = if(token == null) {
-            services.focus.async().take().await()
+            services.focus.await().async().take().await()
         }else {
-            services.focus.async().take(token).await()
+            services.focus.await().async().take(token).await()
         }
         infoLog("Focus Granted")
-        robotContext = services.contextFactory.async().makeContext().await()
+        robotContext = services.contextFactory.await().async().makeContext().await()
         robotContext?.async()?.setFocus(focusOwner).await()
         robotContext?.async()?.setIdentity("$deviceId:$packageId").await()
         infoLog("Robot Context initialized")
-    }
-
-    protected suspend fun initNaoqiData(session: Session){
-        this.session = session
-        services.retrieve(session)
-
-        if (bodyTouchedListener != null && touchSensors.isEmpty()) {
-            connectSensors()
-        }
     }
 
     override suspend fun disconnect() {
@@ -166,13 +154,13 @@ abstract class NaoqiRobot(activity: Activity, private val address: String?) : Ro
                 it.async().removeAllOnStateChangedListeners().await()
             }
             releaseFocus()
-            session?.close().await()
+            session.close().await()
         }
         touchSensors.clear()
     }
 
 
-    override fun isConnected(): Boolean = session != null && session!!.isConnected
+    override fun isConnected(): Boolean = session.isConnected
 
     override fun stop(vararg actions: Action) {
         synchronized(lock) {
@@ -197,8 +185,8 @@ abstract class NaoqiRobot(activity: Activity, private val address: String?) : Ro
     }
 
     private suspend fun connectSensors(){
-        for (sensorName in services.touch.async().sensorNames.await()) {
-            val touchSensor = services.touch.async()?.getSensor(sensorName).await()
+        for (sensorName in services.touch.await().async().sensorNames.await()) {
+            val touchSensor = services.touch.await().async().getSensor(sensorName).await()
             touchSensor?.let {
                 it.async().addOnStateChangedListener {
                     ui {
@@ -290,9 +278,9 @@ abstract class NaoqiRobot(activity: Activity, private val address: String?) : Ro
                     onResult: (suspend (Result<Void>) -> Unit)? = null){
 
         val say = if (locale == null) {
-            services.conversation.async()?.makeSay(robotContext, Phrase(phrase), bodyLanguageOption, getCurrentLocale().toNaoqiLocale()).await()
+            services.conversation.await().async()?.makeSay(robotContext, Phrase(phrase), bodyLanguageOption, getCurrentLocale().toNaoqiLocale()).await()
         } else {
-            services.conversation.async()?.makeSay(robotContext, Phrase(phrase), bodyLanguageOption, locale.toNaoqiLocale()).await()
+            services.conversation.await().async()?.makeSay(robotContext, Phrase(phrase), bodyLanguageOption, locale.toNaoqiLocale()).await()
         }
 
         onStart?.let {
@@ -303,8 +291,8 @@ abstract class NaoqiRobot(activity: Activity, private val address: String?) : Ro
             val animSet = ArrayList<String>()
             animationsRes.mapTo(animSet) { weakActivity.getLocalizedRaw(it, locale) }
 
-            val animation = services.actuation.async()?.makeAnimation(animSet).await()
-            val animate = services.actuation.async()?.makeAnimate(robotContext, animation).await()
+            val animation = services.actuation.await().async().makeAnimation(animSet).await()
+            val animate = services.actuation.await().async().makeAnimate(robotContext, animation).await()
 
             Future.waitAll(animate.async().run(), say.async().run())
         } else {
@@ -356,13 +344,13 @@ abstract class NaoqiRobot(activity: Activity, private val address: String?) : Ro
                     Phrase(string)
                 }
             }
-            services.conversation.async()?.makePhraseSet(phrases).await()
+            services.conversation.await().async().makePhraseSet(phrases).await()
         }
 
         val listen = if (locale == null) {
-            services.conversation.async()?.makeListen(robotContext, phraseSet, bodyLanguageOption, getCurrentLocale().toNaoqiLocale()).await()
+            services.conversation.await().async().makeListen(robotContext, phraseSet, bodyLanguageOption, getCurrentLocale().toNaoqiLocale()).await()
         } else {
-            services.conversation.async()?.makeListen(robotContext, phraseSet, bodyLanguageOption, locale.toNaoqiLocale()).await()
+            services.conversation.await().async().makeListen(robotContext, phraseSet, bodyLanguageOption, locale.toNaoqiLocale()).await()
         }
 
         onStart?.let {
@@ -429,8 +417,8 @@ abstract class NaoqiRobot(activity: Activity, private val address: String?) : Ro
         animSet.add(weakActivity.getRaw(mainAnimation))
         additionalAnimations.mapTo(animSet) { weakActivity.getRaw(it) }
 
-        val animation = services.actuation.async()?.makeAnimation(animSet).await()
-        val animate = services.actuation.async()?.makeAnimate(robotContext, animation).await()
+        val animation = services.actuation.await().async().makeAnimation(animSet).await()
+        val animate = services.actuation.await().async().makeAnimate(robotContext, animation).await()
 
         onStart?.let {
             animate.async().addOnStartedListener { ui { it() } }.await()
@@ -477,13 +465,13 @@ abstract class NaoqiRobot(activity: Activity, private val address: String?) : Ro
     ): String? {
 
         val topicSet = ArrayList<Topic>()
-        topicSet.add(services.conversation.async()?.makeTopic(weakActivity.getLocalizedRaw(mainTopic, locale)).await())
-        additionalTopics.mapTo(topicSet) { services.conversation.async()?.makeTopic(weakActivity.getLocalizedRaw(it, locale)).await() }
+        topicSet.add(services.conversation.await().async().makeTopic(weakActivity.getLocalizedRaw(mainTopic, locale)).await())
+        additionalTopics.mapTo(topicSet) { services.conversation.await().async().makeTopic(weakActivity.getLocalizedRaw(it, locale)).await() }
 
         val discuss = if (locale == null) {
-            services.conversation.async()?.makeDiscuss(robotContext, topicSet, getCurrentLocale().toNaoqiLocale()).await()
+            services.conversation.await().async()?.makeDiscuss(robotContext, topicSet, getCurrentLocale().toNaoqiLocale()).await()
         } else {
-            services.conversation.async()?.makeDiscuss(robotContext, topicSet, locale.toNaoqiLocale()).await()
+            services.conversation.await().async()?.makeDiscuss(robotContext, topicSet, locale.toNaoqiLocale()).await()
         }
 
         val future = discuss.async().run()
@@ -529,14 +517,14 @@ abstract class NaoqiRobot(activity: Activity, private val address: String?) : Ro
     ): String? {
 
         val topics = discussion.topics.map { (key, value) ->
-            val top = services.conversation.async()?.makeTopic(value).await()
+            val top = services.conversation.await().async()?.makeTopic(value).await()
             key to top
         }.toMap()
 
         val discuss = if (discussion.locale == null) {
-            services.conversation.async()?.makeDiscuss(robotContext, topics.values.toList(), getCurrentLocale().toNaoqiLocale()).await()
+            services.conversation.await().async()?.makeDiscuss(robotContext, topics.values.toList(), getCurrentLocale().toNaoqiLocale()).await()
         } else {
-            services.conversation.async()?.makeDiscuss(robotContext, topics.values.toList(), discussion.locale.toNaoqiLocale()).await()
+            services.conversation.await().async()?.makeDiscuss(robotContext, topics.values.toList(), discussion.locale.toNaoqiLocale()).await()
         }
 
         var startBookmark: String? = null

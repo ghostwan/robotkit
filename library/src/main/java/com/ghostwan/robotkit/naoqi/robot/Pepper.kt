@@ -6,15 +6,14 @@ import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
 import android.content.pm.PackageManager
-import android.provider.Settings
 import com.aldebaran.qi.Session
 import com.aldebaran.qi.UserTokenAuthenticator
 import com.aldebaran.qi.sdk.core.util.FocusUtil
 import com.aldebaran.robotservice.IRobotService
 import com.ghostwan.robotkit.exception.RobotUnavailableException
-import com.ghostwan.robotkit.ext.LocalService
 import com.ghostwan.robotkit.ext.getLocalService
 import com.ghostwan.robotkit.naoqi.NaoqiRobot
+import com.ghostwan.robotkit.naoqi.NaoqiServices
 import com.ghostwan.robotkit.naoqi.ext.await
 import com.ghostwan.robotkit.util.errorLog
 import com.ghostwan.robotkit.util.infoLog
@@ -22,11 +21,12 @@ import kotlin.coroutines.experimental.Continuation
 import kotlin.coroutines.experimental.suspendCoroutine
 
 private const val ROBOT_SERVICE_PACKAGE = "com.aldebaran.robotservice"
+
 /**
  * Pepper robot
  */
 open class Pepper(activity: Activity, address: String?) : NaoqiRobot(activity, address) {
-    override fun getRobotType() : String {
+    override fun getRobotType(): String {
         return "Pepper"
     }
 }
@@ -40,7 +40,7 @@ open class Pepper(activity: Activity, address: String?) : NaoqiRobot(activity, a
  */
 class LocalPepper(activity: Activity) : Pepper(activity, null) {
 
-    private var robotService : IRobotService? = null
+    private var robotService: IRobotService? = null
 
     companion object {
         private const val ACTION_ROBOT_SERVICE = "com.aldebaran.action.ROBOT_SERVICE"
@@ -55,6 +55,8 @@ class LocalPepper(activity: Activity) : Pepper(activity, null) {
         if (isConnected()) {
             disconnect()
         }
+        session = Session()
+        services = NaoqiServices(session)
 
         val localRobotService = weakActivity.getLocalService(ROBOT_SERVICE_PACKAGE, ACTION_ROBOT_SERVICE)
 
@@ -65,7 +67,6 @@ class LocalPepper(activity: Activity) : Pepper(activity, null) {
         val endpoint = robotService?.publicEndpoint
         val token = robotService?.publicToken
 
-        val session = Session()
         session.setClientAuthenticator(UserTokenAuthenticator(USER_SESSION, token))
         session.addConnectionListener(object: Session.ConnectionListener {
             override fun onConnected() {
@@ -83,7 +84,6 @@ class LocalPepper(activity: Activity) : Pepper(activity, null) {
         session.connect(endpoint)?.await()
         infoLog("session connected")
 
-        initNaoqiData(session)
         takeFocus()
 
         weakActivity.unbindService(localRobotService.connection)

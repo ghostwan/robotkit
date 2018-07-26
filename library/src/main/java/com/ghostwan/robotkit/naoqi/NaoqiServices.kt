@@ -26,27 +26,23 @@ import com.aldebaran.qi.serialization.QiSerializer
 import com.ghostwan.robotkit.exception.RobotUnavailableException
 import com.ghostwan.robotkit.naoqi.ext.await
 import com.ghostwan.robotkit.util.infoLog
+import kotlinx.coroutines.experimental.Deferred
+import kotlinx.coroutines.experimental.async
 import java.util.concurrent.ExecutionException
 
-class NaoqiServices {
+class NaoqiServices(session: Session) {
 
     private val serializer: QiSerializer = createQiSerializer()
 
-    lateinit var conversation: Conversation
-    lateinit var touch: Touch
-    lateinit var actuation: Actuation
-    lateinit var focus: Focus
-    lateinit var contextFactory: RobotContextFactory
+    val conversation: Deferred<Conversation> by getService(session)
 
-    suspend fun retrieve(session: Session){
-        conversation = retrieveService(session, Conversation::class.java, "Conversation")
-        actuation = retrieveService(session, Actuation::class.java, "Actuation")
-        focus = retrieveService(session, Focus::class.java, "Focus")
-        contextFactory = retrieveService(session, RobotContextFactory::class.java, "ContextFactory")
-        touch = retrieveService(session, Touch::class.java, "Touch")
-        infoLog("services retrieved")
-    }
+    val touch: Deferred<Touch> by getService(session)
 
+    val actuation: Deferred<Actuation> by getService(session)
+
+    val focus: Deferred<Focus> by getService(session)
+
+    val contextFactory: Deferred<RobotContextFactory> by getService(session, "ContextFactory")
 
     /**
      * Simplify Naoqi's Service retrieval
@@ -92,6 +88,14 @@ class NaoqiServices {
         qiSerialiser.addConverter(AnyObjectWrapperConverter())
 
         return qiSerialiser
+    }
+
+    private inline fun <reified T> getService(session: Session, name: String=T::class.java.simpleName): Lazy<Deferred<T>> {
+        return lazy {
+            async {
+                retrieveService(session, T::class.java, name)
+            }
+        }
     }
 
     /**
