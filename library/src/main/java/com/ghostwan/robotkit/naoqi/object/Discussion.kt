@@ -69,7 +69,6 @@ class Discussion{
             id += context.getString(integer).substringAfterLast("/")
             content = addBookmarks(content, "(\\s*proposal:)(.*)", "rk-p")
             content = addBookmarks(content, "(\\s*u\\d+:\\([^)]*\\))(.*)", "rk-u")
-            println(content)
             this.topics[integer] = content
         }
         id = id.sha512()

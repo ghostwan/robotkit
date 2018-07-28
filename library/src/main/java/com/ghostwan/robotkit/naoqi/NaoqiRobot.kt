@@ -125,6 +125,18 @@ abstract class NaoqiRobot(activity: Activity, private val address: String?) : Ro
         }
     }
 
+    /**
+     * Get device locale
+     */
+    open fun getCurrentLocale(): Locale {
+        return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            weakActivity.resources.configuration.locales[0]
+        } else {
+            weakActivity.resources.configuration.locale
+        }
+    }
+
+
     suspend fun releaseFocus() {
         focusOwner?.async()?.release().await()
     }
@@ -559,18 +571,6 @@ abstract class NaoqiRobot(activity: Activity, private val address: String?) : Ro
             connectSensors()
         }
     }
-
-    /**
-     * Get device locale
-     */
-    open fun getCurrentLocale(): Locale {
-        return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-            weakActivity.resources.configuration.locales[0]
-        } else {
-            weakActivity.resources.configuration.locale
-        }
-    }
-
 
 
 }
