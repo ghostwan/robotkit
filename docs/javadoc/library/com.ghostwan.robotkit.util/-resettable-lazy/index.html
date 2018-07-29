@@ -1,0 +1,63 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>ResettableLazy - library</title>
+<link rel="stylesheet" href="../../../style.css">
+</HEAD>
+<BODY>
+<a href="../../index.html">library</a>&nbsp;/&nbsp;<a href="../index.html">com.ghostwan.robotkit.util</a>&nbsp;/&nbsp;<a href="./index.html">ResettableLazy</a><br/>
+<br/>
+<h1>ResettableLazy</h1>
+<code><span class="keyword">class </span><span class="identifier">ResettableLazy</span><span class="symbol">&lt;</span><span class="identifier">PROPTYPE</span><span class="symbol">&gt;</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="../-resettable/index.html"><span class="identifier">Resettable</span></a></code>
+<h3>Constructors</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="-init-.html">&lt;init&gt;</a></p>
+</td>
+<td>
+<code><span class="identifier">ResettableLazy</span><span class="symbol">(</span><span class="identifier" id="com.ghostwan.robotkit.util.ResettableLazy$<init>(com.ghostwan.robotkit.util.ResettableLazyManager, kotlin.Function0((com.ghostwan.robotkit.util.ResettableLazy.PROPTYPE)))/manager">manager</span><span class="symbol">:</span>&nbsp;<a href="../-resettable-lazy-manager/index.html"><span class="identifier">ResettableLazyManager</span></a><span class="symbol">, </span><span class="identifier" id="com.ghostwan.robotkit.util.ResettableLazy$<init>(com.ghostwan.robotkit.util.ResettableLazyManager, kotlin.Function0((com.ghostwan.robotkit.util.ResettableLazy.PROPTYPE)))/init">init</span><span class="symbol">:</span>&nbsp;<span class="symbol">(</span><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<a href="index.html#PROPTYPE"><span class="identifier">PROPTYPE</span></a><span class="symbol">)</span></code></td>
+</tr>
+</tbody>
+</table>
+<h3>Properties</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="lazy-holder.html">lazyHolder</a></p>
+</td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">lazyHolder</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-lazy/index.html"><span class="identifier">Lazy</span></a><span class="symbol">&lt;</span><a href="index.html#PROPTYPE"><span class="identifier">PROPTYPE</span></a><span class="symbol">&gt;</span></code></td>
+</tr>
+</tbody>
+</table>
+<h3>Functions</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="get-value.html">getValue</a></p>
+</td>
+<td>
+<code><span class="keyword">operator</span> <span class="keyword">fun </span><span class="identifier">getValue</span><span class="symbol">(</span><span class="identifier" id="com.ghostwan.robotkit.util.ResettableLazy$getValue(kotlin.Any, kotlin.reflect.KProperty((kotlin.Any)))/thisRef">thisRef</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html"><span class="identifier">Any</span></a><span class="symbol">?</span><span class="symbol">, </span><span class="identifier" id="com.ghostwan.robotkit.util.ResettableLazy$getValue(kotlin.Any, kotlin.reflect.KProperty((kotlin.Any)))/property">property</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.reflect/-k-property/index.html"><span class="identifier">KProperty</span></a><span class="symbol">&lt;</span><span class="identifier">*</span><span class="symbol">&gt;</span><span class="symbol">)</span><span class="symbol">: </span><a href="index.html#PROPTYPE"><span class="identifier">PROPTYPE</span></a></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="make-init-block.html">makeInitBlock</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">makeInitBlock</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-lazy/index.html"><span class="identifier">Lazy</span></a><span class="symbol">&lt;</span><a href="index.html#PROPTYPE"><span class="identifier">PROPTYPE</span></a><span class="symbol">&gt;</span></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="reset.html">reset</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">reset</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+</tbody>
+</table>
+</BODY>
+</HTML>

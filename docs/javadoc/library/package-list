@@ -1,0 +1,30 @@
+$dokka.format:html
+$dokka.linkExtension:html
+$dokka.location:com.ghostwan.robotkit.ext$createLocalizedContext(android.content.Context, java.util.Locale)com.ghostwan.robotkit.ext/android.content.-context/create-localized-context.html
+$dokka.location:com.ghostwan.robotkit.ext$getLocalService(android.content.Context, kotlin.String, kotlin.String, kotlin.Int)com.ghostwan.robotkit.ext/android.content.-context/get-local-service.html
+$dokka.location:com.ghostwan.robotkit.ext$getLocalizedRaw(android.content.Context, kotlin.Int, java.util.Locale)com.ghostwan.robotkit.ext/android.content.-context/get-localized-raw.html
+$dokka.location:com.ghostwan.robotkit.ext$getLocalizedString(android.content.Context, kotlin.Int, java.util.Locale)com.ghostwan.robotkit.ext/android.content.-context/get-localized-string.html
+$dokka.location:com.ghostwan.robotkit.ext$getRaw(android.content.Context, kotlin.Int)com.ghostwan.robotkit.ext/android.content.-context/get-raw.html
+$dokka.location:com.ghostwan.robotkit.ext$inBackground(android.app.Activity, kotlin.SuspendFunction1((android.app.Activity, kotlin.Unit)))com.ghostwan.robotkit.ext/android.app.-activity/in-background.html
+$dokka.location:com.ghostwan.robotkit.ext$inBackgroundAsync(android.app.Activity, kotlin.SuspendFunction1((android.app.Activity, kotlin.Unit)))com.ghostwan.robotkit.ext/android.app.-activity/in-background-async.html
+$dokka.location:com.ghostwan.robotkit.ext$inBackgroundSafe(android.app.Activity, kotlin.SuspendFunction1((android.app.Activity, kotlin.Unit)), kotlin.Function1((kotlin.Throwable, kotlin.Unit)))com.ghostwan.robotkit.ext/android.app.-activity/in-background-safe.html
+$dokka.location:com.ghostwan.robotkit.ext$inUI(android.app.Activity, kotlin.SuspendFunction1((android.app.Activity, kotlin.Unit)))com.ghostwan.robotkit.ext/android.app.-activity/in-u-i.html
+$dokka.location:com.ghostwan.robotkit.ext$inUIAsync(android.app.Activity, kotlin.SuspendFunction1((android.app.Activity, kotlin.Unit)))com.ghostwan.robotkit.ext/android.app.-activity/in-u-i-async.html
+$dokka.location:com.ghostwan.robotkit.ext$inUISafe(android.app.Activity, kotlin.SuspendFunction1((android.app.Activity, kotlin.Unit)), kotlin.Function1((kotlin.Throwable, kotlin.Unit)))com.ghostwan.robotkit.ext/android.app.-activity/in-u-i-safe.html
+$dokka.location:com.ghostwan.robotkit.ext$random(kotlin.ranges.ClosedRange((kotlin.Int)))com.ghostwan.robotkit.ext/kotlin.ranges.-closed-range/random.html
+$dokka.location:com.ghostwan.robotkit.ext$setOnClickCoroutine(android.view.View, kotlin.SuspendFunction1((android.view.View, kotlin.Unit)))com.ghostwan.robotkit.ext/android.view.-view/set-on-click-coroutine.html
+$dokka.location:com.ghostwan.robotkit.ext$setOnClickSafeCoroutine(android.view.View, kotlin.SuspendFunction1((android.view.View, kotlin.Unit)), kotlin.Function1((kotlin.Throwable, kotlin.Unit)))com.ghostwan.robotkit.ext/android.view.-view/set-on-click-safe-coroutine.html
+$dokka.location:com.ghostwan.robotkit.ext$setText(android.widget.TextView, kotlin.Int, java.util.Locale)com.ghostwan.robotkit.ext/android.widget.-text-view/set-text.html
+$dokka.location:com.ghostwan.robotkit.ext$sha512(kotlin.String)com.ghostwan.robotkit.ext/kotlin.-string/sha512.html
+$dokka.location:com.ghostwan.robotkit.naoqi.ext$await(com.aldebaran.qi.Future((com.ghostwan.robotkit.naoqi.ext.await.T)))com.ghostwan.robotkit.naoqi.ext/com.aldebaran.qi.-future/await.html
+$dokka.location:com.ghostwan.robotkit.naoqi.ext$toNaoqiLocale(java.util.Locale)com.ghostwan.robotkit.naoqi.ext/java.util.-locale/to-naoqi-locale.html
+$dokka.location:com.ghostwan.robotkit.naoqi.robot$isOnLocalPepper(android.content.Context)com.ghostwan.robotkit.naoqi.robot/android.content.-context/is-on-local-pepper.html
+com.ghostwan.robotkit
+com.ghostwan.robotkit.exception
+com.ghostwan.robotkit.ext
+com.ghostwan.robotkit.naoqi
+com.ghostwan.robotkit.naoqi.ext
+com.ghostwan.robotkit.naoqi.object
+com.ghostwan.robotkit.naoqi.robot
+com.ghostwan.robotkit.object
+com.ghostwan.robotkit.util
