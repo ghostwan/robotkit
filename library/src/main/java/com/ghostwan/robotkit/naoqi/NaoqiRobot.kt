@@ -7,6 +7,7 @@ import android.support.annotation.RawRes
 import android.support.annotation.StringRes
 import com.aldebaran.qi.Future
 import com.aldebaran.qi.Session
+import com.aldebaran.qi.UserTokenAuthenticator
 import com.aldebaran.qi.sdk.`object`.context.RobotContext
 import com.aldebaran.qi.sdk.`object`.conversation.BodyLanguageOption
 import com.aldebaran.qi.sdk.`object`.conversation.ListenResult
@@ -25,14 +26,20 @@ import com.ghostwan.robotkit.ext.getRaw
 import com.ghostwan.robotkit.naoqi.`object`.*
 import com.ghostwan.robotkit.naoqi.ext.await
 import com.ghostwan.robotkit.naoqi.ext.toNaoqiLocale
-import com.ghostwan.robotkit.util.*
+import com.ghostwan.robotkit.util.infoLog
+import com.ghostwan.robotkit.util.ui
+import com.ghostwan.robotkit.util.weakRef
 import kotlinx.coroutines.experimental.CancellationException
 import java.util.*
 
 /**
  * Interface to call robotics API on Naoqi's robots
  */
-abstract class NaoqiRobot(activity: Activity, private val address: String?) : Robot{
+abstract class NaoqiRobot(activity: Activity, private val address: String?, private val password: String?) : Robot{
+
+    companion object {
+        private const val USER_SESSION = "nao"
+    }
 
     private var futures: MutableMap<Future<*>, Array<out Action>> = HashMap()
     protected var weakActivity: Activity by weakRef(activity)
@@ -97,6 +104,9 @@ abstract class NaoqiRobot(activity: Activity, private val address: String?) : Ro
         session = Session()
         services = NaoqiServices(session)
 
+        if(password != null) {
+            session.setClientAuthenticator(UserTokenAuthenticator(USER_SESSION,password))
+        }
         session.addConnectionListener(object: Session.ConnectionListener {
             override fun onConnected() {
             }
@@ -119,7 +129,7 @@ abstract class NaoqiRobot(activity: Activity, private val address: String?) : Ro
 
     open suspend fun hasFocus() : Boolean {
         return if(focusOwner != null) {
-            services.focus.await().check(focusOwner)
+            services.focus.await().async().check(focusOwner).await()
         } else {
             false
         }
@@ -139,6 +149,7 @@ abstract class NaoqiRobot(activity: Activity, private val address: String?) : Ro
 
     suspend fun releaseFocus() {
         focusOwner?.async()?.release().await()
+        infoLog("Focus Released!")
     }
 
     open suspend fun takeFocus() {
@@ -162,10 +173,13 @@ abstract class NaoqiRobot(activity: Activity, private val address: String?) : Ro
 
     override suspend fun disconnect() {
         if (isConnected()) {
+            if(touchSensors.isNotEmpty())
+                infoLog("Removing listeners")
             touchSensors.map {
                 it.async().removeAllOnStateChangedListeners().await()
             }
             releaseFocus()
+            infoLog("Closing session")
             session.close().await()
         }
         touchSensors.clear()

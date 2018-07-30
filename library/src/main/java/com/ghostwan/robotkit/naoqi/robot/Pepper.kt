@@ -25,7 +25,7 @@ private const val ROBOT_SERVICE_PACKAGE = "com.aldebaran.robotservice"
 /**
  * Pepper robot
  */
-open class Pepper(activity: Activity, address: String?) : NaoqiRobot(activity, address) {
+open class Pepper(activity: Activity, address: String?, password: String?) : NaoqiRobot(activity, address, password) {
     override fun getRobotType(): String {
         return "Pepper"
     }
@@ -38,7 +38,7 @@ open class Pepper(activity: Activity, address: String?) : NaoqiRobot(activity, a
  * to retrieve the endpoints and authenticated tokens.
  *
  */
-class LocalPepper(activity: Activity) : Pepper(activity, null) {
+class LocalPepper(activity: Activity) : Pepper(activity, null, null) {
 
     private var robotService: IRobotService? = null
 

@@ -21,19 +21,17 @@ import kotlinx.coroutines.experimental.CancellationException
 
 class StopActivity : AppCompatActivity() {
 
-    private lateinit var pepper: Pepper
+    private val pepper by lazy {
+        if (intent.hasExtra("address")) {
+            Pepper(this, intent.getStringExtra("address"), "nao")
+        } else {
+            LocalPepper(this)
+        }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_stop_acivity)
-
-        pepper = if(intent.hasExtra("address")) {
-            Pepper(this, intent.getStringExtra("address"))
-        }
-        else {
-            LocalPepper(this)
-        }
-
 
         buttonSay.setOnClickCoroutine{
             pepper.say(R.string.lorem_lpsum, onResult = {onResult(it)})

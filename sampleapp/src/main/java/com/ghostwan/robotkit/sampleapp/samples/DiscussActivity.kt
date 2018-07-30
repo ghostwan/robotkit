@@ -16,7 +16,7 @@ class DiscussActivity : MultiLocaleActivity() {
     override fun scenarioName(): String = "Discuss"
     override fun defaultLayout(): Int = R.layout.activity_discuss
 
-    private lateinit var discussion: Discussion
+    private val discussion: Discussion by lazy { Discussion(this, R.raw.presentation_discussion, locale = locale) }
 
     override fun onRobotConnected() {
         super.onRobotConnected()
@@ -33,7 +33,6 @@ class DiscussActivity : MultiLocaleActivity() {
     }
 
     override suspend fun onStartAction() {
-        discussion = Discussion(this, R.raw.presentation_discussion, locale = locale)
         discussion.setOnBookmarkReached { infoLog("Bookmark $it reached!") }
         discussion.setOnVariableChanged { name, value -> infoLog("Variable $name changed to $value") }
         clearDataBtn.setOnClickCoroutine {

@@ -13,7 +13,7 @@ class TestConnectionActivity : AppCompatActivity() {
 
     private val pepper by lazy {
         if (intent.hasExtra("address")) {
-            Pepper(this, intent.getStringExtra("address"))
+            Pepper(this, intent.getStringExtra("address"), "nao")
         } else {
             LocalPepper(this)
         }

@@ -1,15 +1,18 @@
 package com.ghostwan.robotkit.sampleapp
 
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import com.ghostwan.robotkit.naoqi.robot.LocalPepper
+import com.ghostwan.robotkit.naoqi.robot.Pepper
+import com.ghostwan.robotkit.naoqi.robot.isOnLocalPepper
 import com.ghostwan.robotkit.util.ui
 import kotlinx.android.synthetic.main.activity_test.*
 
 class TestActivity : AppCompatActivity() {
 
     private var step: Int = 0
+
     companion object {
         const val TAG = "TestActivity"
     }
@@ -17,9 +20,13 @@ class TestActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_test)
-        val pepper = LocalPepper(this)
-        var step: Int = 0
-        ui{
+        val pepper = if (isOnLocalPepper()) {
+            LocalPepper(this)
+        } else {
+            Pepper(this, intent.getStringExtra("address"), "nao")
+        }
+        var step = 0
+        ui {
             log("test connection")
             testConnection(pepper)
             log("test connection")
@@ -47,7 +54,7 @@ class TestActivity : AppCompatActivity() {
         }
     }
 
-    private suspend fun testConnection(pepper: LocalPepper) {
+    private suspend fun testConnection(pepper: Pepper) {
         log("Connecting...")
         pepper.connect()
 

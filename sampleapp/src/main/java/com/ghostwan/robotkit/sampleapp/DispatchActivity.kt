@@ -47,7 +47,7 @@ class DispatchActivity : AppCompatActivity() {
 
                 builder.setNegativeButton(R.string.cancel) { dialog, which -> dialog.cancel() }
                 builder.setPositiveButton(R.string.ok)  { dialog, which ->
-                    val address = "tcp://${input.text}:9559"
+                    val address = "tcps://${input.text}:9503"
                     val activityInfo = (spinner.selectedItem as DecoratedActivityInfo).activityInfo
                     val intent = Intent()
                     intent.setClassName(activityInfo.applicationInfo.packageName, activityInfo.name)

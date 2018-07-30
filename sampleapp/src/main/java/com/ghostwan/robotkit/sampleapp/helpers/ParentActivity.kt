@@ -27,7 +27,13 @@ abstract class ParentActivity : AppCompatActivity() {
         const val STOP = "stopAction"
     }
 
-    internal lateinit var pepper: Pepper
+    protected val pepper by lazy {
+        if (intent.hasExtra("address")) {
+            Pepper(this, intent.getStringExtra("address"), "nao")
+        } else {
+            LocalPepper(this)
+        }
+    }
 
     protected open fun defaultLayout(): Int {
         return R.layout.activity_parent
@@ -58,13 +64,6 @@ abstract class ParentActivity : AppCompatActivity() {
             }
         }, this::onError)
 
-
-        pepper = if(intent.hasExtra("address")) {
-            Pepper(this, intent.getStringExtra("address"))
-        }
-        else {
-            LocalPepper(this)
-        }
         pepper.setOnRobotLost(this::onRobotDisconnected)
     }
 

@@ -15,6 +15,7 @@ import com.ghostwan.robotkit.naoqi.robot.LocalPepper
 import com.ghostwan.robotkit.naoqi.robot.Pepper
 import com.ghostwan.robotkit.sampleapp.R
 import com.ghostwan.robotkit.util.exceptionLog
+import com.ghostwan.robotkit.util.infoLog
 import kotlinx.android.synthetic.main.activity_touch.*
 import kotlinx.coroutines.experimental.CancellationException
 
@@ -27,19 +28,9 @@ class TouchActivity : AppCompatActivity() {
         inUI {
             setContentView(R.layout.activity_touch)
             pepper = if (intent.hasExtra("address")) {
-                Pepper(this, intent.getStringExtra("address"))
+                Pepper(this, intent.getStringExtra("address"), "nao")
             } else {
                 LocalPepper(this)
-            }
-            pepper.setOnBodyTouched { bodyPart, touchState ->
-                when (bodyPart) {
-                    BodyPart.HEAD -> changePartVisibility(headImage, touchState)
-                    BodyPart.RIGHT_HAND -> changePartVisibility(leftHandImage, touchState)
-                    BodyPart.LEFT_HAND -> changePartVisibility(rightHandImage, touchState)
-                    BodyPart.LEFT_BUMPER -> changePartVisibility(rightBumperImage, touchState)
-                    BodyPart.RIGHT_BUMPER -> changePartVisibility(leftBumperImage, touchState)
-                    BodyPart.BACK_BUMPER -> changePartVisibility(backBumperImage, touchState)
-                }
             }
         }
     }
@@ -58,6 +49,20 @@ class TouchActivity : AppCompatActivity() {
         inUISafe({
             if (!pepper.isConnected()) {
                 pepper.connect()
+                pepper.setOnBodyTouched { bodyPart, touchState ->
+                    if(touchState == TouchState.TOUCHED)
+                        infoLog("Robot is touched: $bodyPart")
+                    else
+                        infoLog("$bodyPart is being released")
+                    when (bodyPart) {
+                        BodyPart.HEAD -> changePartVisibility(headImage, touchState)
+                        BodyPart.RIGHT_HAND -> changePartVisibility(leftHandImage, touchState)
+                        BodyPart.LEFT_HAND -> changePartVisibility(rightHandImage, touchState)
+                        BodyPart.LEFT_BUMPER -> changePartVisibility(rightBumperImage, touchState)
+                        BodyPart.RIGHT_BUMPER -> changePartVisibility(leftBumperImage, touchState)
+                        BodyPart.BACK_BUMPER -> changePartVisibility(backBumperImage, touchState)
+                    }
+                }
             }
             if (!pepper.hasFocus()) {
                 pepper.takeFocus()
@@ -69,7 +74,7 @@ class TouchActivity : AppCompatActivity() {
     override fun onStop() {
         super.onStop()
         inUISafe({
-            pepper.releaseFocus()
+            pepper.disconnect()
         }, this::onError)
     }
 
