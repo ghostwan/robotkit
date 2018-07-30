@@ -529,3 +529,9 @@ pepper.playSound(R.raw.suprise1, R.raw.suprise2, isLooping = true, isRandom = tr
 pepper.stopSound()
 ```
 
+## TO FIX (WIP version on this branch)
+
+- pepper is not disconnected after a discuss
+- can't import robotkit snapshot anymore from another project
+- don't support ARM 64 processor
+
