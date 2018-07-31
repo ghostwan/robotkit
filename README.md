@@ -5,10 +5,10 @@ RobotKit it's a Kotlin multi-Robot SDK for Android.
 
 ## Last version
 
-0.5.0 Beta Candidate: 
+0.5.1 Beta Candidate: 
 
 ``` groovy
-    compile 'com.github.ghostwan:robotkit:0.5.0'
+    compile 'com.github.ghostwan:robotkit:0.5.1'
 ```
 A [KDOC](https://ghostwan.github.io/robotkit/docs/javadoc/library/index.html) À Kadoc ! [;)](https://media.giphy.com/media/wWSicFanND2gw/200.gif)
 
@@ -378,39 +378,29 @@ fun onError(throwable : Throwable?) {
 }
 ```
 
-*** 
-***
-*** 
-    
-    
-## API DOING
-
 ### Multiple Robot support #27
 
 Creation of an interface Robot which will be implemented by all Robot supported
 
 ``` kotlin 
-pepper : Robot = RemotePepper(this,"pepper.local")
-pepper : Robot = LocalPepper(this)
-nao : Robot = RemoteNao(this,"nao.local")
-cozmo : Robot = RemoteCozmo(this, "cozmo.local")
+val remotePepper : Robot = Pepper(this,"pepper.local", robotPassword)
+val localPepper : Robot = LocalPepper(this)
+val nao : Robot = Nao(this,"nao.local")
 ```    
-
-
 
 ### Connect to Remote Nao #14
 
 ``` kotlin
-nao = RemoteNao(this, "nao.local")
+nao = Nao(this, "nao.local")
 nao.connect()
 ```
 
 ### Connect to Remote Pepper #13
 
 ``` kotlin
-pepper = RemotePepper(this, "pepper.local")
+pepper = Pepper(this, "pepper.local", robotPassword)
 
-//pepper = RemotePepper(this, "192.168.1.23")
+//pepper = Pepper(this, "192.168.1.23")
 pepper.connect()    
 ```
 
@@ -433,13 +423,17 @@ pepper.setOnBodyTouched {
     
 ## API TODO
 
-
-    
-### Connect to Remote Cozmo
+### Control robot autonomous abilities 
 
 ``` kotlin
-cozmo = RemoteCozmo(this, "cozmo.local")
-cozmo.connect()
+pepper.deactivate(Abilitie.BLINKING)
+...
+pepper.deactivate(Abilitie.BACKGROUND_MOVEMENTS, Abilitie.AWARNESS);
+...
+pepper.activate(Abilitie.BLINKING, Abilitie.AWARNESS);
+...
+pepper.activate(Abilitie.BACKGROUND_MOVEMENTS);
+
 ```
 
 ### Animate with animation #15
@@ -450,17 +444,21 @@ Expert API:
 val animation = Animation(R.raw.dog_a001)
 animation.getDuration()
 animation.getLabels()
+animation.setOnLabelReached {name, time ->
+    info("Label $name reached at $time") 
+}
 pepper.animate(animation)
 ```
 
 ### Move around #16
 
 ``` kotlin
-pepper.moveForward(1)
-pepper.moveLeft(1)
-pepper.moveRight(1)
+pepper.move(forward=1)
+pepper.move(left=1)
+pepper.move(right=1)
+pepper.move(x=1, y=2)
 ```
-    
+
 ### Goto a location #17
 
 ``` kotlin
@@ -476,7 +474,108 @@ pepper.rememberLocation("kitchen", theKitchen)
 ```
   
 Allow multiple robots to share a location that they know about #18
+
+### Map its environement and localize itself in the map
+
+``` kotlin
+val myMap:RobotMap = pepper.map()
+...
+pepper.stop()
+...
+pepper.localize(myMap)
+...
+pepper.move(x=1,y=2)
+...
+val theKitchen = pepper.getLocation()
+pepper.rememberLocation("kitchen", theKitchen)
+
+```
+
+### LooktAt something
+``` kotlin
+pepper.lookAt(frame, LookAtMovementPolicy.HEAD_AND_BASE)
+```   
+
+
+### Remember something
+
+``` kotlin
+pepper.remember("discussion:result", result)
+pepper.remember("discussion:state", state)
+nao.remember("discussion:result", result)
+```    
+
+### Get humans arround
+``` kotlin
+val humans : List<Human> = pepper.getHumansArround()
+```
     
+### Wait for a human
+
+``` kotlin
+val human : Human = pepper.waitForHuman()
+whith(human) {
+ info("its age is $age")
+ info("its gender is $gender")
+ info("its pleasure state is $pleasure")
+ info("its excitement state is $excitement")
+ info("its smile state is $smile")
+ info("its attention state is $attention")
+ info("its engagement state is $engagement")
+}
+human.faceframe
+human.facePicture
+```
+    
+### Engage a human
+
+``` kotlin
+pepper.engage(human)
+```    
+
+### Play sound
+
+``` kotlin
+pepper.playSound(R.raw.suprise1, R.raw.suprise2, isLooping = true, isRandom = true)
+pepper.stopSound()
+```
+
+### Take a picture
+``` kotlin
+val picture = pepper.takePicture()
+```
+
+### Set an executor in a discussion
+``` kotlin
+val discussion = Discussion(R.raw.cooking_dicussion)
+discussion.setExecutor("playElephantAnimation") {
+    pepper.animate(R.raw.elephant_animation)
+}
+discussion.setExecutor("playSound") {
+    pepper.playSound(it[0])
+}
+pepper.discuss(discussion)
+```
+``` topic
+topic: ~topic1()
+
+u:(do the elephant) I'm playing an elephant animation ^execute(playElephantAnimation) and now I'm done.
+u:(barks) I'm a dog ^execute(playSound, dog) and now I'm done.
+u:(meows) I'm a cat ^execute(playSound, cat) and now I'm done.
+```
+### Attach a chatbot to a discussion
+``` kotlin
+val helloConcept = Concept(this, R.string.hello, R.string.hi)
+val discussion = Discussion(R.raw.cooking_dicussion)
+discussion.addChatbot(mychatbot)
+discussion.addChatbot{phrase, locale, say->
+    when(phrase) {
+        helloConcept -> say("how are you")
+        "bidule" -> say("I can just greet you")
+    }
+}
+pepper.discuss(discussion)
+```
 
 ### Follow a robot #20
 
@@ -487,50 +586,15 @@ pepper.follow(cozmo)
     
 An API for a Robot to follow another robot
 
-
-### Remember something
-
-``` kotlin
-pepper.remember("discussion:result", result)
-pepper.remember("discussion:state", state)
-nao.remember("discussion:result", result)
-```    
-    
-### Wait for a human
+### Connect to Cozmo
 
 ``` kotlin
-val human : Human = pepper.waitForHuman()
-```
-    
-### Engage a human
-
-``` kotlin
-pepper.engage(human)
-```    
-
-### Control robot autonomous abilities 
-
-``` kotlin
-pepper.deactivate(Abilitie.BLINKING)
-...
-pepper.deactivate(Abilitie.BACKGROUND_MOVEMENTS, Abilitie.AWARNESS);
-...
-pepper.activate(Abilitie.BLINKING, Abilitie.AWARNESS);
-...
-pepper.activate(Abilitie.BACKGROUND_MOVEMENTS);
-
+val cozmo = Cozmo(this, "cozmo.local")
+cozmo.connect()
 ```
 
-### Play sound
-
-``` kotlin
-pepper.playSound(R.raw.suprise1, R.raw.suprise2, isLooping = true, isRandom = true)
-pepper.stopSound()
-```
-
-## TO FIX (WIP version on this branch)
+## TO FIX
 
 - pepper is not disconnected after a discuss
-- can't import robotkit snapshot anymore from another project
-- don't support ARM 64 processor
+
 
