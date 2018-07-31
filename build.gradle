@@ -23,13 +23,13 @@ buildscript {
 
 allprojects {
     repositories {
-        google()
-        jcenter()
-        mavenCentral()
         maven {
             url 'https://android.aldebaran.com/sdk/maven'
         }
         maven { url "https://kotlin.bintray.com/kotlinx" }
+        google()
+        jcenter()
+        mavenCentral()
     }
 }
 
