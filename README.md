@@ -1,14 +1,14 @@
-# RobotKit ![Kotlin Logo](kotlin.png)
+# RobotKit ![Kotlin Logo](kotlin.png) ![Travis CI status](https://travis-ci.org/ghostwan/robotkit.svg?branch=master) 
 
 RobotKit it's a Kotlin multi-Robot SDK for Android.
 
 
 ## Last version
 
-1.0.0 Release Candidate RC4 : 
+0.5.0 Beta Candidate: 
 
 ``` groovy
-    compile 'com.github.ghostwan:robotkit:1.0.0rc4'
+    compile 'com.github.ghostwan:robotkit:0.5.0'
 ```
 A [KDOC](https://ghostwan.github.io/robotkit/docs/javadoc/library/index.html) À Kadoc ! [;)](https://media.giphy.com/media/wWSicFanND2gw/200.gif)
 
@@ -118,16 +118,14 @@ Future Robot support:
 
 [KDOC](https://ghostwan.github.io/robotkit/docs/javadoc/library/index.html)
 
-Here the list of [all robotkit version on jitpack](https://jitpack.io/#ghostwan/robotkit)
-
-If you want to test the last SNAPSHOT version in your app,
+If you want to test the last version in your app,
 add in your root build.gradle file :
 
 ``` groovy
 allprojects {
     repositories {
         ...
-        maven { url "https://jitpack.io" } // To retrieve RobotKit
+        maven { url "https://dl.bintray.com/ghostwan/public/" } // To retrieve RobotKit
         maven { url 'https://android.aldebaran.com/sdk/maven'} // For Pepper SDK
         maven { url "https://kotlin.bintray.com/kotlinx" } // For Kotlin Serialization API
         ...
@@ -140,7 +138,7 @@ And in your app build.gradle file:
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     ...
-    compile 'com.github.ghostwan:robotkit:-SNAPSHOT'
+    compile 'com.github.ghostwan:robotkit:LAST_VERSION'
 }
 kotlin {
     experimental {
@@ -148,6 +146,7 @@ kotlin {
     }
 }
 ```
+Where *LAST_VERSION* is [this](#last-version)
 
 Create a empty activity and make an hello world
  
