@@ -3,6 +3,7 @@ package com.ghostwan.robotkit.sampleapp
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
+import com.ghostwan.robotkit.naoqi.`object`.Discussion
 import com.ghostwan.robotkit.naoqi.robot.LocalPepper
 import com.ghostwan.robotkit.naoqi.robot.Pepper
 import com.ghostwan.robotkit.naoqi.robot.isOnLocalPepper
@@ -35,7 +36,6 @@ class TestActivity : AppCompatActivity() {
             log("tests")
             pepper.connect()
 
-
             log("animate")
             pepper.animate(R.raw.bye_anim)
             log("say")
@@ -44,13 +44,17 @@ class TestActivity : AppCompatActivity() {
             pepper.say("say ${++step} ")
             log("discuss")
             pepper.discuss(R.raw.test_topic, gotoBookmark = "start")
+            val discussion = Discussion(this@TestActivity, R.raw.test_topic)
+            pepper.discuss(discussion, gotoBookmark = "start")
+            discussion.saveData(this@TestActivity)
             log("say and animate")
             pepper.say(R.string.hello_world, R.raw.hello_anim)
 
-
-            log("disconnect")
+            log("stopping...")
+            pepper.stop()
+            log("disconnecting...")
             pepper.disconnect()
-            finish()
+//            finish()
         }
     }
 

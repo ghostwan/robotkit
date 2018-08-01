@@ -148,6 +148,13 @@ kotlin {
 ```
 Where *LAST_VERSION* is [this](#last-version)
 
+The repositories available are:
+
+- Snapshot [https://bintray.com/ghostwan/snapshot/robotkit](https://bintray.com/ghostwan/snapshot/robotkit): current version in development
+- Public [https://bintray.com/ghostwan/public/robotkit](https://bintray.com/ghostwan/public/robotkit): public beta
+- Release [https://bintray.com/ghostwan/release/robotkit](https://bintray.com/ghostwan/release/robotkit):
+official release on jcenter (not used yet)
+
 Create a empty activity and make an hello world
  
 ``` kotlin
@@ -378,7 +385,7 @@ fun onError(throwable : Throwable?) {
 }
 ```
 
-### Multiple Robot support #27
+### Multiple Robot support
 
 Creation of an interface Robot which will be implemented by all Robot supported
 
@@ -388,14 +395,14 @@ val localPepper : Robot = LocalPepper(this)
 val nao : Robot = Nao(this,"nao.local")
 ```    
 
-### Connect to Remote Nao #14
+### Connect to Remote Nao
 
 ``` kotlin
 nao = Nao(this, "nao.local")
 nao.connect()
 ```
 
-### Connect to Remote Pepper #13
+### Connect to Remote Pepper
 
 ``` kotlin
 pepper = Pepper(this, "pepper.local", robotPassword)
@@ -404,7 +411,7 @@ pepper = Pepper(this, "pepper.local", robotPassword)
 pepper.connect()    
 ```
 
-### Detect touch #23
+### Detect touch
 
 ``` kotlin
 pepper.setOnBodyTouched {
@@ -423,7 +430,7 @@ pepper.setOnBodyTouched {
     
 ## API TODO
 
-### Control robot autonomous abilities 
+### Control robot autonomous abilities [#26](https://github.com/ghostwan/robotkit/issues/26)
 
 ``` kotlin
 pepper.deactivate(Abilitie.BLINKING)
@@ -436,7 +443,7 @@ pepper.activate(Abilitie.BACKGROUND_MOVEMENTS);
 
 ```
 
-### Animate with animation #15
+### Animate with animation [#15](https://github.com/ghostwan/robotkit/issues/15)
 
 Expert API:
 
@@ -450,7 +457,7 @@ animation.setOnLabelReached {name, time ->
 pepper.animate(animation)
 ```
 
-### Move around #16
+### Move around [#16](https://github.com/ghostwan/robotkit/issues/16)
 
 ``` kotlin
 pepper.move(forward=1)
@@ -459,7 +466,7 @@ pepper.move(right=1)
 pepper.move(x=1, y=2)
 ```
 
-### Goto a location #17
+### Goto a location [#17](https://github.com/ghostwan/robotkit/issues/17)
 
 ``` kotlin
  val theKitchen : Location = pepper.getLocation("kitchen")
@@ -475,7 +482,7 @@ pepper.rememberLocation("kitchen", theKitchen)
   
 Allow multiple robots to share a location that they know about #18
 
-### Map its environement and localize itself in the map
+### Map its environement and localize itself in the map [#39](https://github.com/ghostwan/robotkit/issues/39)
 
 ``` kotlin
 val myMap:RobotMap = pepper.map()
@@ -491,13 +498,14 @@ pepper.rememberLocation("kitchen", theKitchen)
 
 ```
 
-### LooktAt something
+### LooktAt something [#40](https://github.com/ghostwan/robotkit/issues/40)
+
 ``` kotlin
 pepper.lookAt(frame, LookAtMovementPolicy.HEAD_AND_BASE)
 ```   
 
 
-### Remember something
+### Remember something [#21](https://github.com/ghostwan/robotkit/issues/21)
 
 ``` kotlin
 pepper.remember("discussion:result", result)
@@ -505,15 +513,21 @@ pepper.remember("discussion:state", state)
 nao.remember("discussion:result", result)
 ```    
 
-### Get humans arround
+### Get humans arround [#41](https://github.com/ghostwan/robotkit/issues/41)
+
 ``` kotlin
 val humans : List<Human> = pepper.getHumansArround()
 ```
     
-### Wait for a human
+### Wait for a human [#22](https://github.com/ghostwan/robotkit/issues/22)
 
 ``` kotlin
 val human : Human = pepper.waitForHuman()
+```
+    
+### Human characteristics [#42](https://github.com/ghostwan/robotkit/issues/42)
+
+``` kotlin
 whith(human) {
  info("its age is $age")
  info("its gender is $gender")
@@ -527,25 +541,28 @@ human.faceframe
 human.facePicture
 ```
     
-### Engage a human
+    
+### Engage a human [#23](https://github.com/ghostwan/robotkit/issues/23)
 
 ``` kotlin
 pepper.engage(human)
 ```    
 
-### Play sound
+### Play a sound [#44](https://github.com/ghostwan/robotkit/issues/44)
 
 ``` kotlin
 pepper.playSound(R.raw.suprise1, R.raw.suprise2, isLooping = true, isRandom = true)
 pepper.stopSound()
 ```
 
-### Take a picture
+### Take a picture [#45](https://github.com/ghostwan/robotkit/issues/45)
+
 ``` kotlin
 val picture = pepper.takePicture()
 ```
 
-### Set an executor in a discussion
+### Set an executor in a discussion [#46](https://github.com/ghostwan/robotkit/issues/46)
+
 ``` kotlin
 val discussion = Discussion(R.raw.cooking_dicussion)
 discussion.setExecutor("playElephantAnimation") {
@@ -563,7 +580,9 @@ u:(do the elephant) I'm playing an elephant animation ^execute(playElephantAnima
 u:(barks) I'm a dog ^execute(playSound, dog) and now I'm done.
 u:(meows) I'm a cat ^execute(playSound, cat) and now I'm done.
 ```
-### Attach a chatbot to a discussion
+
+### Attach a chatbot to a discussion [#47](https://github.com/ghostwan/robotkit/issues/47)
+
 ``` kotlin
 val helloConcept = Concept(this, R.string.hello, R.string.hi)
 val discussion = Discussion(R.raw.cooking_dicussion)
@@ -577,7 +596,7 @@ discussion.addChatbot{phrase, locale, say->
 pepper.discuss(discussion)
 ```
 
-### Follow a robot #20
+### Follow a robot [#20](https://github.com/ghostwan/robotkit/issues/20)
 
 ``` kotlin
 nao.follow(pepper)
@@ -586,15 +605,30 @@ pepper.follow(cozmo)
     
 An API for a Robot to follow another robot
 
-### Connect to Cozmo
+### Connect to Cozmo [#48](https://github.com/ghostwan/robotkit/issues/48)
 
 ``` kotlin
 val cozmo = Cozmo(this, "cozmo.local")
 cozmo.connect()
 ```
 
+### Handle typed exception [#38](https://github.com/ghostwan/robotkit/issues/38)
+
+``` kotlin
+val pepper = LocalPepper(this)
+try {
+    pepper.connect()
+    pepper.say()
+}catch(e: ConnectionFailedException) {
+    println("Can't connect to robot")
+}catch(e: AlreadyTalkingException) {
+    println("The robot is already talking")
+}
+...
+```
+
 ## TO FIX
 
-- pepper is not disconnected after a discuss
+- pepper is not disconnected after a discuss [#43](https://github.com/ghostwan/robotkit/issues/43)
 
 
