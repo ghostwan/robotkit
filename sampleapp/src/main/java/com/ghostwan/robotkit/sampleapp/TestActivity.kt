@@ -7,6 +7,7 @@ import com.ghostwan.robotkit.naoqi.`object`.Discussion
 import com.ghostwan.robotkit.naoqi.robot.LocalPepper
 import com.ghostwan.robotkit.naoqi.robot.Pepper
 import com.ghostwan.robotkit.naoqi.robot.isOnLocalPepper
+import com.ghostwan.robotkit.util.getResId
 import com.ghostwan.robotkit.util.ui
 import kotlinx.android.synthetic.main.activity_test.*
 
@@ -42,11 +43,16 @@ class TestActivity : AppCompatActivity() {
             pepper.say("say ${++step} ")
             log("say")
             pepper.say("say ${++step} ")
+
             log("discuss")
-            pepper.discuss(R.raw.test_topic, gotoBookmark = "start")
             val discussion = Discussion(this@TestActivity, R.raw.test_topic)
+            discussion.setExecutor(pepper,"animate") {
+                it?.get(0)?.let {
+                    pepper.animate(getResId(this@TestActivity, it))
+                }
+            }
             pepper.discuss(discussion, gotoBookmark = "start")
-            discussion.saveData(this@TestActivity)
+
             log("say and animate")
             pepper.say(R.string.hello_world, R.raw.hello_anim)
 
@@ -54,7 +60,7 @@ class TestActivity : AppCompatActivity() {
             pepper.stop()
             log("disconnecting...")
             pepper.disconnect()
-//            finish()
+            finish()
         }
     }
 

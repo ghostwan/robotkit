@@ -31,10 +31,20 @@ interface Robot {
     /**
      * Stop all or a specific set of actions
      *
-     * If no action is specify stop all NaoqiRobot's actions running
+     * If no action is specify stop all actions running
      *
      * @param actions list of actions to stop
      */
     fun stop(vararg actions : Action)
+
+
+    /**
+     * Stop all action but the one specify in parameters
+     *
+     * If no action is specify stop all actions running
+     *
+     * @param actions list of actions to not stop
+     */
+    fun stopAllBut(vararg actions: Action)
 
 }

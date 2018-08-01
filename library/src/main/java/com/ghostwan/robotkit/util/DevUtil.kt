@@ -1,5 +1,6 @@
 package com.ghostwan.robotkit.util
 
+import android.content.Context
 import java.lang.ref.WeakReference
 import kotlin.reflect.KProperty
 
@@ -34,3 +35,7 @@ class WeakRefHolder<T>(private var _value: WeakReference<T>) {
 @Suppress("NOTHING_TO_INLINE")
 inline fun <T> weakRef(value: T) = WeakRefHolder<T>(WeakReference(value))
 
+
+fun getResId(context: Context, resourceName: String, type: String?="raw"): Int {
+    return context.resources.getIdentifier(resourceName, type, context.packageName)
+}

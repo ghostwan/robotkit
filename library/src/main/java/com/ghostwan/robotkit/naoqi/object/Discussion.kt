@@ -3,11 +3,14 @@ package com.ghostwan.robotkit.naoqi.`object`
 import android.content.Context
 import android.support.annotation.RawRes
 import com.aldebaran.qi.sdk.`object`.conversation.*
+import com.ghostwan.robotkit.`object`.Action
 import com.ghostwan.robotkit.ext.getLocalizedRaw
 import com.ghostwan.robotkit.ext.sha512
+import com.ghostwan.robotkit.naoqi.NaoqiRobot
 import com.ghostwan.robotkit.naoqi.ext.await
 import com.ghostwan.robotkit.util.infoLog
 import com.ghostwan.robotkit.util.warningLog
+import kotlinx.coroutines.experimental.runBlocking
 import kotlinx.serialization.Optional
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.JSON
@@ -15,6 +18,7 @@ import java.io.File
 import java.io.FileNotFoundException
 import java.util.*
 import java.util.regex.Pattern
+import kotlin.collections.HashMap
 
 /**
  * Created by erwan on 12/03/2018.
@@ -27,8 +31,9 @@ data class Data(var variables: Map<String, String>, @Optional var bookmark: Stri
 //Move in a specific extension
 data class NAOqiData(var qiChatbot: QiChatbot? = null,
                      var qiChatVariables: HashMap<String, QiChatVariable>,
+                     var qiChatExecutors: HashMap<String, QiChatExecutor>?,
                      var qiTopics : Map<Int, Topic>) {
-    constructor() : this(null, HashMap(), HashMap())
+    constructor() : this(null, HashMap(), HashMap(), HashMap()  )
 }
 
 /**
@@ -91,6 +96,8 @@ class Discussion{
         naoqiData.qiChatbot = qiChatbot
         naoqiData.qiChatVariables.clear()
         naoqiData.qiTopics = topics
+
+        qiChatbot.async().setExecutors(naoqiData.qiChatExecutors).await()
 
         getVariables().forEach {key ->
             val qichatvar =  qiChatbot.async()?.variable(key).await()
@@ -254,6 +261,32 @@ class Discussion{
     ){
         val bookmark = naoqiData.qiTopics[topic]?.async()?.bookmarks.await()[name]
         naoqiData.qiChatbot?.async()?.goToBookmark(bookmark, importance, validity).await()
+    }
+
+    /**
+     * set a QiChat executor
+     *
+     * @param robot The Naoqi Robot that will execute this action
+     * @param name Name of the executor
+     * @param onStopExecute Function call when the execution need to stop
+     * @param onExecute Function call when the execution start
+     */
+    suspend fun setExecutor(robot: NaoqiRobot, name: String, onStopExecute: (suspend ()-> Unit)={robot.stopAllBut(Action.DISCUSSING)}, onExecute: (suspend (params: List<String>?) -> Unit)) {
+
+        naoqiData.qiChatExecutors?.set(name, object : RKQiChatExecutor(robot.services.serializer) {
+            override fun runWith(params: List<String>) {
+                runBlocking {
+                    onExecute(params)
+                }
+            }
+
+            override fun stop() {
+                runBlocking {
+                    onStopExecute()
+                }
+            }
+
+        })
     }
 
 

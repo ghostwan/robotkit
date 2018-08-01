@@ -24,6 +24,7 @@ import com.aldebaran.qi.sdk.`object`.touch.TouchConverter
 import com.aldebaran.qi.sdk.serialization.EnumConverter
 import com.aldebaran.qi.serialization.QiSerializer
 import com.ghostwan.robotkit.exception.RobotUnavailableException
+import com.ghostwan.robotkit.naoqi.`object`.AnyObjectProviderConverter
 import com.ghostwan.robotkit.naoqi.ext.await
 import com.ghostwan.robotkit.util.infoLog
 import kotlinx.coroutines.experimental.Deferred
@@ -32,7 +33,7 @@ import java.util.concurrent.ExecutionException
 
 class NaoqiServices(session: Session) {
 
-    private val serializer: QiSerializer = createQiSerializer()
+    val serializer: QiSerializer = createQiSerializer()
 
     val conversation: Deferred<Conversation> by getService(session)
 
@@ -86,6 +87,7 @@ class NaoqiServices(session: Session) {
         qiSerialiser.addConverter(CameraConverter())
         qiSerialiser.addConverter(ImageConverter())
         qiSerialiser.addConverter(AnyObjectWrapperConverter())
+        qiSerialiser.addConverter(AnyObjectProviderConverter())
 
         return qiSerialiser
     }

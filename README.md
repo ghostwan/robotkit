@@ -422,6 +422,32 @@ pepper.setOnBodyTouched {
     }
 }
 ```
+*** 
+***
+*** 
+    
+    
+## API DOING
+
+### Set an executor in a discussion [#46](https://github.com/ghostwan/robotkit/issues/46)
+
+``` kotlin
+val discussion = Discussion(R.raw.cooking_dicussion)
+discussion.setExecutor("playElephantAnimation") {
+    pepper.animate(R.raw.elephant_animation)
+}
+discussion.setExecutor("playSound") {
+    pepper.playSound(it[0])
+}
+pepper.discuss(discussion)
+```
+``` topic
+topic: ~topic1()
+
+u:(do the elephant) I'm playing an elephant animation ^execute(playElephantAnimation) and now I'm done.
+u:(barks) I'm a dog ^execute(playSound, dog) and now I'm done.
+u:(meows) I'm a cat ^execute(playSound, cat) and now I'm done.
+```
 
 *** 
 ***
@@ -559,26 +585,6 @@ pepper.stopSound()
 
 ``` kotlin
 val picture = pepper.takePicture()
-```
-
-### Set an executor in a discussion [#46](https://github.com/ghostwan/robotkit/issues/46)
-
-``` kotlin
-val discussion = Discussion(R.raw.cooking_dicussion)
-discussion.setExecutor("playElephantAnimation") {
-    pepper.animate(R.raw.elephant_animation)
-}
-discussion.setExecutor("playSound") {
-    pepper.playSound(it[0])
-}
-pepper.discuss(discussion)
-```
-``` topic
-topic: ~topic1()
-
-u:(do the elephant) I'm playing an elephant animation ^execute(playElephantAnimation) and now I'm done.
-u:(barks) I'm a dog ^execute(playSound, dog) and now I'm done.
-u:(meows) I'm a cat ^execute(playSound, cat) and now I'm done.
 ```
 
 ### Attach a chatbot to a discussion [#47](https://github.com/ghostwan/robotkit/issues/47)

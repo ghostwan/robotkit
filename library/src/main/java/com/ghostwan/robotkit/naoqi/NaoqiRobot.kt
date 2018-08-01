@@ -207,6 +207,25 @@ abstract class NaoqiRobot(activity: Activity, private val address: String?, priv
         }
     }
 
+    override fun stopAllBut(vararg actions: Action) {
+        synchronized(lock) {
+            if (actions.isEmpty()) {
+                stop()
+            }
+            else {
+                loop@ for ((future, futureActions) in futures) {
+                    for(action in actions) {
+                        if (action !in futureActions) {
+                            future.requestCancellation();
+                            futures.remove(future)
+                            break@loop
+                        }
+                    }
+                }
+            }
+        }
+    }
+
     private suspend fun connectSensors(){
         for (sensorName in services.touch.await().async().sensorNames.await()) {
             val touchSensor = services.touch.await().async().getSensor(sensorName).await()
@@ -562,7 +581,7 @@ abstract class NaoqiRobot(activity: Activity, private val address: String?, priv
                 futureChat.requestCancellation()
         }.await()
         val future = futureChat.thenApply { endValue ?: "" }
-        return handleFuture(future, onResult, throwOnStop, Action.TALKING, Action.LISTENING)
+        return handleFuture(future, onResult, throwOnStop, Action.TALKING, Action.LISTENING, Action.DISCUSSING)
     }
 
     /**

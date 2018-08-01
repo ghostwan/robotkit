@@ -5,4 +5,4 @@ topic: ~test_topic()
 # Replying to speech
 #u:(~hello) ~hello
 
-proposal: %start This is a test ^endDiscuss(end)
+proposal: %start This is a test ^execute(animate, time) it's time ^execute(animate, space ) ^endDiscuss(none)
