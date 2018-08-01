@@ -490,28 +490,8 @@ abstract class NaoqiRobot(activity: Activity, private val address: String?, priv
                         onResult: (suspend (Result<String>) -> Unit)? = null
     ): String? {
 
-        val topicSet = ArrayList<Topic>()
-        topicSet.add(services.conversation.await().async().makeTopic(weakActivity.getLocalizedRaw(mainTopic, locale)).await())
-        additionalTopics.mapTo(topicSet) { services.conversation.await().async().makeTopic(weakActivity.getLocalizedRaw(it, locale)).await() }
-
-        val discuss = if (locale == null) {
-            services.conversation.await().async()?.makeDiscuss(robotContext, topicSet, getCurrentLocale().toNaoqiLocale()).await()
-        } else {
-            services.conversation.await().async()?.makeDiscuss(robotContext, topicSet, locale.toNaoqiLocale()).await()
-        }
-
-        val future = discuss.async().run()
-        discuss.async().addOnStartedListener {
-            ui {
-                onStart?.invoke()
-                if (gotoBookmark != null) {
-                    infoLog("Go to bookmark : $gotoBookmark")
-                    val bookmark = topicSet[0].async().bookmarks.await()[gotoBookmark]
-                    discuss.async().goToBookmarkedOutputUtterance(bookmark).await()
-                }
-            }
-        }.await()
-        return handleFuture(future, onResult, throwOnStop, Action.TALKING, Action.LISTENING)
+        val discussion = Discussion(weakActivity, mainTopic, *additionalTopics, locale = locale)
+        return discuss(discussion, gotoBookmark, throwOnStop, onStart, onResult)
     }
 
     /**
@@ -564,7 +544,6 @@ abstract class NaoqiRobot(activity: Activity, private val address: String?, priv
             ui {
                 onStart?.invoke()
                 if (startBookmark != null) {
-                    infoLog("Go to bookmark : $startBookmark")
                     val bookmark = topics[discussion.mainTopic]?.async()?.bookmarks.await()[startBookmark]
                     discuss.async().goToBookmarkedOutputUtterance(bookmark).await()
                 }
