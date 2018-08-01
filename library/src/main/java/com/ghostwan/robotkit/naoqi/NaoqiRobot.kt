@@ -9,10 +9,7 @@ import com.aldebaran.qi.Future
 import com.aldebaran.qi.Session
 import com.aldebaran.qi.UserTokenAuthenticator
 import com.aldebaran.qi.sdk.`object`.context.RobotContext
-import com.aldebaran.qi.sdk.`object`.conversation.BodyLanguageOption
-import com.aldebaran.qi.sdk.`object`.conversation.ListenResult
-import com.aldebaran.qi.sdk.`object`.conversation.Phrase
-import com.aldebaran.qi.sdk.`object`.conversation.Topic
+import com.aldebaran.qi.sdk.`object`.conversation.*
 import com.aldebaran.qi.sdk.`object`.focus.FocusOwner
 import com.aldebaran.qi.sdk.`object`.touch.TouchSensor
 import com.ghostwan.robotkit.Robot
@@ -520,36 +517,51 @@ abstract class NaoqiRobot(activity: Activity, private val address: String?, priv
                         throwOnStop: Boolean = true,
                         onStart: (suspend () -> Unit)? = null,
                         onResult: (suspend (Result<String>) -> Unit)? = null
-    ): String? {
+    ): String?{
 
         val topics = discussion.topics.map { (key, value) ->
             val top = services.conversation.await().async()?.makeTopic(value).await()
             key to top
         }.toMap()
 
-        val discuss = if (discussion.locale == null) {
-            services.conversation.await().async()?.makeDiscuss(robotContext, topics.values.toList(), getCurrentLocale().toNaoqiLocale()).await()
+        val qichatbot = if (discussion.locale == null) {
+            services.conversation.await().async()?.makeQiChatbot(robotContext, topics.values.toList(), getCurrentLocale().toNaoqiLocale()).await()
         } else {
-            services.conversation.await().async()?.makeDiscuss(robotContext, topics.values.toList(), discussion.locale.toNaoqiLocale()).await()
+            services.conversation.await().async()?.makeQiChatbot(robotContext, topics.values.toList(), discussion.locale.toNaoqiLocale()).await()
+        }
+        val chatbots = listOf<Chatbot>(qichatbot)
+
+        val chat = if (discussion.locale == null) {
+            services.conversation.await().async()?.makeChat(robotContext, chatbots, getCurrentLocale().toNaoqiLocale()).await()
+        } else {
+            services.conversation.await().async()?.makeChat(robotContext, chatbots, discussion.locale.toNaoqiLocale()).await()
         }
 
         var startBookmark: String? = null
-        discussion.prepare(discuss, topics)?.let {
+        discussion.prepare(qichatbot, topics)?.let {
             startBookmark = it
         }
         gotoBookmark?.let {
             startBookmark = gotoBookmark
         }
-        discuss.async().addOnStartedListener {
+        chat.async().addOnStartedListener {
             ui {
                 onStart?.invoke()
                 if (startBookmark != null) {
                     val bookmark = topics[discussion.mainTopic]?.async()?.bookmarks.await()[startBookmark]
-                    discuss.async().goToBookmarkedOutputUtterance(bookmark).await()
+                    qichatbot.async().goToBookmark(bookmark, AutonomousReactionImportance.HIGH, AutonomousReactionValidity.IMMEDIATE).await()
                 }
             }
         }.await()
-        val future = discuss.async().run()
+
+        var endValue : String? = null
+        val futureChat = chat.async().run()
+        qichatbot.async().addOnEndedListener {
+            endValue = it
+            if(chatbots.contains(qichatbot) && chatbots.size <= 1)
+                futureChat.requestCancellation()
+        }.await()
+        val future = futureChat.thenApply { endValue ?: "" }
         return handleFuture(future, onResult, throwOnStop, Action.TALKING, Action.LISTENING)
     }
 

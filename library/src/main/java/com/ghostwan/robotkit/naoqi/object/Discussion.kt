@@ -2,9 +2,7 @@ package com.ghostwan.robotkit.naoqi.`object`
 
 import android.content.Context
 import android.support.annotation.RawRes
-import com.aldebaran.qi.sdk.`object`.conversation.Discuss
-import com.aldebaran.qi.sdk.`object`.conversation.QiChatVariable
-import com.aldebaran.qi.sdk.`object`.conversation.Topic
+import com.aldebaran.qi.sdk.`object`.conversation.*
 import com.ghostwan.robotkit.ext.getLocalizedRaw
 import com.ghostwan.robotkit.ext.sha512
 import com.ghostwan.robotkit.naoqi.ext.await
@@ -27,7 +25,7 @@ data class Data(var variables: Map<String, String>, @Optional var bookmark: Stri
 }
 
 //Move in a specific extension
-data class NAOqiData(var discuss: Discuss? = null,
+data class NAOqiData(var qiChatbot: QiChatbot? = null,
                      var qiChatVariables: HashMap<String, QiChatVariable>,
                      var qiTopics : Map<Int, Topic>) {
     constructor() : this(null, HashMap(), HashMap())
@@ -89,13 +87,13 @@ class Discussion{
         return matcher.appendTail(buffer).toString()
     }
 
-    internal suspend fun prepare(discuss: Discuss, topics : Map<Int, Topic>) : String?{
-        naoqiData.discuss = discuss
+    internal suspend fun prepare(qiChatbot: QiChatbot, topics : Map<Int, Topic>) : String?{
+        naoqiData.qiChatbot = qiChatbot
         naoqiData.qiChatVariables.clear()
         naoqiData.qiTopics = topics
 
         getVariables().forEach {key ->
-            val qichatvar =  discuss.async()?.variable(key).await()
+            val qichatvar =  qiChatbot.async()?.variable(key).await()
             naoqiData.qiChatVariables[key] = qichatvar
             qichatvar.async().addOnValueChangedListener {
                 onVariableChanged?.invoke(key, it)
@@ -105,7 +103,7 @@ class Discussion{
             }
         }
 
-        discuss.async().addOnBookmarkReachedListener {
+        qiChatbot.async().addOnBookmarkReachedListener {
             data.bookmark = it.name
             onBookmarkReached?.invoke(it.name)
         }.await()
@@ -150,7 +148,7 @@ class Discussion{
      */
     suspend fun saveData(context: Context) {
         data.variables = getVariables().map {
-            val variable = naoqiData.discuss?.async()?.variable(it).await()
+            val variable = naoqiData.qiChatbot?.async()?.variable(it).await()
             var value = variable.async().value.await()
             if(value == "")
                 value=" "
@@ -250,9 +248,12 @@ class Discussion{
      * @param name Name of the bookmark to go to
      * @param topic Android resource id of the topic where is the bookmark, by default use the main topic
      */
-    suspend fun gotoBookmark(name: String, topic: Int=mainTopic){
+    suspend fun gotoBookmark(name: String, topic: Int=mainTopic,
+                             importance: AutonomousReactionImportance=AutonomousReactionImportance.HIGH,
+                             validity: AutonomousReactionValidity=AutonomousReactionValidity.IMMEDIATE
+    ){
         val bookmark = naoqiData.qiTopics[topic]?.async()?.bookmarks.await()[name]
-        naoqiData.discuss?.async()?.goToBookmarkedOutputUtterance(bookmark).await()
+        naoqiData.qiChatbot?.async()?.goToBookmark(bookmark, importance, validity).await()
     }
 
 
