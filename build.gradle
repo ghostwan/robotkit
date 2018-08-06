@@ -24,7 +24,7 @@ buildscript {
 allprojects {
     repositories {
         maven {
-            url 'https://android.aldebaran.com/sdk/maven'
+            url 'http://kiwi.aldebaran.lan/android/sdk-internal/maven'
         }
         maven { url "https://kotlin.bintray.com/kotlinx" }
         google()

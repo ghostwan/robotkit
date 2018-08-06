@@ -2,6 +2,8 @@ package com.ghostwan.robotkit.naoqi.`object`
 
 import android.content.Context
 import android.support.annotation.RawRes
+import com.aldebaran.qi.Future
+import com.aldebaran.qi.Promise
 import com.aldebaran.qi.sdk.`object`.conversation.*
 import com.ghostwan.robotkit.`object`.Action
 import com.ghostwan.robotkit.ext.getLocalizedRaw
@@ -273,21 +275,54 @@ class Discussion{
      */
     suspend fun setExecutor(robot: NaoqiRobot, name: String, onStopExecute: (suspend ()-> Unit)={robot.stopAllBut(Action.DISCUSSING)}, onExecute: (suspend (params: List<String>?) -> Unit)) {
 
-        naoqiData.qiChatExecutors?.set(name, object : RKQiChatExecutor(robot.services.serializer) {
-            override fun runWith(params: List<String>) {
-                runBlocking {
+        naoqiData.qiChatExecutors?.set(name, RKQiChatExecutor(robot.services.serializer, object : RKQiChatExecutorAsync() {
+            override fun runWith(params: MutableList<String>?): Future<Void> {
+                return Future.of(null).thenConsume {
+                    runBlocking {
+                        onExecute(params)
+                    }
+                }
+            }
+
+            override fun stop(): Future<Void> {
+                return Future.of(null).thenConsume {
+                    runBlocking {
+                        onStopExecute()
+                    }
+                }
+            }
+
+        }))
+    }
+
+    /**
+     * set a QiChat executor
+     *
+     * @param robot The Naoqi Robot that will execute this action
+     * @param name Name of the executor
+     * @param onStopExecute Function call when the execution need to stop
+     * @param onExecute Function call when the execution start
+     */
+    suspend fun setAsyncExecutor(robot: NaoqiRobot, name: String, onStopExecute: (suspend ()-> Unit)={robot.stopAllBut(Action.DISCUSSING)}, onExecute: (suspend (params: List<String>?) -> Future<Void>)) {
+
+        naoqiData.qiChatExecutors?.set(name, RKQiChatExecutor(robot.services.serializer, object : RKQiChatExecutorAsync() {
+            override fun runWith(params: MutableList<String>?): Future<Void> {
+                return runBlocking {
                     onExecute(params)
                 }
             }
 
-            override fun stop() {
-                runBlocking {
-                    onStopExecute()
+            override fun stop(): Future<Void> {
+                return Future.of(null).thenConsume {
+                    runBlocking {
+                        onStopExecute()
+                    }
                 }
             }
 
-        })
+        }))
     }
+
 
 
 }

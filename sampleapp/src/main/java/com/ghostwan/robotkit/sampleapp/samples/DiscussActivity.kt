@@ -9,6 +9,8 @@ import com.ghostwan.robotkit.util.infoLog
 import com.ghostwan.robotkit.util.ui
 import com.ghostwan.robotkit.sampleapp.helpers.MultiLocaleActivity
 import com.ghostwan.robotkit.sampleapp.R
+import com.ghostwan.robotkit.sampleapp.helpers.playSound
+import com.ghostwan.robotkit.sampleapp.helpers.stopSound
 import kotlinx.android.synthetic.main.activity_discuss.*
 
 class DiscussActivity : MultiLocaleActivity() {
@@ -48,7 +50,7 @@ class DiscussActivity : MultiLocaleActivity() {
 
         val result = if (discussion.restoreData(this)) {
             pepper.say(R.string.restore_discussion, locale = locale)
-            playSound()
+            playSound(this)
             pepper.discuss(discussion, onStart = {
                 gotoBookmarkBtn.visibility = View.VISIBLE
                 stopSound()
@@ -66,35 +68,6 @@ class DiscussActivity : MultiLocaleActivity() {
         super.onStopAction()
         displayInfo("user name is ${discussion.getVariable("name")}")
         discussion.saveData(this)
-    }
-
-    private var mPlayer: MediaPlayer = MediaPlayer()
-
-    private val soundResources = arrayOf(
-            R.raw.wait1_sound,
-            R.raw.wait2_sound,
-            R.raw.wait3_sound,
-            R.raw.wait4_sound,
-            R.raw.wait4_sound,
-            R.raw.wait6_sound,
-            R.raw.wait7_sound)
-
-    fun playSound() {
-        val index = (0..soundResources.size).random()
-        println("Index  : $index / ${soundResources.size}")
-        mPlayer = MediaPlayer.create(this, soundResources[index])
-        mPlayer.setOnCompletionListener {
-            mPlayer.release()
-            playSound()
-        }
-        mPlayer.start()
-    }
-
-    fun stopSound() {
-        ui {
-            mPlayer.stop()
-            mPlayer.release()
-        }
     }
 
 }

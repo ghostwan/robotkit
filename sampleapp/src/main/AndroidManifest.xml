@@ -44,7 +44,7 @@
                 android:theme="@style/AppTheme.NoActionBar">
         </activity>
         <activity android:name=".samples.TestConnectionActivity"/>
-        <activity android:name=".TestActivity" android:label="@string/test">
+        <activity android:name=".test.TestActivity" android:label="@string/test">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 

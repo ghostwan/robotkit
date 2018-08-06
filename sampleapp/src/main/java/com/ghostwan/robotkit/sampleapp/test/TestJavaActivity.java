@@ -1,4 +1,4 @@
-package com.ghostwan.robotkit.sampleapp;
+package com.ghostwan.robotkit.sampleapp.test;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -11,6 +11,7 @@ import com.aldebaran.qi.sdk.builder.TopicBuilder;
 import com.aldebaran.qi.sdk.object.conversation.Bookmark;
 import com.aldebaran.qi.sdk.object.conversation.Discuss;
 import com.aldebaran.qi.sdk.object.conversation.Topic;
+import com.ghostwan.robotkit.sampleapp.R;
 
 public class TestJavaActivity extends AppCompatActivity implements RobotLifecycleCallbacks {
 
