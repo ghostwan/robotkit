@@ -1,4 +1,4 @@
-package com.ghostwan.robotkit.sampleapp.test
+package com.ghostwan.robotkit.sampleapp.test.kotlin
 
 import android.media.MediaPlayer
 import android.os.Bundle
@@ -12,10 +12,10 @@ import com.ghostwan.robotkit.naoqi.robot.isOnLocalPepper
 import com.ghostwan.robotkit.sampleapp.R
 import kotlinx.android.synthetic.main.activity_test.*
 
-class TestActivity : AppCompatActivity() {
+class TestKotlinActivity : AppCompatActivity() {
 
     companion object {
-        const val TAG = "TestActivity"
+        const val TAG = "TestKotlinActivity"
     }
 
     val pepper = if (isOnLocalPepper()) {
@@ -34,7 +34,7 @@ class TestActivity : AppCompatActivity() {
     }
 
     private suspend fun startTest() {
-        testExecuteQiSDK(pepper, this@TestActivity)
+        testExecuteQiSDK(pepper, this@TestKotlinActivity)
     }
 
 

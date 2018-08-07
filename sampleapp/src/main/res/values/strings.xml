@@ -27,5 +27,6 @@
     <string name="ok">OK</string>
     <string name="ip_address">IP Address</string>
     <string name="title_activity_basic_hello_world">BasicHelloWorldActivity</string>
-    <string name="test">Stress Test</string>
+    <string name="kotlin_test">Kotlin Stress Test</string>
+    <string name="java_test">Java Stress Test</string>
 </resources>

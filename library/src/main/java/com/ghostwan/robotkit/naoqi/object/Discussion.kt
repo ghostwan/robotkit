@@ -273,26 +273,22 @@ class Discussion{
      * @param onStopExecute Function call when the execution need to stop
      * @param onExecute Function call when the execution start
      */
-    suspend fun setExecutor(robot: NaoqiRobot, name: String, onStopExecute: (suspend ()-> Unit)={robot.stopAllBut(Action.DISCUSSING)}, onExecute: (suspend (params: List<String>?) -> Unit)) {
+    suspend fun setExecutor(robot: NaoqiRobot, name: String, onStopExecute: (suspend () -> Unit) = { robot.stopAllBut(Action.DISCUSSING) }, onExecute: (suspend (params: List<String>?) -> Unit)) {
 
-        naoqiData.qiChatExecutors?.set(name, RKQiChatExecutor(robot.services.serializer, object : RKQiChatExecutorAsync() {
-            override fun runWith(params: MutableList<String>?): Future<Void> {
-                return Future.of(null).thenConsume {
-                    runBlocking {
-                        onExecute(params)
-                    }
+        naoqiData.qiChatExecutors?.set(name, object : SyncQiChatExecutor(robot.services.serializer) {
+            override fun runWith(params: MutableList<String>?) {
+                runBlocking {
+                    onExecute(params)
                 }
             }
 
-            override fun stop(): Future<Void> {
-                return Future.of(null).thenConsume {
-                    runBlocking {
-                        onStopExecute()
-                    }
+            override fun stop() {
+                runBlocking {
+                    onStopExecute()
                 }
             }
 
-        }))
+        })
     }
 
     /**
@@ -305,7 +301,7 @@ class Discussion{
      */
     suspend fun setAsyncExecutor(robot: NaoqiRobot, name: String, onStopExecute: (suspend ()-> Unit)={robot.stopAllBut(Action.DISCUSSING)}, onExecute: (suspend (params: List<String>?) -> Future<Void>)) {
 
-        naoqiData.qiChatExecutors?.set(name, RKQiChatExecutor(robot.services.serializer, object : RKQiChatExecutorAsync() {
+        naoqiData.qiChatExecutors?.set(name, AsyncQiChatExecutor(robot.services.serializer, object : QiChatExecutor.Async {
             override fun runWith(params: MutableList<String>?): Future<Void> {
                 return runBlocking {
                     onExecute(params)

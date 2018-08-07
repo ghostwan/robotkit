@@ -1,4 +1,4 @@
-package com.ghostwan.robotkit.sampleapp.test
+package com.ghostwan.robotkit.sampleapp.test.kotlin
 
 import com.ghostwan.robotkit.naoqi.robot.Pepper
 

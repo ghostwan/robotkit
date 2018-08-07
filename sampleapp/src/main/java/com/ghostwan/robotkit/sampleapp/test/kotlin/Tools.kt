@@ -1,4 +1,4 @@
-package com.ghostwan.robotkit.sampleapp.test
+package com.ghostwan.robotkit.sampleapp.test.kotlin
 
 import android.content.res.Resources
 import android.util.Log
@@ -15,7 +15,7 @@ internal var step: Int = 0
 internal fun log(text: String, testTitle: TextView?=null) {
     step++
     val message = "$step) $text"
-    Log.i(TestActivity.TAG, message)
+    Log.i(TestKotlinActivity.TAG, message)
     testTitle?.text = message
 }
 

@@ -44,7 +44,25 @@
                 android:theme="@style/AppTheme.NoActionBar">
         </activity>
         <activity android:name=".samples.TestConnectionActivity"/>
-        <activity android:name=".test.TestActivity" android:label="@string/test">
+        <activity
+                android:name=".test.kotlin.TestKotlinActivity"
+                android:label="@string/kotlin_test">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+        </activity>
+        <activity
+                android:name=".test.chat.executor.TestExecutorJActivity"
+                android:label="@string/java_test">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+        </activity>
+        <activity android:name=".test.chat.executor.TestExecutorKActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
