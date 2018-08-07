@@ -3,15 +3,22 @@ package com.ghostwan.robotkit.sampleapp.test;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import com.aldebaran.qi.Future;
 import com.aldebaran.qi.sdk.QiContext;
 import com.aldebaran.qi.sdk.QiSDK;
 import com.aldebaran.qi.sdk.RobotLifecycleCallbacks;
+import com.aldebaran.qi.sdk.builder.ChatBuilder;
 import com.aldebaran.qi.sdk.builder.DiscussBuilder;
+import com.aldebaran.qi.sdk.builder.QiChatbotBuilder;
 import com.aldebaran.qi.sdk.builder.TopicBuilder;
-import com.aldebaran.qi.sdk.object.conversation.Bookmark;
-import com.aldebaran.qi.sdk.object.conversation.Discuss;
-import com.aldebaran.qi.sdk.object.conversation.Topic;
+import com.aldebaran.qi.sdk.object.conversation.*;
+import com.ghostwan.robotkit.naoqi.object.RKQiChatExecutor;
+import com.ghostwan.robotkit.naoqi.object.RKQiChatExecutorAsync;
 import com.ghostwan.robotkit.sampleapp.R;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class TestJavaActivity extends AppCompatActivity implements RobotLifecycleCallbacks {
 
@@ -24,16 +31,22 @@ public class TestJavaActivity extends AppCompatActivity implements RobotLifecycl
 
     @Override
     public void onRobotFocusGained(QiContext qiContext) {
-        Topic t = TopicBuilder.with(qiContext).withResource(R.raw.presentation_discussion).build();
-        Discuss d = DiscussBuilder.with(qiContext).withTopic(t).build();
-        d.variable("name").setValue("erwan");
-        d.variable("age").setValue("33");
-        d.variable("gender").setValue("boy");
-        Bookmark b = t.getBookmarks().get("next");
-        d.setOnStartedListener(() -> {
-            d.goToBookmarkedOutputUtterance(b);
-        });
-        d.run();
+        Topic topic = TopicBuilder.with(qiContext).withResource(R.raw.test_topic).build();
+        QiChatbot qiChatbot = QiChatbotBuilder.with(qiContext).withTopic(topic).build();
+        Chat chat = ChatBuilder.with(qiContext).withChatbot(qiChatbot).build();
+        Map<String, QiChatExecutor> executors = new HashMap<>();
+        executors.put("animate", new RKQiChatExecutor(qiContext.getSerializer(), new RKQiChatExecutorAsync() {
+            @Override
+            public Future<Void> runWith(List<String> params) {
+                return null;
+            }
+
+            @Override
+            public Future<Void> stop() {
+                return null;
+            }
+        }));
+        qiChatbot.setExecutors(executors);
 
     }
 

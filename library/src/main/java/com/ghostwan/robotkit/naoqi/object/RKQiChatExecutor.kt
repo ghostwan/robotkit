@@ -21,6 +21,7 @@ class RKQiChatExecutor(val serializer: QiSerializer, private val asyncValue: RKQ
          val builder = DynamicObjectBuilder()
          try {
              builder.advertiseMethods<QiChatExecutor.Async, RKQiChatExecutorAsync>(serializer, QiChatExecutor.Async::class.java, asyncValue)
+             builder.setThreadingModel(DynamicObjectBuilder.ObjectThreadingModel.MultiThread)
              builder.advertiseProperty("autonomousReaction", anyObjectProperty)
          } catch (e: Exception) {
              Log.e(TAG, "Advertise error", e)

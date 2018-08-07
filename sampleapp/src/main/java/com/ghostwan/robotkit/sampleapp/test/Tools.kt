@@ -19,12 +19,18 @@ internal fun log(text: String, testTitle: TextView?=null) {
     testTitle?.text = message
 }
 
-internal fun start() {
-    log("------------ START ------------")
+internal fun start(name: String, isRobotKit: Boolean=true) {
+    if(isRobotKit)
+        log("------------ [RK] START : $name ------------")
+    else
+        log("------------ [QiSDK] START : $name ------------")
 }
 
-internal fun end() {
-    log("------------ END ------------")
+internal fun end(name: String, isRobotKit: Boolean=true) {
+    if(isRobotKit)
+        log("------------ [RK] END : $name ------------")
+    else
+        log("------------ [QiSDK] END : $name  ------------")
 }
 
 internal class Tools {
