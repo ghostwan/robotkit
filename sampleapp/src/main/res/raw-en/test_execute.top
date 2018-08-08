@@ -3,3 +3,4 @@ topic: ~test_execute()
 u:(animate async) This is test for  ^execute(animateAsync) animate async
 u:(animate sync) This is test for ^execute(animateSync) animate sync
 u:(play async) This is test for ^execute(playAsync) play async
+u:(play sync) This is test for ^execute(playSync) play sync

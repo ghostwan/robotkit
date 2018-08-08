@@ -30,14 +30,14 @@ import java.util.concurrent.ExecutionException;
 public class TestExecutorJActivity extends AppCompatActivity implements RobotLifecycleCallbacks {
 
     private static final String TAG = "TestExecutorJActivity";
-    private Button chattingButton;
+    private Button startButton;
     private Future<Void> chatting = Future.of(null);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_test_executor);
-        chattingButton = findViewById(R.id.startButton);
+        startButton = findViewById(R.id.startButton);
         QiSDK.register(this, this);
     }
 
@@ -119,15 +119,16 @@ public class TestExecutorJActivity extends AppCompatActivity implements RobotLif
         Chat chat = ChatBuilder.with(qiContext).withChatbot(qiChatbot).build();
 
         runOnUiThread(() -> {
-            chattingButton.setText("Start");
-            chattingButton.setOnClickListener(v -> {
-                if(chattingButton.getText().equals("Start")) {
+            startButton.setEnabled(true);
+            startButton.setText("Start");
+            startButton.setOnClickListener(v -> {
+                if(startButton.getText().equals("Start")) {
                     chatting = chat.async().run();
-                    chattingButton.setText("Stop");
+                    startButton.setText("Stop");
                 }
                 else {
                     chatting.requestCancellation();
-                    chattingButton.setText("Start");
+                    startButton.setText("Start");
                 }
             });
         });
