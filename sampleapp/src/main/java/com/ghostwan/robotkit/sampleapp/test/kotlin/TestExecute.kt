@@ -25,13 +25,17 @@ internal suspend fun testExecuteRobotKit(pepper: Pepper, context: Context) {
     val discussion = Discussion(context, R.raw.test_topic)
 
     discussion.setAsyncExecutor(pepper, "animate", onExecute = {
-    pepper.animate(R.raw.hello_anim)
+        pepper.animate(R.raw.hello_anim)
         playSound(context)
         Promise<Void>().future
     }, onStopExecute = {
         pepper.stopAllBut(Action.DISCUSSING)
         stopSound()
     })
+    discussion.setExecutor(pepper, "play") {
+        playSound(context)
+    }
+
     pepper.discuss(discussion, gotoBookmark = "start")
     pepper.disconnect()
     end(testName)
