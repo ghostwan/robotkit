@@ -435,6 +435,72 @@ abstract class NaoqiRobot(activity: Activity, private val address: String?, priv
      *
      * If [onResult] it's not set, the coroutine will be suspended until the animation end, without blocking the thread
      *
+     * @param mainAnimation Main animation. It's raw data following qianim format.
+     *
+     * @param additionalAnimations Additional animation as for example trajectory to make the robot dance.
+     * It's raw data following qianim format.
+     *
+     * @param throwOnStop By default it's true. Does this method throw when the stop api is called and stop it.
+     * Could be useful to set it to false when we want to continue actions scenario after a stop
+     *
+     * @param onStart This lambada is called when the action start on the robot
+     *
+     * @param onResult If this lambada is set the coroutine won't wait and the result of
+     * the api call will be forward to the lambda.
+     * Give a [Success] or a [Failure] with the exception
+     *
+     */
+    suspend fun animate(mainAnimation: Animation, vararg additionalAnimations: Animation,
+                        throwOnStop: Boolean = true,
+                        onStart: (suspend () -> Unit)? = null,
+                        onResult: (suspend (Result<Void>) -> Unit)? = null) {
+
+        val additionalAnimList = ArrayList<String>()
+        additionalAnimations.mapTo(additionalAnimList) { it.toString() }
+        animate(mainAnimation.toString(), additionalAnimList,
+                throwOnStop = throwOnStop,
+                onStart = onStart,
+                onResult = onResult )
+    }
+
+    /**
+     * Animate the robot with an animation using raw qianim file
+     *
+     * If [onResult] it's not set, the coroutine will be suspended until the animation end, without blocking the thread
+     *
+     * @param mainAnimation Main animation. It's raw data following qianim format.
+     *
+     * @param additionalAnimations Additional animation as for example trajectory to make the robot dance.
+     * It's raw data following qianim format.
+     *
+     * @param throwOnStop By default it's true. Does this method throw when the stop api is called and stop it.
+     * Could be useful to set it to false when we want to continue actions scenario after a stop
+     *
+     * @param onStart This lambada is called when the action start on the robot
+     *
+     * @param onResult If this lambada is set the coroutine won't wait and the result of
+     * the api call will be forward to the lambda.
+     * Give a [Success] or a [Failure] with the exception
+     *
+     */
+    suspend fun animate(mainAnimation: String, vararg additionalAnimations: String,
+                        throwOnStop: Boolean = true,
+                        onStart: (suspend () -> Unit)? = null,
+                        onResult: (suspend (Result<Void>) -> Unit)? = null) {
+
+        val additionalAnimList = ArrayList<String>()
+        additionalAnimations.mapTo(additionalAnimList) { it }
+        animate(mainAnimation, additionalAnimList,
+                throwOnStop = throwOnStop,
+                onStart = onStart,
+                onResult = onResult )
+    }
+
+    /**
+     * Animate the robot with an animation using raw qianim file
+     *
+     * If [onResult] it's not set, the coroutine will be suspended until the animation end, without blocking the thread
+     *
      * @param mainAnimation Main animation. It's an android raw resources.
      *
      * @param additionalAnimations Additional animation as for example trajectory to make the robot dance.
@@ -455,9 +521,22 @@ abstract class NaoqiRobot(activity: Activity, private val address: String?, priv
                         onStart: (suspend () -> Unit)? = null,
                         onResult: (suspend (Result<Void>) -> Unit)? = null) {
 
+        val additionalAnimList = ArrayList<String>()
+        additionalAnimations.mapTo(additionalAnimList) { weakActivity.getRaw(it) }
+        animate(weakActivity.getRaw(mainAnimation), additionalAnimList,
+                throwOnStop = throwOnStop,
+                onStart = onStart,
+                onResult = onResult )
+    }
+
+    suspend fun animate(mainAnimation: String, additionalAnimations: List<String>,
+                        throwOnStop: Boolean = true,
+                        onStart: (suspend () -> Unit)? = null,
+                        onResult: (suspend (Result<Void>) -> Unit)? = null) {
+
         val animSet = ArrayList<String>()
-        animSet.add(weakActivity.getRaw(mainAnimation))
-        additionalAnimations.mapTo(animSet) { weakActivity.getRaw(it) }
+        animSet.add(mainAnimation)
+        animSet.addAll(additionalAnimations)
 
         val animation = services.actuation.await().async().makeAnimation(animSet).await()
         val animate = services.actuation.await().async().makeAnimate(robotContext, animation).await()
@@ -466,10 +545,10 @@ abstract class NaoqiRobot(activity: Activity, private val address: String?, priv
             animate.async().addOnStartedListener { ui { it() } }.await()
         }
 
-
         val future = animate.async().run()
         handleFuture(future, onResult, throwOnStop, Action.MOVING)
     }
+
 
     /**
      * Make the robot discuss using raw qichat topics

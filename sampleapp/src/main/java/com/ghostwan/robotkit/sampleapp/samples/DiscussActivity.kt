@@ -1,16 +1,14 @@
 package com.ghostwan.robotkit.sampleapp.samples
 
-import android.media.MediaPlayer
 import android.view.View
-import com.ghostwan.robotkit.naoqi.`object`.Discussion
-import com.ghostwan.robotkit.ext.random
 import com.ghostwan.robotkit.ext.setOnClickCoroutine
-import com.ghostwan.robotkit.util.infoLog
-import com.ghostwan.robotkit.util.ui
-import com.ghostwan.robotkit.sampleapp.helpers.MultiLocaleActivity
+import com.ghostwan.robotkit.naoqi.`object`.Discussion
 import com.ghostwan.robotkit.sampleapp.R
+import com.ghostwan.robotkit.sampleapp.helpers.MultiLocaleActivity
 import com.ghostwan.robotkit.sampleapp.helpers.playSound
 import com.ghostwan.robotkit.sampleapp.helpers.stopSound
+import com.ghostwan.robotkit.util.infoLog
+import com.ghostwan.robotkit.util.ui
 import kotlinx.android.synthetic.main.activity_discuss.*
 
 class DiscussActivity : MultiLocaleActivity() {

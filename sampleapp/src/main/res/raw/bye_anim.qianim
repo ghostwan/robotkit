@@ -409,4 +409,13 @@
       <Tangent abscissaParam="-10.0" editor:interpType="bezier_auto" ordinateParam="-0.0" side="left"/>
     </Key>
   </ActuatorCurve>
+  <Labels editor:groupName="Layer 01" fps="25">
+    <Label frame="7">l1</Label>
+    <Label frame="18">l2</Label>
+    <Label frame="31">l3</Label>
+  </Labels>
+  <Labels editor:groupName="Layer 02" fps="25">
+    <Label frame="13">d1</Label>
+    <Label frame="27">d2</Label>
+  </Labels>
 </Animation>

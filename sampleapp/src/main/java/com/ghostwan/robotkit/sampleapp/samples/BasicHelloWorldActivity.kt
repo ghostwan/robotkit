@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity
 import com.ghostwan.robotkit.ext.setOnClickCoroutine
 import com.ghostwan.robotkit.naoqi.robot.LocalPepper
 import com.ghostwan.robotkit.sampleapp.R
+import com.ghostwan.robotkit.util.ui
 
 import kotlinx.android.synthetic.main.activity_basic_hello_world.*
 
@@ -32,6 +33,16 @@ class BasicHelloWorldActivity : AppCompatActivity() {
                 })
             }
         }
+
+        /**
+         * val pepper = LocalPepper(this)
+         * pepper.connect()
+         *
+         * pepper.say("hello world", R.raw.toto) onStart = {
+         *
+         * }
+         *
+         */
     }
 
 }

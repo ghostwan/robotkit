@@ -7,7 +7,7 @@ import com.aldebaran.qi.sdk.`object`.conversation.QiChatExecutor
 import com.aldebaran.qi.serialization.QiSerializer
 import com.ghostwan.robotkit.util.TAG
 
-class AsyncQiChatExecutor(private val serializer: QiSerializer, private val asyncValue: QiChatExecutor.Async) : QiService(), QiChatExecutor, AnyObjectProvider {
+class AsyncQiChatExecutor(private val serializer: QiSerializer, private val asyncValue: QiChatExecutor.Async) : QiChatExecutor, AnyObjectProvider {
     override fun async(): QiChatExecutor.Async {
         return asyncValue
     }
@@ -38,7 +38,7 @@ class AsyncQiChatExecutor(private val serializer: QiSerializer, private val asyn
 }
 
 
-abstract class SyncQiChatExecutor(private val serializer: QiSerializer) : QiService(), QiChatExecutor, AnyObjectProvider {
+abstract class SyncQiChatExecutor(private val serializer: QiSerializer) : QiChatExecutor, AnyObjectProvider {
     override fun async(): QiChatExecutor.Async {
         return object : QiChatExecutor.Async {
             override fun runWith(params: MutableList<String>?): Future<Void> {
