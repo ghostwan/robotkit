@@ -1,7 +1,6 @@
 package com.ghostwan.robotkit.sampleapp.samples
 
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
 import com.ghostwan.robotkit.naoqi.`object`.*
 import com.ghostwan.robotkit.naoqi.robot.LocalPepper
 import com.ghostwan.robotkit.util.ui
