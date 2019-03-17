@@ -6,18 +6,21 @@ import android.support.design.widget.Snackbar
 import android.support.v7.app.AppCompatActivity
 import android.view.View
 import com.aldebaran.qi.QiException
-import com.ghostwan.robotkit.`object`.*
-import com.ghostwan.robotkit.naoqi.robot.LocalPepper
+import com.ghostwan.robotkit.`object`.Action
+import com.ghostwan.robotkit.`object`.Failure
+import com.ghostwan.robotkit.`object`.Result
+import com.ghostwan.robotkit.`object`.Success
 import com.ghostwan.robotkit.exception.RobotUnavailableException
-import com.ghostwan.robotkit.naoqi.`object`.ResConcept
 import com.ghostwan.robotkit.ext.inUISafe
 import com.ghostwan.robotkit.ext.setOnClickCoroutine
 import com.ghostwan.robotkit.ext.setOnClickSafeCoroutine
+import com.ghostwan.robotkit.naoqi.`object`.ResConcept
+import com.ghostwan.robotkit.naoqi.robot.LocalPepper
 import com.ghostwan.robotkit.naoqi.robot.Pepper
-import com.ghostwan.robotkit.util.exceptionLog
 import com.ghostwan.robotkit.sampleapp.R
+import com.ghostwan.robotkit.util.exceptionLog
 import kotlinx.android.synthetic.main.activity_stop_acivity.*
-import kotlinx.coroutines.experimental.CancellationException
+import kotlinx.coroutines.CancellationException
 
 class StopActivity : AppCompatActivity() {
 

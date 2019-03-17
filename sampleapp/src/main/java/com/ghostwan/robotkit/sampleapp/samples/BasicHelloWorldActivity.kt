@@ -17,7 +17,6 @@ class BasicHelloWorldActivity : AppCompatActivity() {
         setSupportActionBar(toolbar)
 
         val pepper = LocalPepper(this)
-
         fab.setOnClickCoroutine {
             if (pepper.isConnected()) {
                 pepper.say(R.string.bye, R.raw.bye_anim)

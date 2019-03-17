@@ -3,7 +3,6 @@ package com.ghostwan.robotkit.naoqi.`object`
 import android.content.Context
 import android.support.annotation.RawRes
 import com.aldebaran.qi.Future
-import com.aldebaran.qi.Promise
 import com.aldebaran.qi.sdk.`object`.conversation.*
 import com.ghostwan.robotkit.`object`.Action
 import com.ghostwan.robotkit.ext.getLocalizedRaw
@@ -12,10 +11,10 @@ import com.ghostwan.robotkit.naoqi.NaoqiRobot
 import com.ghostwan.robotkit.naoqi.ext.await
 import com.ghostwan.robotkit.util.infoLog
 import com.ghostwan.robotkit.util.warningLog
-import kotlinx.coroutines.experimental.runBlocking
+import kotlinx.coroutines.runBlocking
 import kotlinx.serialization.Optional
 import kotlinx.serialization.Serializable
-import kotlinx.serialization.json.JSON
+import kotlinx.serialization.json.Json
 import java.io.File
 import java.io.FileNotFoundException
 import java.util.*
@@ -164,7 +163,7 @@ class Discussion{
             it to value
         }.toMap()
 
-        val json = JSON.stringify(data)
+        val json = Json.stringify(Data.serializer(), data)
 
         val filename = getFilename()
         context.openFileOutput(filename, Context.MODE_PRIVATE).use {
@@ -192,7 +191,7 @@ class Discussion{
             json = context.openFileInput(filename).use {
                 it.bufferedReader().use { it.readLine() }
             }
-            val dataLocal : Data = JSON.parse(json)
+            val dataLocal : Data = Json.parse(Data.serializer(), json)
             infoLog("get json data : $json")
             if(restoreState) {
                 if (dataLocal.bookmark != null) {

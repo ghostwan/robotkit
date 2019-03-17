@@ -6,16 +6,16 @@ import android.support.design.widget.Snackbar
 import android.support.v7.app.AppCompatActivity
 import android.view.View
 import com.aldebaran.qi.QiException
-import com.ghostwan.robotkit.naoqi.robot.LocalPepper
-import com.ghostwan.robotkit.naoqi.robot.Pepper
 import com.ghostwan.robotkit.exception.RobotUnavailableException
-import com.ghostwan.robotkit.ext.setOnClickSafeCoroutine
 import com.ghostwan.robotkit.ext.inUI
 import com.ghostwan.robotkit.ext.inUISafe
-import com.ghostwan.robotkit.util.exceptionLog
+import com.ghostwan.robotkit.ext.setOnClickSafeCoroutine
+import com.ghostwan.robotkit.naoqi.robot.LocalPepper
+import com.ghostwan.robotkit.naoqi.robot.Pepper
 import com.ghostwan.robotkit.sampleapp.R
+import com.ghostwan.robotkit.util.exceptionLog
 import kotlinx.android.synthetic.main.activity_parent.*
-import kotlinx.coroutines.experimental.CancellationException
+import kotlinx.coroutines.CancellationException
 
 /**
  * Created by erwan on 20/03/2018.

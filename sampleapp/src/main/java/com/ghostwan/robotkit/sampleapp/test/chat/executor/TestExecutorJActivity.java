@@ -69,7 +69,6 @@ public class TestExecutorJActivity extends AppCompatActivity implements RobotLif
                 animating.requestCancellation();
             }
         });
-        //FIXME Need libqi-java 2.4.1 to work
         executors.put("animateAsync", new AsyncQiChatExecutor(qiContext.getSerializer(), new QiChatExecutor.Async() {
             Future<Void> animating;
 
@@ -87,7 +86,6 @@ public class TestExecutorJActivity extends AppCompatActivity implements RobotLif
                 return Future.of(null);
             }
         }));
-        //FIXME Need libqi-java 2.4.1 to work
         executors.put("playAsync", new AsyncQiChatExecutor(qiContext.getSerializer(), new QiChatExecutor.Async() {
             private MediaPlayer mediaPlayer;
 

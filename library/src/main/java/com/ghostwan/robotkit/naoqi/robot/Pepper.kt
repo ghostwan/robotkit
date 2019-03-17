@@ -8,7 +8,7 @@ import android.content.IntentFilter
 import android.content.pm.PackageManager
 import com.aldebaran.qi.Session
 import com.aldebaran.qi.UserTokenAuthenticator
-import com.aldebaran.qi.sdk.core.util.FocusUtil
+import com.aldebaran.robotservice.FocusUtil
 import com.aldebaran.robotservice.IRobotService
 import com.ghostwan.robotkit.exception.RobotUnavailableException
 import com.ghostwan.robotkit.ext.getLocalService
@@ -17,8 +17,10 @@ import com.ghostwan.robotkit.naoqi.NaoqiServices
 import com.ghostwan.robotkit.naoqi.ext.await
 import com.ghostwan.robotkit.util.errorLog
 import com.ghostwan.robotkit.util.infoLog
-import kotlin.coroutines.experimental.Continuation
-import kotlin.coroutines.experimental.suspendCoroutine
+import kotlin.coroutines.Continuation
+import kotlin.coroutines.suspendCoroutine
+import kotlin.coroutines.resume
+import kotlin.coroutines.resumeWithException
 
 private const val ROBOT_SERVICE_PACKAGE = "com.aldebaran.robotservice"
 

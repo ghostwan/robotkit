@@ -27,8 +27,9 @@ import com.ghostwan.robotkit.exception.RobotUnavailableException
 import com.ghostwan.robotkit.naoqi.`object`.AnyObjectProviderConverter
 import com.ghostwan.robotkit.naoqi.ext.await
 import com.ghostwan.robotkit.util.infoLog
-import kotlinx.coroutines.experimental.Deferred
-import kotlinx.coroutines.experimental.async
+import kotlinx.coroutines.Deferred
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.async
 import java.util.concurrent.ExecutionException
 
 class NaoqiServices(session: Session) {
@@ -94,7 +95,7 @@ class NaoqiServices(session: Session) {
 
     private inline fun <reified T> getService(session: Session, name: String=T::class.java.simpleName): Lazy<Deferred<T>> {
         return lazy {
-            async {
+            GlobalScope.async {
                 retrieveService(session, T::class.java, name)
             }
         }

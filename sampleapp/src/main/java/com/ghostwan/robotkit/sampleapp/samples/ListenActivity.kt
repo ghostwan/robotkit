@@ -1,8 +1,8 @@
 package com.ghostwan.robotkit.sampleapp.samples
 
 import com.ghostwan.robotkit.naoqi.`object`.ResConcept
-import com.ghostwan.robotkit.sampleapp.helpers.MultiLocaleActivity
 import com.ghostwan.robotkit.sampleapp.R
+import com.ghostwan.robotkit.sampleapp.helpers.MultiLocaleActivity
 
 class ListenActivity : MultiLocaleActivity() {
 

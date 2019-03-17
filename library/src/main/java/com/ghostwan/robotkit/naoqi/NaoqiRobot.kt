@@ -13,10 +13,7 @@ import com.aldebaran.qi.sdk.`object`.conversation.*
 import com.aldebaran.qi.sdk.`object`.focus.FocusOwner
 import com.aldebaran.qi.sdk.`object`.touch.TouchSensor
 import com.ghostwan.robotkit.Robot
-import com.ghostwan.robotkit.`object`.Action
-import com.ghostwan.robotkit.`object`.Failure
-import com.ghostwan.robotkit.`object`.Result
-import com.ghostwan.robotkit.`object`.Success
+import com.ghostwan.robotkit.`object`.*
 import com.ghostwan.robotkit.ext.getLocalizedRaw
 import com.ghostwan.robotkit.ext.getLocalizedString
 import com.ghostwan.robotkit.ext.getRaw
@@ -26,7 +23,7 @@ import com.ghostwan.robotkit.naoqi.ext.toNaoqiLocale
 import com.ghostwan.robotkit.util.infoLog
 import com.ghostwan.robotkit.util.ui
 import com.ghostwan.robotkit.util.weakRef
-import kotlinx.coroutines.experimental.CancellationException
+import kotlinx.coroutines.CancellationException
 import java.util.*
 
 /**
@@ -70,7 +67,7 @@ abstract class NaoqiRobot(activity: Activity, private val address: String?, priv
             ui {
                 when {
                     it.isSuccess -> onResult?.invoke(Success(it.value))
-                    it.isCancelled -> onResult?.invoke(Failure(CancellationException()))
+                    it.isCancelled -> onResult?.invoke(Cancel())
                     else -> onResult?.invoke(Failure(it.error))
                 }
             }
@@ -411,7 +408,8 @@ abstract class NaoqiRobot(activity: Activity, private val address: String?, priv
                             }
                         }.map { onResult(Success(it)) }
                     }
-                    is Failure -> onResult(Failure(CancellationException()))
+                    is Failure -> onResult(Failure(it.exception))
+                    is Cancel -> onResult(Cancel())
                 }
             }
         }

@@ -62,7 +62,7 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name=".test.chat.executor.TestExecutorKActivity">
+        <activity android:name=".samples.DiscussAndExecutorActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 

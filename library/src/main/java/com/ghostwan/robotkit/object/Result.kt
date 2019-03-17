@@ -1,5 +1,7 @@
 package com.ghostwan.robotkit.`object`
 
+import kotlinx.coroutines.CancellationException
+
 /**
  * Result of a computation
  *
@@ -24,3 +26,10 @@ data class Success<T>(val value: T) : Result<T>()
  * @param exception The exception thrown if the computation failed
  */
 data class Failure<T>(val exception: Throwable) : Result<T>()
+
+
+/**
+ * If the result is a failure
+ *
+ */
+class Cancel<T> : Result<T>()

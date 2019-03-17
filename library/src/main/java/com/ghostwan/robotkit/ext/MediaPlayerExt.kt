@@ -1,8 +1,10 @@
 package com.ghostwan.robotkit.ext
 
 import android.media.MediaPlayer
-import kotlin.coroutines.experimental.Continuation
-import kotlin.coroutines.experimental.suspendCoroutine
+import kotlin.coroutines.Continuation
+import kotlin.coroutines.suspendCoroutine
+import kotlin.coroutines.resume
+import kotlin.coroutines.resumeWithException
 
 
 /**
@@ -11,7 +13,7 @@ import kotlin.coroutines.experimental.suspendCoroutine
 suspend fun MediaPlayer.startAndAwait() =
         suspendCoroutine { cont: Continuation<Unit> ->
             this.setOnCompletionListener { cont.resume(Unit) }
-            this.setOnErrorListener { mp, what, extra -> cont.resumeWithException(RuntimeException("Media player error : $what"))
+            this.setOnErrorListener { _, what, _ -> cont.resumeWithException(RuntimeException("Media player error : $what"))
                 return@setOnErrorListener true
             }
             this.start()

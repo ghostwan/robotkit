@@ -12,14 +12,12 @@ import android.support.annotation.RawRes
 import android.support.annotation.StringRes
 import com.ghostwan.robotkit.exception.RobotUnavailableException
 import com.ghostwan.robotkit.exception.ServiceDisconnectedException
-import kotlinx.coroutines.experimental.Deferred
-import kotlinx.coroutines.experimental.Job
-import kotlinx.coroutines.experimental.android.UI
-import kotlinx.coroutines.experimental.async
-import kotlinx.coroutines.experimental.launch
+import kotlinx.coroutines.*
 import java.util.*
-import kotlin.coroutines.experimental.Continuation
-import kotlin.coroutines.experimental.suspendCoroutine
+import kotlin.coroutines.Continuation
+import kotlin.coroutines.suspendCoroutine
+import kotlin.coroutines.resume
+import kotlin.coroutines.resumeWithException
 
 
 /**
@@ -72,19 +70,19 @@ suspend fun Context.getLocalService(packageName: String, action: String, flags :
 }
 
 fun Activity.inUI(onRun: suspend Activity.() -> Unit): Job {
-    return launch(UI, block = {
+    return GlobalScope.launch(Dispatchers.Main, block = {
         onRun(this@inUI)
     })
 }
 
 fun Activity.inUIAsync(onRun: suspend Activity.() -> Unit): Deferred<Unit> {
-    return async(UI, block = {
+    return GlobalScope.async(Dispatchers.Main, block = {
         onRun(this@inUIAsync)
     })
 }
 
 fun Activity.inUISafe(onRun: suspend Activity.() -> Unit, onError : (Throwable?) -> Unit ): Deferred<Unit> {
-    val job = async (UI, block = {
+    val job = GlobalScope.async (Dispatchers.Main, block = {
         onRun(this@inUISafe)
     })
     job.invokeOnCompletion {
@@ -94,19 +92,19 @@ fun Activity.inUISafe(onRun: suspend Activity.() -> Unit, onError : (Throwable?)
 }
 
 fun Activity.inBackground(onRun: suspend Activity.() -> Unit): Job {
-    return launch(block = {
+    return GlobalScope.launch(block = {
         onRun(this@inBackground)
     })
 }
 
 fun Activity.inBackgroundAsync(onRun: suspend Activity.() -> Unit): Deferred<Unit> {
-    return async(block = {
+    return GlobalScope.async(block = {
         onRun(this@inBackgroundAsync)
     })
 }
 
 fun Activity.inBackgroundSafe(onRun: suspend Activity.() -> Unit, onError : (Throwable?) -> Unit): Deferred<Unit> {
-    val job = async (block = {
+    val job = GlobalScope.async (block = {
         onRun(this@inBackgroundSafe)
     })
     job.invokeOnCompletion {

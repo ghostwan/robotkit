@@ -1,16 +1,14 @@
 package com.ghostwan.robotkit.sampleapp.samples
 
-import android.media.MediaPlayer
 import android.view.View
-import com.ghostwan.robotkit.naoqi.`object`.Discussion
-import com.ghostwan.robotkit.ext.random
 import com.ghostwan.robotkit.ext.setOnClickCoroutine
-import com.ghostwan.robotkit.util.infoLog
-import com.ghostwan.robotkit.util.ui
-import com.ghostwan.robotkit.sampleapp.helpers.MultiLocaleActivity
+import com.ghostwan.robotkit.naoqi.`object`.Discussion
 import com.ghostwan.robotkit.sampleapp.R
+import com.ghostwan.robotkit.sampleapp.helpers.MultiLocaleActivity
 import com.ghostwan.robotkit.sampleapp.helpers.playSound
 import com.ghostwan.robotkit.sampleapp.helpers.stopSound
+import com.ghostwan.robotkit.util.infoLog
+import com.ghostwan.robotkit.util.ui
 import kotlinx.android.synthetic.main.activity_discuss.*
 
 class DiscussActivity : MultiLocaleActivity() {
@@ -18,7 +16,7 @@ class DiscussActivity : MultiLocaleActivity() {
     override fun scenarioName(): String = "Discuss"
     override fun defaultLayout(): Int = R.layout.activity_discuss
 
-    private val discussion: Discussion by lazy { Discussion(this, R.raw.presentation_discussion, locale = locale) }
+    private lateinit var discussion: Discussion
 
     override fun onRobotConnected() {
         super.onRobotConnected()
@@ -35,6 +33,7 @@ class DiscussActivity : MultiLocaleActivity() {
     }
 
     override suspend fun onStartAction() {
+        discussion = Discussion(this, R.raw.presentation_discussion, locale = locale)
         discussion.setOnBookmarkReached { infoLog("Bookmark $it reached!") }
         discussion.setOnVariableChanged { name, value -> infoLog("Variable $name changed to $value") }
         clearDataBtn.setOnClickCoroutine {

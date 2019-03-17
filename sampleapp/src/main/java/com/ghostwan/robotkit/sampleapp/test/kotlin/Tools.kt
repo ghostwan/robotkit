@@ -7,7 +7,7 @@ import com.aldebaran.qi.QiException
 import com.ghostwan.robotkit.exception.RobotUnavailableException
 import com.ghostwan.robotkit.util.errorLog
 import com.ghostwan.robotkit.util.exceptionLog
-import kotlinx.coroutines.experimental.CancellationException
+import kotlinx.coroutines.CancellationException
 
 
 internal var step: Int = 0

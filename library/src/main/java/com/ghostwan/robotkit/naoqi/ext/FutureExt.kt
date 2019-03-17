@@ -1,9 +1,11 @@
 package com.ghostwan.robotkit.naoqi.ext
 
 import com.aldebaran.qi.Future
-import kotlinx.coroutines.experimental.CancellationException
-import kotlin.coroutines.experimental.Continuation
-import kotlin.coroutines.experimental.suspendCoroutine
+import kotlinx.coroutines.CancellationException
+import kotlin.coroutines.Continuation
+import kotlin.coroutines.suspendCoroutine
+import kotlin.coroutines.resume
+import kotlin.coroutines.resumeWithException
 
 /**
  * Created by erwan on 10/03/2018.

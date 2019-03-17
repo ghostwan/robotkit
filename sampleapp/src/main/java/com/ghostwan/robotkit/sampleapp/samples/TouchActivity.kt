@@ -17,7 +17,7 @@ import com.ghostwan.robotkit.sampleapp.R
 import com.ghostwan.robotkit.util.exceptionLog
 import com.ghostwan.robotkit.util.infoLog
 import kotlinx.android.synthetic.main.activity_touch.*
-import kotlinx.coroutines.experimental.CancellationException
+import kotlinx.coroutines.CancellationException
 
 class TouchActivity : AppCompatActivity() {
 
