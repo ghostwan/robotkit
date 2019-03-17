@@ -74,20 +74,20 @@ artifacts {
     archives javadok
 }
 
-//uploadArchives {
-//    repositories {
-//        mavenDeployer {
-//            repository(url: 'https://api.bintray.com/maven/'+USER_NAME+'/'+REPOSITORY_NAME+'/'+POM_ARTIFACT_ID) {
-//                authentication(
-//                        userName: System.getenv('BINTRAY_USER'),
-//                        password: System.getenv('BINTRAY_API_KEY')
-//                )
-//            }
-//            pom.artifactId = POM_ARTIFACT_ID
-//            pom.groupId = POM_GROUP_ID
-//            pom.version = VERSION_NAME
-//        }
-//    }
-//}
+uploadArchives {
+    repositories {
+        mavenDeployer {
+            repository(url: 'https://api.bintray.com/maven/'+USER_NAME+'/'+REPOSITORY_NAME+'/'+POM_ARTIFACT_ID) {
+                authentication(
+                        userName: System.getenv('BINTRAY_USER'),
+                        password: System.getenv('BINTRAY_API_KEY')
+                )
+            }
+            pom.artifactId = POM_ARTIFACT_ID
+            pom.groupId = POM_GROUP_ID
+            pom.version = VERSION_NAME
+        }
+    }
+}
 
 
