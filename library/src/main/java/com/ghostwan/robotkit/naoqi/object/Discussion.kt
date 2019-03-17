@@ -7,8 +7,8 @@ import com.aldebaran.qi.sdk.`object`.conversation.*
 import com.ghostwan.robotkit.`object`.Action
 import com.ghostwan.robotkit.ext.getLocalizedRaw
 import com.ghostwan.robotkit.ext.sha512
-import com.ghostwan.robotkit.naoqi.NaoqiRobot
 import com.ghostwan.robotkit.naoqi.ext.await
+import com.ghostwan.robotkit.naoqi.robot.Pepper
 import com.ghostwan.robotkit.util.infoLog
 import com.ghostwan.robotkit.util.warningLog
 import kotlinx.coroutines.runBlocking
@@ -30,12 +30,13 @@ data class Data(var variables: Map<String, String>, @Optional var bookmark: Stri
 }
 
 //Move in a specific extension
-data class NAOqiData(var qiChatbot: QiChatbot? = null,
-                     var qiChatVariables: HashMap<String, QiChatVariable>,
-                     var qiChatExecutors: HashMap<String, QiChatExecutor>?,
-                     var qiTopics : Map<Int, Topic>) {
-    constructor() : this(null, HashMap(), HashMap(), HashMap()  )
-}
+open class NaoqiData(var qiChatVariables: HashMap<String, QiChatVariable> = HashMap(),
+                     var qiTopics: Map<Int, Topic> = HashMap())
+
+data class NaoData(var discuss: Discuss? = null) : NaoqiData()
+
+data class PepperData(var qiChatbot: QiChatbot? = null,
+                      var qiChatExecutors: HashMap<String, QiChatExecutor> = HashMap()) : NaoqiData()
 
 /**
  * Object that handle discussion data.
@@ -46,16 +47,16 @@ data class NAOqiData(var qiChatbot: QiChatbot? = null,
  * - Bookmarks and variables can be followed
  * - Possibility to go to a specific bookmark while the discussion is running
  */
-class Discussion{
+class Discussion {
     var id: String = ""
-    var mainTopic : Int
+    var mainTopic: Int
     var topics = HashMap<Int, String>()
-    var data : Data = Data()
-    var naoqiData : NAOqiData = NAOqiData()
-    val locale : Locale?
+    var data: Data = Data()
+    lateinit var naoqiData: NaoqiData
+    val locale: Locale?
 
-    private var onBookmarkReached :((String) -> Unit)? = null
-    private var onVariableChanged :((String, String) -> Unit)? = null
+    private var onBookmarkReached: ((String) -> Unit)? = null
+    private var onVariableChanged: ((String, String) -> Unit)? = null
 
     /**
      * Construct a Discussion object that will handle the discussion data
@@ -65,7 +66,7 @@ class Discussion{
      * The topic content depend of the locale
      * @param locale The locale of the discussion, if it's null, use the one of the device.
      */
-    constructor(context: Context, @RawRes vararg topicsRes: Int, locale : Locale?=null) {
+    constructor(context: Context, @RawRes vararg topicsRes: Int, locale: Locale? = null) {
         this.locale = locale
         mainTopic = topicsRes[0]
         for (integer in topicsRes) {
@@ -80,7 +81,7 @@ class Discussion{
 
     }
 
-    private fun addBookmarks(content : String, regex : String, template : String) : String {
+    private fun addBookmarks(content: String, regex: String, template: String): String {
         val pattern = Pattern.compile(regex)
         val matcher = pattern.matcher(content)
         matcher.matches()
@@ -93,20 +94,19 @@ class Discussion{
         return matcher.appendTail(buffer).toString()
     }
 
-    internal suspend fun prepare(qiChatbot: QiChatbot, topics : Map<Int, Topic>) : String?{
-        naoqiData.qiChatbot = qiChatbot
-        naoqiData.qiChatVariables.clear()
+    internal suspend fun prepare(qiChatbot: QiChatbot, topics: Map<Int, Topic>): String? {
+        naoqiData = PepperData(qiChatbot)
         naoqiData.qiTopics = topics
 
-        qiChatbot.async().setExecutors(naoqiData.qiChatExecutors).await()
+        qiChatbot.async().setExecutors((naoqiData as PepperData).qiChatExecutors).await()
 
-        getVariables().forEach {key ->
-            val qichatvar =  qiChatbot.async()?.variable(key).await()
+        getVariables().forEach { key ->
+            val qichatvar = qiChatbot.async()?.variable(key).await()
             naoqiData.qiChatVariables[key] = qichatvar
             qichatvar.async().addOnValueChangedListener {
                 onVariableChanged?.invoke(key, it)
             }.await()
-            if(key in data.variables) {
+            if (key in data.variables) {
                 qichatvar.async().setValue(data.variables[key]).await()
             }
         }
@@ -118,12 +118,35 @@ class Discussion{
         return data.bookmark
     }
 
+    internal suspend fun prepare(discuss: Discuss, topics: Map<Int, Topic>): String? {
+        naoqiData = NaoData(discuss)
+        naoqiData.qiTopics = topics
+
+        getVariables().forEach { key ->
+            val qichatvar = discuss.async()?.variable(key).await()
+            naoqiData.qiChatVariables[key] = qichatvar
+            qichatvar.async().addOnValueChangedListener {
+                onVariableChanged?.invoke(key, it)
+            }.await()
+            if (key in data.variables) {
+                qichatvar.async().setValue(data.variables[key]).await()
+            }
+        }
+
+        discuss.async().addOnBookmarkReachedListener {
+            data.bookmark = it.name
+            onBookmarkReached?.invoke(it.name)
+        }.await()
+        return data.bookmark
+
+    }
+
     /**
      * Set the listener which be called when a bookmark is reached in the discussion
      *
      * @param onBookmarkReached the callback called when a bookmark is reached with the name of the bookmark reached
      */
-    fun setOnBookmarkReached(onBookmarkReached: ((name : String) -> Unit)? = null){
+    fun setOnBookmarkReached(onBookmarkReached: ((name: String) -> Unit)? = null) {
         this.onBookmarkReached = onBookmarkReached
     }
 
@@ -132,7 +155,7 @@ class Discussion{
      *
      * @param onVariableChanged the callback called when a variable change with the name of the variable and its value
      */
-    fun setOnVariableChanged(onVariableChanged: ((name: String, value: String) -> Unit)? = null){
+    fun setOnVariableChanged(onVariableChanged: ((name: String, value: String) -> Unit)? = null) {
         this.onVariableChanged = onVariableChanged
     }
 
@@ -156,10 +179,15 @@ class Discussion{
      */
     suspend fun saveData(context: Context) {
         data.variables = getVariables().map {
-            val variable = naoqiData.qiChatbot?.async()?.variable(it).await()
+
+            val variable = if (naoqiData is PepperData)
+                (naoqiData as PepperData).qiChatbot?.async()?.variable(it).await()
+            else
+                (naoqiData as NaoData).discuss?.async()?.variable(it).await()
+
             var value = variable.async().value.await()
-            if(value == "")
-                value=" "
+            if (value == "")
+                value = " "
             it to value
         }.toMap()
 
@@ -182,8 +210,8 @@ class Discussion{
      * @return true if the discussion is restored, false otherwise (bookmark or variables can't be restored)
      */
     fun restoreData(context: Context,
-                    restoreVariable : Boolean = true,
-                    restoreState : Boolean = true): Boolean {
+                    restoreVariable: Boolean = true,
+                    restoreState: Boolean = true): Boolean {
         val filename = getFilename()
 
         val json: String?
@@ -191,23 +219,21 @@ class Discussion{
             json = context.openFileInput(filename).use {
                 it.bufferedReader().use { it.readLine() }
             }
-            val dataLocal : Data = Json.parse(Data.serializer(), json)
+            val dataLocal: Data = Json.parse(Data.serializer(), json)
             infoLog("get json data : $json")
-            if(restoreState) {
+            if (restoreState) {
                 if (dataLocal.bookmark != null) {
                     infoLog("state ${dataLocal.bookmark} restored")
                     data.bookmark = dataLocal.bookmark
-                }
-                else {
+                } else {
                     return false
                 }
             }
-            if(restoreVariable) {
+            if (restoreVariable) {
                 if (dataLocal.variables.isNotEmpty()) {
                     infoLog("variables ${dataLocal.variables} restored")
                     data.variables = dataLocal.variables
-                }
-                else {
+                } else {
                     return false
                 }
 
@@ -223,7 +249,7 @@ class Discussion{
      */
     fun clearData() {
         val file = File(getFilename());
-        if(file.delete())
+        if (file.delete())
             infoLog("File ${getFilename()} deleted")
         else
             warningLog("Fail to delete ${getFilename()}!")
@@ -236,7 +262,7 @@ class Discussion{
      * @param name Name of the variable
      * @param value Value of the variable to set
      */
-    suspend fun setVariable(name : String , value : String) {
+    suspend fun setVariable(name: String, value: String) {
         naoqiData.qiChatVariables[name]?.async()?.setValue(value).await()
     }
 
@@ -246,7 +272,7 @@ class Discussion{
      * @param name Name of the variable to get
      * @return the value of the variable
      */
-    suspend fun getVariable(name : String) : String {
+    suspend fun getVariable(name: String): String {
         return naoqiData.qiChatVariables[name]?.async()?.value.await()
     }
 
@@ -256,12 +282,17 @@ class Discussion{
      * @param name Name of the bookmark to go to
      * @param topic Android resource id of the topic where is the bookmark, by default use the main topic
      */
-    suspend fun gotoBookmark(name: String, topic: Int=mainTopic,
-                             importance: AutonomousReactionImportance=AutonomousReactionImportance.HIGH,
-                             validity: AutonomousReactionValidity=AutonomousReactionValidity.IMMEDIATE
-    ){
+    suspend fun gotoBookmark(name: String, topic: Int = mainTopic,
+                             importance: AutonomousReactionImportance = AutonomousReactionImportance.HIGH,
+                             validity: AutonomousReactionValidity = AutonomousReactionValidity.IMMEDIATE
+    ) {
         val bookmark = naoqiData.qiTopics[topic]?.async()?.bookmarks.await()[name]
-        naoqiData.qiChatbot?.async()?.goToBookmark(bookmark, importance, validity).await()
+        if (naoqiData is PepperData)
+            (naoqiData as PepperData).qiChatbot?.async()?.goToBookmark(bookmark, importance, validity).await()
+        else
+            (naoqiData as NaoData).discuss?.async()?.goToBookmarkedOutputUtterance(bookmark).await()
+
+
     }
 
     /**
@@ -272,9 +303,9 @@ class Discussion{
      * @param onStopExecute Function call when the execution need to stop
      * @param onExecute Function call when the execution start
      */
-    suspend fun setExecutor(robot: NaoqiRobot, name: String, onStopExecute: (suspend () -> Unit) = { robot.stopAllBut(Action.DISCUSSING) }, onExecute: (suspend (params: List<String>?) -> Unit)) {
+    suspend fun setExecutor(pepper: Pepper, name: String, onStopExecute: (suspend () -> Unit) = { pepper.stopAllBut(Action.DISCUSSING) }, onExecute: (suspend (params: List<String>?) -> Unit)) {
 
-        naoqiData.qiChatExecutors?.set(name, object : SyncQiChatExecutor(robot.services.serializer) {
+        (naoqiData as PepperData).qiChatExecutors[name] = object : SyncQiChatExecutor(pepper.services.serializer) {
             override fun runWith(params: MutableList<String>?) {
                 runBlocking {
                     onExecute(params)
@@ -287,7 +318,7 @@ class Discussion{
                 }
             }
 
-        })
+        }
     }
 
     /**
@@ -298,9 +329,9 @@ class Discussion{
      * @param onStopExecute Function call when the execution need to stop
      * @param onExecute Function call when the execution start
      */
-    suspend fun setAsyncExecutor(robot: NaoqiRobot, name: String, onStopExecute: (suspend ()-> Unit)={robot.stopAllBut(Action.DISCUSSING)}, onExecute: (suspend (params: List<String>?) -> Future<Void>)) {
+    suspend fun setAsyncExecutor(pepper: Pepper, name: String, onStopExecute: (suspend () -> Unit) = { pepper.stopAllBut(Action.DISCUSSING) }, onExecute: (suspend (params: List<String>?) -> Future<Void>)) {
 
-        naoqiData.qiChatExecutors?.set(name, AsyncQiChatExecutor(robot.services.serializer, object : QiChatExecutor.Async {
+        (naoqiData as PepperData).qiChatExecutors[name] = AsyncQiChatExecutor(pepper.services.serializer, object : QiChatExecutor.Async {
             override fun runWith(params: MutableList<String>?): Future<Void> {
                 return runBlocking {
                     onExecute(params)
@@ -315,9 +346,8 @@ class Discussion{
                 }
             }
 
-        }))
+        })
     }
-
 
 
 }

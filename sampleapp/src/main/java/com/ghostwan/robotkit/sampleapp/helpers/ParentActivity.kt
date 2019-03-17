@@ -11,6 +11,7 @@ import com.ghostwan.robotkit.ext.inUI
 import com.ghostwan.robotkit.ext.inUISafe
 import com.ghostwan.robotkit.ext.setOnClickSafeCoroutine
 import com.ghostwan.robotkit.naoqi.robot.LocalPepper
+import com.ghostwan.robotkit.naoqi.robot.Nao
 import com.ghostwan.robotkit.naoqi.robot.Pepper
 import com.ghostwan.robotkit.sampleapp.R
 import com.ghostwan.robotkit.util.exceptionLog
@@ -27,11 +28,11 @@ abstract class ParentActivity : AppCompatActivity() {
         const val STOP = "stopAction"
     }
 
-    protected val pepper by lazy {
-        if (intent.hasExtra("address")) {
-            Pepper(this, intent.getStringExtra("address"), "nao")
-        } else {
-            LocalPepper(this)
+    protected val robot by lazy {
+        when {
+            intent.hasExtra("nao") -> Nao(this, intent.getStringExtra("address"))
+            intent.hasExtra("address") -> Pepper(this, intent.getStringExtra("address"), "nao")
+            else -> LocalPepper(this)
         }
     }
 
@@ -64,14 +65,14 @@ abstract class ParentActivity : AppCompatActivity() {
             }
         }, this::onError)
 
-        pepper.setOnRobotLost(this::onRobotDisconnected)
+        robot.setOnRobotLost(this::onRobotDisconnected)
     }
 
     override fun onStart() {
         super.onStart()
         inUISafe({
             fab.visibility = View.INVISIBLE
-            pepper.connect()
+            robot.connect()
             onRobotConnected()
         }, this::onError)
     }
@@ -80,7 +81,7 @@ abstract class ParentActivity : AppCompatActivity() {
         super.onStop()
         inUISafe({
             onStopAction()
-            pepper.disconnect()
+            robot.disconnect()
         }, this::onError)
     }
 
@@ -129,6 +130,6 @@ abstract class ParentActivity : AppCompatActivity() {
     abstract suspend fun onStartAction()
 
     open suspend fun onStopAction() {
-        pepper.stop()
+        robot.stop()
     }
 }

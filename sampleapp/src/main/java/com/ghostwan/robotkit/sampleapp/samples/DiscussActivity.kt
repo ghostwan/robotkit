@@ -48,14 +48,14 @@ class DiscussActivity : MultiLocaleActivity() {
         gotoBookmarkBtn.visibility = View.INVISIBLE
 
         val result = if (discussion.restoreData(this)) {
-            pepper.say(R.string.restore_discussion, locale = locale)
+            robot.say(R.string.restore_discussion, locale = locale)
             playSound(this)
-            pepper.discuss(discussion, onStart = {
+            robot.discuss(discussion, onStart = {
                 gotoBookmarkBtn.visibility = View.VISIBLE
                 stopSound()
             })
         } else {
-            pepper.discuss(discussion, gotoBookmark = "intro", onStart = {
+            robot.discuss(discussion, gotoBookmark = "intro", onStart = {
                 gotoBookmarkBtn.visibility = View.VISIBLE
             })
         }

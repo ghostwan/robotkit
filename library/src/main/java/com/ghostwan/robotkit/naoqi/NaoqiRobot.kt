@@ -49,14 +49,14 @@ abstract class NaoqiRobot(activity: Activity, private val address: String?, priv
     private var focusOwner: FocusOwner? =null
 
     var robotLostListener: ((String) -> Unit)? = null
-    var touchSensors = ArrayList<TouchSensor>()
-    protected var bodyTouchedListener: ((BodyPart, TouchState) -> Unit)? = null
+    private var touchSensors = ArrayList<TouchSensor>()
+    private var bodyTouchedListener: ((BodyPart, TouchState) -> Unit)? = null
 
 
-    private suspend fun <T : Any?> handleFuture(future: Future<T>,
-                                                onResult: (suspend  (Result<T>) -> Unit)?,
-                                                throwOnCancel: Boolean,
-                                                vararg actions: Action): T? {
+    internal suspend fun <T : Any?> handleFuture(future: Future<T>,
+                                                 onResult: (suspend  (Result<T>) -> Unit)?,
+                                                 throwOnCancel: Boolean,
+                                                 vararg actions: Action): T? {
         synchronized(lock) {
             futures.put(future, actions)
         }
@@ -530,57 +530,10 @@ abstract class NaoqiRobot(activity: Activity, private val address: String?, priv
      * @return the result of the discussion if [onResult] it's not set
      *
      */
-    suspend fun discuss(discussion: Discussion, gotoBookmark: String? = null,
+    abstract suspend fun discuss(discussion: Discussion, gotoBookmark: String? = null,
                         throwOnStop: Boolean = true,
                         onStart: (suspend () -> Unit)? = null,
-                        onResult: (suspend (Result<String>) -> Unit)? = null
-    ): String?{
-
-        val topics = discussion.topics.map { (key, value) ->
-            val top = services.conversation.await().async()?.makeTopic(value).await()
-            key to top
-        }.toMap()
-
-        val qichatbot = if (discussion.locale == null) {
-            services.conversation.await().async()?.makeQiChatbot(robotContext, topics.values.toList(), getCurrentLocale().toNaoqiLocale()).await()
-        } else {
-            services.conversation.await().async()?.makeQiChatbot(robotContext, topics.values.toList(), discussion.locale.toNaoqiLocale()).await()
-        }
-        val chatbots = listOf<Chatbot>(qichatbot)
-
-        val chat = if (discussion.locale == null) {
-            services.conversation.await().async()?.makeChat(robotContext, chatbots, getCurrentLocale().toNaoqiLocale()).await()
-        } else {
-            services.conversation.await().async()?.makeChat(robotContext, chatbots, discussion.locale.toNaoqiLocale()).await()
-        }
-
-        var startBookmark: String? = null
-        discussion.prepare(qichatbot, topics)?.let {
-            startBookmark = it
-        }
-        gotoBookmark?.let {
-            startBookmark = gotoBookmark
-        }
-        chat.async().addOnStartedListener {
-            ui {
-                onStart?.invoke()
-                if (startBookmark != null) {
-                    val bookmark = topics[discussion.mainTopic]?.async()?.bookmarks.await()[startBookmark]
-                    qichatbot.async().goToBookmark(bookmark, AutonomousReactionImportance.HIGH, AutonomousReactionValidity.IMMEDIATE).await()
-                }
-            }
-        }.await()
-
-        var endValue : String? = null
-        val futureChat = chat.async().run()
-        qichatbot.async().addOnEndedListener {
-            endValue = it
-            if(chatbots.contains(qichatbot) && chatbots.size <= 1)
-                futureChat.requestCancellation()
-        }.await()
-        val future = futureChat.thenApply { endValue ?: "" }
-        return handleFuture(future, onResult, throwOnStop, Action.TALKING, Action.LISTENING, Action.DISCUSSING)
-    }
+                        onResult: (suspend (Result<String>) -> Unit)? = null): String?
 
     /**
      * Set the callback called when Pepper's body is touched

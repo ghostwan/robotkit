@@ -8,15 +8,23 @@ import android.content.IntentFilter
 import android.content.pm.PackageManager
 import com.aldebaran.qi.Session
 import com.aldebaran.qi.UserTokenAuthenticator
+import com.aldebaran.qi.sdk.`object`.conversation.AutonomousReactionImportance
+import com.aldebaran.qi.sdk.`object`.conversation.AutonomousReactionValidity
+import com.aldebaran.qi.sdk.`object`.conversation.Chatbot
 import com.aldebaran.robotservice.FocusUtil
 import com.aldebaran.robotservice.IRobotService
+import com.ghostwan.robotkit.`object`.Action
+import com.ghostwan.robotkit.`object`.Result
 import com.ghostwan.robotkit.exception.RobotUnavailableException
 import com.ghostwan.robotkit.ext.getLocalService
 import com.ghostwan.robotkit.naoqi.NaoqiRobot
 import com.ghostwan.robotkit.naoqi.NaoqiServices
+import com.ghostwan.robotkit.naoqi.`object`.Discussion
 import com.ghostwan.robotkit.naoqi.ext.await
+import com.ghostwan.robotkit.naoqi.ext.toNaoqiLocale
 import com.ghostwan.robotkit.util.errorLog
 import com.ghostwan.robotkit.util.infoLog
+import com.ghostwan.robotkit.util.ui
 import kotlin.coroutines.Continuation
 import kotlin.coroutines.suspendCoroutine
 import kotlin.coroutines.resume
@@ -30,6 +38,62 @@ private const val ROBOT_SERVICE_PACKAGE = "com.aldebaran.robotservice"
 open class Pepper(activity: Activity, address: String?, password: String?) : NaoqiRobot(activity, address, password) {
     override fun getRobotType(): String {
         return "Pepper"
+    }
+
+    override suspend fun discuss(discussion: Discussion, gotoBookmark: String?,
+                                 throwOnStop: Boolean,
+                                 onStart: (suspend () -> Unit)?,
+                                 onResult: (suspend (Result<String>) -> Unit)?
+    ): String?{
+
+        val topics = discussion.topics.map { (key, value) ->
+            val top = services.conversation.await().async()?.makeTopic(value).await()
+            key to top
+        }.toMap()
+
+        val qichatbot = if (discussion.locale == null) {
+            services.conversation.await().async()
+                    ?.makeQiChatbot(robotContext, topics.values.toList(), getCurrentLocale().toNaoqiLocale()).await()
+        } else {
+            services.conversation.await().async()
+                    ?.makeQiChatbot(robotContext, topics.values.toList(), discussion.locale.toNaoqiLocale()).await()
+        }
+        val chatbots = listOf<Chatbot>(qichatbot)
+
+        val chat = if (discussion.locale == null) {
+            services.conversation.await().async()
+                    ?.makeChat(robotContext, chatbots, getCurrentLocale().toNaoqiLocale()).await()
+        } else {
+            services.conversation.await().async()
+                    ?.makeChat(robotContext, chatbots, discussion.locale.toNaoqiLocale()).await()
+        }
+
+        var startBookmark: String? = null
+        discussion.prepare(qichatbot, topics)?.let {
+            startBookmark = it
+        }
+        gotoBookmark?.let {
+            startBookmark = gotoBookmark
+        }
+        chat.async().addOnStartedListener {
+            ui {
+                onStart?.invoke()
+                if (startBookmark != null) {
+                    val bookmark = topics[discussion.mainTopic]?.async()?.bookmarks.await()[startBookmark]
+                    qichatbot.async().goToBookmark(bookmark, AutonomousReactionImportance.HIGH, AutonomousReactionValidity.IMMEDIATE).await()
+                }
+            }
+        }.await()
+
+        var endValue : String? = null
+        val futureChat = chat.async().run()
+        qichatbot.async().addOnEndedListener {
+            endValue = it
+            if(chatbots.contains(qichatbot) && chatbots.size <= 1)
+                futureChat.requestCancellation()
+        }.await()
+        val future = futureChat.thenApply { endValue ?: "" }
+        return handleFuture(future, onResult, throwOnStop, Action.TALKING, Action.LISTENING, Action.DISCUSSING)
     }
 }
 

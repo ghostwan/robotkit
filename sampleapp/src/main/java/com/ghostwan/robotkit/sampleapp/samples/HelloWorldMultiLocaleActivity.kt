@@ -11,9 +11,9 @@ class HelloWorldMultiLocaleActivity : MultiLocaleActivity() {
     override fun scenarioName(): String = "Hello World Multi locales"
 
     override suspend fun onStartAction() {
-        pepper.say(R.string.hello_world, locale = locale)
+        robot.say(R.string.hello_world, locale = locale)
         textview.setText(R.string.hello_world, locale = locale)
-        pepper.animate(R.raw.hello_anim)
+        robot.animate(R.raw.hello_anim)
     }
 
 

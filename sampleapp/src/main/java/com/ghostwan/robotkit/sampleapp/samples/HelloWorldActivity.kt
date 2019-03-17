@@ -11,8 +11,8 @@ class HelloWorldActivity : ParentActivity() {
     override fun scenarioName(): String = "Hello World Parallel"
 
     override suspend fun onStartAction() {
-        val t1 = inUIAsync { pepper.say(R.string.hello_world) }
-        val t2 = inUIAsync { pepper.animate(R.raw.hello_anim) }
+        val t1 = inUIAsync { robot.say(R.string.hello_world) }
+        val t2 = inUIAsync { robot.animate(R.raw.hello_anim) }
         val t3 = inUIAsync { textview.setText(R.string.hello_world) }
 
         t1.await()
