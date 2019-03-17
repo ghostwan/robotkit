@@ -44,56 +44,61 @@ open class Pepper(activity: Activity, address: String?, password: String?) : Nao
                                  throwOnStop: Boolean,
                                  onStart: (suspend () -> Unit)?,
                                  onResult: (suspend (Result<String>) -> Unit)?
-    ): String?{
+    ): String? {
 
-        val topics = discussion.topics.map { (key, value) ->
-            val top = services.conversation.await().async()?.makeTopic(value).await()
-            key to top
-        }.toMap()
+        //FIXME Weird Hack -_- otherwise the current object die...
+        val hack = this
+        with(hack) {
+            val topics = discussion.topics.map { (key, value) ->
+                val top = services.conversation.await().async()?.makeTopic(value).await()
+                key to top
+            }.toMap()
 
-        val qichatbot = if (discussion.locale == null) {
-            services.conversation.await().async()
-                    ?.makeQiChatbot(robotContext, topics.values.toList(), getCurrentLocale().toNaoqiLocale()).await()
-        } else {
-            services.conversation.await().async()
-                    ?.makeQiChatbot(robotContext, topics.values.toList(), discussion.locale.toNaoqiLocale()).await()
-        }
-        val chatbots = listOf<Chatbot>(qichatbot)
-
-        val chat = if (discussion.locale == null) {
-            services.conversation.await().async()
-                    ?.makeChat(robotContext, chatbots, getCurrentLocale().toNaoqiLocale()).await()
-        } else {
-            services.conversation.await().async()
-                    ?.makeChat(robotContext, chatbots, discussion.locale.toNaoqiLocale()).await()
-        }
-
-        var startBookmark: String? = null
-        discussion.prepare(qichatbot, topics)?.let {
-            startBookmark = it
-        }
-        gotoBookmark?.let {
-            startBookmark = gotoBookmark
-        }
-        chat.async().addOnStartedListener {
-            ui {
-                onStart?.invoke()
-                if (startBookmark != null) {
-                    val bookmark = topics[discussion.mainTopic]?.async()?.bookmarks.await()[startBookmark]
-                    qichatbot.async().goToBookmark(bookmark, AutonomousReactionImportance.HIGH, AutonomousReactionValidity.IMMEDIATE).await()
-                }
+            val qichatbot = if (discussion.locale == null) {
+                services.conversation.await().async()
+                        ?.makeQiChatbot(robotContext, topics.values.toList(), getCurrentLocale().toNaoqiLocale()).await()
+            } else {
+                services.conversation.await().async()
+                        ?.makeQiChatbot(robotContext, topics.values.toList(), discussion.locale.toNaoqiLocale()).await()
             }
-        }.await()
+            val chatbots = listOf<Chatbot>(qichatbot)
 
-        var endValue : String? = null
-        val futureChat = chat.async().run()
-        qichatbot.async().addOnEndedListener {
-            endValue = it
-            if(chatbots.contains(qichatbot) && chatbots.size <= 1)
-                futureChat.requestCancellation()
-        }.await()
-        val future = futureChat.thenApply { endValue ?: "" }
-        return handleFuture(future, onResult, throwOnStop, Action.TALKING, Action.LISTENING, Action.DISCUSSING)
+            val chat = if (discussion.locale == null) {
+                services.conversation.await().async()
+                        ?.makeChat(robotContext, chatbots, getCurrentLocale().toNaoqiLocale()).await()
+            } else {
+                services.conversation.await().async()
+                        ?.makeChat(robotContext, chatbots, discussion.locale.toNaoqiLocale()).await()
+            }
+
+            var startBookmark: String? = null
+            discussion.prepare(qichatbot, topics)?.let {
+                startBookmark = it
+            }
+            gotoBookmark?.let {
+                startBookmark = gotoBookmark
+            }
+            chat.async().addOnStartedListener {
+                ui {
+                    onStart?.invoke()
+                    if (startBookmark != null) {
+                        val bookmark = topics[discussion.mainTopic]?.async()?.bookmarks.await()[startBookmark]
+                        qichatbot.async().goToBookmark(bookmark, AutonomousReactionImportance.HIGH, AutonomousReactionValidity.IMMEDIATE).await()
+                    }
+                }
+            }.await()
+
+            var endValue: String? = null
+            val futureChat = chat.async().run()
+            qichatbot.async().addOnEndedListener {
+                endValue = it
+                if (chatbots.contains(qichatbot) && chatbots.size <= 1)
+                    futureChat.requestCancellation()
+            }.await()
+            val future = futureChat.thenApply { endValue ?: "" }
+            return handleFuture(future, onResult, throwOnStop, Action.TALKING, Action.LISTENING, Action.DISCUSSING)
+        }
+
     }
 }
 
@@ -126,22 +131,22 @@ class LocalPepper(activity: Activity) : Pepper(activity, null, null) {
 
         val localRobotService = weakActivity.getLocalService(ROBOT_SERVICE_PACKAGE, ACTION_ROBOT_SERVICE)
 
-        if(localRobotService.binder == null)
-                throw RobotUnavailableException("RobotService not available!")
+        if (localRobotService.binder == null)
+            throw RobotUnavailableException("RobotService not available!")
 
         robotService = IRobotService.Stub.asInterface(localRobotService.binder)
         val endpoint = robotService?.publicEndpoint
         val token = robotService?.publicToken
 
         session.setClientAuthenticator(UserTokenAuthenticator(USER_SESSION, token))
-        session.addConnectionListener(object: Session.ConnectionListener {
+        session.addConnectionListener(object : Session.ConnectionListener {
             override fun onConnected() {
             }
 
             override fun onDisconnected(reason: String?) {
-                if(reason == null) {
+                if (reason == null) {
                     robotLostListener?.invoke("")
-                }else {
+                } else {
                     robotLostListener?.invoke(reason)
                 }
             }
@@ -156,7 +161,7 @@ class LocalPepper(activity: Activity) : Pepper(activity, null, null) {
     }
 
     override suspend fun hasFocus(): Boolean {
-        if(robotService == null)
+        if (robotService == null)
             return false
         val activityName = weakActivity.componentName.className
         val activityId = FocusUtil.extractActivityId(weakActivity)
@@ -169,7 +174,7 @@ class LocalPepper(activity: Activity) : Pepper(activity, null, null) {
 
     private suspend fun getToken(): String? {
         return suspendCoroutine { cont: Continuation<String> ->
-            if(robotService == null) {
+            if (robotService == null) {
                 cont.resumeWithException(RobotUnavailableException("RobotService not available!"))
             } else {
                 val focusToken = FocusUtil.extractFocusToken(weakActivity)
